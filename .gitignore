@@ -1,0 +1,97 @@
+# ~/.claude/.gitignore
+# Exclude sensitive data and temporary files from version control
+# Created: 2025-10-24
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Sensitive Data & Session Information
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Session history (may contain private conversations)
+history.jsonl
+
+# Debug logs (may contain sensitive debug output)
+debug/
+
+# File change history
+file-history/
+
+# Session environment variables
+session-env/
+
+# Shell snapshots (may contain command history with secrets)
+shell-snapshots/
+
+# Todo lists (may contain private information)
+todos/
+
+# Project session history (contains conversation logs)
+projects/
+
+# Analytics and telemetry
+statsig/
+
+# Downloaded content
+downloads/
+
+# Local settings (may contain personal overrides)
+settings.local.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Temporary & Backup Files
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Backup files
+*.backup-*
+*.bak
+*.old
+
+# macOS metadata
+.DS_Store
+._.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Development & Testing
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Test output
+tests/output/
+tests/*.log
+
+# Logs
+*.log
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Files to TRACK (explicitly included below)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# All *.md documentation (TRACKED)
+# career/*.md (TRACKED)
+# environment/*.md (TRACKED)
+# lessons/*.md (TRACKED)
+# integrations/*.md (TRACKED)
+# reference/*.md (TRACKED)
+# workflow/*.md (TRACKED)
+# templates/*.md (TRACKED)
+
+# Scripts (TRACKED)
+# scripts/**/*.sh
+# scripts/**/*.py
+
+# Configuration (TRACKED)
+# commands/*.md
+# skills/*.md
+# agents/*.yaml, agents/*.md
+# settings.json (safe - no secrets)
+# API_KEYS_REFERENCE.md (safe - no actual keys)
