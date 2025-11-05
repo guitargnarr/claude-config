@@ -412,6 +412,92 @@ npm install
 
 ---
 
+## Tailwind Migration Workflow (Learned Nov 6, 2025)
+
+**Pain Points from projectlavos neubrutalism conversion - 3 deployment cycles, 90 min debugging**
+
+### Critical: Tailwind Version Selection
+
+**Problem:** Tailwind CSS v4 uses `@tailwindcss/postcss` plugin which doesn't read `tailwind.config.js` the same way. Custom utilities (shadow-brutal, border-3) won't generate.
+
+**Solution:** Use Tailwind CSS v3.4.16 for projects with custom utilities defined in config.
+
+```bash
+# Install v3 (NOT v4)
+npm install -D tailwindcss@3.4.16 postcss autoprefixer
+
+# postcss.config.js
+export default {
+  plugins: {
+    tailwindcss: {},      // Standard plugin, reads tailwind.config.js
+    autoprefixer: {},
+  },
+}
+```
+
+### Pre-Deploy Verification Checklist
+
+**Before pushing design changes:**
+
+```bash
+# 1. Build locally
+npm run build
+
+# 2. Verify custom classes exist in CSS bundle
+grep -r "shadow-brutal" dist/assets/*.css
+# Should show 3-6 matches for brutal, brutal-sm, brutal-lg
+
+# 3. Check for old CSS conflicts
+grep -c "\.demo-card" src/App.css
+# Should be 0 (remove old conflicting classes)
+
+# 4. Preview locally
+npm run preview
+# Test in browser, inspect elements, verify styling
+
+# 5. Only then deploy
+vercel --prod --yes
+```
+
+### CSS Migration Strategy
+
+**Problem:** Old CSS with high specificity overrides Tailwind utilities.
+
+**Solution:** Remove old CSS incrementally, keep only non-converted sections.
+
+```bash
+# Before: 884 lines of mixed CSS
+# After: 299 lines (only Portfolio, About, Footer not yet converted)
+
+# Remove: .demo-card, .hero-section, .form-grid, etc.
+# Keep: .portfolio-preview, .about, .footer (until converted)
+```
+
+### Process Hygiene
+
+**Problem:** Duplicate dev servers waste RAM (9 shells, 540MB).
+
+**Solution:** Check and clean regularly.
+
+```bash
+# Check running processes
+# (Claude Code has /bashes command)
+
+# Kill duplicates via KillShell tool
+# Keep only: 1 backend, 1 frontend per project
+```
+
+### Time Impact
+
+| Mistake | Cost | Prevention |
+|---------|------|------------|
+| Wrong Tailwind version | 40 min | Check v3 vs v4 compatibility first |
+| CSS conflicts | 30 min | Remove old CSS before converting |
+| No local verification | 20 min | Always build + preview before deploy |
+| **Total avoidable** | **90 min** | **Follow checklist above** |
+
+---
+
 ## Recent Work: Prompt Engineering Showcase (Nov 5, 2025)
 
 **What:** Added 4th demo to projectlavos.com - interactive prompt engineering playground
