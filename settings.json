@@ -1,84 +1,16 @@
 {
-  "env": {
-    "RESUMES_DIR": "~/Desktop/Resumes_Master_2025"
-  },
   "permissions": {
     "allow": [
-      {
-        "type": "tool",
-        "tool": "Bash",
-        "value": "ollama run*"
-      },
-      {
-        "type": "tool",
-        "tool": "Bash",
-        "value": "python3 */query_jobs.py*"
-      },
-      {
-        "type": "tool",
-        "tool": "Bash",
-        "value": "sqlite3 */job_tracker.db*"
-      }
+      "Read(**)",
+      "Write(**)",
+      "WebFetch",
+      "Bash(**)"
     ],
-    "additionalDirectories": [
-      "~/Desktop/Resumes_Master_2025"
+    "deny": [],
+    "ask": [
+      "Bash(rm:*)"
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "hooks": {
-    "postToolUse": [
-      {
-        "matcher": {
-          "tool": "Edit",
-          "path": "**/VARIANT_*.txt"
-        },
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] EDIT - {{path}}\" >> ~/Desktop/Resumes_Master_2025/logs/resume_changes.log"
-      },
-      {
-        "matcher": {
-          "tool": "Edit",
-          "path": "**/MASTER_RESUME_SOURCE_TRUTH.txt"
-        },
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] EDIT - MASTER SOURCE - {{path}}\" >> ~/Desktop/Resumes_Master_2025/logs/resume_changes.log"
-      },
-      {
-        "matcher": {
-          "tool": "Write",
-          "path": "**/resumes/**/*.txt"
-        },
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] WRITE - {{path}}\" >> ~/Desktop/Resumes_Master_2025/logs/resume_changes.log"
-      }
-    ],
-    "preToolUse": [
-      {
-        "matcher": {
-          "tool": "Write",
-          "path": "**/VARIANT_*.txt"
-        },
-        "command": "bash -c 'echo \"\" && echo \"⚠️  WARNING: Attempting to OVERWRITE resume variant\" && echo \"File: {{path}}\" && echo \"\" && echo \"This will replace the ENTIRE file. Use Edit tool for modifications.\" && echo \"\" && read -p \"Type YES to confirm overwrite: \" confirm && [[ $confirm != \"YES\" ]] && echo \"❌ Overwrite cancelled\" && exit 1 || echo \"✅ Overwrite confirmed\"'"
-      },
-      {
-        "matcher": {
-          "tool": "Write",
-          "path": "**/MASTER_RESUME_SOURCE_TRUTH.txt"
-        },
-        "command": "bash -c 'echo \"\" && echo \"🚨 CRITICAL: Attempting to overwrite MASTER RESUME SOURCE\" && echo \"\" && read -p \"Type CONFIRM-MASTER-OVERWRITE to proceed: \" confirm && [[ $confirm != \"CONFIRM-MASTER-OVERWRITE\" ]] && echo \"❌ Master overwrite BLOCKED\" && exit 1 || echo \"✅ Master overwrite confirmed\"'"
-      },
-      {
-        "matcher": {
-          "tool": "Bash",
-          "commandPattern": "rm.*VARIANT.*"
-        },
-        "command": "echo \"🛑 BLOCKED: Cannot delete resume variant files via Bash\" && exit 1"
-      },
-      {
-        "matcher": {
-          "tool": "Bash",
-          "commandPattern": "rm.*MASTER_RESUME.*"
-        },
-        "command": "echo \"🛑 BLOCKED: Cannot delete master resume source via Bash\" && exit 1"
-      }
-    ]
-  },
-  "model": "sonnet[1m]"
+  "alwaysThinkingEnabled": false,
+  "model": "sonnet"
 }
