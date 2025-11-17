@@ -7,6 +7,10 @@ argument-hint: [repository-name]
 
 Execute a RIGOROUS, THOROUGH audit of repository: **$1**
 
+**NOTE**: Before starting, ensure the audit system is initialized.
+If unsure, run `/audit-status` to check if the coordination file exists.
+If not, run `/audit-handoff` to initialize the system.
+
 ## Required Methodology
 
 ### PRINCIPLES (Non-Negotiable):
@@ -69,8 +73,8 @@ Execute a RIGOROUS, THOROUGH audit of repository: **$1**
 - [ ] Safe to publish as-is?
 
 #### Phase 8: Create Audit Report
-- [ ] Create comprehensive .txt report in ~/Desktop/Github/
-- [ ] Use format: {REPO}_COMPLETE_AUDIT_2025-10-13.txt
+- [ ] Create comprehensive .txt report in the audit directory (auto-detected)
+- [ ] Use format: {REPO}_COMPLETE_AUDIT_YYYY-MM-DD.txt
 - [ ] Include ALL findings (no assumptions)
 - [ ] Include file counts, LOC, metrics
 - [ ] Include risk assessment

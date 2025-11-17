@@ -5,6 +5,7 @@ Ensures audit reports are complete and meet quality standards
 """
 
 import sys
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -22,12 +23,29 @@ REQUIRED_SECTIONS = [
 MIN_REPORT_LENGTH = 5000  # characters
 
 
+def get_audit_dir():
+    """Find audit directory"""
+    possible_locations = [
+        Path.home() / "Desktop/Github",
+        Path.home() / "Desktop/AUDIT_SYSTEM",
+        Path.home() / ".claude/audit_data",
+        Path(os.environ.get('AUDIT_DIR', '')),
+    ]
+
+    for location in possible_locations:
+        if location.exists():
+            return location
+
+    # Default
+    return Path.home() / "Desktop/Github"
+
+
 def verify_audit_report(repo_name, date=None):
     """Verify audit report is complete"""
     if date is None:
         date = datetime.now().strftime('%Y-%m-%d')
 
-    github_dir = Path.home() / "Desktop/Github"
+    github_dir = get_audit_dir()
     report_file = github_dir / f"{repo_name}_COMPLETE_AUDIT_{date}.txt"
 
     errors = []

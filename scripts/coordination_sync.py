@@ -12,8 +12,26 @@ from pathlib import Path
 from datetime import datetime
 import shutil
 
-COORD_FILE = Path.home() / "Desktop/Github/COORDINATION_STATUS.json"
-BACKUP_DIR = Path.home() / "Desktop/Github/.coordination_backups"
+# Adaptive path detection - checks multiple locations
+def get_audit_paths():
+    """Find audit directory, checking multiple locations"""
+    # Priority order for audit directory
+    possible_locations = [
+        Path.home() / "Desktop/Github",
+        Path.home() / "Desktop/AUDIT_SYSTEM",
+        Path.home() / ".claude/audit_data",
+        Path(os.environ.get('AUDIT_DIR', '')),  # Environment variable override
+    ]
+
+    for location in possible_locations:
+        if location.exists() and (location / "COORDINATION_STATUS.json").exists():
+            return location / "COORDINATION_STATUS.json", location / ".coordination_backups"
+
+    # Default to Desktop/Github if nothing found (for initialization)
+    default_dir = Path.home() / "Desktop/Github"
+    return default_dir / "COORDINATION_STATUS.json", default_dir / ".coordination_backups"
+
+COORD_FILE, BACKUP_DIR = get_audit_paths()
 
 
 def create_backup():

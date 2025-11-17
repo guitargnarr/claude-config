@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "github-automation": {
+      "command": "node",
+      "args": ["/Users/matthewscott/.claude/scripts/mcp_github_server.js"],
+      "env": {
+        "GH_TOKEN": "${GITHUB_TOKEN}",
+        "GH_USER": "guitargnarr"
+      },
+      "description": "GitHub automation MCP server for issues, PRs, and code review (DISABLED - script missing, use built-in mcp__github tools)",
+      "disabled": true
+    },
+    "featurebase": {
+      "command": "npx",
+      "args": ["-y", "featurebase-mcp"],
+      "env": {
+        "FEATUREBASE_API_KEY": "${FEATUREBASE_API_KEY}"
+      },
+      "description": "Customer feedback integration (requires Featurebase account)",
+      "disabled": true
+    }
+  },
+  "version": "1.0.0",
+  "description": "MCP configuration for Mirador Systems development automation"
+}

@@ -7,6 +7,14 @@ argument-hint: [operation] [repo-name] [additional-args...]
 
 **IMPORTANT**: This command uses Python scripts with atomic file locking to prevent corruption.
 
+**NOTE**: The coordination file location is auto-detected from:
+- `~/Desktop/Github/COORDINATION_STATUS.json`
+- `~/Desktop/AUDIT_SYSTEM/COORDINATION_STATUS.json`
+- `~/.claude/audit_data/COORDINATION_STATUS.json`
+- `$AUDIT_DIR/COORDINATION_STATUS.json` (environment variable)
+
+If no coordination file exists, run `/audit-handoff` to initialize the system.
+
 ## Usage
 
 `/audit-sync <operation> <repo-name> [additional-args]`
@@ -158,15 +166,12 @@ The system handles these error cases:
 
 ## Backup Location
 
-Backups stored in: `~/Desktop/Github/.coordination_backups/`
+Backups are stored in `.coordination_backups/` subdirectory of the audit directory.
 
 Format: `COORDINATION_STATUS_YYYYMMDD_HHMMSS.backup.json`
 
-To restore from backup:
-```bash
-cp ~/Desktop/Github/.coordination_backups/COORDINATION_STATUS_<timestamp>.backup.json \
-   ~/Desktop/Github/COORDINATION_STATUS.json
-```
+To restore from backup, copy the backup file to the main coordination file location.
+The backup directory is in the same location as the COORDINATION_STATUS.json file.
 
 ## Testing
 

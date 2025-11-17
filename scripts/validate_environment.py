@@ -6,10 +6,27 @@ Checks that all dependencies exist before running commands
 
 import json
 import sys
+import os
 from pathlib import Path
 
-COORD_FILE = Path.home() / "Desktop/Github/COORDINATION_STATUS.json"
-GITHUB_DIR = Path.home() / "Desktop/Github"
+def get_audit_paths():
+    """Find audit directory, checking multiple locations"""
+    possible_locations = [
+        Path.home() / "Desktop/Github",
+        Path.home() / "Desktop/AUDIT_SYSTEM",
+        Path.home() / ".claude/audit_data",
+        Path(os.environ.get('AUDIT_DIR', '')),
+    ]
+
+    for location in possible_locations:
+        if location.exists() and (location / "COORDINATION_STATUS.json").exists():
+            return location / "COORDINATION_STATUS.json", location
+
+    # Default to Desktop/Github if nothing found
+    default_dir = Path.home() / "Desktop/Github"
+    return default_dir / "COORDINATION_STATUS.json", default_dir
+
+COORD_FILE, GITHUB_DIR = get_audit_paths()
 HANDOFF_FILES = [
     "SESSION_HANDOFF_FOR_NEXT_CLAUDE_2025-10-12.txt",
     "SESSION_METHODOLOGY_AND_PROMPTS_2025-10-12.txt",

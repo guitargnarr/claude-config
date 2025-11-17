@@ -4,35 +4,50 @@ description: Sync with other Claude instance, read handoff docs, and pick next r
 
 # Repository Audit Handoff Protocol
 
-You are continuing a multi-session repository audit project for Matthew Scott. Follow these steps EXACTLY:
+You are continuing or starting a multi-session repository audit project for Matthew Scott.
+
+## Phase 0: Check if Audit System Exists
+
+Run the coordination sync status command to check if the system exists:
+```bash
+python3 ~/.claude/scripts/coordination_sync.py status
+```
+
+**If the command fails with "file_not_found"**:
+1. Search for archived audit system in ~/Desktop/6_ARCHIVES_OLD_DESKTOP/
+2. Check if there's an October 2025 audit in the archives
+3. Ask the user:
+   - "I found an archived audit system from October 2025. Do you want to:"
+   - "A) Restore and continue the October audit"
+   - "B) Start a fresh audit system for November 2025"
+   - "C) Cancel and do something else"
+4. If user chooses A, help them restore the files
+5. If user chooses B, run: `python3 ~/.claude/scripts/init_audit_system.py`
+6. If user chooses C, exit gracefully
+
+**If the command succeeds**:
+Continue with Step 1 below.
 
 ## Step 1: Read Coordination File
-Read `~/Desktop/Github/COORDINATION_STATUS.json` completely to understand:
+
+The coordination file is auto-detected from these locations (in priority order):
+- `~/Desktop/Github/COORDINATION_STATUS.json`
+- `~/Desktop/AUDIT_SYSTEM/COORDINATION_STATUS.json`
+- `~/.claude/audit_data/COORDINATION_STATUS.json`
+- `$AUDIT_DIR/COORDINATION_STATUS.json` (if environment variable set)
+
+Read it completely to understand:
 - What repositories have been audited
 - What is currently being worked on (check if locked)
 - What's in the work queue
 - The audit methodology and required checks
 
-## Step 2: Read Handoff Documents
-Read these files IN ORDER:
-1. `~/Desktop/Github/SESSION_HANDOFF_FOR_NEXT_CLAUDE_2025-10-13.txt` - Critical context (LATEST)
-2. `~/Desktop/Github/SESSION_METHODOLOGY_AND_PROMPTS_2025-10-12.txt` - How to audit
-3. (Optional) Previous handoff docs for historical context
+## Step 2: Review Previous Audit Reports (if they exist)
 
-## Step 3: Review Completed Audits
-Quickly scan the completed audit reports to understand the standard and depth required.
-Recent examples (Session #01 - Oct 13, 2025):
-- PORTFOLIO_WEBSITE_COMPLETE_AUDIT_2025-10-13.txt
-- LLM_ENGINEER_DEMO_COMPLETE_AUDIT_2025-10-13.txt
-- JCPS_BOOTS_COMPLETE_AUDIT_2025-10-13.txt
-- FRETVISION_APP_COMPLETE_AUDIT_2025-10-13.txt
+If there are completed audits in the audit directory, scan 2-3 of them to understand the standard and depth required.
 
-Historical examples (Previous sessions):
-- FRETFORGE_COMPLETE_AUDIT_2025-10-12.txt
-- CAREER_AUTOMATION_COMPLETE_AUDIT_2025-10-12.txt
-- SECURITY_COPILOT_COMPLETE_AUDIT_2025-10-12.txt
+## Step 3: Understand Critical Context
 
-## Step 4: Understand Critical Context
 **CRITICAL**:
 - User suspects job automation caused their layoff (unconfirmed)
 - Previous GitHub deleted for security/data leakage
@@ -40,14 +55,16 @@ Historical examples (Previous sessions):
 - ZERO shortcuts allowed - read every file
 - Quality over speed - we are NOT in a rush
 
-## Step 5: Select Next Repository
+## Step 4: Select Next Repository
+
 Check COORDINATION_STATUS.json:
 - If `current_work.locked == true`, DO NOT work on that repo
 - Pick next highest priority repo from `work_queue`
-- Update coordination file with your selection
-- Lock the repo so other instance doesn't duplicate work
+- Use `/audit-sync lock <repo> <instance-id>` to lock it
+- Report your selection
 
-## Step 6: Confirm Understanding
+## Step 5: Confirm Understanding
+
 Report back:
 - Which repo you selected
 - Why you selected it

@@ -1,0 +1,483 @@
+# Global Claude Code Setup
+
+## Critical Rules
+- **NEVER create documentation unprompted**
+- **NEVER use "ultrathink" unless I explicitly request it** (causes analysis paralysis)
+- **ALWAYS implement code before writing documentation**
+- **NEVER generate marketing/aspirational language**
+- Never assume consulting is the goal (job search is Priority 1)
+- Never suggest rest/energy management
+- Never use emojis unless explicitly requested
+
+## Execution Philosophy
+
+### Code-First Mandate
+1. **Write code first, document later**
+2. **Direct implementation > Extended planning**
+3. **Working software > Comprehensive documentation**
+4. **When stuck: implement smallest viable piece, not analyze more**
+
+### "Ultrathink" Usage Policy
+- ✅ **Use when:** Initial complex problem analysis, architectural decisions, debugging root causes
+- ❌ **DON'T use for:** Follow-up questions, implementation tasks, every response
+- ⚠️ **Pattern to avoid:** Request ultrathink → 500+ line analysis → More ultrathink → Analysis paralysis
+- ✅ **Better pattern:** One initial analysis, then direct action commands
+
+### Documentation Limits (STRICT)
+- **Maximum 5 markdown files per project** (README, FIXES, MONITORING, API, STATUS)
+- **Maximum 500 lines per file** (if longer, split or delete)
+- **Delete redundant content** (don't create multiple summaries)
+- **No "ULTRATHINK" suffixed files** (analysis belongs in responses, not files)
+- **Archive, don't accumulate** (move old docs to /docs/archive/)
+
+## System Info
+- Python: 3.14 at `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3`
+- GitHub: guitargnarr (matthewdscott7@gmail.com)
+- Deployment: Vercel, Netlify, Render
+- Ollama: 16 local models (prefer for routine tasks - free inference)
+
+## Proven Workflows
+
+### Deployment (8-13 seconds)
+```bash
+# Vercel (Frontend)
+vercel --prod --yes
+
+# Test Before Deploy (ALWAYS)
+npm run build && npm run preview
+
+# Git workflow (ALWAYS add assets)
+git add public/
+```
+
+### Development Pattern That Works
+```bash
+# Pattern: Direct implementation (24 mins → 87% complete)
+1. Implement feature
+2. Test immediately
+3. Fix issues
+4. Commit
+5. Move to next
+
+# Anti-pattern: Analysis spiral (90 mins → 0% progress)
+1. Request analysis
+2. Generate planning docs
+3. More analysis
+4. More planning
+5. Context exhausted, no code written
+```
+
+## Common Pitfalls
+- ❌ NO vercel.json for Vite projects (Vercel auto-detects)
+- ❌ NO Tailwind v4 (use v3 - config incompatibility)
+- ❌ NO extensive planning before coding (implement first)
+- ❌ NO lock file operations on coordination files (use audit-sync carefully)
+- ✅ Absolute URLs for OG meta tags (relative paths fail in social shares)
+
+## Context Management (I Do This Already)
+
+**Current patterns (KEEP DOING):**
+- `/clear` after major tasks (216 uses - excellent!)
+- `/context` to monitor usage (111 uses - good awareness)
+- `/cost` tracking (42 uses - cost-conscious)
+- `/compact` for long conversations (23 uses)
+- `/model` switching (219 uses - smart optimization)
+
+**Proactive context strategy:**
+- Clear between unrelated tasks
+- Switch to Haiku for simple tasks
+- Use Ollama for routine operations (free)
+- Reserve Opus for complex reasoning only
+
+## Job Search Data Protection
+
+**CRITICAL - Never read/edit these files without explicit permission:**
+- Any file matching `**/JOB_TRACKER*.csv`
+- Any file matching `**/GMAIL_*.csv`
+- Any file matching `**/APPLICATIONS*.csv`
+- Any file matching `**/COMPANY_RESPONSES*.csv`
+- Directory: `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
+
+**These contain:**
+- Personal application data
+- Company contacts
+- Communication history
+- Sensitive job search information
+
+## Slash Commands
+
+**Career**: `/coach` `/louisville` `/tactic`
+**Code**: `/analyze` `/code` `/humanize` `/quick`
+**GitHub**: `/git` `/commit` `/push-pr` `/review-pr` `/worktree`
+**Audit**: `/audit-repo` `/audit-status` `/audit-sync` `/audit-handoff`
+
+**Note:** Audit commands use coordination file - watch for lock conflicts
+
+## Communication Preferences
+- Direct, technical, honest
+- Present options, I decide
+- Challenge assumptions when warranted
+- Ask "What next?" not "Should you rest?"
+- **Code examples > Long explanations**
+- **Facts > Speculation**
+- **Action > Analysis**
+
+## Response Structure (Minimize Cognitive Load)
+
+**Always organize ideas into clear buckets:**
+```
+Idea 1 → Example/Evidence
+Idea 2 → Example/Evidence
+Idea 3 → Example/Evidence
+```
+
+**Before responding, consider:**
+- Why should you care? (Make relevance clear upfront)
+- What do you know? (Don't explain basics, don't assume advanced knowledge)
+- What do I know? (Bridge the gap efficiently)
+- How can I minimize work on your end? (Pre-answer obvious questions)
+
+**Structure every response:**
+1. What is this? (Define the thing)
+2. What's the approach? (How to think about it)
+3. What's the action? (What to do next)
+
+**Efficiency rules:**
+- Respect time - get to the point
+- Don't make you piece together scattered ideas
+- Answer follow-up questions pre-emptively
+- Use analogies when helpful
+
+## Quality Standards (Definition of Done)
+
+A task is ONLY complete when:
+- [ ] Implementation works (tested manually)
+- [ ] Tests pass (run the actual tests)
+- [ ] Build succeeds (no errors/warnings)
+- [ ] Committed to git
+- [ ] Deployed (if applicable)
+
+Never claim completion based on code written - only on tests passing.
+
+## Verification Before Claiming Done
+
+1. Run the actual tests
+2. Check git status
+3. Verify build passes
+4. Test functionality manually
+
+If tests fail, task is NOT complete.
+
+## When I Say Specific Things
+
+**"It has nothing to do with X"** → Stop pursuing that angle entirely
+**"Using Claude Code to fix what's broken"** → Focus only on actual broken functionality
+**"We don't want to delete anything"** → Organize, don't propose deletion
+**"Help me"** → Provide actionable steps, not more analysis
+**"Ultrathink"** → Deep analysis requested (use sparingly)
+
+## Frontend Testing and Debugging
+
+### Using Playwright MCP Server (When Available)
+When troubleshooting HTML, CSS, and JavaScript issues:
+1. Navigate to page with `mcp__playwright__browser_navigate`
+2. Use `mcp__playwright__browser_snapshot` to capture page state
+3. Check `mcp__playwright__browser_console_messages` for JS errors
+4. Use `mcp__playwright__browser_evaluate` to run JS interactively
+
+Setup: `claude mcp add playwright npx @playwright/mcp@latest`
+
+### Common Frontend Debugging Workflows
+- **HTML/CSS issues**: Use browser_snapshot to inspect DOM
+- **JavaScript errors**: Check browser_console_messages
+- **Interactive debugging**: Use browser_evaluate to run JS
+- **Network issues**: Monitor with browser_network_requests
+
+### Best Practices for Front-End Work
+1. Always work with local servers Claude can access
+2. Use hot reload for quick iteration
+3. Keep test pages minimal to avoid token limits
+4. Take screenshots manually and attach to prompts
+5. Describe visual issues in detail (spacing, alignment, colors)
+6. Reference specific elements by class names or IDs
+7. Break CSS problems into small, testable changes
+8. Verify each change before moving to next issue
+
+### CSS Framework Guidelines
+- Document design system tokens and variables in project CLAUDE.md
+- Include responsive breakpoints and grid systems
+- Add framework-specific conventions
+
+## Context Optimization
+
+### Auto-Compact Setting
+- **Status**: Turn OFF to reclaim 20-40% context window
+- **How**: /config → Auto-compact → false
+- **Savings**: Up to 45k tokens per session
+- **Why**: No control over what context is added, may include stale info
+
+### Context Clearing Strategy
+Use /clear after every 1-3 messages to:
+- Prevent noise accumulation
+- Keep focused on current task
+- Avoid forgetting project rules
+- Save money and usage limits
+- Prevent context rot
+
+CLAUDE.md files automatically reload after /clear.
+
+### File Filtering (.claudeignore)
+Create .claudeignore in project roots:
+```
+node_modules/
+dist/
+build/
+*.log
+*.min.js
+coverage/
+.git/
+vendor/
+__pycache__/
+```
+
+Benefits: Reduces context usage, faster operations, focus on relevant code
+
+## File Size Standards
+
+### Guidelines
+- **Target**: <500 lines per file
+- **Maximum**: 1000 lines (refactor if exceeded)
+- **Strategy**: Extract reusable logic into utility modules
+
+### Refactoring Strategy
+When encountering large files:
+1. Identify logical boundaries
+2. Extract related functions into modules
+3. Create clear interfaces between modules
+4. Update imports and tests
+5. Verify functionality after refactoring
+
+### Module Organization
+- Separate UI components into individual files
+- Keep business logic separate from presentation
+- Extract reusable utilities to shared modules
+
+## Architecture Documentation
+
+### Project CLAUDE.md Should Include
+
+**System Overview:**
+- Architecture pattern (microservices, monolith, etc.)
+- Service dependencies
+- Communication patterns (REST, events, message queues)
+
+**Technology Stack:**
+- Exact versions of all dependencies
+- Framework-specific patterns
+- Important version notes
+
+**Common Pitfalls:**
+- Framework-specific gotchas
+- Anti-patterns to avoid
+- Known issues
+
+**Example:**
+```markdown
+## Architecture
+- Microservices with event-driven communication
+- Services: Auth, User, Order, Payment
+- Message broker: RabbitMQ
+- Database: PostgreSQL per service
+
+## Communication Patterns
+- Synchronous: REST APIs for client-facing
+- Asynchronous: Event bus for inter-service
+- Events: user.created, order.placed
+
+## Common Pitfalls
+- Don't make direct DB calls between services
+- Always publish events for state changes
+- Use idempotent event handlers
+```
+
+## Business Logic Documentation
+
+### Domain-Specific Information (Project CLAUDE.md)
+
+**Core Concepts:**
+- Business entity lifecycle states
+- State transitions and rules
+- Domain terminology glossary
+
+**Business Rules:**
+- Pricing rules with examples
+- Inventory management rules
+- Payment processing rules
+
+**Common Workflows:**
+- Checkout flow steps
+- Return/refund process
+- Order fulfillment workflow
+
+**Example Code:**
+Include actual implementation examples showing how business rules are applied in code.
+
+## Testing Standards
+
+### Test-Driven Development Workflow
+1. Define requirements clearly
+2. Ask Claude to write comprehensive tests FIRST
+3. Run tests (they should fail initially)
+4. Ask Claude to implement code to pass tests
+5. Verify all tests pass
+6. Only consider task complete when tests pass
+
+### Example TDD Prompt
+```
+Before implementing user authentication, write comprehensive tests covering:
+- Successful login with valid credentials
+- Failed login with invalid credentials
+- Password hashing verification
+- Token generation and validation
+- Session management
+
+Then implement the feature to pass all tests.
+```
+
+### Test Coverage Requirements
+- Unit tests: >80% coverage
+- Integration tests for critical paths
+- E2E tests for main user workflows
+- All tests must pass before claiming done
+
+## Custom Slash Commands
+
+### Create Commands for Repetitive Workflows
+Location: `.claude/commands/` in project root
+
+**Example: Fix GitHub Issue**
+File: `.claude/commands/fix-github-issue.md`
+```markdown
+Please analyze and fix GitHub issue: $ARGUMENTS
+
+Steps:
+1. Use `gh issue view` to get details
+2. Understand the problem
+3. Search codebase for relevant files
+4. Implement necessary changes
+5. Write and run tests
+6. Ensure linting and type checking pass
+7. Create descriptive commit message
+8. Push and create PR
+```
+
+Usage: `/fix-github-issue 1234`
+
+### Verification Command
+File: `.claude/commands/verify-status.md`
+```markdown
+# Verify Task Status
+
+Perform comprehensive verification of completion.
+
+## Instructions
+
+1. **Status Assessment**: Run git status, git log
+2. **Build Verification**: Run build command, execute tests
+3. **Functional Verification**: Test main features, verify APIs
+4. **Security Check**: Run security audit, check vulnerabilities
+5. **Deployment Readiness**: Verify production build, check configs
+6. **Cross-Reference Claims**: Verify claimed features exist and work
+
+## Output Format
+- ✅ VERIFIED: Items confirmed working
+- ❌ FAILED: Items that don't work
+- ⚠️ WARNING: Items needing attention
+- 📋 SUMMARY: Overall status and next steps
+```
+
+## Framework Documentation
+
+### Always Refer to Official Docs (Project CLAUDE.md)
+```markdown
+## Framework Documentation
+### React
+- Official Docs: https://react.dev/
+- Current version: 18.3.0
+
+### Next.js
+- Official Docs: https://nextjs.org/docs
+- Current version: 14.2.0
+
+## Important Notes
+- We use React 18+ with concurrent features
+- We use Next.js App Router (not Pages Router)
+- We use TypeScript strict mode
+
+## Deprecated/Removed
+- ❌ Don't use getServerSideProps (deprecated)
+- ❌ Don't use getStaticProps (deprecated)
+- ✅ Use async Server Components instead
+```
+
+## Manual Review Requirements
+
+### Code Requiring Human Review (Project CLAUDE.md)
+The following changes ALWAYS require manual review:
+- Authentication and authorization logic
+- Payment processing code
+- Database schema changes
+- API contract changes
+- Security configurations
+- Performance-critical code paths
+- Complex state management
+- Error handling logic
+- Edge cases and boundary conditions
+
+Never claim these are complete without explicit human verification.
+
+## Plan Files for Complex Tasks
+
+### Workflow for Multi-Step Tasks
+1. Ask Claude to create plan in `plan.md`
+2. Claude updates plan as it implements
+3. Plan persists across sessions
+4. Reference plan to resume work
+5. Clear context frequently, plan maintains continuity
+
+### Plan Template
+```markdown
+# Plan: [Task Name]
+
+## Completed
+- [x] Step 1
+- [x] Step 2
+
+## In Progress
+- [ ] Current step
+
+## Todo
+- [ ] Next step
+- [ ] Final step
+```
+
+## MCP Server Integration
+
+### Useful MCP Servers
+- **Playwright/Puppeteer**: Browser automation for frontend debugging
+- **Documentation MCP**: Fetch latest docs from official sources
+- **NPM MCP**: Check current package versions
+- **GitHub MCP**: Access latest repository information
+- **Security MCP**: Check for known vulnerabilities
+
+### When to Use MCP
+- Frontend visual debugging (Playwright)
+- Real-time documentation access
+- Package version verification
+- Security vulnerability scanning
+
+## Documentation References
+- Memory system structure: @~/.claude/SYSTEM_DOCUMENTATION.md
+- Optimal workflows (Anthropic): @~/.claude/WORKFLOWS.md
+- Usage patterns: @~/.claude/context/workflow-patterns.md
+- Permission guide: @~/.claude/PERMISSIONS_GUIDE.md

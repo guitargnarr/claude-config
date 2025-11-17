@@ -121,12 +121,6 @@
       "Read(**/.npmrc)",
       "Read(**/.pypirc)",
 
-      // ===== PROTECT JOB SEARCH DATA =====
-      "Read(**/JOB_TRACKER*.csv)",
-      "Read(**/GMAIL_*.csv)",
-      "Read(**/APPLICATIONS*.csv)",
-      "Read(**/COMPANY_RESPONSES*.csv)",
-
       "Edit(.env)",
       "Edit(.env.*)",
       "Edit(**/.env)",
@@ -136,12 +130,6 @@
       "Edit(**/.ssh/id_*)",
       "Edit(**/.aws/credentials)",
 
-      // ===== PROTECT JOB SEARCH DATA (EDIT) =====
-      "Edit(**/JOB_TRACKER*.csv)",
-      "Edit(**/GMAIL_*.csv)",
-      "Edit(**/APPLICATIONS*.csv)",
-      "Edit(**/COMPANY_RESPONSES*.csv)",
-
       "Write(.env)",
       "Write(.env.*)",
       "Write(**/.env)",
@@ -150,12 +138,6 @@
       "Write(**/secrets/**)",
       "Write(**/.ssh/id_*)",
       "Write(**/.aws/credentials)",
-
-      // ===== PROTECT JOB SEARCH DATA (WRITE) =====
-      "Write(**/JOB_TRACKER*.csv)",
-      "Write(**/GMAIL_*.csv)",
-      "Write(**/APPLICATIONS*.csv)",
-      "Write(**/COMPANY_RESPONSES*.csv)",
 
       // ===== PREVENT DANGEROUS BASH =====
       "Bash(:()){:|:&};:)",  // Fork bomb

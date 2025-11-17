@@ -1,0 +1,137 @@
+# Global Claude Code Setup
+
+## Critical Rules
+- **NEVER create documentation unprompted**
+- **NEVER use "ultrathink" unless I explicitly request it** (causes analysis paralysis)
+- **ALWAYS implement code before writing documentation**
+- **NEVER generate marketing/aspirational language**
+- Never assume consulting is the goal (job search is Priority 1)
+- Never suggest rest/energy management
+- Never use emojis unless explicitly requested
+
+## Execution Philosophy
+
+### Code-First Mandate
+1. **Write code first, document later**
+2. **Direct implementation > Extended planning**
+3. **Working software > Comprehensive documentation**
+4. **When stuck: implement smallest viable piece, not analyze more**
+
+### "Ultrathink" Usage Policy
+- ✅ **Use when:** Initial complex problem analysis, architectural decisions, debugging root causes
+- ❌ **DON'T use for:** Follow-up questions, implementation tasks, every response
+- ⚠️ **Pattern to avoid:** Request ultrathink → 500+ line analysis → More ultrathink → Analysis paralysis
+- ✅ **Better pattern:** One initial analysis, then direct action commands
+
+### Documentation Limits (STRICT)
+- **Maximum 5 markdown files per project** (README, FIXES, MONITORING, API, STATUS)
+- **Maximum 500 lines per file** (if longer, split or delete)
+- **Delete redundant content** (don't create multiple summaries)
+- **No "ULTRATHINK" suffixed files** (analysis belongs in responses, not files)
+- **Archive, don't accumulate** (move old docs to /docs/archive/)
+
+## System Info
+- Python: 3.14 at `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3`
+- GitHub: guitargnarr (matthewdscott7@gmail.com)
+- Deployment: Vercel, Netlify, Render
+- Ollama: 16 local models (prefer for routine tasks - free inference)
+
+## Proven Workflows
+
+### Deployment (8-13 seconds)
+```bash
+# Vercel (Frontend)
+vercel --prod --yes
+
+# Test Before Deploy (ALWAYS)
+npm run build && npm run preview
+
+# Git workflow (ALWAYS add assets)
+git add public/
+```
+
+### Development Pattern That Works
+```bash
+# Pattern: Direct implementation (24 mins → 87% complete)
+1. Implement feature
+2. Test immediately
+3. Fix issues
+4. Commit
+5. Move to next
+
+# Anti-pattern: Analysis spiral (90 mins → 0% progress)
+1. Request analysis
+2. Generate planning docs
+3. More analysis
+4. More planning
+5. Context exhausted, no code written
+```
+
+## Common Pitfalls
+- ❌ NO vercel.json for Vite projects (Vercel auto-detects)
+- ❌ NO Tailwind v4 (use v3 - config incompatibility)
+- ❌ NO extensive planning before coding (implement first)
+- ❌ NO lock file operations on coordination files (use audit-sync carefully)
+- ✅ Absolute URLs for OG meta tags (relative paths fail in social shares)
+
+## Context Management (I Do This Already)
+
+**Current patterns (KEEP DOING):**
+- `/clear` after major tasks (216 uses - excellent!)
+- `/context` to monitor usage (111 uses - good awareness)
+- `/cost` tracking (42 uses - cost-conscious)
+- `/compact` for long conversations (23 uses)
+- `/model` switching (219 uses - smart optimization)
+
+**Proactive context strategy:**
+- Clear between unrelated tasks
+- Switch to Haiku for simple tasks
+- Use Ollama for routine operations (free)
+- Reserve Opus for complex reasoning only
+
+## Job Search Data Protection
+
+**CRITICAL - Never read/edit these files without explicit permission:**
+- Any file matching `**/JOB_TRACKER*.csv`
+- Any file matching `**/GMAIL_*.csv`
+- Any file matching `**/APPLICATIONS*.csv`
+- Any file matching `**/COMPANY_RESPONSES*.csv`
+- Directory: `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
+
+**These contain:**
+- Personal application data
+- Company contacts
+- Communication history
+- Sensitive job search information
+
+## Slash Commands
+
+**Career**: `/coach` `/louisville` `/tactic`
+**Code**: `/analyze` `/code` `/humanize` `/quick`
+**GitHub**: `/git` `/commit` `/push-pr` `/review-pr` `/worktree`
+**Audit**: `/audit-repo` `/audit-status` `/audit-sync` `/audit-handoff`
+
+**Note:** Audit commands use coordination file - watch for lock conflicts
+
+## Communication Preferences
+- Direct, technical, honest
+- Present options, I decide
+- Challenge assumptions when warranted
+- Ask "What next?" not "Should you rest?"
+- **Code examples > Long explanations**
+- **Facts > Speculation**
+- **Action > Analysis**
+
+## When I Say Specific Things
+
+**"It has nothing to do with X"** → Stop pursuing that angle entirely
+**"Using Claude Code to fix what's broken"** → Focus only on actual broken functionality
+**"We don't want to delete anything"** → Organize, don't propose deletion
+**"Help me"** → Provide actionable steps, not more analysis
+**"Ultrathink"** → Deep analysis requested (use sparingly)
+
+## Documentation References
+- Memory system structure: @~/.claude/SYSTEM_DOCUMENTATION.md
+- Optimal workflows (Anthropic): @~/.claude/WORKFLOWS.md
+- Usage patterns: @~/.claude/USAGE_ANALYSIS.md
+- Permission guide: @~/.claude/PERMISSIONS_GUIDE.md

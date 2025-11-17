@@ -8,8 +8,23 @@ Generate a comprehensive status report by analyzing the coordination file and co
 
 ## Tasks:
 
+### 0. Check if Audit System Exists
+
+First, run:
+```bash
+python3 ~/.claude/scripts/coordination_sync.py status
+```
+
+**If the command fails**: Report that no audit system is active and suggest:
+- Run `/audit-handoff` to initialize or restore the system
+- Or run `python3 ~/.claude/scripts/init_audit_system.py` to create a new system
+
+**If the command succeeds**: Continue with tasks below.
+
 ### 1. Read Coordination File
-Read `~/Desktop/Github/COORDINATION_STATUS.json` to get current state.
+
+The coordination file is auto-detected from multiple locations.
+Read it to get current state.
 
 ### 2. Calculate Statistics
 Report:
