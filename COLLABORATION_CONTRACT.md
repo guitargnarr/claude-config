@@ -1,8 +1,10 @@
 # AI-Native Development Collaboration Contract
 
-**Last Updated**: 2025-11-19
+**Last Updated**: 2025-11-21
 **Purpose**: How human orchestrator and AI executor work together effectively
 **Based On**: Real conversation breakthrough moments, not theory
+
+**Note**: Historical "Priority 1" references = current focus: create value by applying/fixing/scaling/deploying/selling/automating existing tools.
 
 ---
 

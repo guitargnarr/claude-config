@@ -115,7 +115,7 @@ When tests pass and quality is verified, ship it. Don't second-guess completed w
 Building skills and demonstrating capability over time. Each project adds to the proof of what I can deliver.
 
 **Strategic context:**
-Job search is priority 1, but building IS how I demonstrate capability. Guitar platform shows React, TypeScript, state management, component architecture, testing, deployment—all relevant for SE roles.
+Create value: apply, fix, scale, deploy, sell, automate existing tools. Skills compound into platforms and income.
 
 **Sustainable pace:**
 Deep work sessions on substantial problems. Not burning out chasing dopamine hits from shipping features.

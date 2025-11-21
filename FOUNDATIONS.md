@@ -1,11 +1,13 @@
 # Foundations - The "Why" Behind AI-Native Development
 
-**Last Updated**: 2025-11-19
+**Last Updated**: 2025-11-21
 **Purpose**: Single source of truth for philosophy, values, and the AI-native developer thesis
 **Context**: Discovered through building, not theorizing
 
+**Strategic Shift (Nov 21)**: Not pursuing 9-5. Focus = create value via: apply, fix, scale, deploy, sell, automate existing tools.
+
 **Core insight**: @~/.claude/context/working-philosophy.md (detailed values)
-**This document**: Synthesizes philosophy + AI-native thesis + survival strategy
+**This document**: Synthesizes philosophy + AI-native thesis + value creation strategy
 
 ---
 

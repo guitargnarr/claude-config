@@ -243,18 +243,18 @@ claude
 
 ---
 
-### Strategy 4: Job Search Automation (High Value)
+### Strategy 4: GitHub Repo Quality Improvement (Value Creation)
 
-**Best for**: Automating repetitive job search tasks
+**Best for**: Vetting and improving GitHub repos for deployment/sale readiness
 
-**Example**: Full job search workflow
-- Task 1: Resume auto-customizer (reads job description, tailors resume)
-- Task 2: Cover letter generator (uses matthewdscott7@gmail.com context)
-- Task 3: Application tracker improvements (CSV → dashboard)
-- Task 4: Interview prep automation (company research + question prep)
+**Example**: 4 repos reviewed in parallel
+- Task 1: Fix python linting, create GitHub Issues for problems
+- Task 2: Complete TODOs, improve documentation, add examples
+- Task 3: Code review with quality scoring, create PRs for fixes
+- Task 4: Deployment verification, GitHub Actions setup, test coverage
 
-**Pros**: 34.5% of your work automated  
-**Cons**: Requires access to job search data
+**Pros**: Portfolio quality, deployment readiness, pattern learning on common issues
+**Cons**: None - directly creates value
 
 ---
 

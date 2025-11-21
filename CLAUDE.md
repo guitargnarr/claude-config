@@ -5,7 +5,7 @@
 - **Documentation:** Max 5 files per project, 500 lines each (README/CLAUDE.md/TODO allowed)
 - **Code first:** Implement before documenting (docs describe what exists, not plans)
 - **Delete planning docs** after extracting action items (prevent bloat)
-- Never assume consulting is the goal (job search is Priority 1)
+- **Work mode:** Consulting and platform building (sustainable income model)
 - Never use emojis unless explicitly requested
 
 ## System Info
@@ -18,10 +18,10 @@
 - **NO Tailwind v4** (use v3)
 - **Absolute URLs for OG meta tags**
 
-## Job Search Data Protection
+## Private Data Protection
 **CRITICAL - Never read/edit without permission:**
 - `**/JOB_TRACKER*.csv`, `**/GMAIL_*.csv`, `**/APPLICATIONS*.csv`
-- `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
+- `~/Desktop/1_PRIORITY_JOB_SEARCH/**` (historical data, archived)
 
 ## Communication Style
 - Direct, technical, honest
