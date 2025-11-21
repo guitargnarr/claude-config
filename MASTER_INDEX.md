@@ -1,6 +1,6 @@
 # AI-Native Development Toolkit - Master Index
 
-**Last Updated**: 2025-11-19
+**Last Updated**: 2025-11-21
 **Purpose**: Complete inventory of tools, automation, and documentation for AI-native development
 
 **Quick Access**:
@@ -21,11 +21,12 @@
 | `~/.claude/context/current-status.md` | 62 | Temporal info (updated 2025-11-19) | ✅ Working |
 | `~/.claude/context/working-philosophy.md` | ~300 | Core values and principles | ✅ Working |
 
-### Reference Documentation (✅ VERIFIED 2025-11-19)
+### Reference Documentation (✅ VERIFIED 2025-11-21)
 
 | File | Size | Purpose | Status |
 |------|------|---------|--------|
 | `~/.claude/reference/parallel-development-playbook.md` | 21KB | v4 parallel development methodology | ✅ Working |
+| `~/.claude/reference/MIRADOR_PATTERN_LEARNING_INTEGRATION.md` | 14KB | Pattern learning integration guide | ✅ Working |
 | `~/.claude/archive/WORKFLOWS.md` | 13KB | Anthropic optimal workflows | ✅ Working |
 | `~/.claude/archive/SYSTEM_DOCUMENTATION.md` | 8KB | Memory system meta-documentation | ✅ Working |
 | `~/.claude/archive/PERMISSIONS_GUIDE.md` | 8KB | Permissions configuration guide | ✅ Working |
@@ -47,10 +48,13 @@
 #### Parallel Development (✅ PROVEN)
 | Script | Purpose | Status | Last Verified |
 |--------|---------|--------|---------------|
+| `lib/parallel_memory.py` | Pattern learning memory backend (SQLite) | ✅ Working | 2025-11-21 |
+| `store_parallel_result.py` | Store parallel run results with quality scoring | ✅ Working | 2025-11-21 |
+| `pattern_dashboard.py` | Pattern learning dashboard and trend visualization | ✅ Working | 2025-11-21 |
 | `launch_parallel.sh` | Launch 4 terminals for parallel development | ⚠️ Untested | Never |
 | `worktree_manager.py` | Git worktree management | ⚠️ Untested | Never |
 | `cleanup-worktrees.sh` | Remove merged worktrees | ⚠️ Untested | Never |
-| `parallel_metrics.py` | Track parallel dev metrics | ⚠️ Untested | Never |
+| `parallel_metrics.py` | Track parallel dev metrics (deprecated - use pattern_dashboard.py) | ⚠️ Untested | Never |
 | `merge-parallel-prs.sh` | Automated PR merging | ⚠️ Untested | Never |
 
 #### Verification & Validation
