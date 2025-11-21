@@ -1,6 +1,6 @@
 ---
 description: Manage git worktrees for parallel development
-argument-hint: <create|list|remove> [branch] [base]
+argument-hint: <create|list|remove|cleanup> [branch] [base]
 allowed-tools: Bash
 ---
 
@@ -62,6 +62,25 @@ Clean up stale worktree records from git.
 ```bash
 /worktree prune
 ```
+
+### `cleanup`
+Automatically clean up all merged worktrees and branches (SAFE).
+
+**Example**:
+```bash
+/worktree cleanup
+```
+
+**What happens**:
+- Fetches latest from remote
+- Updates main branch
+- Identifies all merged branches
+- Removes worktrees for merged branches
+- Deletes local merged branches
+- Prunes stale references
+- Shows any running Claude instances in deleted directories
+
+**Use this after parallel development sessions to clean up everything at once!**
 
 ## Implementation:
 

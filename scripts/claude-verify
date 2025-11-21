@@ -1,0 +1,62 @@
+#!/bin/bash
+# claude-verify
+# Purpose: Run all verification scripts
+# Last Updated: 2025-11-19
+
+echo "🔍 Running AI-Native Development Toolkit Verification..."
+echo ""
+
+VERIFICATION_DIR="${HOME}/.claude/verification"
+
+if [ ! -d "$VERIFICATION_DIR" ]; then
+    echo "❌ Verification directory not found: $VERIFICATION_DIR"
+    exit 1
+fi
+
+# Track overall status
+all_passed=true
+
+# Run verify-inventory.sh
+echo "═══════════════════════════════════════"
+echo "1. Inventory Verification"
+echo "═══════════════════════════════════════"
+if [ -x "$VERIFICATION_DIR/verify-inventory.sh" ]; then
+    "$VERIFICATION_DIR/verify-inventory.sh"
+    if [ $? -ne 0 ]; then
+        all_passed=false
+    fi
+else
+    echo "❌ verify-inventory.sh not found or not executable"
+    all_passed=false
+fi
+
+echo ""
+echo "═══════════════════════════════════════"
+echo "2. Documentation Verification"
+echo "═══════════════════════════════════════"
+if [ -x "$VERIFICATION_DIR/verify-docs.sh" ]; then
+    "$VERIFICATION_DIR/verify-docs.sh"
+    if [ $? -ne 0 ]; then
+        all_passed=false
+    fi
+else
+    echo "❌ verify-docs.sh not found or not executable"
+    all_passed=false
+fi
+
+echo ""
+echo "═══════════════════════════════════════"
+echo "Overall Result"
+echo "═══════════════════════════════════════"
+
+if [ "$all_passed" = true ]; then
+    echo "✅ All verification checks passed!"
+    echo ""
+    echo "Your AI-native development toolkit is verified and ready to use."
+    exit 0
+else
+    echo "⚠️  Some verification checks failed"
+    echo ""
+    echo "Run 'claude-status' for detailed issues and recommendations."
+    exit 1
+fi

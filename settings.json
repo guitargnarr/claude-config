@@ -1,18 +1,17 @@
 {
+  "cleanupPeriodDays": 30,
+  "env": {
+    "PYTHONPATH": "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3"
+  },
   "permissions": {
     "allow": [
-      // ===== FILE OPERATIONS =====
       "Read(**)",
       "Write(**)",
       "Edit(**)",
       "Glob(**)",
       "Grep(**)",
-
-      // ===== WEB OPERATIONS =====
       "WebFetch",
       "WebSearch",
-
-      // ===== SAFE BASH COMMANDS =====
       "Bash(git:*)",
       "Bash(gh:*)",
       "Bash(npm:*)",
@@ -29,8 +28,6 @@
       "Bash(kubectl:*)",
       "Bash(vercel:*)",
       "Bash(netlify:*)",
-
-      // ===== SAFE UTILITIES =====
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(echo:*)",
@@ -55,11 +52,7 @@
       "Bash(which:*)",
       "Bash(chmod:*)",
       "Bash(chown:*)",
-
-      // ===== OLLAMA MODELS =====
       "Bash(ollama:*)",
-
-      // ===== TESTING & BUILD =====
       "Bash(pytest:*)",
       "Bash(jest:*)",
       "Bash(vitest:*)",
@@ -70,8 +63,6 @@
       "Bash(clang:*)",
       "Bash(gcc:*)",
       "Bash(cmake:*)",
-
-      // ===== CUSTOM SLASH COMMANDS =====
       "SlashCommand(/coach:*)",
       "SlashCommand(/louisville:*)",
       "SlashCommand(/tactic:*)",
@@ -84,9 +75,49 @@
       "SlashCommand(/audit-repo:*)",
       "SlashCommand(/audit-status:*)"
     ],
-
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/credentials.json)",
+      "Read(**/secrets/**)",
+      "Read(**/.ssh/id_*)",
+      "Read(**/.aws/credentials)",
+      "Read(**/.npmrc)",
+      "Read(**/.pypirc)",
+      "Read(**/JOB_TRACKER*.csv)",
+      "Read(**/GMAIL_*.csv)",
+      "Read(**/APPLICATIONS*.csv)",
+      "Read(**/COMPANY_RESPONSES*.csv)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Edit(**/credentials.json)",
+      "Edit(**/secrets/**)",
+      "Edit(**/.ssh/id_*)",
+      "Edit(**/.aws/credentials)",
+      "Edit(**/JOB_TRACKER*.csv)",
+      "Edit(**/GMAIL_*.csv)",
+      "Edit(**/APPLICATIONS*.csv)",
+      "Edit(**/COMPANY_RESPONSES*.csv)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/credentials.json)",
+      "Write(**/secrets/**)",
+      "Write(**/.ssh/id_*)",
+      "Write(**/.aws/credentials)",
+      "Write(**/JOB_TRACKER*.csv)",
+      "Write(**/GMAIL_*.csv)",
+      "Write(**/APPLICATIONS*.csv)",
+      "Write(**/COMPANY_RESPONSES*.csv)",
+      "Bash(chmod 000:*)",
+      "Bash(chmod -R 000:*)"
+    ],
     "ask": [
-      // ===== ASK BEFORE DESTRUCTIVE OPERATIONS =====
       "Bash(rm:*)",
       "Bash(rmdir:*)",
       "Bash(kill:*)",
@@ -98,8 +129,6 @@
       "Bash(reboot:*)",
       "Bash(dd:*)",
       "Bash(format:*)",
-
-      // ===== ASK FOR FORCE OPERATIONS =====
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(git reset --hard:*)",
@@ -107,82 +136,18 @@
       "Bash(brew upgrade:*)",
       "Bash(apt-get upgrade:*)"
     ],
-
-    "deny": [
-      // ===== PROTECT SENSITIVE FILES =====
-      "Read(.env)",
-      "Read(.env.*)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/credentials.json)",
-      "Read(**/secrets/**)",
-      "Read(**/.ssh/id_*)",
-      "Read(**/.aws/credentials)",
-      "Read(**/.npmrc)",
-      "Read(**/.pypirc)",
-
-      // ===== PROTECT JOB SEARCH DATA =====
-      "Read(**/JOB_TRACKER*.csv)",
-      "Read(**/GMAIL_*.csv)",
-      "Read(**/APPLICATIONS*.csv)",
-      "Read(**/COMPANY_RESPONSES*.csv)",
-
-      "Edit(.env)",
-      "Edit(.env.*)",
-      "Edit(**/.env)",
-      "Edit(**/.env.*)",
-      "Edit(**/credentials.json)",
-      "Edit(**/secrets/**)",
-      "Edit(**/.ssh/id_*)",
-      "Edit(**/.aws/credentials)",
-
-      // ===== PROTECT JOB SEARCH DATA (EDIT) =====
-      "Edit(**/JOB_TRACKER*.csv)",
-      "Edit(**/GMAIL_*.csv)",
-      "Edit(**/APPLICATIONS*.csv)",
-      "Edit(**/COMPANY_RESPONSES*.csv)",
-
-      "Write(.env)",
-      "Write(.env.*)",
-      "Write(**/.env)",
-      "Write(**/.env.*)",
-      "Write(**/credentials.json)",
-      "Write(**/secrets/**)",
-      "Write(**/.ssh/id_*)",
-      "Write(**/.aws/credentials)",
-
-      // ===== PROTECT JOB SEARCH DATA (WRITE) =====
-      "Write(**/JOB_TRACKER*.csv)",
-      "Write(**/GMAIL_*.csv)",
-      "Write(**/APPLICATIONS*.csv)",
-      "Write(**/COMPANY_RESPONSES*.csv)",
-
-      // ===== PREVENT DANGEROUS BASH =====
-      "Bash(:()){:|:&};:)",  // Fork bomb
-      "Bash(chmod 000:*)",
-      "Bash(chmod -R 000:*)"
-    ],
-
+    "defaultMode": "default",
     "additionalDirectories": [
       "~/Projects",
       "~/Desktop/1_PRIORITY_JOB_SEARCH",
       "~/Desktop/Github"
-    ],
-
-    "defaultMode": "default"
+    ]
   },
-
+  "model": "sonnet[1m]",
   "sandbox": {
     "enabled": false,
     "autoAllowBashIfSandboxed": false,
     "allowUnsandboxedCommands": true
   },
-
-  "alwaysThinkingEnabled": false,
-  "model": "sonnet[1m]",
-  "cleanupPeriodDays": 30,
-
-  "env": {
-    "PYTHONPATH": "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3"
-  }
+  "alwaysThinkingEnabled": false
 }

@@ -1,0 +1,92 @@
+#!/bin/bash
+# claude-status
+# Purpose: Show what needs attention
+# Last Updated: 2025-11-19
+
+echo "📊 AI-Native Development Toolkit Status"
+echo ""
+
+INDEX_FILE="${HOME}/.claude/MASTER_INDEX.md"
+CURRENT_STATUS="${HOME}/.claude/context/current-status.md"
+
+# Check for issues
+issues=()
+
+echo "Checking for issues..."
+echo ""
+
+# 1. Check for untested tools
+if [ -f "$INDEX_FILE" ]; then
+    untested_count=$(grep -c "⚠️ Untested" "$INDEX_FILE")
+    if [ "$untested_count" -gt 0 ]; then
+        issues+=("$untested_count tools never verified")
+    fi
+
+    broken_count=$(grep -c "❌ Broken" "$INDEX_FILE")
+    if [ "$broken_count" -gt 0 ]; then
+        issues+=("$broken_count tools marked as broken")
+    fi
+fi
+
+# 2. Check for stale current-status.md
+if [ -f "$CURRENT_STATUS" ]; then
+    modified_date=$(stat -f "%Sm" -t "%Y-%m-%d" "$CURRENT_STATUS" 2>/dev/null || stat -c "%y" "$CURRENT_STATUS" 2>/dev/null | cut -d' ' -f1)
+    today_date=$(date +"%Y-%m-%d")
+
+    # Calculate days difference
+    if command -v gdate > /dev/null; then
+        days_diff=$(( ( $(gdate -d "$today_date" +%s) - $(gdate -d "$modified_date" +%s) ) / 86400 ))
+    elif [ "$(uname)" = "Darwin" ]; then
+        days_diff=$(( ( $(date -j -f "%Y-%m-%d" "$today_date" +%s) - $(date -j -f "%Y-%m-%d" "$modified_date" +%s) ) / 86400 ))
+    else
+        days_diff=$(( ( $(date -d "$today_date" +%s) - $(date -d "$modified_date" +%s) ) / 86400 ))
+    fi
+
+    if [ $days_diff -gt 3 ]; then
+        issues+=("current-status.md is $days_diff days old")
+    fi
+fi
+
+# 3. Check for broken @ imports (quick check)
+broken_imports=$(find ~/.claude ~/Projects -name "CLAUDE.md" -exec grep -l "@~/.claude/WORKFLOWS.md" {} \; 2>/dev/null | wc -l | tr -d ' ')
+if [ "$broken_imports" -gt 0 ]; then
+    issues+=("Potentially $broken_imports files with broken @ imports")
+fi
+
+# Display issues
+if [ ${#issues[@]} -eq 0 ]; then
+    echo "✅ No issues found!"
+    echo ""
+    echo "Your AI-native development toolkit is in good shape."
+    echo ""
+    echo "📋 Recommended actions:"
+    echo "  - Continue weekly verification (claude-verify)"
+    echo "  - Use tools from MASTER_INDEX.md"
+    echo "  - Update current-status.md weekly"
+else
+    echo "⚠️  Issues found:"
+    echo ""
+    for issue in "${issues[@]}"; do
+        echo "  • $issue"
+    done
+    echo ""
+    echo "📋 Recommended actions:"
+    echo "  1. Run 'claude-verify' for detailed verification"
+    echo "  2. Test untested tools (see TRUST_PROTOCOL.md)"
+    echo "  3. Update current-status.md if stale"
+    echo "  4. Fix broken @ imports (see verify-docs.sh output)"
+    echo ""
+fi
+
+echo "───────────────────────────────────────"
+echo "Quick commands:"
+echo "  claude-inventory  - Show available tools"
+echo "  claude-verify     - Run all verification checks"
+echo "  claude-status     - This command"
+echo ""
+echo "Documentation:"
+echo "  ~/.claude/MASTER_INDEX.md          - Tool inventory"
+echo "  ~/.claude/TRUST_PROTOCOL.md        - Verification guide"
+echo "  ~/.claude/COLLABORATION_CONTRACT.md - How to work with AI"
+echo "  ~/.claude/METHODOLOGY_PROVEN.md     - Parallel development v4"
+echo "  ~/.claude/FOUNDATIONS.md            - Core philosophy"

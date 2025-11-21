@@ -43,7 +43,22 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - **Full playbook:** @~/.claude/reference/parallel-development-playbook.md
 - Proven: 60-70% time savings, 50-100% PR success rate acceptable
 
+## AI-Native Development Toolkit (2025-11-19)
+**Quick Commands:**
+- `claude-inventory` - Show available tools
+- `claude-verify` - Verify toolkit works
+- `claude-status` - Check what needs attention
+- `claude-export [type]` - Generate documentation exports
+
+**Core Documentation:**
+- **Tool inventory:** @~/.claude/MASTER_INDEX.md
+- **Collaboration:** @~/.claude/COLLABORATION_CONTRACT.md (how human + AI work together)
+- **Verification:** @~/.claude/TRUST_PROTOCOL.md (never trust, always verify)
+- **Methodology:** @~/.claude/METHODOLOGY_PROVEN.md (parallel dev v4, 100% success)
+- **Philosophy:** @~/.claude/FOUNDATIONS.md (the "why" behind AI-native development)
+
 ## Reference Documentation (Load on-demand via @)
 - **Anthropic workflows:** @~/.claude/archive/WORKFLOWS.md
 - **System documentation:** @~/.claude/archive/SYSTEM_DOCUMENTATION.md
 - **Permissions:** @~/.claude/archive/PERMISSIONS_GUIDE.md
+- When opening websites for me verify what is displayed on screen

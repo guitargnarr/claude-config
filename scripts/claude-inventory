@@ -1,0 +1,37 @@
+#!/bin/bash
+# claude-inventory
+# Purpose: Show available tools from MASTER_INDEX.md
+# Last Updated: 2025-11-19
+
+echo "🛠️  AI-Native Development Toolkit Inventory"
+echo ""
+
+INDEX_FILE="${HOME}/.claude/MASTER_INDEX.md"
+
+if [ ! -f "$INDEX_FILE" ]; then
+    echo "❌ MASTER_INDEX.md not found"
+    echo "Run: cat ~/.claude/MASTER_INDEX.md"
+    exit 1
+fi
+
+# Show working tools
+echo "✅ Working Tools:"
+echo "─────────────────"
+grep "✅ Working" "$INDEX_FILE" | head -20
+echo ""
+
+# Show untested tools count
+untested_count=$(grep -c "⚠️ Untested" "$INDEX_FILE")
+echo "⚠️  Untested: $untested_count tools"
+echo ""
+
+# Show broken tools if any
+broken_count=$(grep -c "❌ Broken" "$INDEX_FILE")
+if [ "$broken_count" -gt 0 ]; then
+    echo "❌ Broken: $broken_count tools"
+    echo ""
+fi
+
+echo "For full inventory: cat ~/.claude/MASTER_INDEX.md"
+echo "To verify tools work: claude-verify"
+echo "To check status: claude-status"

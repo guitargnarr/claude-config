@@ -170,6 +170,7 @@ def main():
         print("  list - List all worktrees")
         print("  remove <branch> - Remove worktree")
         print("  prune - Clean up stale worktree records")
+        print("  cleanup - Auto-cleanup all merged worktrees and branches")
         sys.exit(1)
 
     manager = WorktreeManager()
@@ -203,6 +204,25 @@ def main():
 
         elif command == "prune":
             manager.prune_worktrees()
+
+        elif command == "cleanup":
+            # Run the bash cleanup script
+            cleanup_script = Path.home() / ".claude" / "scripts" / "cleanup-worktrees.sh"
+            repo_root = manager.get_repo_root()
+
+            if not cleanup_script.exists():
+                print(f"❌ Cleanup script not found: {cleanup_script}")
+                sys.exit(1)
+
+            # Make script executable
+            subprocess.run(['chmod', '+x', str(cleanup_script)])
+
+            # Run cleanup script
+            result = subprocess.run(
+                [str(cleanup_script), str(repo_root)],
+                text=True
+            )
+            sys.exit(result.returncode)
 
         else:
             print(f"❌ Unknown command: {command}")
