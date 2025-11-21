@@ -4,7 +4,7 @@
 **Purpose**: How human orchestrator and AI executor work together effectively
 **Based On**: Real conversation breakthrough moments, not theory
 
-**Note**: Historical "Priority 1" references = current focus: create value by applying/fixing/scaling/deploying/selling/automating existing tools.
+**Note**: Document contains historical examples referencing job search as "Priority 1" (lines 113, 175, 446-450, 485-500). As of Nov 21, 2025: Priority 1 = create value via apply/fix/scale/deploy/sell/automate existing tools. Principles remain valid; context updated.
 
 ---
 
