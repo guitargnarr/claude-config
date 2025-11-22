@@ -30,6 +30,7 @@ class ParallelResultStorage:
 
         # Category directories
         self.categories = {
+            'github-vetting': self.base_dir / 'github_vetting',
             'ui': self.base_dir / 'ui_features',
             'api': self.base_dir / 'api_features',
             'testing': self.base_dir / 'testing',
@@ -117,7 +118,7 @@ def main():
 
     parser.add_argument('--description', required=True, help='Run description')
     parser.add_argument('--features', required=True, help='Comma-separated feature names')
-    parser.add_argument('--category', default='ui', choices=['ui', 'api', 'testing', 'docs', 'refactor'],
+    parser.add_argument('--category', default='ui', choices=['github-vetting', 'ui', 'api', 'testing', 'docs', 'refactor'],
                         help='Feature category')
 
     parser.add_argument('--prs-created', type=int, default=0, help='Number of PRs created')
