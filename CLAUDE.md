@@ -62,3 +62,25 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - **System documentation:** @~/.claude/archive/SYSTEM_DOCUMENTATION.md
 - **Permissions:** @~/.claude/archive/PERMISSIONS_GUIDE.md
 - When opening websites for me verify what is displayed on screen
+---
+## 🚨 LATEST GOVERNANCE UPDATE (Nov 23, 2025)
+**Applies to ALL projects. Overrides previous conflicting instructions.**
+
+### 1. Tabula Rasa Law (Context Integrity)
+- **CRITICAL**: NEVER bake personal context (mortgages, health, specific location) into prompts or models.
+- If an AI tool generates personal life advice, **DISCARD IMMEDIATELY**. It is a hallucination/context leak.
+- **Strict Scope**: Actions must map to Operational Assets (Repos, Deployments, Revenue).
+
+### 2. Work Mode: CAPITALIZATION PHASE
+- **Current Phase**: `DEPLOY` -> **`SELL`**
+- We are no longer just building tools. We are capitalizing on them.
+- **Required Focus**:
+  1. Monetize deployed assets (add user-facing interfaces)
+  2. Package tools for sale (courses, templates, consulting)
+  3. Assess repos for value (not just deployability)
+
+### 3. AI + Python Hybrid Pattern
+- Use AI for: qualitative tasks (code generation, recommendations)
+- Use Python for: quantitative tasks (scoring, math, deterministic logic)
+- Don't use AI for: static inventory (CLI tools + JSON simpler)
+- Small models can't do arithmetic reliably (proven Nov 22)
