@@ -84,3 +84,8 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - Use Python for: quantitative tasks (scoring, math, deterministic logic)
 - Don't use AI for: static inventory (CLI tools + JSON simpler)
 - Small models can't do arithmetic reliably (proven Nov 22)
+
+### 4. Deployment Gotchas (Learned Nov 23)
+- **Vercel**: Defaults to auth-protected. Disable "Vercel Authentication" in Project Settings → Deployment Protection
+- **Railway**: Requires PORT from environment variable (not hardcoded 8000)
+- **Vercel + GitHub**: Auto-connects when repo is pushed, enables CI/CD automatically
