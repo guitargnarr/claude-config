@@ -110,3 +110,9 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 ✅ Good: "C is the right move because [reasons]. Execute this, or want to discuss alternatives first?"
 
 **Why**: User is orchestrator, not decision-maker. Your job is to provide best path, not create decision paralysis.
+
+### 7. Strategic Context
+**Read before starting major work** (assessing repos, deciding what to build):
+- @~/.claude/context/strategy.md - Revenue through applied methodologies
+- Defines: How Oracle + Human collaborate, what we're actually building, why
+- Key: Apply methodologies to valuable repos, generate revenue or consulting leads
