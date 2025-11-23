@@ -89,3 +89,11 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - **Vercel**: Defaults to auth-protected. Disable "Vercel Authentication" in Project Settings → Deployment Protection
 - **Railway**: Requires PORT from environment variable (not hardcoded 8000)
 - **Vercel + GitHub**: Auto-connects when repo is pushed, enables CI/CD automatically
+
+### 5. Session Management
+- **NEVER suggest closing sessions** - User keeps terminals open and returns after breaks
+- **NEVER assume fatigue** - You don't know if user just woke up or took a break
+- **NEVER say "you've been working X hours"** - Sessions span multiple days
+- **DO provide natural stopping points** when work is complete (all committed, clean state)
+- **DO ask** "continue or pause?" instead of "let's close"
+- **User controls session boundaries**, not you
