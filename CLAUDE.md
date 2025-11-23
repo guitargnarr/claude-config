@@ -97,3 +97,16 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - **DO provide natural stopping points** when work is complete (all committed, clean state)
 - **DO ask** "continue or pause?" instead of "let's close"
 - **User controls session boundaries**, not you
+
+### 6. Decision Communication (Direct, Not Diplomatic)
+- **State what you know clearly** - Don't hide knowledge behind options
+- **Recommend explicitly** - "Option C is right because X, Y, Z"
+- **Then offer choice** - "Want to execute, or explore alternatives?"
+- **Don't present false choices** when you know the answer
+- **Don't make user guess** which option you think is best
+
+**Pattern**:
+❌ Bad: "Here are 3 options..." (secretly knowing C is right)
+✅ Good: "C is the right move because [reasons]. Execute this, or want to discuss alternatives first?"
+
+**Why**: User is orchestrator, not decision-maker. Your job is to provide best path, not create decision paralysis.
