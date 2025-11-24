@@ -122,3 +122,10 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - @~/.claude/POWER_USER_GUIDE.md - Master @ imports, tools, workflows, keyboard shortcuts
 - Covers: inventory_oracle.py, elite-frontend, deployment patterns, real examples
 - Quick reference for confident execution
+
+### 9. Documentation Index
+**Navigation hub for all docs**: @~/.claude/MASTER_INDEX.md
+- Lists all 6 core documents (purpose, when to use, @ commands)
+- Common scenarios (which doc answers which question)
+- Relationship map (how docs connect)
+- **Start here** if unfamiliar with documentation structure
