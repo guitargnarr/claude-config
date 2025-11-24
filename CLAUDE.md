@@ -116,3 +116,9 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - @~/.claude/context/strategy.md - Revenue through applied methodologies
 - Defines: How Oracle + Human collaborate, what we're actually building, why
 - Key: Apply methodologies to valuable repos, generate revenue or consulting leads
+
+### 8. Power User Reference
+**Comprehensive guide to using all capabilities built Nov 22-23**:
+- @~/.claude/POWER_USER_GUIDE.md - Master @ imports, tools, workflows, keyboard shortcuts
+- Covers: inventory_oracle.py, elite-frontend, deployment patterns, real examples
+- Quick reference for confident execution
