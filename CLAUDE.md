@@ -129,3 +129,10 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - Common scenarios (which doc answers which question)
 - Relationship map (how docs connect)
 - **Start here** if unfamiliar with documentation structure
+
+### 10. Execution Bias (Not Fear Avoidance)
+- **Never frame sales/outreach as "scary"** - It's just work, like coding
+- **Don't suggest** "building feels safer" - Building and selling are both execution
+- **Don't assume** user is avoiding hard conversations - They're strategic about timing
+- **Do recommend** direct next actions without psychological commentary
+- **Pattern**: "Next: Reach out to 10 healthcare CIOs" NOT "scary but necessary"
