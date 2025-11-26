@@ -6,15 +6,30 @@
 
 ## 🚨 MANDATORY Pre-Work Steps
 
-### When User Says Any Of:
-- "Make this an app..."
-- "Deploy this to..."
-- "Improve this website..."
-- "I want to enhance..."
-- "Help me with [URL]..."
-- "Get this working..."
+### When User Says Any Of (TRIGGERS):
 
-### STOP and Run This Checklist:
+**Definite triggers (100% run protocol):**
+- "Make [URL] an app" - Converting existing deployment
+- "Improve [URL]" or "Enhance [URL]" - Modifying existing deployment
+- "Deploy this to production" - Mentions existing infrastructure
+- "Get [URL] working" - Fixing deployed app
+- "Add [feature] to [URL]" - Building on deployed app
+- User provides specific deployment URL (https://app.vercel.app, etc.)
+
+**Probable triggers (investigate first):**
+- "Help me with my app" + project has .vercel, .netlify, or railway.json
+- Multiple .env files exist (.env.production, .env.staging)
+- Package.json name doesn't match current directory name
+- User mentions "old deployment" or "previous version"
+
+**NOT triggers (skip protocol):**
+- "How do I deploy to..." - Tutorial request, not improving existing
+- "What is Vercel?" - Educational question
+- "Create new app from scratch" - No existing deployments
+- "localhost" or "local development" - Dev environment only
+- "Deploy new project" - First deployment, nothing to compare
+
+### STOP and Run This Checklist (If Triggered):
 
 #### ☑️ 1. Deployment Inventory (5 min)
 
@@ -165,15 +180,26 @@ Which should we use as the foundation?
 
 ## Red Flags That Trigger This Protocol
 
-1. **User provides URL** - Any mention of deployed app
-2. **Multiple .env files** - Suggests multiple deployments
-3. **Package.json name mismatch** - "portfolio" but user says "ourjourney"
-4. **Multiple App versions** - App.jsx, AppV2.jsx, AppFinal.jsx
-5. **Git mentions old account** - Different deployment source
-6. **User says "old deployment"** - Obviously multiple versions exist
-7. **Vercel/Railway already configured** - Means prior deployments
+### Code/File Indicators:
+1. **Multiple .env files** - .env.production, .env.staging = multiple deployments exist
+2. **Package.json name mismatch** - "portfolio" but user says "ourjourney" = wrong codebase
+3. **Multiple App versions** - App.jsx, AppV2.jsx, AppFinal.jsx = experimentation happened
+4. **.vercel or .railway directories exist** - Previously deployed from this codebase
+5. **Multiple similar directories** - personal-journey AND personal-journey-flow = variants exist
+
+### User Language Indicators:
+6. **User provides specific deployment URL** - https://app.vercel.app = something already deployed
+7. **User mentions "old deployment" or "previous version"** - Multiple versions confirmed
+8. **User says "my app at..."** - Possessive + URL = existing deployment
+9. **Git references old account** - guitargnar vs guitargnarr = migration, old deployments
+
+### Context Indicators:
+10. **Vercel/Railway/Netlify CLI already configured** - Means prior deployments exist
+11. **Custom domain mentioned** - app-name.com = production deployment exists
+12. **User mentions "make this an app"** - "This" implies something already exists
 
 **If ANY of these appear: Run the protocol.**
+**If MULTIPLE appear: Protocol is MANDATORY.**
 
 ---
 
