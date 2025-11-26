@@ -52,10 +52,31 @@ netlify sites:list
 # Look for Pages deployments
 ```
 
+**Check git branch alignment:**
+```bash
+# List all branches
+git branch -a
+
+# Check which branch is currently active
+git branch --show-current
+
+# Check recent commits on remote branches
+git log origin/main --oneline -5
+git log origin/production --oneline -5 2>/dev/null || echo "No production branch"
+
+# For Vercel: Check deployment source
+vercel inspect [deployment-url] 2>/dev/null | grep -i "branch\|commit"
+
+# For Railway: Check in dashboard which branch is deployed
+```
+
 **Document what exists:**
 - [ ] List ALL found deployments with URLs
 - [ ] Note which platforms are used
 - [ ] Identify custom domains vs preview URLs
+- [ ] **Verify which git branch each deployment uses**
+- [ ] **Confirm local branch matches target deployment source**
+- [ ] **Ask user if unsure: "Which branch is deployed to [URL]?"**
 
 ---
 
@@ -98,7 +119,42 @@ npx playwright install chromium
 
 ---
 
-#### ☑️ 4. Present Findings to User (2 min)
+#### ☑️ 4. Check Environment Variables (5 min)
+
+**Verify production configuration:**
+
+```bash
+# Vercel: List environment variables
+vercel env ls 2>/dev/null
+
+# Railway: Check variables in dashboard or CLI
+railway variables 2>/dev/null
+
+# Compare with local .env.example
+cat .env.example
+
+# Identify gaps
+diff <(grep "^[A-Z_]*=" .env.example | cut -d= -f1 | sort) \
+     <(vercel env ls 2>/dev/null | grep "Production" | awk '{print $1}' | sort)
+```
+
+**Document requirements:**
+- [ ] List all env vars used by deployed version
+- [ ] Compare with local .env.example
+- [ ] Identify missing variables (DATABASE_URL, API_KEYS, etc.)
+- [ ] Note which are secrets vs public URLs
+- [ ] **Ask user for production values if missing**
+- [ ] Verify Railway/Vercel has all required vars set
+
+**Critical check:**
+- [ ] Database connection strings match?
+- [ ] API URLs point to production (not localhost)?
+- [ ] Auth secrets configured?
+- [ ] CORS origins include correct frontend URL?
+
+---
+
+#### ☑️ 5. Present Findings to User (2 min)
 
 **Template:**
 
@@ -128,19 +184,35 @@ Which should we use as the foundation?
 
 ---
 
-#### ☑️ 5. Verify Local Code Matches Chosen Deployment
+#### ☑️ 6. Verify Local Code Matches Chosen Deployment
 
 **Before starting work:**
 
 - [ ] Confirm local code IS the source of chosen deployment
-- [ ] Check git branches (might be deployed from different branch)
-- [ ] Verify package.json matches deployment name
-- [ ] Check .env files for deployment URLs
+- [ ] **Verify git branch matches deployment** (main vs production vs deploy)
+- [ ] Check package.json name matches deployment name
+- [ ] Check .env files reference correct deployment URLs
+- [ ] Confirm recent commits in local match deployed version
+
+**Git branch verification:**
+```bash
+# Which branch am I on?
+git branch --show-current
+
+# Which branch is deployed to [URL]?
+vercel inspect [url] | grep branch
+# Or ask user: "Which branch powers [URL]?"
+
+# Do commits match?
+git log --oneline -3  # Local commits
+# Compare with deployment commit hash from vercel/railway
+```
 
 **If mismatch found:**
-- Download/clone correct source
+- Switch to correct branch: `git checkout production`
+- OR clone from correct branch
 - OR build on local and redeploy to good URL
-- Document which approach chosen
+- **Document which approach chosen and get user confirmation**
 
 ---
 
