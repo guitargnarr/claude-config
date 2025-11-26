@@ -158,6 +158,55 @@ Which deployment should we enhance?
 
 ---
 
+### Step 5: Verify Git Alignment
+
+**Before building, confirm branch alignment:**
+
+```bash
+# Check which branch you're currently on
+git branch --show-current
+
+# List all remote branches
+git branch -r
+
+# Check recent commits on key branches
+git log origin/main --oneline -5
+git log origin/production --oneline -5 2>/dev/null || echo "No production branch"
+git log origin/deploy --oneline -5 2>/dev/null || echo "No deploy branch"
+
+# For Vercel: Check which branch/commit is deployed
+vercel inspect [URL] 2>/dev/null | grep -i "branch\|commit"
+
+# For Railway: Check dashboard settings → Deployments tab
+```
+
+**Critical questions to answer:**
+- Which branch is deployed to each URL?
+- Does local branch match deployment source?
+- Are there multiple deployment branches (main, production, deploy)?
+- Is local branch ahead/behind deployed commit?
+
+**If mismatch found:**
+- Ask user: "Deployment is from 'production' branch, but you're on 'main'. Which should we use?"
+- Switch branches if needed: `git checkout production`
+- Or deploy from local branch (user's choice)
+- Document the decision
+
+**Why this matters:**
+- Prevents building features on `main` that won't deploy (deployed from `production`)
+- Prevents modifying wrong branch
+- Ensures changes actually reach production
+
+**Example mismatch:**
+```
+Local: main branch (5 commits ahead)
+Deployed: production branch (deployed 2 weeks ago)
+Problem: Your changes on main won't appear in deployment
+Solution: Either merge main → production, or switch to production branch
+```
+
+---
+
 ## When This Protocol Applies
 
 **Trigger phrases from user:**
