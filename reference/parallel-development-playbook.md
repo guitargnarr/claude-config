@@ -46,6 +46,8 @@ This methodology works because it properly uses AI:
 3. **Clear Instructions**: Copy-paste prompts with context
 4. **Post-Execution Steps**: /commit, /push-pr checklist
 5. **Priority Ranking**: Know which tasks matter most
+6. **Deployment Discovery FIRST**: Always inventory existing deployments before starting (Nov 25 lesson)
+7. **HITL Checkpoints**: Human tests at critical milestones, catches issues early
 
 ### Why It's Faster
 
@@ -57,6 +59,37 @@ This methodology works because it properly uses AI:
 
 ## The Playbook (Step-by-Step)
 
+### Phase 0: Deployment Discovery (15 minutes) - MANDATORY
+
+**Before identifying tasks, discover what already exists:**
+
+```bash
+# Run deployment discovery
+claude-discover https://your-app-url.com
+
+# OR manually:
+vercel list  # Check all Vercel deployments
+railway status  # Check Railway projects
+
+# Test EVERY found URL with Playwright
+cd project-dir
+npx playwright test test-deployments.spec.js
+```
+
+**Critical questions to answer:**
+- What's already deployed and working?
+- Which deployment has the best UI?
+- Which has working backend/features?
+- Are we building on the right foundation?
+
+**Real example (OurJourney - Nov 25):**
+- Found `ourjourney-app.vercel.app` had SUPERIOR UI (5-star onboarding)
+- Missed this, built on inferior `AppEnhanced.jsx` (3-star basic login)
+- Cost: 2 hours wasted on wrong codebase
+- **Lesson: ALWAYS discover deployments first**
+
+---
+
 ### Phase 1: Identify Tasks (15 minutes)
 
 **Criteria for Good Parallel Tasks:**
@@ -64,6 +97,7 @@ This methodology works because it properly uses AI:
 - ✅ Similar size (~30min to 2 hours each)
 - ✅ High value (clear user benefit)
 - ✅ Different files/modules (minimal conflicts)
+- ✅ Building on VERIFIED correct codebase (Phase 0 complete)
 
 **Example Task List:**
 | Priority | Project | Feature | Effort | Value |
@@ -331,23 +365,29 @@ gh pr list
 
 ### ❌ Don't Do This
 
-1. **Dependent Tasks**: Task 2 requires Task 1 to finish first
-2. **Same Files**: Multiple tasks editing the same file
-3. **Vague Prompts**: "Improve the code" without specifics
-4. **No Post-Execution Plan**: Forgetting /commit, /push-pr steps
-5. **Too Many Tasks**: >4 parallel instances = context switching overhead
-6. **Ignoring Sessions**: Not checking in periodically
-7. **Leaving Sessions Open**: Using tokens without progress
+1. **Skipping Deployment Discovery**: Building without checking what's already deployed (Nov 25 lesson)
+2. **Dependent Tasks**: Task 2 requires Task 1 to finish first
+3. **Same Files**: Multiple tasks editing the same file
+4. **Vague Prompts**: "Improve the code" without specifics
+5. **No Post-Execution Plan**: Forgetting /commit, /push-pr steps
+6. **Too Many Tasks**: >4 parallel instances = context switching overhead
+7. **Ignoring Sessions**: Not checking in periodically
+8. **Leaving Sessions Open**: Using tokens without progress
+9. **Assuming Local = Canonical**: Deployed version might be superior to local code
+10. **No HITL Checkpoints**: Building for hours without user testing
 
 ### ✅ Do This Instead
 
-1. **Independent Tasks**: Each task stands alone
-2. **Different Modules**: Minimal file overlap
-3. **Specific Prompts**: Clear requirements, acceptance criteria
-4. **Post-Execution Checklist**: /commit, /push-pr, verify PR
-5. **2-4 Tasks**: Sweet spot for parallel work
-6. **Check Every 15-20 Minutes**: Monitor progress
-7. **Close After Completion**: Save notes, exit gracefully
+1. **Run Deployment Discovery First**: Use `claude-discover` before any work
+2. **Independent Tasks**: Each task stands alone
+3. **Different Modules**: Minimal file overlap
+4. **Specific Prompts**: Clear requirements, acceptance criteria
+5. **Post-Execution Checklist**: /commit, /push-pr, verify PR
+6. **2-4 Tasks**: Sweet spot for parallel work
+7. **Check Every 15-20 Minutes**: Monitor progress
+8. **HITL Checkpoints**: User tests at critical milestones
+9. **Verify Foundation**: Confirm you're building on best codebase
+10. **Close After Completion**: Save notes, exit gracefully
 
 ---
 

@@ -1,9 +1,9 @@
 # Global Claude Code Setup
 
 ## Critical Rules
-- **Ultrathink:** ONLY when I explicitly request it (prevents analysis paralysis)
+- **Ultrathink:** ONLY when you explicitly request it with "use ultrathink" - means deep recursive analysis with structured output, not just "thinking deeply". If you don't request it, I proceed with normal execution.
 - **Documentation:** Max 5 files per project, 500 lines each (README/CLAUDE.md/TODO allowed)
-- **Code first:** Implement before documenting (docs describe what exists, not plans)
+- **Discovery first, then code:** For deployment work, inventory what exists before building. For new features, implement before documenting.
 - **Delete planning docs** after extracting action items (prevent bloat)
 - **Work mode:** Consulting and platform building (sustainable income model)
 - Never use emojis unless explicitly requested
@@ -11,12 +11,14 @@
 ## System Info
 - Python: 3.14 at `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3`
 - GitHub: guitargnarr (matthewdscott7@gmail.com)
-- Deployment: Vercel (`vercel --prod --yes`), test first: `npm run build && npm run preview`
+- Deployment: Vercel (`vercel --prod --yes`), test build locally: `npm run build && npm run preview`
 
 ## Critical Pitfalls
 - **NO vercel.json for Vite projects** (breaks auto-detect)
 - **NO Tailwind v4** (use v3)
 - **Absolute URLs for OG meta tags**
+- **ALWAYS inventory ALL deployments FIRST** - Check Vercel/Railway/Netlify dashboards before assuming local code is canonical
+- **Test live URLs before building** - Deployed version might be superior to local code
 
 ## Private Data Protection
 **CRITICAL - Never read/edit without permission:**
