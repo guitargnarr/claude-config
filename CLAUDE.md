@@ -14,8 +14,8 @@
 - Deployment: Vercel (`vercel --prod --yes`), test build locally: `npm run build && npm run preview`
 
 ## Critical Pitfalls
-- **NO vercel.json for Vite projects** (breaks auto-detect)
-- **NO Tailwind v4** (use v3)
+- **Minimal vercel.json OK for Vite SPA routing** - Simple rewrites to `/index.html` are REQUIRED for React Router. Complex configs break auto-detect. Keep it minimal.
+- **NO Tailwind v4** (use v3) - Exception: Next.js projects can use v4
 - **Absolute URLs for OG meta tags**
 - **ALWAYS inventory ALL deployments FIRST** - Check Vercel/Railway/Netlify dashboards before assuming local code is canonical
 - **Test live URLs before building** - Deployed version might be superior to local code
@@ -53,11 +53,9 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - `claude-export [type]` - Generate documentation exports
 
 **Core Documentation:**
-- **Tool inventory:** @~/.claude/MASTER_INDEX.md
 - **Collaboration:** @~/.claude/COLLABORATION_CONTRACT.md (how human + AI work together)
-- **Verification:** @~/.claude/TRUST_PROTOCOL.md (never trust, always verify)
-- **Methodology:** @~/.claude/METHODOLOGY_PROVEN.md (parallel dev v4, 100% success)
-- **Philosophy:** @~/.claude/FOUNDATIONS.md (the "why" behind AI-native development)
+- **Parallel Dev:** @~/.claude/reference/parallel-development-playbook.md (v4, 100% success rate)
+- **Deployment Discovery:** @~/.claude/reference/deployment-discovery-protocol.md (prevent wrong codebase)
 
 ## Reference Documentation (Load on-demand via @)
 - **Anthropic workflows:** @~/.claude/archive/WORKFLOWS.md
@@ -113,26 +111,15 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 
 **Why**: User is orchestrator, not decision-maker. Your job is to provide best path, not create decision paralysis.
 
-### 7. Strategic Context
-**Read before starting major work** (assessing repos, deciding what to build):
-- @~/.claude/context/strategy.md - Revenue through applied methodologies
-- Defines: How Oracle + Human collaborate, what we're actually building, why
-- Key: Apply methodologies to valuable repos, generate revenue or consulting leads
+### 7. Deployment Discovery (Nov 26, 2025)
+**MANDATORY for any deployment work:**
+- Run `claude-discover [URL]` before building
+- Test ALL found deployments with Playwright
+- Compare quality, choose best foundation
+- **Prevents building on wrong codebase** (OurJourney lesson)
+- Full protocol: @~/.claude/reference/deployment-discovery-protocol.md
 
-### 8. Power User Reference
-**Comprehensive guide to using all capabilities built Nov 22-23**:
-- @~/.claude/POWER_USER_GUIDE.md - Master @ imports, tools, workflows, keyboard shortcuts
-- Covers: inventory_oracle.py, elite-frontend, deployment patterns, real examples
-- Quick reference for confident execution
-
-### 9. Documentation Index
-**Navigation hub for all docs**: @~/.claude/MASTER_INDEX.md
-- Lists all 6 core documents (purpose, when to use, @ commands)
-- Common scenarios (which doc answers which question)
-- Relationship map (how docs connect)
-- **Start here** if unfamiliar with documentation structure
-
-### 10. Execution Bias (Not Fear Avoidance)
+### 8. Execution Bias (Not Fear Avoidance)
 - **Never frame sales/outreach as "scary"** - It's just work, like coding
 - **Don't suggest** "building feels safer" - Building and selling are both execution
 - **Don't assume** user is avoiding hard conversations - They're strategic about timing
