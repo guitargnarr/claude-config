@@ -146,11 +146,20 @@ cd ~/Projects/.worktrees/projectlavos-backend/feature/phishguard-features
 - [ ] Tests written and passing
 - [ ] Documentation updated
 - [ ] No linting errors
+- [ ] PR created (NOT committed to main directly)
 
-**Post-Completion**:
-1. /commit (with descriptive message)
-2. /push-pr main
-3. Verify PR created
+**CRITICAL: Git Workflow (DO NOT skip)**:
+1. Create feature branch: `git checkout -b feature/[name]`
+2. Implement your changes
+3. Commit to feature branch: `git add . && git commit -m "feat: [description]"`
+4. Push and create PR:
+   ```bash
+   git push -u origin feature/[name]
+   gh pr create --title "feat: [title]" --body "## Summary\n- [bullets]\n\n## Test Plan\n- [ ] Build passes\n- [ ] Tests pass"
+   ```
+5. Verify PR exists: `gh pr list`
+
+**SUCCESS CRITERIA: Task is NOT complete until `gh pr list` shows your PR.**
 ```
 
 ### Phase 4: Launch Terminals (2 minutes)
@@ -876,13 +885,214 @@ done
 
 ---
 
-**Last Updated:** November 16, 2025 (v4.0)
-**Proven Effective:** 12 tasks, 10 PRs, 100% success rate (v3→v4)
-**v4 Results:** Guitar Platform - 4/4 PRs, <3 min execution, automated merge, zero failures
-**Recommended:** Use v4 prompts + orchestrator for any 2-4 independent tasks
+**Last Updated:** December 20, 2025 (v5.0)
+**Proven Effective:** 16 tasks, 14 PRs, 100% success rate (v4→v5)
+**v5 Results:** Portfolio Health Check - 4/4 tasks, 3 PRs merged, ~15 min total
+**Recommended:** Use tmux + v5 workflow for any 2-4 independent tasks
 
 ## Version History
+- **v5.0 (2025-12-20):** tmux integration, remote monitoring, automated approval
 - **v4.0 (2025-11-16):** Orchestrator pattern, build gates, conflict detection, 100% success
 - **v3.0 (2025-11-15):** Error recovery, time management, 70-80% success
 - **v2.0 (2025-11-14):** Initial parallel workflow, 50-70% success
+
+---
+
+## Version 5: tmux Integration (December 20, 2025)
+
+### Why tmux?
+
+Previous versions required manually opening 4 Terminal.app windows. tmux provides:
+- **Single window, 4 panes** - Everything visible at once
+- **Detachable sessions** - Walk away, come back later
+- **Remote monitoring** - Check pane status from another Claude session
+- **Scriptable** - Send prompts and approvals programmatically
+
+### New Tools
+
+**Config:** `~/.tmux.conf`
+- Prefix: `Ctrl+a` (easier than default `Ctrl+b`)
+- Mouse support enabled
+- Teal/orange status bar (matches brand)
+- Quick layouts: `Ctrl+a p` for 4-pane parallel layout
+
+**Scripts:**
+- `~/.claude/scripts/tmux-parallel.sh` - Launch 4-pane session with default projects
+- `~/.claude/scripts/tmux-worktrees.sh` - Launch session with git worktrees
+
+**Aliases (in ~/.zshrc):**
+```bash
+t         # Attach to last session or create new
+tpar      # Launch 4-pane parallel session
+twt       # Launch worktree-based session
+tguitar   # Guitar project session
+tjobs     # ai-talent-optimizer session
+tlavos    # Monorepo session
+ta <name> # Attach to named session
+tl        # List sessions
+tk <name> # Kill session
+```
+
+### Updated Workflow
+
+#### Phase 4: Launch with tmux (Replaces "Open 4 terminal windows")
+
+**Option A: Quick launch with defaults**
+```bash
+tpar
+# Creates 4 panes with:
+# - projectlavos-monorepo
+# - guitar-model-lab
+# - ai-talent-optimizer
+# - phishguard-ui
+```
+
+**Option B: Custom projects**
+```bash
+~/.claude/scripts/tmux-parallel.sh myrun \
+  ~/Projects/project1 \
+  ~/Projects/project2 \
+  ~/Projects/project3 \
+  ~/Projects/project4
+```
+
+**Option C: Worktree-based**
+```bash
+twt projectlavos-monorepo feature/api feature/auth feature/ui feature/tests
+```
+
+#### Phase 4b: Launch Claude in all panes
+
+```bash
+# From another terminal or Claude session:
+tmux send-keys -t myrun:1.1 "claude" Enter
+tmux send-keys -t myrun:1.2 "claude" Enter
+tmux send-keys -t myrun:1.3 "claude" Enter
+tmux send-keys -t myrun:1.4 "claude" Enter
+```
+
+#### Phase 4c: Send prompts to all panes
+
+```bash
+# Send prompt to pane 1
+tmux send-keys -t myrun:1.1 "Your task prompt here" Enter
+
+# Send to all panes at once
+for pane in 1 2 3 4; do
+  tmux send-keys -t myrun:1.$pane "Task $pane prompt" Enter
+done
+```
+
+#### Phase 5: Remote Monitoring (NEW)
+
+**Check status without attaching:**
+```bash
+# View last 20 lines of each pane
+for pane in 1 2 3 4; do
+  echo "=== PANE $pane ==="
+  tmux capture-pane -t myrun:1.$pane -p | tail -20
+done
+```
+
+**Approve permissions remotely:**
+```bash
+# Send Enter to approve pending dialogs
+tmux send-keys -t myrun:1.1 Enter
+tmux send-keys -t myrun:1.2 Enter
+tmux send-keys -t myrun:1.3 Enter
+tmux send-keys -t myrun:1.4 Enter
+```
+
+**Use "always allow" to reduce prompts:**
+```bash
+# Send "2" then Enter to select "Yes, and don't ask again"
+tmux send-keys -t myrun:1.1 "2" Enter
+```
+
+#### Phase 6: Cleanup
+
+```bash
+# Kill the session when done
+tmux kill-session -t myrun
+
+# Or detach to keep running (Ctrl+a d from inside tmux)
+```
+
+### tmux Quick Reference
+
+**Inside tmux (after Ctrl+a):**
+| Key | Action |
+|-----|--------|
+| `p` | 4-pane parallel layout |
+| `\|` | Split vertical |
+| `-` | Split horizontal |
+| `z` | Zoom current pane (toggle) |
+| `d` | Detach (keeps running) |
+| `s` | Session picker |
+| `o` | Cycle through panes |
+| `x` | Kill current pane |
+| `r` | Reload config |
+
+**Navigate panes (no prefix needed):**
+| Key | Action |
+|-----|--------|
+| `Alt+Arrow` | Move between panes |
+| `Ctrl+Alt+Arrow` | Resize panes |
+| `Alt+1/2/3/4` | Jump to window 1/2/3/4 |
+
+### Real-World Example (Dec 20, 2025)
+
+**Portfolio Health Check Run:**
+
+```bash
+# 1. Launch session
+tpar
+
+# 2. Start Claude in all panes (from this Claude session)
+tmux send-keys -t demo:1.1 "claude" Enter
+tmux send-keys -t demo:1.2 "claude" Enter
+tmux send-keys -t demo:1.3 "claude" Enter
+tmux send-keys -t demo:1.4 "claude" Enter
+
+# 3. Send task prompts
+tmux send-keys -t demo:1.1 "Check all subdomains and OG images..." Enter
+tmux send-keys -t demo:1.2 "Run build, check for vulnerabilities..." Enter
+tmux send-keys -t demo:1.3 "Test all API endpoints..." Enter
+tmux send-keys -t demo:1.4 "Verify frontend connects to API..." Enter
+
+# 4. Monitor remotely every few minutes
+tmux capture-pane -t demo:1.1 -p | tail -15
+
+# 5. Approve permissions as needed
+tmux send-keys -t demo:1.1 Enter
+
+# 6. Merge PRs when complete
+gh pr merge 38 --squash --delete-branch -R guitargnarr/projectlavos-monorepo
+gh pr merge 3 --squash --delete-branch -R guitargnarr/phishguard-ui
+
+# 7. Kill session
+tmux kill-session -t demo
+```
+
+**Results:**
+- 4 tasks completed in ~15 minutes
+- 3 PRs created and merged
+- 1 project verified healthy (no changes needed)
+- All done without leaving the orchestrating Claude session
+
+### Migration from v4 to v5
+
+**Keep Using:**
+- All v4 prompt templates
+- Autonomous execution guidelines
+- 15-20 minute monitoring intervals
+- PR-based workflow
+
+**New in v5:**
+- Replace 4 Terminal windows with `tpar` (tmux)
+- Monitor remotely with `tmux capture-pane`
+- Approve permissions with `tmux send-keys`
+- Detach/reattach for long-running tasks
+
+**Backward Compatible:** v4 workflow still works, v5 adds tmux convenience
 
