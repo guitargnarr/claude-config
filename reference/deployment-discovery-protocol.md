@@ -144,17 +144,25 @@ Which deployment should we enhance?
 
 ---
 
-### Step 4: Get User Confirmation
+### Step 4: Make Decision or Ask (Dec 2025 Update)
 
-**NEVER proceed without asking:**
+**Fix-First Policy:** If one deployment is clearly superior, USE IT and proceed:
+- Best UI + missing backend? Add backend to that one.
+- Best backend + basic UI? That's the foundation.
 
-"I found multiple deployed versions with different UI quality. Which should we use as the foundation?"
+**Only ask if genuinely ambiguous:**
+- Two deployments with equal quality but different trade-offs
+- User preference materially affects outcome
 
-**Options to present:**
-- Enhance deployment A (better UI, needs backend)
-- Enhance deployment B (working backend, needs UI polish)
-- Merge best of both
-- Start fresh (only if both are broken)
+**Example - DON'T ask:**
+- Deployment A: Beautiful UI, no backend
+- Deployment B: Basic login, working backend
+- **Decision: Use A (superior UX), integrate backend** - proceed without asking
+
+**Example - DO ask:**
+- Deployment A: Mobile-optimized, limited features
+- Deployment B: Desktop-focused, full features
+- **Question needed:** "Mobile or desktop priority? Each leads to different base."
 
 ---
 
@@ -370,13 +378,15 @@ This file: `deployment-discovery-protocol.md`
 **Add to pre-work checklist:**
 
 When user says "improve this app" or provides URL:
-1. ⏸️ STOP - Don't code yet
-2. 🔍 DISCOVER - Test all deployments
-3. 📊 COMPARE - Which is better?
-4. 💬 ASK - Which to enhance?
-5. ✅ PROCEED - Now build
+1. DISCOVER - Test all deployments (5 min)
+2. COMPARE - Which is objectively better?
+3. DECIDE - Pick the superior one (don't ask if answer is clear)
+4. BUILD - Proceed with best foundation
+5. SHOW - Visual proof that it's working
 
-**New habit:** Deployment discovery is as important as reading code.
+**Only ask if:** Two genuinely equal options with different trade-offs that user preference affects.
+
+**New habit:** Discovery + Decision + Execution + Visual Proof
 
 ---
 

@@ -1,5 +1,10 @@
 # Parallel Development - Terminal Prompt Template (v3)
 
+**DEPRECATED:** Use @~/.claude/reference/unified-task-prompt.md instead (Dec 2025)
+This file kept for reference only. The unified template is shorter and includes project inventory.
+
+---
+
 **Use this template when launching parallel Claude Code sessions.**
 
 **Updated:** November 16, 2025

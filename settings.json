@@ -143,7 +143,6 @@
       "~/Desktop/Github"
     ]
   },
-  "model": "sonnet[1m]",
   "sandbox": {
     "enabled": false,
     "autoAllowBashIfSandboxed": false,

@@ -139,24 +139,31 @@ Claude:
 
 **Principle 2 violation:** "Radical Transparency - I must signal confusion immediately, not fabricate plausible responses"
 
-**Correct response should've been:**
-"You requested Ultrathink. Do you want:
-A) Formal ULTRATHINK_*.md analysis document (50-200 lines, recursive exploration)
-B) Just thorough normal execution with todos and planning
+**Correct response (Dec 2025 - Fix-First Policy):**
+When user says "use ultrathink":
+1. Create ULTRATHINK_[TOPIC].md file immediately
+2. Write the structured analysis (50-200 lines)
+3. Show user the file path and key findings
+4. Proceed to execute based on analysis
 
-Ultrathink creates structured analysis files. Is that what you want here?"
+**Do NOT ask "Do you want formal or informal?" - just execute the protocol.**
+User said "ultrathink" = create the document. Period.
 
 ---
 
 ## Integration with Other Principles
 
+**Principle 1:** Visual Proof Required
+- Ultrathink output = ULTRATHINK_*.md file user can see
+- After analysis, SHOW working result from execution
+
+**Principle 2:** Fix-First, No Unnecessary Questions
+- Don't ask "formal or informal?" - just do it
+- User said ultrathink = create the document
+
 **Principle 3:** Verification Over Trust
 - Ultrathink output must still be verified
 - Analysis documents aren't gospel
-
-**Principle 2:** Radical Transparency
-- Don't claim to use Ultrathink if not creating formal analysis
-- Ask for clarification if unsure what user wants
 
 **Principle 4:** Inventory Before Building
 - Ultrathink can be used FOR inventory/discovery
@@ -164,5 +171,5 @@ Ultrathink creates structured analysis files. Is that what you want here?"
 
 ---
 
-**Updated:** November 26, 2025
-**Status:** Clarified - Ultrathink is formal analysis mode, not default execution
+**Updated:** December 10, 2025
+**Status:** Clarified - Ultrathink is formal analysis mode, execute without asking for confirmation
