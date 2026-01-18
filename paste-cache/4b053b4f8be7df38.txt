@@ -1,0 +1,403 @@
+ Frontend Design Oracle: Tenerife PAL Transformation
+
+  Design Philosophy Shift
+
+  Current Problem: The page operates as a warning system when it should be a confidence engine.
+
+  The fundamental UX error: treating uncertainty as danger. A knowledgeable travel companion doesn't say "RISK LEVEL: MEDIUM-HIGH" — they say "Here's exactly what to do, and I've got backup plans ready."
+
+  ---
+  Aesthetic Direction: Volcanic Calm
+
+  Tenerife is defined by two forces: the volcanic drama of El Teide and the serene Atlantic. The design should mirror this — grounded confidence with moments of warmth.
+
+  Color Palette Transformation
+
+  OUT: Alarm-based palette
+  Red warnings → Orange/amber warmth
+  Green/Yellow/Red traffic light → Unified teal progression
+  Multiple competing alert colors → Single accent system
+
+  IN: Canary Islands-inspired palette
+
+  :root {
+    /* Primary: Deep volcanic slate - grounding, trustworthy */
+    --volcanic-900: #1a1d23;
+    --volcanic-800: #252a33;
+    --volcanic-700: #353b47;
+    --volcanic-600: #4a5568;
+
+    /* Secondary: Atlantic teal - calm, capable */
+    --atlantic-500: #0d9488;
+    --atlantic-400: #2dd4bf;
+    --atlantic-300: #5eead4;
+    --atlantic-100: #ccfbf1;
+
+    /* Accent: Teide sunset - warmth without alarm */
+    --teide-500: #f59e0b;  /* Amber, not red */
+    --teide-400: #fbbf24;
+    --teide-300: #fcd34d;
+
+    /* Neutral warmth */
+    --sand-50: #fefdfb;
+    --sand-100: #faf8f5;
+    --sand-200: #f0ebe4;
+
+    /* Success states only - not for scenarios */
+    --solved-500: #10b981;
+  }
+
+  Key principle: Red appears NOWHERE except actual errors. Amber/gold replaces all "attention needed" states.
+
+  ---
+  Information Architecture Restructure
+
+  Current (Anxiety-inducing)
+
+  [CRITICAL ALERTS - 3 red banners]
+      ↓
+  [Flight details]
+      ↓
+  [RISK ASSESSMENT - red banner]
+      ↓
+  [Scenario matrix - red/yellow/green]
+      ↓
+  [IF YOU FAIL section]
+      ↓
+  [Critical tips - feels like homework]
+
+  Proposed (Confidence-building)
+
+  [Journey Overview - warm, welcoming hero]
+      ↓
+  [Your Flight Path - visual timeline]
+      ↓
+  [London Connection - "Here's the plan"]
+      ↓
+  [Everything's Handled - collapsed details]
+      ↓
+  [Packing & Prep - feels like gift, not chore]
+
+  ---
+  Component Redesigns
+
+  1. Replace "Critical Alerts" with "Journey Highlights"
+
+  Before: Three red warning boxes competing for attention
+
+  After: A single, elegant card that frames these as features of your trip:
+
+  // JourneyHighlights.tsx
+  function JourneyHighlights() {
+    const highlights = [
+      {
+        icon: <Plane className="rotate-45" />,
+        label: "London Connection",
+        detail: "3h 10m to explore Heathrow → Gatwick",
+        action: "View transfer plan"
+      },
+      {
+        icon: <Moon />,
+        label: "London Overnight",
+        detail: "19 hours on return — perfect for the city",
+        action: "See hotel options"
+      },
+      {
+        icon: <Sparkles />,
+        label: "Premium Cabin",
+        detail: "Lie-flat-adjacent on the overnight",
+        action: "Seat selection tips"
+      }
+    ];
+
+    return (
+      <div className="bg-volcanic-800 rounded-2xl p-6 border border-volcanic-700">
+        <h3 className="text-atlantic-400 text-sm font-medium tracking-wide uppercase mb-4">
+          Journey Highlights
+        </h3>
+        <div className="space-y-4">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="flex items-center gap-4 group cursor-pointer"
+            >
+              <div className="w-10 h-10 rounded-xl bg-atlantic-500/10 flex items-center justify-center text-atlantic-400">
+                {h.icon}
+              </div>
+              <div className="flex-1">
+                <div className="text-sand-50 font-medium">{h.label}</div>
+                <div className="text-volcanic-400 text-sm">{h.detail}</div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-volcanic-600 group-hover:text-atlantic-400 transition-colors" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  ---
+  2. Transform the Transfer Section
+
+  The core reframe: Instead of "Risk Assessment," present "Your Transfer Plan"
+
+  Before:
+  - Red "MEDIUM-HIGH RISK" banner
+  - Bullet list of problems
+  - Three-column scenario matrix with red worst-case
+  - "If You Miss" failure section
+
+  After:
+  - Confident header: "London Connection: Sorted"
+  - Single recommended path (hero treatment)
+  - Expandable "What if?" section (de-emphasized)
+  - Timeline that shows you MAKING your flight
+
+  // LondonConnectionPlan.tsx
+  function LondonConnectionPlan() {
+    const [showBackup, setShowBackup] = useState(false);
+
+    return (
+      <div className="bg-gradient-to-br from-volcanic-800 to-volcanic-900 rounded-2xl overflow-hidden">
+        {/* Confident Header */}
+        <div className="p-6 border-b border-volcanic-700">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-full bg-atlantic-500 flex items-center justify-center">
+              <Check className="w-4 h-4 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold text-sand-50">
+              London Connection: Sorted
+            </h3>
+          </div>
+          <p className="text-volcanic-400 text-sm ml-11">
+            Heathrow T5 → Gatwick South · 3h 10m window · Plan ready
+          </p>
+        </div>
+
+        {/* The Plan - Hero Treatment */}
+        <div className="p-6">
+          <div className="bg-atlantic-500/10 border border-atlantic-500/20 rounded-xl p-5">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <div className="text-atlantic-400 text-xs font-medium uppercase tracking-wide mb-1">
+                  Your Transfer
+                </div>
+                <div className="text-sand-50 text-lg font-semibold">
+                  National Express Coach
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-atlantic-300 font-semibold">£18.30</div>
+                <div className="text-volcanic-400 text-xs">with flex ticket</div>
+              </div>
+            </div>
+
+            {/* Visual Timeline - Shows Success Path */}
+            <div className="relative">
+              <div className="absolute left-4 top-0 bottom-0 w-px bg-atlantic-500/30" />
+
+              {[
+                { time: "6:35", label: "Land at Heathrow T5", icon: <Plane /> },
+                { time: "7:20", label: "Clear immigration (45min avg)", icon: <Stamp />, note: "E-gates for US passports" },
+                { time: "7:30", label: "Board coach at Stop 11-15", icon: <Bus />, note: "Change & Go = any departure" },
+                { time: "8:40", label: "Arrive Gatwick South", icon: <MapPin /> },
+                { time: "9:45", label: "BA 2702 departs → Tenerife", icon: <Palmtree />, highlight: true }
+              ].map((step, i) => (
+                <div key={i} className="relative flex items-start gap-4 pb-4 last:pb-0">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center z-10
+                    ${step.highlight 
+                      ? 'bg-teide-500 text-volcanic-900' 
+                      : 'bg-volcanic-700 text-atlantic-400'}`}>
+                    {step.icon}
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-atlantic-300 font-mono text-sm">{step.time}</span>
+                      <span className="text-sand-100">{step.label}</span>
+                    </div>
+                    {step.note && (
+                      <div className="text-volcanic-400 text-xs mt-0.5">{step.note}</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Key Insight - Not a Warning */}
+          <div className="mt-4 flex items-start gap-3 text-sm">
+            <Lightbulb className="w-4 h-4 text-teide-400 mt-0.5 flex-shrink-0" />
+            <p className="text-volcanic-300">
+              <span className="text-sand-100 font-medium">Carry-on only</span> saves 20-30 min
+              at baggage. You've got this baked in.
+            </p>
+          </div>
+
+          {/* Backup Plans - Collapsed, De-emphasized */}
+          <button
+            onClick={() => setShowBackup(!showBackup)}
+            className="mt-6 w-full flex items-center justify-between py-3 px-4
+              bg-volcanic-800/50 rounded-lg text-sm text-volcanic-400
+              hover:text-volcanic-300 transition-colors"
+          >
+            <span className="flex items-center gap-2">
+              <Shield className="w-4 h-4" />
+              Backup plans (just in case)
+            </span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${showBackup ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {showBackup && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="pt-4 space-y-3">
+                  <BackupOption
+                    scenario="Immigration takes 70+ min"
+                    solution="Change & Go ticket lets you board the next coach — they run every 15-20 min"
+                  />
+                  <BackupOption
+                    scenario="Miss BA 2702 entirely"
+                    solution="Single booking = BA rebooks you free. Next TFS flights typically afternoon. Call +44 344 493 0787"
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
+
+  function BackupOption({ scenario, solution }: { scenario: string; solution: string }) {
+    return (
+      <div className="flex gap-3 p-3 bg-volcanic-800/30 rounded-lg">
+        <div className="w-6 h-6 rounded-full bg-teide-500/10 flex items-center justify-center flex-shrink-0">
+          <Zap className="w-3 h-3 text-teide-400" />
+        </div>
+        <div>
+          <div className="text-volcanic-300 text-sm">{scenario}</div>
+          <div className="text-sand-100 text-sm mt-1">{solution}</div>
+        </div>
+      </div>
+    );
+  }
+
+  ---
+  3. Kill the Traffic Light Scenario Matrix
+
+  The three-column BEST/LIKELY/WORST design is inherently anxiety-inducing because:
+  - It gives equal visual weight to failure
+  - Traffic light colors trigger stress responses
+  - It frames the trip as probability, not preparation
+
+  Replace with: A confident single timeline (shown above) with collapsed edge cases.
+
+  If you must show scenarios, use a progressive disclosure pattern where the default state shows the likely (successful) path, and alternatives are available but not prominent.
+
+  ---
+  4. Typography & Spacing
+
+  Font Pairing (add to index.html):
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  :root {
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  DM Sans: Friendly but professional. Not as cold as Inter, more personality than system fonts.
+  JetBrains Mono: For times, flight numbers, codes — gives technical info a polished look.
+
+  Spacing principles:
+  - More breathing room between sections (py-8 minimum)
+  - Tighter internal spacing within cards
+  - Consistent 24px (p-6) padding on all cards
+
+  ---
+  5. Motion That Builds Confidence
+
+  Remove: Jittery hover states, pulsing warnings, attention-grabbing animations
+
+  Add: Smooth, purposeful transitions that feel like pages turning
+
+  // Stagger children on section reveal
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
+    }
+  };
+
+  // Use on flight segments
+  <motion.div variants={containerVariants} initial="hidden" animate="visible">
+    {segments.map((seg, i) => (
+      <motion.div key={i} variants={itemVariants}>
+        <FlightSegment {...seg} />
+      </motion.div>
+    ))}
+  </motion.div>
+
+  Expand/collapse should feel like unfolding a map, not popping open an alert:
+  <AnimatePresence mode="wait">
+    {isOpen && (
+      <motion.div
+        initial={{ opacity: 0, height: 0, scale: 0.98 }}
+        animate={{ opacity: 1, height: 'auto', scale: 1 }}
+        exit={{ opacity: 0, height: 0, scale: 0.98 }}
+        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        {content}
+      </motion.div>
+    )}
+  </AnimatePresence>
+
+  ---
+  Summary: Before → After
+  ┌───────────────────────┬────────────────────────────────┬─────────────────────────────────────────────┐
+  │        Element        │             Before             │                    After                    │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Critical Alerts       │ 3 red warning banners          │ "Journey Highlights" feature card           │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Risk Assessment       │ Red "MEDIUM-HIGH" banner       │ Removed — confidence assumed                │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Scenario Matrix       │ 3-column traffic light         │ Single success timeline + collapsed backups │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ "If You Miss" section │ Prominent failure planning     │ Folded into "Backup plans" accordion        │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Critical Tips         │ Feels like homework            │ "You're Ready" checklist with checkmarks    │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Color dominant        │ Red/Yellow                     │ Teal/Amber with volcanic dark theme         │
+  ├───────────────────────┼────────────────────────────────┼─────────────────────────────────────────────┤
+  │ Tone                  │ "Watch out for these problems" │ "Here's exactly what you'll do"             │
+  └───────────────────────┴────────────────────────────────┴─────────────────────────────────────────────┘
+  ---
+  Implementation Priority
+
+  1. Immediate: Replace color palette (CSS variables only)
+  2. High: Redesign transfer section with timeline approach
+  3. Medium: Convert alerts → highlights, restructure info hierarchy
+  4. Polish: Typography, motion refinements, dark theme consistency
+
+  The goal is a travel companion that makes you feel like a seasoned traveler, not a worried first-timer. Every design choice should answer: "Does this make me feel prepared or anxious?"

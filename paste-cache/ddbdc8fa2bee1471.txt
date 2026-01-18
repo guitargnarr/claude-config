@@ -1,0 +1,260 @@
+Contact us
+guitargnar
+ 
+Namecheap
+DomainsNEW
+ 
+Hosting
+ 
+WordPress
+ 
+Email
+ 
+Marketing ToolsNEW
+ 
+SecurityNEW
+ 
+Transfer to UsTRY ME
+ 
+Help CenterNEW
+ 
+AccountNEW
+ 
+1
+Dashboard
+Expiring / Expired
+Domain List
+Hosting List
+Private Email
+SSL Certificates
+Apps
+My Offers
+Jan
+Profile
+Domains → Details
+projectlavos.com 
+
+
+Domain  Products  Sharing & Transfer  Advanced DNS
+DNS TEMPLATES
+Choose DNS Template
+
+
+HOST RECORDS
+Actions
+Filters
+
+Type    
+Host
+Value
+TTL
+A Record    
+@
+216.198.79.1
+Automatic
+A Record    
+about
+76.76.21.21
+Automatic
+A Record    
+ba-pathfinder
+76.76.21.21
+Automatic
+A Record    
+demos
+76.76.21.21
+Automatic
+A Record    
+guitar
+76.76.21.21
+Automatic
+A Record    
+jobtrack
+76.76.21.21
+Automatic
+A Record    
+mirador
+76.76.21.21
+Automatic
+A Record    
+orchestrator
+76.76.21.21
+Automatic
+A Record    
+ourjourney
+76.76.21.21
+Automatic
+A Record    
+phishguard
+76.76.21.21
+Automatic
+A Record    
+services
+76.76.21.21
+Automatic
+CNAME Record    
+jobs
+cname.vercel-dns.com.
+Automatic
+CNAME Record    
+prompts
+3a30982cf38338f3.vercel-dns-017.com.
+Automatic
+CNAME Record    
+resume
+cname.vercel-dns.com.
+Automatic
+CNAME Record    
+www
+7c321aa997a11fb5.vercel-dns-017.com.
+Automatic
+TXT Record    
+@
+google-site-verification=1m8LakNCffkxLrSs7xLN0BcPHfzDBl1Oye2tKlcReQM
+Automatic
+A Record    
+crm
+76.76.21.21
+Automatic
+ADD NEW RECORD SHOW LESS
+DNSSEC
+Status
+
+MAIL SETTINGS
+Email Forwarding
+
+
+Type    
+Host
+Value
+TTL
+TXT Record
+@
+v=spf1 include:spf.efwd.registrar-servers.com ~all
+Automatic
+
+DYNAMIC DNS
+Status
+
+PERSONAL DNS SERVER
+Register Nameserver
+ADD NAMESERVER
+Find Nameservers
+Standard Nameservers
+
+SEARCH
+Need help? We're always here for you.
+Chat with a Live Person
+ Namecheap
+We make registering, hosting, and managing domains for yourself or others easy and affordable, because the internet needs people.
+
+About Namecheap
+
+Read our blog
+Join Our Newsletter & Marketing Communication
+We'll send you news and offers.
+
+
+Join
+Domains
+Domain Name Search
+Domain Transfer
+New TLDs
+Handshake domains NEW
+Personal Domain
+Namecheap Market
+Whois Lookup
+PremiumDNS
+FreeDNS
+Hosting
+Shared Hosting
+WordPress Hosting
+Reseller Hosting
+VPS Hosting
+Dedicated Servers
+Private Email Hosting
+Migrate to Namecheap
+WordPress
+Shared Hosting
+WordPress Hosting
+Migrate WordPress
+Security
+Domain Privacy
+Website Security NEW
+Fix Hacked Website SOS
+Domain Vault NEW
+PremiumDNS
+CDN
+FastVPN UPDATED
+Cyber Insurance NEW
+2FA
+Public DNS
+Anti-Spam Protection
+Transfer to Us TRY ME
+Domain Transfer
+Migrate Hosting
+Migrate WordPress
+Migrate Email
+SSL Certificates
+Comodo
+Organization Validation
+Domain Validation
+Extended Validation
+Single Domain
+Wildcard
+Multi-Domain
+Resellers
+SSL Certificates
+Reseller Hosting
+Promos
+Guru Guides
+Help Center
+Status Updates
+Knowledgebase
+How-To Videos
+Submit Ticket
+Live Chat
+Report Abuse
+Marketing Tools
+Marketplace
+How to Get Started NEW
+Business Starter Kit FREE
+Business Formation FREE
+Relate Marketing Suite SAVE
+RelateSEO AI
+RelateSocial NEWAI
+RelateReviews NEWAI
+RelateAds AI
+RelateLocal AI
+Brand Monitoring AI
+Visual
+Site Maker NEW
+Font Maker NEW
+Logo Maker AI
+Business Name Generator
+Stencil Graphics
+Business Card Maker
+Careers
+Affiliates
+Send us Feedback
+The entirety of this site is protected by copyright © 2000–2026 Namecheap, Inc.
+
+4600 East Washington Street, Suite 305, Phoenix, AZ 85034, USA
+Terms and Conditions Privacy Policy UDRP Domain Registration Data Disclosure Policy Cookie Preferences
+WE SUPPORT
+Electronic Frontier Foundation
+Fight For The Future
+We are an ICANN-accredited registrar.
+Serving customers since 2001.
+Payment Options
+
+American Express
+Bitcoin
+MasterCard
+PayPal
+Visa
+Discover
+ Sectigo
+Android app on google play
+iOS App Store
+;

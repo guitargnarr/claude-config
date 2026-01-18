@@ -1,0 +1,160 @@
+Supabase
+guitargnar's Org
+FREE
+
+portfolio-crm
+
+main
+PRODUCTION
+
+
+Connect
+Feedback
+
+Search...
+K
+
+
+
+
+
+
+SQL Editor
+Search queries
+
+
+SHARED
+
+FAVORITES
+
+PRIVATE (49)
+
+COMMUNITY
+
+View running queries
+
+
+Portfolio CRM Schema
+
+Bulk Import Demo Client Leads
+
+Portfolio CRM Outreach & Activity Tracking Update
+
+Clients & Activities Indexing with Tier Backfill
+
+Staggered Lead Follow-Ups
+
+Client Tier Assignment by Category
+
+Bulk Update Client Phone Numbers
+
+Update client contact names and hours
+
+Bulk client contact and hours update
+
+Add hours column to clients
+
+Bulk update client contact names and operating hours
+
+Client Pricing Tier Updates
+
+Client revenue summary
+
+Top Paying Lead Clients
+
+Top Lead Clients by Revenue
+
+Website Tiering & Pricing Migration
+
+Add website tier to clients
+
+Client Website Tier Assignments
+
+Website Tier Pricing and Revenue Breakdown
+
+Total Pipeline Value and Site Count
+
+Clients with Monthly Rate 149
+
+Upgrade clients from $149 to Tier 1
+
+Client Notes Outreach Templates
+
+Replace placeholder user_id in clients
+
+Client contact and billing list
+
+Deduplicate clients by highest monthly rate
+
+Deduplicate clients by business (keep highest rate)
+
+Merge Outreach phone numbers into CRM
+
+Bulk client phone updates
+
+Clients by Tier and Name
+
+Update client contact names by business
+
+Clients with Incomplete Contact Information
+
+Clients Ordered by Tier and Name
+
+Update client site URLs
+
+Bulk update client site URLs
+
+Clients with Websites by Tier
+
+Tier-1 Clients With Phone Numbers
+
+Update client email
+
+Update client contact numbers
+
+Add contact_phone column to clients
+
+Client activities and status enhancements
+
+Indexes for Activities and Clients
+
+Client Contact Dates
+
+Indexes for activities and clients
+
+Weekly Pipeline Overview
+
+Weekly Pipeline Snapshot
+
+1
+SELECT * FROM weekly_pipeline;
+
+
+Results
+
+Explain
+
+Chart
+
+Export
+
+
+
+
+Source
+
+Primary Database
+
+Role
+postgres
+
+Run
+Error: Failed to run sql query: ERROR: 42P01: relation "weekly_pipeline" does not exist LINE 1: SELECT * FROM weekly_pipeline limit 100; ^
+Note: A limit of 100 was applied to your query. If this was the cause of a syntax error, try selecting "No limit" instead and re-run the query.
+
+Debug with Assistant
+
+0 row (Limited to only 100 rows)
+
+Limit results to: 100 rows
+portfolio-crm | guitargnar's Org | Supabase

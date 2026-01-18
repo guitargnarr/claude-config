@@ -114,6 +114,7 @@ for (const url of urls) {
 - ✅ Full browser test with Playwright
 - ✅ Screenshot for visual comparison
 - ✅ Feature inventory (login? CRUD? navigation?)
+- ✅ Mobile responsiveness check (see @~/.claude/reference/workflows.md Mobile Verification section)
 
 ---
 
@@ -403,6 +404,6 @@ When user says "improve this app" or provides URL:
 
 ---
 
-**Updated:** November 25, 2025
+**Last Updated:** January 17, 2026 (Cross-referenced from COLLABORATION_CONTRACT.md "Discovery First" principle)
 **Status:** Active protocol for all deployment work
 **Trigger:** ANY mention of improving/deploying/enhancing existing apps

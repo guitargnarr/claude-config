@@ -1,0 +1,86 @@
+{
+  "name": "Highland Cleaners",
+  "slug": "highland-cleaners",
+  "tagline": "Louisville's Premier Dry Cleaning Since 1968",
+  "phone": "(502) 454-4641",
+  "email": "info@highlandcleaners.com",
+  "address": "2457 Bardstown Road, Louisville, KY 40205",
+  "hours": "Mon-Fri: 7AM-6PM | Sat: 8AM-3PM",
+  "website": "https://highlandcleaners.com",
+  "industry": "home-services",
+  "services": [
+    {
+      "title": "Dry Cleaning",
+      "description": "Expert care for your finest garments using eco-friendly solvents.",
+      "icon": "Shirt"
+    },
+    {
+      "title": "Expert Alterations",
+      "description": "4 full-time tailors for perfect fits and custom alterations.",
+      "icon": "Scissors"
+    },
+    {
+      "title": "Wedding Gowns",
+      "description": "Specialized cleaning and preservation for your special day.",
+      "icon": "Heart"
+    },
+    {
+      "title": "Leather & Suede",
+      "description": "Professional care for delicate leather and suede items.",
+      "icon": "Sparkles"
+    },
+    {
+      "title": "Household Items",
+      "description": "Drapes, comforters, rugs, and other household textiles.",
+      "icon": "Home"
+    },
+    {
+      "title": "Free Pickup & Delivery",
+      "description": "Convenient service to your home or office at no extra charge.",
+      "icon": "Truck"
+    }
+  ],
+  "locations": [
+    { "name": "Office & Plant", "address": "2457 Bardstown Road", "phone": "(502) 454-4641" },
+    { "name": "Indian Hills", "address": "4007 Brownsboro Road", "phone": "(502) 897-3797" },
+    { "name": "Prospect Plaza", "address": "9211 US Highway 42", "phone": "(502) 228-0700" },
+    { "name": "Hurstbourne", "address": "410 N Hurstbourne Lane", "phone": "(502) 426-5300" },
+    { "name": "Hikes Point", "address": "4039 Taylorsville Road", "phone": "(502) 451-1520" },
+    { "name": "Springhurst Center", "address": "9410 Highway 22", "phone": "(502) 326-0900" },
+    { "name": "Forest Springs", "address": "12478 Lagrange Road", "phone": "(502) 241-9130" },
+    { "name": "Middletown", "address": "235 Blakenbaker Parkway", "phone": "(502) 244-8600" },
+    { "name": "Northfield", "address": "4901 US Highway 22", "phone": "(502) 426-0319" },
+    { "name": "Lake Forest", "address": "13837 English Villa Drive", "phone": "(502) 244-5544" },
+    { "name": "St. Matthews", "address": "3708 Lexington Road", "phone": "(502) 893-5541" },
+    { "name": "Cherokee Triangle", "address": "1401 Bardstown Road", "phone": "(502) 454-4058" }
+  ],
+  "social": {
+    "facebook": "https://facebook.com/highlandcleaners"
+  },
+  "colors": {
+    "primary": "#1e40af",
+    "secondary": "#3b82f6"
+  },
+  "features": {
+    "booking": false,
+    "ecommerce": false,
+    "auth": false,
+    "multiPage": false
+  },
+  "content": {
+    "about": "Since 1968, Highland Cleaners has been the trusted choice for Louisville families seeking exceptional garment care. What began as a single family-owned location has grown into 12 convenient locations across the Louisville metro area, while maintaining our commitment to quality, service, and environmental responsibility.",
+    "history": "Three generations of the Highland family have built our reputation on attention to detail, expert craftsmanship, and genuine care for our customers and their garments."
+  },
+  "stats": [
+    { "value": "80+", "label": "Years of Service" },
+    { "value": "12", "label": "Locations" },
+    { "value": "3", "label": "Generations" },
+    { "value": "1000s", "label": "Happy Customers" }
+  ],
+  "_meta": {
+    "tier": 1,
+    "generatedAt": "2026-01-03",
+    "deployedUrl": "https://highland-cleaners.vercel.app",
+    "localPath": "~/Projects/jobtrack/client-sites/highland-cleaners"
+  }
+}

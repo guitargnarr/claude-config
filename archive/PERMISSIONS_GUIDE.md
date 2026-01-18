@@ -1,6 +1,12 @@
 # Claude Code Permissions Configuration Guide
 
+> **ARCHIVED (Jan 2026):** This guide served its purpose during initial Claude Code setup.
+> The recommended settings have been adopted and are now the default configuration.
+> Kept for historical reference and troubleshooting edge cases.
+> For current workflows, see: @~/.claude/reference/workflows.md
+
 **Created:** November 14, 2025
+**Archived:** January 17, 2026
 **Purpose:** Maximize Claude Code usefulness while maintaining security
 
 ---

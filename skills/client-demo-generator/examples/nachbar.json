@@ -1,0 +1,71 @@
+{
+  "name": "Nachbar",
+  "slug": "nachbar",
+  "tagline": "Germantown's Neighborhood Bar",
+  "phone": "(502) 637-4377",
+  "email": "info@nachbarlouisville.com",
+  "address": "969 Charles Street, Louisville, KY 40204",
+  "hours": "Mon-Thu: 4PM-2AM | Fri-Sun: 2PM-2AM",
+  "website": "https://nachbarlouisville.com",
+  "industry": "restaurant",
+  "services": [
+    {
+      "title": "Craft Beer",
+      "description": "Rotating selection of local and regional craft beers on tap.",
+      "icon": "Beer"
+    },
+    {
+      "title": "Cocktails",
+      "description": "Classic cocktails and house specialties crafted with care.",
+      "icon": "Wine"
+    },
+    {
+      "title": "Bar Bites",
+      "description": "Delicious small plates perfect for sharing.",
+      "icon": "UtensilsCrossed"
+    },
+    {
+      "title": "Live Music",
+      "description": "Regular live performances from local artists.",
+      "icon": "Music"
+    },
+    {
+      "title": "Private Events",
+      "description": "Host your next gathering in our cozy space.",
+      "icon": "Users"
+    },
+    {
+      "title": "Outdoor Patio",
+      "description": "Enjoy drinks al fresco in our charming courtyard.",
+      "icon": "Sun"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Germantown",
+      "address": "969 Charles Street, Louisville, KY 40204",
+      "phone": "(502) 637-4377"
+    }
+  ],
+  "social": {
+    "facebook": "https://facebook.com/nachbarlouisville",
+    "instagram": "https://instagram.com/nachbarlouisville"
+  },
+  "colors": {
+    "primary": "#78350f",
+    "secondary": "#d97706"
+  },
+  "features": {
+    "booking": false,
+    "ecommerce": false,
+    "auth": false,
+    "multiPage": false
+  },
+  "content": {
+    "about": "Nachbar (German for 'neighbor') is a cozy neighborhood bar in Louisville's historic Germantown district. We pride ourselves on creating a welcoming atmosphere where friends old and new can gather over great drinks and good conversation."
+  },
+  "_meta": {
+    "tier": 1,
+    "localPath": "~/Projects/jobtrack/client-sites/nachbar"
+  }
+}

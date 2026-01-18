@@ -1,0 +1,110 @@
+Supabase
+guitargnar's Org
+FREE
+
+portfolio-crm
+
+main
+PRODUCTION
+
+
+Connect
+Feedback
+
+Search...
+K
+
+
+
+
+
+
+SQL Editor
+Search queries
+
+
+SHARED
+
+FAVORITES
+
+PRIVATE (25)
+
+COMMUNITY
+
+View running queries
+
+
+Portfolio CRM Schema
+
+Bulk Import Demo Client Leads
+
+Portfolio CRM Outreach & Activity Tracking Update
+
+Clients & Activities Indexing with Tier Backfill
+
+Staggered Lead Follow-Ups
+
+Client Tier Assignment by Category
+
+Bulk Update Client Phone Numbers
+
+Update client contact names and hours
+
+Bulk client contact and hours update
+
+Add hours column to clients
+
+Bulk update client contact names and operating hours
+
+Client Pricing Tier Updates
+
+Client revenue summary
+
+Top Paying Lead Clients
+
+Top Lead Clients by Revenue
+
+Website Tiering & Pricing Migration
+
+Add website tier to clients
+
+Client Website Tier Assignments
+
+Website Tier Pricing and Revenue Breakdown
+
+Total Pipeline Value and Site Count
+
+Clients with Monthly Rate 149
+
+Upgrade clients from $149 to Tier 1
+
+Client Notes Outreach Templates
+
+Replace placeholder user_id in clients
+
+1
+  UPDATE clients SET user_id = 'user_384vQ4cQZfqSRKkUS1DCfsNUuXs' WHERE user_id = 'user_placeholder';
+
+
+Results
+
+Explain
+
+Chart
+
+Export
+
+
+
+Source
+
+Primary Database
+
+Role
+postgres
+
+Run
+Success. No rows returned
+
+0 row
+portfolio-crm | guitargnar's Org | Supabase

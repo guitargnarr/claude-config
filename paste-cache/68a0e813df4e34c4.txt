@@ -1,0 +1,146 @@
+O
+ourjourney
+Projects
+
+Search
+COMMAND+K
+
+New
+
+Upgrade
+
+
+Projects
+Blueprints
+Environment Groups
+INTEGRATIONS
+Observability
+Webhooks
+Notifications
+NETWORKING
+Private Links
+WORKSPACE
+Billing
+Settings
+
+Changelog
+Invite a friend
+
+Contact support
+Render Status
+Overview
+
+Invite your team
+
+New
+Projects
+Get organized with Projects
+An easier way to organize your resources and collaborate with team members.
+
+Create your first project
+Learn more
+
+Ungrouped Services
+
+Active
+(7)
+
+Suspended
+(2)
+
+All
+(9)
+Search services
+
+
+Select all rows
+
+SERVICE NAME
+7
+
+Select row
+texume-api
+Options
+STATUS
+Deployed
+RUNTIME
+Python 3
+REGION
+Oregon
+UPDATED
+4d
+
+Select row
+ourjourney-api
+Options
+STATUS
+RUNTIME
+Node
+REGION
+Oregon
+UPDATED
+10d
+
+Select row
+ourjourney-db
+Options
+STATUS
+RUNTIME
+PostgreSQL 18
+REGION
+Oregon
+UPDATED
+14d
+
+Select row
+guitar-model-lab
+Options
+STATUS
+RUNTIME
+Python 3
+REGION
+Oregon
+UPDATED
+19d
+
+Select row
+mirador
+Options
+STATUS
+RUNTIME
+Python 3
+REGION
+Oregon
+UPDATED
+24d
+
+Select row
+ai-talent-optimizer
+Options
+STATUS
+RUNTIME
+Python 3
+REGION
+Oregon
+UPDATED
+25d
+
+Select row
+projectlavos-backend
+Options
+STATUS
+RUNTIME
+Python 3
+REGION
+Oregon
+UPDATED
+1mo
+0 services selected:
+
+Move
+
+Generate Blueprint
+
+Resume
+
+Suspend

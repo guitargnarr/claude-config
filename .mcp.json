@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "wpcom-mcp": {
+      "command": "npx",
+      "args": ["-y", "@automattic/mcp-wpcom-remote@latest"],
+      "description": "WordPress.com MCP - manage matthewscott.link site"
+    },
     "github-automation": {
       "command": "node",
       "args": ["/Users/matthewscott/.claude/scripts/mcp_github_server.js"],

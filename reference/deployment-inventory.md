@@ -1,285 +1,218 @@
 # Deployment Inventory
 
-**Last Updated:** 2025-12-18 (Full Audit Complete)
-**Total Assets:** 224+ (57 code projects, 14 deployed URLs, 51 Ollama models)
-**Single Source of Truth:** Update this file, then sync to unified-task-prompt.md and CLAUDE.md
-**Audit Status:** ALL 13 FRONTEND SITES + 3 BACKEND APIs PASS
+**Last Updated:** 2026-01-17
+**Total:** 94 live URLs | 86 code projects | 51 Vercel | 6 Render | 51 Ollama models
+**Status:** ALL 13 projectlavos.com URLs + 51 client demo sites VERIFIED HTTP 200
+**Note:** 51 Ollama models are local AI models, not web URLs
 
 ---
 
-## Key Metrics
+## Custom Domains (3)
 
-| Metric | Value |
-|--------|-------|
-| Code Projects | 56 |
-| With GitHub Repo | 29 (52%) |
-| With Visual Assets | 28 (50%) - 654 files |
-| Deployed URLs | 14 (was 16, cleaned 6 orphans) |
-| Vercel Projects | 20 (was 26, deleted 6) |
-| Slash Commands | 25 |
-| Agents | 7 |
-| Scripts | 22 |
-| Reference Docs | 35 |
-| Ollama Models | 51 (38 custom) |
+| Domain | Platform | URL | Status |
+|--------|----------|-----|--------|
+| projectlavos.com | Vercel | https://projectlavos.com | 200 |
+| jaspermatters.com | Netlify | https://jaspermatters.com | 200 |
+| matthewscott.link | WordPress | https://matthewscott.link | 200 |
 
 ---
 
-## Deployed Projects (14 - All HTTP 200, Audit Dec 18)
+## projectlavos.com Subdomains (13) - ALL VERIFIED
 
-### Vercel + Render (Production)
-| Project | URL | Local Path | GitHub | Platform |
-|---------|-----|------------|--------|----------|
-| projectlavos-monorepo | projectlavos.com | ~/Projects/projectlavos-monorepo | guitargnarr/projectlavos-monorepo | Vercel |
-| ai-talent-optimizer | jobs.projectlavos.com | ~/Projects/ai-talent-optimizer | guitargnarr/ai-talent-optimizer | Vercel + Render |
-| guitar-model-lab | guitar-model-lab.onrender.com | ~/Projects/guitar-model-lab | guitargnarr/guitar-model-lab | Render |
-| projectlavos-backend | projectlavos-backend.onrender.com | ~/Projects/projectlavos-backend | guitargnarr/projectlavos-backend | Render |
-| mirador-api | mirador-xva2.onrender.com | ~/Projects/Security-Tools/mirador-test | guitargnarr/mirador | Render |
-| mirador-landing | mirador-o2wgw9o65-matthew-scotts-projects-1dc9743e.vercel.app | ~/Projects/projectlavos-monorepo/services/mirador | guitargnarr/projectlavos-monorepo | Vercel |
-| mirador-enterprise | mirador-enterprise-p6snyl8xd-matthew-scotts-projects-1dc9743e.vercel.app | ~/Projects/projectlavos-monorepo/services/mirador-enterprise | guitargnarr/projectlavos-monorepo | Vercel |
-| phishguard-ui | phishguard-ui.vercel.app | ~/Projects/phishguard-ui | guitargnarr/phishguard-ui | Vercel |
-| interactive-resume | interactive-resume-ten-pi.vercel.app | ~/Projects/interactive-resume | guitargnarr/interactive-resume | Vercel |
-| jobtrack | jobtrack-two.vercel.app | ~/Projects/jobtrack | guitargnarr/jobtrack | Vercel |
-| OurJourney | ourjourney-app.vercel.app | ~/Projects/Personal/personal-journey | guitargnarr/OurJourney | Vercel |
-| jaspermatters | jaspermatters-job-intelligence.vercel.app | ~/Projects/Career-Business/jaspermatters-job-intelligence | guitargnarr/jaspermatters-job-intelligence | Vercel |
-| ba-pathfinder | ba-pathfinder.vercel.app | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | guitargnarr/ba-pathfinder | Vercel |
-| 2025-skills-to-know | 2025-skills-to-know.vercel.app | ~/Desktop/Manus/2025-skills-to-know | NO-GIT | Vercel |
-| phishguard-ml | (deployable) | ~/Projects/phishguard-ml | guitargnarr/phishguard-ml | - |
-| apartment-demo | frontend-mu-dusky-38.vercel.app | ~/Projects/Portfolio/apartment-leasing-demo | guitargnarr/apartment-leasing-demo | Vercel |
-
-### Custom Domains (6)
-| Domain | Points To | Purpose |
-|--------|-----------|---------|
-| projectlavos.com | main-site (Vercel) | Portfolio hub |
-| guitar.projectlavos.com | guitar service | Guitar learning |
-| jobs.projectlavos.com | ai-talent-optimizer | Job discovery |
-| demos.projectlavos.com | demos service | AI demos |
-| about.projectlavos.com | about service | About page |
-| www.projectlavos.com | Redirect | → projectlavos.com |
+| Subdomain | Local Path | Description | Status |
+|-----------|------------|-------------|--------|
+| projectlavos.com | ~/Projects/projectlavos-monorepo/main-site | Portfolio hub | 200 |
+| guitar. | ~/Projects/projectlavos-monorepo/services/guitar | Guitar platform | 200 |
+| jobs. | ~/Projects/ai-talent-optimizer | AI job discovery | 200 |
+| demos. | ~/Projects/projectlavos-monorepo/demos | AI demos | 200 |
+| about. | ~/Projects/projectlavos-monorepo/about | About page | 200 |
+| mirador. | ~/Projects/projectlavos-monorepo/services/mirador | Mirador AI | 200 |
+| ourjourney. | ~/Projects/Personal/personal-journey | Coparenting app | 200 |
+| jobtrack. | ~/Projects/jobtrack | Job tracker | 200 |
+| phishguard. | ~/Projects/phishguard-ui | PhishGuard | 200 |
+| ba-pathfinder. | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | BA career guide | 200 |
+| resume. | ~/Projects/interactive-resume | Interactive resume | 200 |
+| prompts. | ~/Desktop/Manus/prompt-fact | Prompt factory | 200 |
+| orchestrator. | ~/Projects/projectlavos-monorepo/services/orchestrator | AI workflow builder | 200 |
 
 ---
 
-## Render Services (3 Active - Audit Dec 18)
+## Vercel Apps (13 with .vercel.app URLs)
 
-| Service | URL | Status | Endpoints Tested |
-|---------|-----|--------|------------------|
-| projectlavos-backend | projectlavos-backend.onrender.com | LIVE | /api/sentiment, /api/phishing |
-| guitar-model-lab | guitar-model-lab.onrender.com | LIVE | /scales (12), /health, /generate-gp5 |
-| ai-talent-optimizer | ai-talent-optimizer.onrender.com | LIVE (v3.1.0) | /stats (1,222 jobs), /jobs/tier1 (21 high-value) |
-| jaspermatters-api | - | SUSPENDED | - |
-| jobtracker-backend | - | SUSPENDED | - |
-
----
-
-## Railway Projects (2 Active - Cleaned Dec 18)
-
-| Project | Purpose | Status |
-|---------|---------|--------|
-| humble-perception | Postgres database | ACTIVE |
-| poetic-optimism | Expert Sourcing demo | LIVE |
-
----
-
-## Active Development (9 Projects)
-
-| Directory | Type | GitHub | Visual Assets | Description |
-|-----------|------|--------|---------------|-------------|
-| ~/Projects/texume | Python | guitargnarr/texume | - | Resume LaTeX generator (9 scripts) |
-| ~/Projects/reflexia-model-manager | Python | guitargnarr/reflexia | 17 | Ollama model manager CLI |
-| ~/Projects/Security-Tools/mirador-test | Python | guitargnarr/mirador | 43 | Mirador Self-Governing AI (API: mirador-xva2.onrender.com, Landing: Vercel) |
-| ~/Projects/phishguard-intel | Python | guitargnarr/phishguard-intel (PRIVATE) | - | OSINT infrastructure mapper for scam attribution |
-| ~/Projects/claude-zones | Node.js | guitargnarr/claude-context-zones | - | Claude context zones |
-| ~/Projects/job-search-automation | Python | guitargnarr/job-search-automation | - | Job automation tools |
-| ~/Projects/fretforge-v1 | Node.js | LOCAL-ONLY | 116 | Guitar platform v1 |
-| ~/Projects/tool-gmail-integration | Python | LOCAL-ONLY | - | Gmail automation |
-| ~/Projects/mcp-vercel | Node.js | nganiet/mcp-vercel | - | MCP Vercel integration |
+| URL | Local Path | GitHub |
+|-----|------------|--------|
+| interactive-resume-ten-pi.vercel.app | ~/Projects/interactive-resume | guitargnarr/interactive-resume |
+| ourjourney-app.vercel.app | ~/Projects/Personal/personal-journey | guitargnarr/OurJourney |
+| jobtrack-two.vercel.app | ~/Projects/jobtrack | guitargnarr/jobtrack |
+| ba-pathfinder.vercel.app | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | guitargnarr/ba-pathfinder |
+| phishguard-ui.vercel.app | ~/Projects/phishguard-ui | guitargnarr/phishguard-ui |
+| jaspermatters-job-intelligence.vercel.app | ~/Projects/Career-Business/jaspermatters-job-intelligence | guitargnarr/jaspermatters-job-intelligence |
+| fret-vision.vercel.app | ~/Desktop/Manus/fret-vision | NO-GIT |
+| 2025-skills-to-know.vercel.app | ~/Desktop/Manus/2025-skills-to-know | NO-GIT |
+| frontend-mu-dusky-38.vercel.app | ~/Projects/Portfolio/apartment-leasing-demo | guitargnarr/apartment-leasing-demo |
+| mirador-enterprise.vercel.app | ~/Projects/projectlavos-monorepo/services/mirador-enterprise | guitargnarr/projectlavos-monorepo |
+| guitar-ebon.vercel.app | ~/Projects/projectlavos-monorepo/services/guitar | guitargnarr/projectlavos-monorepo |
+| services-teal.vercel.app | ~/Projects/projectlavos-monorepo/services | guitargnarr/projectlavos-monorepo |
+| jcps-transfer.vercel.app | ~/Projects/Personal/jcps-boots | guitargnarr/jcps-boots |
 
 ---
 
-## Local Tools (8 Projects - No Git)
+## Tier Templates (5) - UI/UX Reference
 
-| Directory | Type | Description |
-|-----------|------|-------------|
-| ~/Projects/coparenting-cli | Python | Coparenting CLI tool |
-| ~/Projects/gmail-automation-system | Python | Gmail automation |
-| ~/Projects/job-hunter-pro | Python | Job search tool |
-| ~/Projects/merry-go-round-monitor | Python | Monitor utility |
-| ~/Projects/generated-services | Python | Auto-generated services |
-| ~/Projects/prompt-factory | Python | Prompt templates |
-| ~/Projects/DevelopmentTools/Guitar Technique Portfolio | Node.js | Guitar portfolio |
-| ~/Projects/WebTools/Link Validator | Python | Link validation CLI |
+| URL | Description |
+|-----|-------------|
+| tier1-essential.vercel.app | Single-page landing |
+| tier2-professional.vercel.app | Multi-page + booking |
+| tier3-advanced.vercel.app | E-commerce + cart |
+| tier4-enterprise.vercel.app | Auth + dashboard |
+| tier-comparison.vercel.app | Side-by-side comparison |
 
----
-
-## Manus Code Projects (6)
-
-| Directory | Type | Description |
-|-----------|------|-------------|
-| ~/Desktop/Manus/fret-vision | Node.js | Guitar fretboard visualizer |
-| ~/Desktop/Manus/mirador-one-of-many | Python | Mirador variant (65+ models) |
-| ~/Desktop/Manus/prompt-fact | Python | Streamlit prompt generator |
-| ~/Desktop/Manus/enter-the-unknown-of-inheritance | Python | 44-file comprehensive app |
-| ~/Desktop/Manus/guitair | Python | Guitar AI |
-| ~/Desktop/Manus/p5-sketch-animation | JS | p5.js animations |
+**Reference:** @~/.claude/reference/tier-templates-reference.md
 
 ---
 
-## Top Visual Asset Projects
+## Client Demo Sites (51 deployed)
 
-| Rank | Project | Assets | Types |
-|------|---------|--------|-------|
-| 1 | fretforge-v1 | 116 | png |
-| 2 | personal-journey | 90 | png |
-| 3 | projectlavos-monorepo | 70 | png, svg |
-| 4 | personal-journey-flow | 57 | png, svg |
-| 5 | mirador-test | 43 | png, svg |
-| 6 | portfolio-website | 33 | png |
-| 7 | music-fretforge | 21 | png |
-| 8 | reflexia-model-manager | 17 | png, svg, jpg |
-| 9 | interactive-resume | 15 | png, svg |
+All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
+**Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
----
+### By Business Category
 
-## GitHub Repos (29 with Remotes)
+**Healthcare/Medical (14):** affinity-dental, dermatology-associates-psc, dermcare-practitioners, dupont-pediatric-dentistry, gray-family-dentistry, jbh-dental, kentuckiana-gastro, kuhn-allergy, louisville-family-chiro, primary-express-care, rejuvenation-med-spa, springhurst-endo, vance-stovall-optometry
 
-### With Deployments (17)
-| GitHub Repo | Deployment | Local Path |
-|-------------|------------|------------|
-| projectlavos-monorepo | projectlavos.com + subdomains | ~/Projects/projectlavos-monorepo |
-| ai-talent-optimizer | jobs.projectlavos.com | ~/Projects/ai-talent-optimizer |
-| guitar-model-lab | guitar-model-lab.onrender.com | ~/Projects/guitar-model-lab |
-| phishguard-ui | phishguard-ui.vercel.app | ~/Projects/phishguard-ui |
-| interactive-resume | interactive-resume-ten-pi.vercel.app | ~/Projects/interactive-resume |
-| jobtrack | jobtrack-two.vercel.app | ~/Projects/jobtrack |
-| OurJourney | ourjourney-app.vercel.app | ~/Projects/Personal/personal-journey |
-| jaspermatters-job-intelligence | jaspermatters-job-intelligence.vercel.app | ~/Projects/Career-Business/jaspermatters-job-intelligence |
-| mirador-consciousness-platform | vercel-demo-flame.vercel.app | ~/Projects/mirador-consciousness-platform |
-| ba-pathfinder | ba-pathfinder.vercel.app | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder |
-| apartment-leasing-demo | frontend-mu-dusky-38.vercel.app | ~/Projects/Portfolio/apartment-leasing-demo |
+**Personal Services (10):** blown-away-bar, cleaning-by-regina, fritz-salon, highland-cleaners (x5 versions), jr-spa-salon, louisville-aesthetics, louisville-nails-spa, pilates-plus-louisville, lawnco-louisville
 
-### Without Deployments (12)
-| GitHub Repo | Platform | Local Path |
-|-------------|----------|------------|
-| projectlavos-backend | Render | ~/Projects/projectlavos-backend |
-| reflexia | CLI | ~/Projects/reflexia-model-manager |
-| texume | CLI | ~/Projects/texume |
-| mirador | Render API | ~/Projects/Security-Tools/mirador-test |
-| job-search-automation | Local | ~/Projects/job-search-automation |
-| phishguard-ml | ML | ~/Projects/phishguard-ml |
-| sentiment-analysis-api | API | ~/Projects/AI-ML/sentiment-analysis-api |
-| llm-engineer-demo | Demo | ~/Projects/AI-ML/llm-engineer-demo |
-| career-automation | Local | ~/Projects/Career-Business/career-automation |
-| JobTools | Local | ~/Projects/Career-Business/career-job-tools |
-| FretVision | Local | ~/Projects/Music-Audio/music-fretvision-app |
-| jcps-boots | Local | ~/Projects/Personal/jcps-boots |
+**Food & Beverage (7):** cottage-cafe-eight, jw-cafe-bakery, maira-mediterranean, nachbar, north-lime-coffee, passtime-fish-house, shawarma-shack
 
-### Legacy (DELETE from GitHub)
-- projectlavos-frontend (superseded by main-site)
-- jobtracker-frontend (legacy satire)
-- jobtracker-backend (legacy)
-- jaspermatters (superseded)
-- sentiment-api (duplicate)
+**Retail (8):** camp-j-lovat, cardinal-uniforms, clater-jewelers, genesis-diamonds, playthings-toy-shoppe, sophias-rugs, tasteful-travels, tonini-church-supply
+
+**Entertainment (4):** headliners-louisville, hideaway-saloon (LARGEST - 5569 lines)
+
+**Real Estate (3):** halsey-flats, mallard-crossing, springs-stony-brook
+
+**Professional Services (4):** dgv-services, ky-family-lawyer, schwartz-bankruptcy, ln-credit-union
+
+**Conceptual/Demo (6):** auriga, forma, psyche-hub, threshold, umbra, uofl-demo
+
+### All 51 Sites Deployed (Jan 12, 2026)
+No remaining stub files or undeployed sites.
 
 ---
 
-## Backend URLs Quick Reference
+## Render APIs (6)
 
+| URL | Local Path | Key Endpoints |
+|-----|------------|---------------|
+| guitar-model-lab.onrender.com | ~/Projects/guitar-model-lab | /generate-gp5, /scales, /patterns |
+| projectlavos-backend.onrender.com | ~/Projects/projectlavos-backend | /api/sentiment, /api/leads |
+| ai-talent-optimizer.onrender.com | ~/Projects/ai-talent-optimizer | /stats, /jobs |
+| mirador-xva2.onrender.com | ~/Projects/Security-Tools/mirador-test | /api/personas, /api/chains |
+| ourjourney-api.onrender.com | ~/Projects/Personal/personal-journey | /api/health, /api/ideas |
+| client-cms-api.onrender.com | ~/Projects/client-sites/client-cms/api | /health, /api/sites, /api/auth/login |
+
+**Note:** Free tier spins down after 15min (~30sec cold start)
+
+---
+
+## Other Platforms
+
+| Platform | URL | Description |
+|----------|-----|-------------|
+| Railway | poetic-optimism-production.up.railway.app | Expert Sourcing |
+| Netlify | steady-dodol-cd1dfd.netlify.app | jaspermatters.com |
+| Streamlit | prompt-factory-ai-...streamlit.app | Prompt generator (auth) |
+
+---
+
+## Active Development (9)
+
+| Path | Type | GitHub |
+|------|------|--------|
+| ~/Projects/texume | Python | guitargnarr/texume |
+| ~/Projects/reflexia-model-manager | Python | guitargnarr/reflexia |
+| ~/Projects/Security-Tools/mirador-test | Python | guitargnarr/mirador |
+| ~/Projects/phishguard-intel | Python | PRIVATE |
+| ~/Projects/claude-zones | Node.js | guitargnarr/claude-context-zones |
+| ~/Projects/job-search-automation | Python | guitargnarr/job-search-automation |
+| ~/Projects/fretforge-v1 | Node.js | LOCAL-ONLY |
+| ~/Projects/tool-gmail-integration | Python | LOCAL-ONLY |
+| ~/Projects/mcp-vercel | Node.js | nganiet/mcp-vercel |
+
+---
+
+## GitHub Repos with Deployments (12)
+
+| Repo | Deployment |
+|------|------------|
+| projectlavos-monorepo | projectlavos.com + subdomains |
+| ai-talent-optimizer | jobs.projectlavos.com + Render |
+| guitar-model-lab | guitar-model-lab.onrender.com |
+| phishguard-ui | phishguard.projectlavos.com |
+| interactive-resume | resume.projectlavos.com |
+| jobtrack | jobtrack.projectlavos.com |
+| OurJourney | ourjourney.projectlavos.com |
+| jaspermatters-job-intelligence | jaspermatters.com |
+| mirador | mirador-xva2.onrender.com |
+| ba-pathfinder | ba-pathfinder.projectlavos.com |
+| apartment-leasing-demo | frontend-mu-dusky-38.vercel.app |
+| jcps-boots | jcps-transfer.vercel.app |
+
+---
+
+## Quick Lookup
+
+**By subdomain → local path:**
 ```
-# Active APIs (4 on Render)
-https://projectlavos-backend.onrender.com     # LIVE - 7 endpoints
-https://guitar-model-lab.onrender.com         # LIVE - GP5 generation
-https://ai-talent-optimizer.onrender.com      # LIVE - v3.1.0 job API
-https://mirador-xva2.onrender.com             # LIVE - v2.0.0 AI orchestrator (30 personas, 6 chains)
-
-# Frontend URLs
-https://projectlavos.com                       # Portfolio hub
-https://guitar.projectlavos.com                # Guitar platform
-https://jobs.projectlavos.com                  # Job discovery
-https://interactive-resume-ten-pi.vercel.app   # Resume
-https://ourjourney-app.vercel.app              # Coparenting
-https://jobtrack-two.vercel.app                # Job tracking
-https://ba-pathfinder.vercel.app               # BA career guide
-https://phishguard-ui.vercel.app               # Phishing demo
-
-# Mirador (Landing + API)
-https://mirador-o2wgw9o65-matthew-scotts-projects-1dc9743e.vercel.app  # Landing page (Self-Governing AI narrative)
-https://mirador-xva2.onrender.com                                       # API backend (30 personas, 6 chains)
+guitar.projectlavos.com       → ~/Projects/projectlavos-monorepo/services/guitar
+jobs.projectlavos.com         → ~/Projects/ai-talent-optimizer
+ourjourney.projectlavos.com   → ~/Projects/Personal/personal-journey
+jobtrack.projectlavos.com     → ~/Projects/jobtrack
+resume.projectlavos.com       → ~/Projects/interactive-resume
+mirador.projectlavos.com      → ~/Projects/projectlavos-monorepo/services/mirador
+phishguard.projectlavos.com   → ~/Projects/phishguard-ui
+ba-pathfinder.projectlavos.com → ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder
+prompts.projectlavos.com      → ~/Desktop/Manus/prompt-fact
+orchestrator.projectlavos.com → ~/Projects/projectlavos-monorepo/services/orchestrator
 ```
 
----
-
-## Cleanup Actions Required
-
-### Vercel Dashboard - COMPLETED Dec 18
-~~DELETE: mirador-consciousness-platform, matthewscott, projectlavos-frontend, projectlavos, jobtracker-frontend, ourjourney-flow~~
-**DONE** - Deleted 6 orphaned projects, now 20 remaining
-
-### Railway Dashboard - COMPLETED Dec 18
-~~DELETE: precious-vibrancy, adaptable-harmony, earnest-cat~~
-**DONE** - Deleted 3 empty projects manually
-
-### GitHub - COMPLETED Dec 18
-~~DELETE: projectlavos-frontend, jobtracker-frontend, jobtracker-backend, jaspermatters, sentiment-api~~
-**DONE** - Deleted 5 legacy repos via `gh repo delete`
-
----
-
-## Deployment Commands
-
-```bash
-# Vercel (no env vars)
-vercel --prod --yes
-
-# Vercel (with VITE_ env vars)
-VITE_API_URL=https://api.example.com vercel build --prod
-vercel deploy --prebuilt --prod --yes
-
-# Render
-# Auto-deploys from GitHub on push to main
-# Manual: Dashboard → Service → Manual Deploy
-
-# Check all URLs
-for url in projectlavos.com guitar.projectlavos.com jobs.projectlavos.com; do
-  curl -s -o /dev/null -w "%{http_code} $url\n" "https://$url"
-done
+**By Render API → local path:**
+```
+guitar-model-lab.onrender.com → ~/Projects/guitar-model-lab
+projectlavos-backend.onrender.com → ~/Projects/projectlavos-backend
+ai-talent-optimizer.onrender.com → ~/Projects/ai-talent-optimizer
+mirador-xva2.onrender.com     → ~/Projects/Security-Tools/mirador-test
+ourjourney-api.onrender.com   → ~/Projects/Personal/personal-journey
+client-cms-api.onrender.com   → ~/Projects/client-sites/client-cms/api
 ```
 
----
-
-**Maintenance Notes:**
-- GitHub Auto-Deploy: phishguard-ui, interactive-resume, jobtrack, ba-pathfinder, jaspermatters-job-intelligence, apartment-leasing-demo
-- Manual Deploy: All projectlavos-monorepo services, ourjourney-app
-- Render: Free tier spins down after 15min (~30sec cold start)
-- Railway: `railway link` then `railway up` from project directory
+**Deploy commands:** See @~/.claude/reference/workflows.md
 
 ---
 
-## Audit Log (Dec 18, 2025)
+## Pending Actions
 
-### Frontend Sites Audited (13 PASS)
-| Site | Status | Issues Found | Fixed |
-|------|--------|--------------|-------|
-| projectlavos.com | PASS | - | - |
-| guitar.projectlavos.com | PASS | - | - |
-| jobs.projectlavos.com | PASS | - | - |
-| interactive-resume-ten-pi.vercel.app | PASS | - | - |
-| ourjourney-app.vercel.app | PASS | - | - |
-| jobtrack-two.vercel.app | PASS | - | - |
-| ba-pathfinder.vercel.app | PASS | - | - |
-| phishguard-ui.vercel.app | PASS | - | - |
-| frontend-mu-dusky-38.vercel.app | PASS | - | - |
-| jaspermatters-job-intelligence.vercel.app | PASS | 3 broken GitHub links, OG 404 | Fixed all |
-| vercel-demo-flame.vercel.app | PASS | - | - |
-| 2025-skills-to-know.vercel.app | PASS | - | - |
-| fretforge-showcase.vercel.app | 404 | Orphaned deployment | Removed from Projects.jsx |
+- [ ] LOGIN: `render login`
+- [ ] LOGIN: `railway login`
 
-### Backend APIs Audited (3 PASS)
-| API | Status | Endpoints Verified |
-|-----|--------|-------------------|
-| projectlavos-backend.onrender.com | PASS | /api/sentiment, /api/phishing |
-| guitar-model-lab.onrender.com | PASS | /scales, /health |
-| ai-talent-optimizer.onrender.com | PASS | /stats, /jobs/tier1 |
+### Stale Vercel Apps (Not in URL count - need review)
+- chordgen-pro.vercel.app - status unknown
+- landing-page.vercel.app - status unknown
 
-### Fixes Applied
-1. **jaspermatters-job-intelligence**: Removed 3 broken GitHub links (mirador, job-search-automation, unemployment-quest-system), replaced with Guitar Platform and OurJourney cards, created og-image.png
-2. **Projects.jsx**: Removed fretforge-showcase entry (404 deployment)
-3. **Vercel**: Deleted 6 orphaned projects (mirador-consciousness-platform, matthewscott, projectlavos-frontend, projectlavos, jobtracker-frontend, ourjourney-flow)
+**Note:** jcps-transfer.vercel.app is listed in Vercel Apps table and counted.
+
+---
+
+## Maintenance Notes
+
+- **Auto-Deploy (GitHub):** phishguard-ui, interactive-resume, jobtrack, ba-pathfinder, jaspermatters-job-intelligence
+- **Manual Deploy:** projectlavos-monorepo services, ourjourney-app
+- **Render cold start:** ~30sec after 15min idle
+- **Railway:** `railway link && railway up`
+
+---
+
+**Audit Log:** Detailed history moved to ~/.claude/archive/deployment-audit-log.md
+
+---
+
+**Last Updated:** January 17, 2026 (URL count corrected to 94, Ollama clarification, Render Quick Lookup added)

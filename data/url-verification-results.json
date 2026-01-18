@@ -1,0 +1,356 @@
+{
+  "timestamp": "2026-01-09T13:02:05.721415",
+  "total": 58,
+  "passing": 58,
+  "failing": 0,
+  "results": [
+    {
+      "url": "https://projectlavos.com",
+      "status": 200,
+      "response_time_ms": 157,
+      "category": "Custom Domains (3)"
+    },
+    {
+      "url": "https://jaspermatters.com",
+      "status": 200,
+      "response_time_ms": 387,
+      "category": "Custom Domains (3)"
+    },
+    {
+      "url": "https://matthewscott.link",
+      "status": 200,
+      "response_time_ms": 893,
+      "category": "Custom Domains (3)"
+    },
+    {
+      "url": "https://interactive-resume-ten-pi.vercel.app",
+      "status": 200,
+      "response_time_ms": 170,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://ourjourney-app.vercel.app",
+      "status": 200,
+      "response_time_ms": 141,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://jobtrack-two.vercel.app",
+      "status": 200,
+      "response_time_ms": 170,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://ba-pathfinder.vercel.app",
+      "status": 200,
+      "response_time_ms": 173,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://phishguard-ui.vercel.app",
+      "status": 200,
+      "response_time_ms": 189,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://jaspermatters-job-intelligence.vercel.app",
+      "status": 200,
+      "response_time_ms": 183,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://fret-vision.vercel.app",
+      "status": 200,
+      "response_time_ms": 154,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://2025-skills-to-know.vercel.app",
+      "status": 200,
+      "response_time_ms": 154,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://frontend-mu-dusky-38.vercel.app",
+      "status": 200,
+      "response_time_ms": 193,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://mirador-enterprise.vercel.app",
+      "status": 200,
+      "response_time_ms": 160,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://guitar-ebon.vercel.app",
+      "status": 200,
+      "response_time_ms": 166,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://services-teal.vercel.app",
+      "status": 200,
+      "response_time_ms": 193,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://jcps-transfer.vercel.app",
+      "status": 200,
+      "response_time_ms": 145,
+      "category": "Vercel Apps (13 with .vercel.app URLs)"
+    },
+    {
+      "url": "https://tier1-essential.vercel.app",
+      "status": 200,
+      "response_time_ms": 160,
+      "category": "Tier Templates (5) - UI/UX Reference"
+    },
+    {
+      "url": "https://tier2-professional.vercel.app",
+      "status": 200,
+      "response_time_ms": 173,
+      "category": "Tier Templates (5) - UI/UX Reference"
+    },
+    {
+      "url": "https://tier3-advanced.vercel.app",
+      "status": 200,
+      "response_time_ms": 225,
+      "category": "Tier Templates (5) - UI/UX Reference"
+    },
+    {
+      "url": "https://tier4-enterprise.vercel.app",
+      "status": 200,
+      "response_time_ms": 172,
+      "category": "Tier Templates (5) - UI/UX Reference"
+    },
+    {
+      "url": "https://tier-comparison.vercel.app",
+      "status": 200,
+      "response_time_ms": 410,
+      "category": "Tier Templates (5) - UI/UX Reference"
+    },
+    {
+      "url": "https://fritz-salon.vercel.app",
+      "status": 200,
+      "response_time_ms": 539,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://maira-mediterranean.vercel.app",
+      "status": 200,
+      "response_time_ms": 426,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://jw-cafe-bakery.vercel.app",
+      "status": 200,
+      "response_time_ms": 576,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://passtime-fish-house.vercel.app",
+      "status": 200,
+      "response_time_ms": 519,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://nachbar.vercel.app",
+      "status": 200,
+      "response_time_ms": 579,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://rejuvenation-med-spa.vercel.app",
+      "status": 200,
+      "response_time_ms": 661,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://louisville-aesthetics.vercel.app",
+      "status": 200,
+      "response_time_ms": 385,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://cottage-cafe-eight.vercel.app",
+      "status": 200,
+      "response_time_ms": 383,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://ky-family-lawyer.vercel.app",
+      "status": 200,
+      "response_time_ms": 694,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://highland-cleaners.vercel.app",
+      "status": 200,
+      "response_time_ms": 379,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://lawnco-louisville.vercel.app",
+      "status": 200,
+      "response_time_ms": 677,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://highland-cleaners-v2.vercel.app",
+      "status": 200,
+      "response_time_ms": 384,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://highland-cleaners-tier1.vercel.app",
+      "status": 200,
+      "response_time_ms": 385,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://highland-cleaners-tier4.vercel.app",
+      "status": 200,
+      "response_time_ms": 765,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://tonini-church-supply.vercel.app",
+      "status": 200,
+      "response_time_ms": 543,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://camp-j-lovat.vercel.app",
+      "status": 200,
+      "response_time_ms": 543,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://shawarma-shack.vercel.app",
+      "status": 200,
+      "response_time_ms": 385,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://tasteful-travels.vercel.app",
+      "status": 200,
+      "response_time_ms": 436,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://pilates-plus-louisville.vercel.app",
+      "status": 200,
+      "response_time_ms": 552,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://kentuckiana-gastro.vercel.app",
+      "status": 200,
+      "response_time_ms": 540,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://louisville-nails-spa.vercel.app",
+      "status": 200,
+      "response_time_ms": 429,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://chabad-of-kentucky.vercel.app",
+      "status": 200,
+      "response_time_ms": 679,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://paint-spot-louisville.vercel.app",
+      "status": 200,
+      "response_time_ms": 436,
+      "category": "Client Demo Sites (23)"
+    },
+    {
+      "url": "https://guitar-model-lab.onrender.com",
+      "status": 200,
+      "response_time_ms": 884,
+      "category": "Render APIs (5)"
+    },
+    {
+      "url": "https://projectlavos-backend.onrender.com",
+      "status": 200,
+      "response_time_ms": 760,
+      "category": "Render APIs (5)"
+    },
+    {
+      "url": "https://ai-talent-optimizer.onrender.com",
+      "status": 200,
+      "response_time_ms": 1039,
+      "category": "Render APIs (5)"
+    },
+    {
+      "url": "https://mirador-xva2.onrender.com",
+      "status": 200,
+      "response_time_ms": 832,
+      "category": "Render APIs (5)"
+    },
+    {
+      "url": "https://ourjourney-api.onrender.com",
+      "status": 200,
+      "response_time_ms": 601,
+      "category": "Render APIs (5)"
+    },
+    {
+      "url": "https://poetic-optimism-production.up.railway.app",
+      "status": 200,
+      "response_time_ms": 830,
+      "category": "Other Platforms"
+    },
+    {
+      "url": "https://steady-dodol-cd1dfd.netlify.app",
+      "status": 200,
+      "response_time_ms": 647,
+      "category": "Other Platforms"
+    },
+    {
+      "url": "https://jobs.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 557,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://phishguard.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 586,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://resume.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 618,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://jobtrack.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 383,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://ourjourney.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 552,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://ba-pathfinder.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 383,
+      "category": "GitHub Repos with Deployments (12)"
+    },
+    {
+      "url": "https://guitar.projectlavos.com",
+      "status": 200,
+      "response_time_ms": 384,
+      "category": "Quick Lookup"
+    }
+  ]
+}

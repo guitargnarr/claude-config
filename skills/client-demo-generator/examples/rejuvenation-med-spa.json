@@ -1,0 +1,89 @@
+{
+  "name": "Rejuvenation Med Spa",
+  "slug": "rejuvenation-med-spa",
+  "tagline": "Your Journey to Timeless Beauty",
+  "phone": "(502) 555-GLOW",
+  "email": "info@rejuvenationmedspa.com",
+  "address": "123 Wellness Drive, Louisville, KY 40207",
+  "hours": "Mon-Fri: 9AM-7PM | Sat: 10AM-5PM",
+  "industry": "beauty-wellness",
+  "services": [
+    {
+      "title": "Botox & Fillers",
+      "description": "FDA-approved injectables for natural-looking results.",
+      "icon": "Sparkles",
+      "price": "Starting at $12/unit"
+    },
+    {
+      "title": "Laser Treatments",
+      "description": "Advanced laser technology for skin rejuvenation and hair removal.",
+      "icon": "Zap",
+      "price": "Starting at $150"
+    },
+    {
+      "title": "Chemical Peels",
+      "description": "Medical-grade peels for improved skin texture and tone.",
+      "icon": "Droplets",
+      "price": "Starting at $125"
+    },
+    {
+      "title": "Microneedling",
+      "description": "Collagen induction therapy for firmer, younger-looking skin.",
+      "icon": "Target",
+      "price": "Starting at $250"
+    },
+    {
+      "title": "IV Therapy",
+      "description": "Vitamin infusions for energy, immunity, and wellness.",
+      "icon": "Heart",
+      "price": "Starting at $150"
+    },
+    {
+      "title": "Body Contouring",
+      "description": "Non-invasive treatments for fat reduction and skin tightening.",
+      "icon": "Ruler",
+      "price": "Starting at $500"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Main Spa",
+      "address": "123 Wellness Drive, Louisville, KY 40207",
+      "phone": "(502) 555-GLOW"
+    }
+  ],
+  "social": {
+    "facebook": "https://facebook.com/rejuvenationmedspa",
+    "instagram": "https://instagram.com/rejuvenationmedspa"
+  },
+  "colors": {
+    "primary": "#be185d",
+    "secondary": "#f472b6"
+  },
+  "features": {
+    "booking": true,
+    "ecommerce": false,
+    "auth": false,
+    "multiPage": true
+  },
+  "content": {
+    "about": "At Rejuvenation Med Spa, we combine advanced medical aesthetics with a luxurious spa experience. Our team of certified professionals is dedicated to helping you look and feel your best through personalized treatment plans.",
+    "testimonials": [
+      {
+        "quote": "The staff made me feel so comfortable. I love my results!",
+        "author": "Sarah M.",
+        "role": "Botox Client"
+      },
+      {
+        "quote": "Best med spa in Louisville. Professional and knowledgeable.",
+        "author": "Jennifer K.",
+        "role": "Regular Client"
+      }
+    ]
+  },
+  "_meta": {
+    "tier": 2,
+    "notes": "Tier 2 selected for appointment booking functionality",
+    "localPath": "~/Projects/jobtrack/client-sites/rejuvenation-med-spa"
+  }
+}

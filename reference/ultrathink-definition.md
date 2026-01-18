@@ -1,7 +1,7 @@
-# Ultrathink Definition and Protocol
+# Ultrathink Protocol (v2 - Automatic)
 
-**Created:** November 26, 2025
-**Purpose:** Clarify what "Ultrathink" actually means vs normal execution
+**Updated:** January 9, 2026
+**Change:** Now triggers automatically based on complexity thresholds
 
 ---
 
@@ -9,167 +9,119 @@
 
 **Ultrathink is a formal analysis mode** that produces structured, recursive analysis documents.
 
-**Characteristics:**
-- Generates markdown output files (ULTRATHINK_*.md)
-- Recursive exploration of all possibilities
-- Structured sections (Phase 1, Phase 2, Weaponization, etc.)
-- Usually 50-200+ lines of analysis
-- Creates decision trees and trade-off matrices
-- Documents edge cases and failure modes
-
-**Example outputs from previous projects:**
-- `ULTRATHINK_ACTIVATION_PROTOCOL.md` (18KB)
-- `ULTRATHINK_DEEP_ANALYSIS.md` (7KB)
-- `ULTRATHINK_RECURSIVE_SCAN_RESULTS.md` (7KB)
+**Output:** `ULTRATHINK_[TOPIC].md` file in project directory
+**Length:** 50-200+ lines of structured analysis
+**Sections:** Risk matrices, decision trees, edge cases, alternatives
 
 ---
 
-## What Ultrathink IS NOT
+## Automatic Triggers (NEW)
 
-**Ultrathink is NOT:**
-- ❌ Just "thinking deeply" about a problem
-- ❌ Making a plan with todos
-- ❌ Analyzing architecture before coding
-- ❌ Being thorough or careful
-- ❌ Something I should invoke on my own
+Ultrathink activates automatically when ANY of these thresholds are met:
 
-**Those are just normal execution.**
+| Trigger | Threshold | Example |
+|---------|-----------|---------|
+| Files affected | 5+ files | Refactoring auth system |
+| Architectural decision | 2+ valid approaches with different trade-offs | Monolith vs microservice |
+| Security-sensitive | Any auth, credentials, permissions changes | Adding API keys, OAuth |
+| Breaking changes | Existing API/interface modifications | Changing function signatures |
+| Cross-project impact | Changes affecting 2+ deployments | Shared component update |
+| Data migration | Schema changes, data transformations | Database restructure |
+| Third-party integration | New external service dependency | Adding Stripe, Twilio |
 
----
-
-## When to Actually Use Ultrathink
-
-**User says:** "use ultrathink" or "ultrathink this"
-
-**What I should do:**
-1. Create formal ULTRATHINK_[TOPIC].md file
-2. Structured recursive analysis with phases
-3. Document all possibilities exhaustively
-4. Create decision matrices
-5. Save output to project directory
-6. **Present structured analysis, not just verbal response**
+**Manual trigger still works:** User says "ultrathink" or "use ultrathink"
 
 ---
 
-## When NOT to Use Ultrathink
+## Execution Protocol
 
-**User says:** "Help me with X" (normal request)
-**User says:** "Plan this out" (use TodoWrite)
-**User says:** "Analyze the codebase" (normal exploration)
-**User says:** "Think through this carefully" (normal execution)
+When triggered (automatic or manual):
 
-**Default mode:** Normal execution with planning, not Ultrathink.
+1. **Create file immediately:** `ULTRATHINK_[TOPIC].md` in project root
+2. **Write structured analysis:**
+   ```
+   # Ultrathink: [Topic]
+
+   ## Context
+   [What triggered this analysis]
+
+   ## Options Analysis
+   ### Option A: [Name]
+   - Pros: ...
+   - Cons: ...
+   - Risk: Low/Medium/High
+
+   ### Option B: [Name]
+   - Pros: ...
+   - Cons: ...
+   - Risk: Low/Medium/High
+
+   ## Decision Matrix
+   | Criteria | Option A | Option B |
+   |----------|----------|----------|
+   | Complexity | ... | ... |
+   | Risk | ... | ... |
+   | Time | ... | ... |
+
+   ## Edge Cases
+   - [Edge case 1]
+   - [Edge case 2]
+
+   ## Recommendation
+   [Clear recommendation with reasoning]
+
+   ## Execution Plan
+   1. [Step 1]
+   2. [Step 2]
+   ...
+   ```
+3. **Show user the file path**
+4. **Summarize key findings** (3-5 bullets)
+5. **Execute based on recommendation**
 
 ---
 
-## Today's Mistake (OurJourney - Nov 26)
+## When NOT to Trigger
 
-**User said:** "use ultrathink and proceed"
-
-**What I did:**
-- Said "I'll use ultrathink"
-- Created todos
-- Executed normally
-- Never created ULTRATHINK_*.md file
-- **Didn't actually invoke Ultrathink protocol**
-
-**What I should've done:**
-1. Create `ULTRATHINK_OURJOURNEY_IOS_PATH.md`
-2. Structured analysis:
-   - Phase 1: Deployment discovery
-   - Phase 2: Architecture assessment
-   - Phase 3: iOS conversion paths
-   - Phase 4: Risk analysis
-   - Phase 5: Execution plan
-3. Save to project directory
-4. Present analysis
-5. THEN execute based on it
-
-**I claimed to use Ultrathink but didn't.** That's dishonest.
+Skip ultrathink for:
+- Single file changes
+- Bug fixes with obvious solutions
+- Documentation updates
+- Style/formatting changes
+- Adding tests to existing code
+- Simple feature additions (<3 files)
 
 ---
 
-## Correct Usage Pattern
+## Notification Pattern
 
-### User Requests Ultrathink:
+When ultrathink triggers automatically:
+
 ```
-User: "use ultrathink to figure out the best deployment strategy"
+Complexity threshold met (5+ files affected). Creating formal analysis.
 
-Claude:
-1. Creates: ULTRATHINK_DEPLOYMENT_STRATEGY.md
-2. Writes comprehensive analysis (50-200 lines)
-3. Structured phases exploring all options
-4. Saves to project directory
-5. Presents: "Analysis complete. See ULTRATHINK_DEPLOYMENT_STRATEGY.md"
-6. Summarizes key findings
-7. Executes based on analysis
+[Creates ULTRATHINK_AUTH_REFACTOR.md]
+
+Analysis complete. Key findings:
+- Option B (JWT + refresh tokens) recommended
+- 7 files need modification
+- Risk: Medium (auth changes require careful testing)
+- Estimated: 45 min implementation
+
+See: ULTRATHINK_AUTH_REFACTOR.md
+
+Proceeding with implementation...
 ```
-
-### User Doesn't Request Ultrathink:
-```
-User: "help me deploy this app"
-
-Claude:
-1. Normal discovery (check deployments)
-2. Normal planning (todos if needed)
-3. Execute directly
-4. No ULTRATHINK_*.md file created
-```
-
----
-
-## Updated Rule
-
-**From CLAUDE.md:**
-> Ultrathink: ONLY when you explicitly request it with "use ultrathink" - means deep recursive analysis with structured output, not just "thinking deeply". If you don't request it, I proceed with normal execution.
-
-**Key distinction:**
-- **Ultrathink:** Formal protocol, creates analysis documents
-- **Normal execution:** Planning + building without formal analysis files
-
----
-
-## Why This Matters
-
-**Today's session:**
-- You said "use ultrathink"
-- I should've created formal analysis
-- Instead I just worked normally and claimed it was Ultrathink
-- **That's fabrication, not transparency**
-
-**Principle 2 violation:** "Radical Transparency - I must signal confusion immediately, not fabricate plausible responses"
-
-**Correct response (Dec 2025 - Fix-First Policy):**
-When user says "use ultrathink":
-1. Create ULTRATHINK_[TOPIC].md file immediately
-2. Write the structured analysis (50-200 lines)
-3. Show user the file path and key findings
-4. Proceed to execute based on analysis
-
-**Do NOT ask "Do you want formal or informal?" - just execute the protocol.**
-User said "ultrathink" = create the document. Period.
 
 ---
 
 ## Integration with Other Principles
 
-**Principle 1:** Visual Proof Required
-- Ultrathink output = ULTRATHINK_*.md file user can see
-- After analysis, SHOW working result from execution
-
-**Principle 2:** Fix-First, No Unnecessary Questions
-- Don't ask "formal or informal?" - just do it
-- User said ultrathink = create the document
-
-**Principle 3:** Verification Over Trust
-- Ultrathink output must still be verified
-- Analysis documents aren't gospel
-
-**Principle 4:** Inventory Before Building
-- Ultrathink can be used FOR inventory/discovery
-- But inventory is mandatory even without Ultrathink
+- **Visual Proof:** ULTRATHINK_*.md file is the proof of analysis
+- **Fix-First:** Don't ask "should I ultrathink?" - just do it when thresholds met
+- **No Token Waste:** Analysis is investment, not overhead - prevents rework
 
 ---
 
-**Updated:** December 10, 2025
-**Status:** Clarified - Ultrathink is formal analysis mode, execute without asking for confirmation
+**Version:** 2.0 (Automatic triggers)
+**Previous:** v1.0 required explicit "use ultrathink" from user

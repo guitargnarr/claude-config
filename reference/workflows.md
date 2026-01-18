@@ -17,7 +17,18 @@
 
 ## CRITICAL: Git Workflow (PR Required)
 
-**DO NOT commit directly to main.** Always use feature branches + PRs:
+**DO NOT commit directly to main.** Always use feature branches + PRs.
+
+**Pre-Commit Quality Check (MANDATORY):**
+```bash
+# TypeScript/JavaScript - must pass
+npm run build
+
+# Python - must pass
+flake8 [file.py] --max-line-length=127
+
+# Fix ALL errors before committing - no exceptions
+```
 
 ```bash
 # 1. Create feature branch
@@ -43,18 +54,52 @@ gh pr list
 
 **SUCCESS CRITERIA: Task is NOT complete until `gh pr list` shows your PR.**
 
+### Merge and Cleanup
+
+```bash
+# Merge PR (after review/approval)
+gh pr merge [PR_NUMBER] --squash --delete-branch
+
+# Or merge with specific method
+gh pr merge [PR_NUMBER] --merge      # Merge commit
+gh pr merge [PR_NUMBER] --rebase     # Rebase
+
+# Update local after merge
+git checkout main && git pull
+```
+
+### Rollback (Emergency)
+
+```bash
+# Vercel - instant rollback to previous deployment
+vercel rollback
+
+# Or rollback to specific deployment
+vercel ls  # Find deployment URL
+vercel rollback [DEPLOYMENT_URL]
+
+# Render - redeploy previous commit
+# Dashboard → Service → Deploys → Find working deploy → Redeploy
+
+# Git - revert last commit (creates new commit)
+git revert HEAD
+git push origin main
+```
+
 ---
 
-## Deployment (8-13 seconds)
+## Deployment
+
+### Vercel (Frontend) - 8-13 seconds
 
 ```bash
 # Test Before Deploy (ALWAYS)
 npm run build && npm run preview
 
-# Vercel (Frontend) - NO env vars needed
+# NO env vars needed
 vercel --prod --yes
 
-# Vercel (Frontend) - WITH env vars (Vite bakes at build time)
+# WITH env vars (Vite bakes at build time)
 # CRITICAL: Don't waste time with vercel env add then regular deploy
 # Env vars MUST be in the build, not just in Vercel dashboard
 VITE_MY_VAR=https://api.example.com vercel build --prod
@@ -62,6 +107,51 @@ vercel deploy --prebuilt --prod --yes
 
 # Git workflow (ALWAYS add assets)
 git add public/
+```
+
+### Render (Python APIs) - 2-5 minutes
+
+```bash
+# 1. Push to GitHub (Render auto-deploys from main)
+git push origin main
+
+# 2. Or manual deploy via dashboard
+# Dashboard → Service → Manual Deploy → Deploy latest commit
+
+# 3. Verify deployment
+curl https://your-api.onrender.com/health
+```
+
+**Render Configuration (render.yaml):**
+```yaml
+services:
+  - type: web
+    name: my-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Set manually in dashboard
+```
+
+**Critical Notes:**
+- Free tier spins down after 15min (~30sec cold start)
+- Use `pg8000` driver, NOT `psycopg2-binary` (build fails)
+- PORT must come from env var, not hardcoded
+- Blueprint sync adds/updates env vars but NEVER removes them
+
+### Post-Deploy Verification (MANDATORY)
+
+```bash
+# Frontend (SPA) - use Playwright, NOT curl/WebFetch
+npx playwright screenshot --wait-for-timeout=5000 "https://site.vercel.app" verify.png
+
+# Backend API - curl is fine
+curl -s https://api.onrender.com/health | jq .
+
+# Both - check response time
+time curl -s https://api.onrender.com/health > /dev/null
 ```
 
 ---
@@ -113,9 +203,43 @@ git add public/
 
 ---
 
+## Mobile Verification (Jan 2026)
+
+**ALWAYS verify mobile responsiveness after deployment:**
+
+```bash
+# Single site verification (desktop + mobile screenshots)
+~/.claude/scripts/mobile-verify.sh https://site.vercel.app
+
+# Batch verify top 10 client sites
+~/.claude/scripts/mobile-verify-batch.sh ./audit-output
+
+# Quick mobile-only check
+npx playwright screenshot --viewport-size="375,667" --wait-for-timeout=5000 "https://site.vercel.app" mobile.png
+```
+
+**Mobile Viewport:** 375x667 (iPhone SE)
+
+**Visual Checklist:**
+- Hero text readable on mobile?
+- Navigation accessible (hamburger menu)?
+- CTAs tappable (min 44x44px)?
+- No horizontal scroll?
+- Images not cut off?
+
+**Output:**
+- Screenshots saved to output directory
+- HTML report generated (batch mode)
+
+---
+
 ## Usage
 
 Load when you need deployment or development workflow reminders:
 ```
 @~/.claude/reference/workflows.md
 ```
+
+---
+
+**Last Updated:** January 17, 2026 (Added Render deployment, PR merge, rollback workflows)

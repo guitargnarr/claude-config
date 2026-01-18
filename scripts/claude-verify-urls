@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""
+claude-verify-urls - Validate all URLs in deployment inventory
+
+Usage:
+    claude-verify-urls           # Check all URLs, show failures only
+    claude-verify-urls --all     # Show all results
+    claude-verify-urls --json    # Output as JSON
+    claude-verify-urls --update  # Update inventory file with results
+"""
+
+import re
+import sys
+import json
+import asyncio
+import aiohttp
+from pathlib import Path
+from datetime import datetime
+from typing import NamedTuple
+
+INVENTORY_PATH = Path.home() / ".claude/reference/deployment-inventory.md"
+RESULTS_PATH = Path.home() / ".claude/data/url-verification-results.json"
+
+class URLResult(NamedTuple):
+    url: str
+    status: int | str
+    response_time_ms: int
+    category: str
+
+def extract_urls_from_inventory() -> list[tuple[str, str]]:
+    """Extract URLs and their categories from deployment-inventory.md"""
+    urls = []
+    current_category = "Unknown"
+
+    with open(INVENTORY_PATH) as f:
+        content = f.read()
+
+    for line in content.split('\n'):
+        # Track category headers
+        if line.startswith('## '):
+            current_category = line[3:].strip()
+
+        # Extract URLs from markdown tables and text
+        # Pattern: domain.vercel.app, domain.onrender.com, domain.com, etc.
+        url_patterns = [
+            r'https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}[^\s\)|\]]*',  # Full URLs
+            r'\b([a-zA-Z0-9-]+\.vercel\.app)\b',  # Vercel apps
+            r'\b([a-zA-Z0-9-]+\.onrender\.com)\b',  # Render apps
+            r'\b([a-zA-Z0-9-]+\.netlify\.app)\b',  # Netlify apps
+            r'\b([a-zA-Z0-9-]+\.up\.railway\.app)\b',  # Railway apps
+            r'\b(projectlavos\.com)\b',  # Custom domain
+            r'\b([a-zA-Z0-9-]+\.projectlavos\.com)\b',  # Subdomains
+            r'\b(jaspermatters\.com)\b',  # Custom domain
+            r'\b(matthewscott\.link)\b',  # Custom domain
+        ]
+
+        for pattern in url_patterns:
+            matches = re.findall(pattern, line)
+            for match in matches:
+                url = match if match.startswith('http') else f'https://{match}'
+                # Clean URL (remove trailing punctuation)
+                url = url.rstrip('.,;:')
+                if url not in [u[0] for u in urls]:
+                    urls.append((url, current_category))
+
+    return urls
+
+async def check_url(session: aiohttp.ClientSession, url: str, category: str) -> URLResult:
+    """Check a single URL and return result"""
+    start = datetime.now()
+
+    # For API endpoints, try health endpoints in order: /api/health, /health, then root
+    check_urls = [url]
+    if any(domain in url for domain in ['onrender.com', 'railway.app']):
+        base = url.rstrip('/')
+        check_urls = [f"{base}/api/health", f"{base}/health", base]
+
+    for check_url_str in check_urls:
+        try:
+            # Try HEAD first (faster)
+            async with session.head(check_url_str, timeout=aiohttp.ClientTimeout(total=10), allow_redirects=True, ssl=False) as response:
+                elapsed = int((datetime.now() - start).total_seconds() * 1000)
+                # If HEAD returns 405 (Method Not Allowed), try GET
+                if response.status == 405:
+                    async with session.get(check_url_str, timeout=aiohttp.ClientTimeout(total=15), allow_redirects=True, ssl=False) as get_response:
+                        elapsed = int((datetime.now() - start).total_seconds() * 1000)
+                        if get_response.status < 400:
+                            return URLResult(url, get_response.status, elapsed, category)
+                        continue  # Try next URL
+                if response.status < 400:
+                    return URLResult(url, response.status, elapsed, category)
+                # If 404, try next URL in list
+                if response.status == 404 and check_url_str != check_urls[-1]:
+                    continue
+                return URLResult(url, response.status, elapsed, category)
+        except asyncio.TimeoutError:
+            # Render free tier cold start - retry once with longer timeout
+            if 'onrender.com' in url and check_url_str == check_urls[-1]:
+                try:
+                    async with session.get(url, timeout=aiohttp.ClientTimeout(total=45), allow_redirects=True, ssl=False) as response:
+                        elapsed = int((datetime.now() - start).total_seconds() * 1000)
+                        return URLResult(url, response.status, elapsed, category)
+                except asyncio.TimeoutError:
+                    return URLResult(url, "TIMEOUT (cold start?)", 45000, category)
+            if check_url_str == check_urls[-1]:
+                return URLResult(url, "TIMEOUT", 10000, category)
+            continue
+        except aiohttp.ClientError as e:
+            if check_url_str == check_urls[-1]:
+                return URLResult(url, f"ERROR: {type(e).__name__}", 0, category)
+            continue
+        except Exception as e:
+            if check_url_str == check_urls[-1]:
+                return URLResult(url, f"ERROR: {str(e)[:50]}", 0, category)
+            continue
+
+    return URLResult(url, "ERROR: All endpoints failed", 0, category)
+
+async def check_all_urls(urls: list[tuple[str, str]]) -> list[URLResult]:
+    """Check all URLs concurrently"""
+    connector = aiohttp.TCPConnector(limit=20)  # Limit concurrent connections
+    async with aiohttp.ClientSession(connector=connector) as session:
+        tasks = [check_url(session, url, category) for url, category in urls]
+        results = await asyncio.gather(*tasks)
+    return results
+
+def print_results(results: list[URLResult], show_all: bool = False):
+    """Print results to console"""
+    failures = [r for r in results if not isinstance(r.status, int) or r.status >= 400]
+    successes = [r for r in results if isinstance(r.status, int) and r.status < 400]
+
+    print(f"\n{'='*60}")
+    print(f"URL Verification Results - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    print(f"{'='*60}")
+    print(f"Total URLs: {len(results)}")
+    print(f"Passing: {len(successes)}")
+    print(f"Failing: {len(failures)}")
+    print(f"{'='*60}\n")
+
+    if failures:
+        print("FAILURES:\n")
+        for r in sorted(failures, key=lambda x: x.category):
+            status_str = str(r.status)
+            print(f"  [{r.category}]")
+            print(f"    {r.url}")
+            print(f"    Status: {status_str}\n")
+
+    if show_all and successes:
+        print("\nPASSING:\n")
+        # Group by category
+        by_category = {}
+        for r in successes:
+            if r.category not in by_category:
+                by_category[r.category] = []
+            by_category[r.category].append(r)
+
+        for category, items in sorted(by_category.items()):
+            print(f"  [{category}]")
+            for r in items:
+                print(f"    {r.url} ({r.status}, {r.response_time_ms}ms)")
+            print()
+
+    if not failures:
+        print("All URLs passing!")
+
+def save_results(results: list[URLResult]):
+    """Save results to JSON file"""
+    RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    data = {
+        "timestamp": datetime.now().isoformat(),
+        "total": len(results),
+        "passing": len([r for r in results if isinstance(r.status, int) and r.status < 400]),
+        "failing": len([r for r in results if not isinstance(r.status, int) or r.status >= 400]),
+        "results": [
+            {
+                "url": r.url,
+                "status": r.status,
+                "response_time_ms": r.response_time_ms,
+                "category": r.category
+            }
+            for r in results
+        ]
+    }
+
+    with open(RESULTS_PATH, 'w') as f:
+        json.dump(data, f, indent=2)
+
+    print(f"\nResults saved to: {RESULTS_PATH}")
+
+def update_inventory(results: list[URLResult]):
+    """Update inventory file with verification timestamp"""
+    with open(INVENTORY_PATH) as f:
+        content = f.read()
+
+    # Update the Last Updated line
+    today = datetime.now().strftime('%Y-%m-%d')
+    content = re.sub(
+        r'\*\*Last Updated:\*\* \d{4}-\d{2}-\d{2}',
+        f'**Last Updated:** {today}',
+        content
+    )
+
+    # Update status line
+    failures = [r for r in results if not isinstance(r.status, int) or r.status >= 400]
+    if failures:
+        status = f"{len(failures)} URLs FAILING"
+    else:
+        status = "ALL VERIFIED HTTP 200"
+
+    content = re.sub(
+        r'\*\*Status:\*\* .*',
+        f'**Status:** {status}',
+        content
+    )
+
+    with open(INVENTORY_PATH, 'w') as f:
+        f.write(content)
+
+    print(f"Updated: {INVENTORY_PATH}")
+
+def output_json(results: list[URLResult]):
+    """Output results as JSON to stdout"""
+    failures = [r for r in results if not isinstance(r.status, int) or r.status >= 400]
+    data = {
+        "timestamp": datetime.now().isoformat(),
+        "total": len(results),
+        "passing": len(results) - len(failures),
+        "failing": len(failures),
+        "failures": [
+            {"url": r.url, "status": r.status, "category": r.category}
+            for r in failures
+        ]
+    }
+    print(json.dumps(data, indent=2))
+
+def main():
+    args = sys.argv[1:]
+    show_all = '--all' in args
+    as_json = '--json' in args
+    update = '--update' in args
+
+    if not INVENTORY_PATH.exists():
+        print(f"Error: Inventory file not found: {INVENTORY_PATH}")
+        sys.exit(1)
+
+    print("Extracting URLs from inventory...")
+    urls = extract_urls_from_inventory()
+    print(f"Found {len(urls)} URLs to check")
+
+    print("Checking URLs (this may take a moment)...")
+    results = asyncio.run(check_all_urls(urls))
+
+    if as_json:
+        output_json(results)
+    else:
+        print_results(results, show_all)
+        save_results(results)
+
+    if update:
+        update_inventory(results)
+
+    # Exit with error code if failures found
+    failures = [r for r in results if not isinstance(r.status, int) or r.status >= 400]
+    sys.exit(1 if failures else 0)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,445 @@
+  COMPREHENSIVE CLIENT SITES ANALYSIS
+
+  EXECUTIVE SUMMARY
+  ┌─────────────────────────────┬───────┐
+  │           Metric            │ Count │
+  ├─────────────────────────────┼───────┤
+  │ Total Sites (client-sites/) │ 54    │
+  ├─────────────────────────────┼───────┤
+  │ Total Sites (jobtrack/)     │ 6     │
+  ├─────────────────────────────┼───────┤
+  │ Templates                   │ 4     │
+  ├─────────────────────────────┼───────┤
+  │ TOTAL                       │ 64    │
+  ├─────────────────────────────┼───────┤
+  │ Deployed (HTTP 200)         │ 48    │
+  ├─────────────────────────────┼───────┤
+  │ Not Deployed (404)          │ 3     │
+  ├─────────────────────────────┼───────┤
+  │ Stub Files (<50 lines)      │ 2     │
+  └─────────────────────────────┴───────┘
+  ---
+  COMPLETE SITE INVENTORY
+
+  ~/Projects/client-sites/ (54 sites)
+  ┌────────────────────────────┬───────┬────────┬────────┬────────┬──────────┬────────────┬──────────┐
+  │            Site            │ Lines │ Router │ Styled │ Framer │ Tailwind │  OG Image  │ Deployed │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ affinity-dental            │ 1045  │ YES    │ NO     │ YES    │ YES      │ NO         │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ auriga                     │ 548   │ NO     │ NO     │ YES    │ YES      │ YES (294K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ blown-away-bar             │ 1086  │ YES    │ NO     │ YES    │ YES      │ YES (270K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ call-prep                  │ N/A   │ -      │ -      │ -      │ -        │ NO         │ -        │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ camp-j                     │ 1351  │ NO     │ YES    │ YES    │ NO       │ YES (40K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ cardinal-uniforms          │ 1567  │ YES    │ NO     │ YES    │ YES      │ YES (274K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ chabad-of-kentucky         │ 2366  │ YES    │ YES    │ YES    │ NO       │ NO         │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ clater-jewelers            │ 703   │ NO     │ NO     │ YES    │ YES      │ YES (36K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ cleaning-by-regina         │ 568   │ NO     │ NO     │ YES    │ YES      │ NO         │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ dermatology-associates-psc │ 206   │ NO     │ NO     │ YES    │ YES      │ YES (461K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ dermcare-practitioners     │ 206   │ NO     │ NO     │ YES    │ YES      │ YES (461K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ dgv-services               │ 1053  │ NO     │ NO     │ YES    │ YES      │ YES (323K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ dupont-pediatric-dentistry │ 1284  │ YES    │ NO     │ YES    │ YES      │ YES (36K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ fableandflows              │ 335   │ -      │ -      │ -      │ -        │ YES (365K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ forma                      │ 478   │ NO     │ NO     │ YES    │ YES      │ YES (565K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ fritz-salon                │ 1211  │ YES    │ NO     │ YES    │ YES      │ YES (88K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ genesis-diamonds           │ 1391  │ YES    │ NO     │ YES    │ NO       │ YES (417K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ gray-family-dentistry      │ 206   │ NO     │ NO     │ YES    │ YES      │ YES (458K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ halsey-flats               │ 989   │ YES    │ NO     │ YES    │ YES      │ YES (611K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ headliners-louisville      │ 1916  │ NO     │ NO     │ YES    │ NO       │ YES (35K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ hideaway-saloon            │ 5569  │ NO     │ NO     │ YES    │ YES      │ YES (50K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ highland-cleaners-tier1    │ 678   │ NO     │ NO     │ YES    │ YES      │ YES (585K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ highland-cleaners-tier2    │ 1436  │ YES    │ NO     │ YES    │ YES      │ NO         │ NO (404) │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ highland-cleaners-tier4    │ 1173  │ YES    │ NO     │ YES    │ YES      │ YES (575K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ highland-cleaners-v2       │ 1259  │ YES    │ NO     │ YES    │ YES      │ YES (179K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ jbh-dental                 │ 994   │ YES    │ NO     │ YES    │ YES      │ YES (34K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ jr-spa-salon               │ 634   │ -      │ -      │ -      │ -        │ YES (28K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ kentuckiana-gastro         │ 1643  │ YES    │ YES    │ YES    │ NO       │ YES (494K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ kuhn-allergy               │ 726   │ NO     │ NO     │ YES    │ YES      │ YES (407K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ ky-family-lawyer           │ 23    │ YES    │ NO     │ NO     │ YES      │ YES (90K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ lawnco-louisville          │ 23    │ YES    │ NO     │ NO     │ YES      │ YES (77K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ ln-credit-union            │ 2234  │ NO     │ NO     │ YES    │ YES      │ YES (328K) │ NO (404) │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ louisville-aesthetics      │ 924   │ -      │ -      │ -      │ -        │ YES (68K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ louisville-family-chiro    │ 207   │ NO     │ NO     │ YES    │ YES      │ YES (411K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ louisville-nails-spa       │ 1576  │ YES    │ YES    │ YES    │ NO       │ NO         │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ maira-mediterranean        │ 932   │ YES    │ NO     │ YES    │ YES      │ YES (929K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ mallard-crossing           │ 1326  │ NO     │ NO     │ NO     │ NO       │ YES (36K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ north-lime-coffee          │ 879   │ YES    │ NO     │ NO     │ YES      │ NO         │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ outreach-tracker           │ 1080  │ -      │ -      │ -      │ -        │ -          │ -        │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ paint-spot-louisville      │ 634   │ NO     │ NO     │ YES    │ YES      │ YES (427K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ pilates-plus-louisville    │ 1875  │ YES    │ YES    │ YES    │ NO       │ YES (37K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ playthings-toy-shoppe      │ 828   │ -      │ -      │ -      │ -        │ YES (77K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ portfolio-crm              │ 2458  │ -      │ -      │ -      │ -        │ -          │ -        │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ portfolio-launcher         │ 676   │ -      │ -      │ -      │ -        │ -          │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ primary-express-care       │ 1234  │ YES    │ NO     │ YES    │ NO       │ YES (92K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ psyche-hub                 │ 276   │ NO     │ NO     │ YES    │ YES      │ YES (643K) │ NO (404) │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ schwartz-bankruptcy        │ 897   │ NO     │ NO     │ YES    │ YES      │ YES (209K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ shawarma-shack             │ 1579  │ NO     │ YES    │ YES    │ NO       │ YES (70K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ sophias-rugs               │ 875   │ YES    │ NO     │ YES    │ YES      │ YES (867K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ springhurst-endo           │ 1573  │ YES    │ NO     │ YES    │ YES      │ YES (619K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ springs-stony-brook        │ 538   │ NO     │ NO     │ YES    │ YES      │ YES (709K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ tasteful-travels           │ 2130  │ NO     │ YES    │ YES    │ NO       │ YES (46K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ threshold                  │ 417   │ NO     │ NO     │ YES    │ YES      │ YES (546K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ tom-drexler                │ 953   │ YES    │ NO     │ YES    │ YES      │ YES (46K)  │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ tonini-church-supply       │ 834   │ NO     │ YES    │ YES    │ NO       │ YES (253K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ umbra                      │ 448   │ NO     │ NO     │ YES    │ YES      │ YES (533K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ uofl-demo                  │ 621   │ NO     │ NO     │ YES    │ YES      │ YES (284K) │ YES      │
+  ├────────────────────────────┼───────┼────────┼────────┼────────┼──────────┼────────────┼──────────┤
+  │ vance-stovall-optometry    │ 329   │ NO     │ NO     │ YES    │ YES      │ YES (473K) │ YES      │
+  └────────────────────────────┴───────┴────────┴────────┴────────┴──────────┴────────────┴──────────┘
+  ~/Projects/jobtrack/client-sites/ (6 sites - Component Architecture)
+  ┌──────────────────────┬───────┬─────────────┬────────────────────────┐
+  │         Site         │ Files │ Total Lines │        Features        │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ cottage-cafe         │ 5     │ 622         │ Basic multi-page       │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ highland-cleaners    │ 5     │ 760         │ Basic multi-page       │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ jw-cafe-bakery       │ 9     │ 1288        │ Multi-page + menu      │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ nachbar              │ 13    │ 3390        │ Full-featured bar site │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ passtime-fish-house  │ 9     │ 1256        │ Multi-page + menu      │
+  ├──────────────────────┼───────┼─────────────┼────────────────────────┤
+  │ rejuvenation-med-spa │ 8     │ 1700        │ Multi-page + booking   │
+  └──────────────────────┴───────┴─────────────┴────────────────────────┘
+  Templates (4)
+  ┌────────────────────┬───────┬───────────────────────────────┐
+  │      Template      │ Lines │         Deployed URL          │
+  ├────────────────────┼───────┼───────────────────────────────┤
+  │ tier1-essential    │ 664   │ tier1-essential.vercel.app    │
+  ├────────────────────┼───────┼───────────────────────────────┤
+  │ tier2-professional │ 1362  │ tier2-professional.vercel.app │
+  ├────────────────────┼───────┼───────────────────────────────┤
+  │ tier3-advanced     │ 1062  │ tier3-advanced.vercel.app     │
+  ├────────────────────┼───────┼───────────────────────────────┤
+  │ tier4-enterprise   │ 1290  │ tier4-enterprise.vercel.app   │
+  └────────────────────┴───────┴───────────────────────────────┘
+  ---
+  FEATURE ANALYSIS
+
+  By Feature Count
+  ┌───────────┬───────┬────────────────────────────────────────────────────┐
+  │  Feature  │ Sites │                    Top Examples                    │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Booking   │ 24    │ hideaway-saloon, fritz-salon, primary-express-care │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Gallery   │ 12    │ hideaway-saloon, blown-away-bar, halsey-flats      │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Auth      │ 11    │ hideaway-saloon, headliners, genesis-diamonds      │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Toast     │ 10    │ hideaway-saloon, cardinal-uniforms, highland-v2    │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Cart      │ 6     │ maira, sophias-rugs, shawarma-shack, highland-v2   │
+  ├───────────┼───────┼────────────────────────────────────────────────────┤
+  │ Dashboard │ 9     │ hideaway-saloon, headliners, portfolio-crm         │
+  └───────────┴───────┴────────────────────────────────────────────────────┘
+  Enterprise Feature Sites (Auth + Dashboard + Toast)
+
+  1. hideaway-saloon - 5569 lines - FULL ENTERPRISE
+  2. headliners-louisville - 1916 lines
+  3. dupont-pediatric-dentistry - 1284 lines
+  4. affinity-dental - 1045 lines
+  5. jbh-dental - 994 lines
+  6. highland-cleaners-tier4 - 1173 lines
+
+  ---
+  TECH STACK BREAKDOWN
+
+  Styling Framework
+  ┌───────────────────┬───────┬─────┐
+  │       Stack       │ Count │  %  │
+  ├───────────────────┼───────┼─────┤
+  │ Tailwind CSS      │ 42    │ 78% │
+  ├───────────────────┼───────┼─────┤
+  │ Styled-Components │ 9     │ 17% │
+  ├───────────────────┼───────┼─────┤
+  │ Plain CSS/JSX     │ 3     │ 5%  │
+  └───────────────────┴───────┴─────┘
+  Styled-Components Sites (9)
+
+  - camp-j
+  - chabad-of-kentucky
+  - kentuckiana-gastro
+  - louisville-nails-spa
+  - pilates-plus-louisville
+  - shawarma-shack
+  - tasteful-travels
+  - tonini-church-supply
+  - (headliners - uses inline styles)
+
+  TypeScript vs JavaScript
+  ┌───────────────────┬───────┐
+  │       Type        │ Count │
+  ├───────────────────┼───────┤
+  │ TypeScript (.tsx) │ 50    │
+  ├───────────────────┼───────┤
+  │ JavaScript (.jsx) │ 4     │
+  └───────────────────┴───────┘
+  JSX Sites: fableandflows, jr-spa-salon, louisville-aesthetics, playthings-toy-shoppe
+
+  ---
+  DEPLOYMENT STATUS
+
+  HTTP 200 (48 sites deployed)
+
+  All sites listed below return HTTP 200:
+
+  Client Demo Sites (44):
+  - fritz-salon, maira-mediterranean, jw-cafe-bakery, passtime-fish-house, nachbar
+  - rejuvenation-med-spa, cottage-cafe-eight, highland-cleaners-v2, highland-cleaners-tier1
+  - highland-cleaners-tier4, lawnco-louisville, tonini-church-supply, camp-j-lovat
+  - shawarma-shack, tasteful-travels, pilates-plus-louisville, kentuckiana-gastro
+  - louisville-nails-spa, chabad-of-kentucky, paint-spot-louisville, ky-family-lawyer
+  - louisville-aesthetics, jr-spa-salon, playthings-toy-shoppe, primary-express-care
+  - genesis-diamonds, headliners-louisville, hideaway-saloon, sophias-rugs
+  - halsey-flats, cardinal-uniforms, tom-drexler, schwartz-bankruptcy
+  - affinity-dental, blown-away-bar, springhurst-endo, north-lime-coffee
+  - auriga, forma, threshold, umbra, uofl-demo, clater-jewelers
+  - cleaning-by-regina, dermatology-associates-psc, dermcare-practitioners
+  - dgv-services, dupont-pediatric-dentistry, fableandflows, gray-family-dentistry
+  - jbh-dental, kuhn-allergy, louisville-family-chiro, mallard-crossing
+  - springs-stony-brook, vance-stovall-optometry
+
+  Templates (4):
+  tier1-essential, tier2-professional, tier3-advanced, tier4-enterprise
+
+  HTTP 404 (3 sites not deployed)
+
+  - ln-credit-union.vercel.app
+  - psyche-hub.vercel.app
+  - highland-cleaners-tier2.vercel.app
+
+  ---
+  STUB FILES (Incomplete Sites)
+  ┌───────────────────┬───────┬────────────────────────────────────┐
+  │       Site        │ Lines │               Issue                │
+  ├───────────────────┼───────┼────────────────────────────────────┤
+  │ ky-family-lawyer  │ 23    │ Router shell only, no actual pages │
+  ├───────────────────┼───────┼────────────────────────────────────┤
+  │ lawnco-louisville │ 23    │ Router shell only, no actual pages │
+  └───────────────────┴───────┴────────────────────────────────────┘
+  These are deployed but contain minimal code - likely placeholder deployments.
+
+  ---
+  OG IMAGE STATUS
+
+  Missing OG Images (8 sites)
+  ┌─────────────────────────┬───────┬──────────┐
+  │          Site           │ Lines │ Deployed │
+  ├─────────────────────────┼───────┼──────────┤
+  │ affinity-dental         │ 1045  │ YES      │
+  ├─────────────────────────┼───────┼──────────┤
+  │ call-prep               │ N/A   │ -        │
+  ├─────────────────────────┼───────┼──────────┤
+  │ chabad-of-kentucky      │ 2366  │ YES      │
+  ├─────────────────────────┼───────┼──────────┤
+  │ cleaning-by-regina      │ 568   │ YES      │
+  ├─────────────────────────┼───────┼──────────┤
+  │ highland-cleaners-tier2 │ 1436  │ NO       │
+  ├─────────────────────────┼───────┼──────────┤
+  │ louisville-nails-spa    │ 1576  │ YES      │
+  ├─────────────────────────┼───────┼──────────┤
+  │ north-lime-coffee       │ 879   │ YES      │
+  └─────────────────────────┴───────┴──────────┘
+  Large OG Images (>500K)
+  ┌─────────────────────────┬──────┐
+  │          Site           │ Size │
+  ├─────────────────────────┼──────┤
+  │ maira-mediterranean     │ 929K │
+  ├─────────────────────────┼──────┤
+  │ sophias-rugs            │ 867K │
+  ├─────────────────────────┼──────┤
+  │ springs-stony-brook     │ 709K │
+  ├─────────────────────────┼──────┤
+  │ psyche-hub              │ 643K │
+  ├─────────────────────────┼──────┤
+  │ springhurst-endo        │ 619K │
+  ├─────────────────────────┼──────┤
+  │ halsey-flats            │ 611K │
+  ├─────────────────────────┼──────┤
+  │ highland-cleaners-tier1 │ 585K │
+  ├─────────────────────────┼──────┤
+  │ highland-cleaners-tier4 │ 575K │
+  ├─────────────────────────┼──────┤
+  │ forma                   │ 565K │
+  ├─────────────────────────┼──────┤
+  │ threshold               │ 546K │
+  ├─────────────────────────┼──────┤
+  │ umbra                   │ 533K │
+  └─────────────────────────┴──────┘
+  ---
+  CODE VOLUME ANALYSIS
+
+  Largest Sites
+  ┌─────────────────────────┬───────┬───────────────────────────────────┐
+  │          Site           │ Lines │             Features              │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ hideaway-saloon         │ 5569  │ Auth, Booking, Gallery, Dashboard │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ portfolio-crm           │ 2458  │ Booking, Dashboard                │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ chabad-of-kentucky      │ 2366  │ Basic (community site)            │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ ln-credit-union         │ 2234  │ Toast                             │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ tasteful-travels        │ 2130  │ Cart, Toast                       │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ headliners-louisville   │ 1916  │ Auth, Gallery, Toast, Dashboard   │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ pilates-plus-louisville │ 1875  │ Booking                           │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ kentuckiana-gastro      │ 1643  │ Booking                           │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ shawarma-shack          │ 1579  │ Cart                              │
+  ├─────────────────────────┼───────┼───────────────────────────────────┤
+  │ louisville-nails-spa    │ 1576  │ Booking, Gallery                  │
+  └─────────────────────────┴───────┴───────────────────────────────────┘
+  Smallest Full Sites (>50 lines)
+  ┌────────────────────────────┬───────┬──────────┐
+  │            Site            │ Lines │ Features │
+  ├────────────────────────────┼───────┼──────────┤
+  │ dermatology-associates-psc │ 206   │ Booking  │
+  ├────────────────────────────┼───────┼──────────┤
+  │ dermcare-practitioners     │ 206   │ Basic    │
+  ├────────────────────────────┼───────┼──────────┤
+  │ gray-family-dentistry      │ 206   │ Booking  │
+  ├────────────────────────────┼───────┼──────────┤
+  │ louisville-family-chiro    │ 207   │ Booking  │
+  ├────────────────────────────┼───────┼──────────┤
+  │ psyche-hub                 │ 276   │ Basic    │
+  ├────────────────────────────┼───────┼──────────┤
+  │ vance-stovall-optometry    │ 329   │ Basic    │
+  ├────────────────────────────┼───────┼──────────┤
+  │ fableandflows              │ 335   │ Basic    │
+  ├────────────────────────────┼───────┼──────────┤
+  │ threshold                  │ 417   │ Booking  │
+  └────────────────────────────┴───────┴──────────┘
+  ---
+  ARCHITECTURE PATTERNS
+
+  Single-File Architecture (Most Sites)
+
+  - All code in App.tsx
+  - Average: 800-1500 lines
+  - No code splitting
+  - Easy to deploy, harder to maintain
+
+  Component Architecture (JobTrack Sites Only)
+
+  - Separate Header/Footer/Pages
+  - nachbar: 13 files, 3390 lines total
+  - More maintainable, mirrors real-world apps
+
+  ---
+  BUSINESS CATEGORIES
+  ┌─────────────────────────┬───────┬────────────────────────────────────────────────────────────────────────────────┐
+  │        Category         │ Count │                                    Examples                                    │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Healthcare/Medical      │ 14    │ kentuckiana-gastro, affinity-dental, dupont-pediatric, kuhn-allergy            │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Personal Services       │ 10    │ fritz-salon, louisville-nails-spa, highland-cleaners, cleaning-by-regina       │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Food & Beverage         │ 7     │ maira, shawarma-shack, nachbar, jw-cafe, north-lime-coffee                     │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Retail                  │ 5     │ genesis-diamonds, sophias-rugs, playthings, clater-jewelers, cardinal-uniforms │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Conceptual/Demo         │ 6     │ AURIGA, FORMA, PSYCHE, THRESHOLD, UMBRA, uofl-demo                             │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Real Estate             │ 3     │ halsey-flats, mallard-crossing, springs-stony-brook                            │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Professional Services   │ 3     │ ky-family-lawyer, schwartz-bankruptcy, dgv-services                            │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Entertainment/Lifestyle │ 4     │ headliners, hideaway-saloon, camp-j, pilates-plus                              │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Religious/Community     │ 2     │ chabad-of-kentucky, tonini-church-supply                                       │
+  ├─────────────────────────┼───────┼────────────────────────────────────────────────────────────────────────────────┤
+  │ Home Services           │ 2     │ lawnco, tom-drexler                                                            │
+  └─────────────────────────┴───────┴────────────────────────────────────────────────────────────────────────────────┘
+  ---
+  KEY FINDINGS
+
+  Issues Found
+
+  1. 2 Stub Files - ky-family-lawyer and lawnco-louisville are deployed but have only 23 lines (router shells with no content)
+  2. 3 Sites Not Deployed - ln-credit-union, psyche-hub, highland-cleaners-tier2 return 404
+  3. 8 Sites Missing OG Images - Including high-value sites like chabad-of-kentucky (2366 lines)
+  4. Inventory Mismatch - CLIENT_SITES_INVENTORY.md shows 22 deployed, actual is 48 deployed
+  5. JobTrack Sites Undervalued - nachbar has 3390 lines of real code, not a stub
+
+  Positive Findings
+
+  1. 48 of 51 testable sites return HTTP 200 (94% deployment rate)
+  2. hideaway-saloon is the most feature-complete at 5569 lines with all enterprise features
+  3. Good OG image coverage - 46 of 54 sites have OG images
+  4. Consistent tech stack - 78% use Tailwind, 93% use TypeScript
+
+  ---
+  RECOMMENDATIONS
+
+  Immediate Actions
+
+  1. Fix Stubs - Complete ky-family-lawyer and lawnco-louisville (both are deployed but empty)
+  2. Deploy Missing - ln-credit-union, psyche-hub, highland-cleaners-tier2
+  3. Add OG Images - affinity-dental, chabad-of-kentucky, cleaning-by-regina, louisville-nails-spa, north-lime-coffee
+  4. Update Inventory - CLIENT_SITES_INVENTORY.md is severely outdated (shows 22 deployed, actual is 48)
+
+  Architecture Recommendations
+
+  1. Migrate Styled-Components → Tailwind - 9 sites use different styling, creates maintenance burden
+  2. Extract JobTrack Pattern - nachbar's component architecture is cleaner than single-file sites
+  3. Compress Large OG Images - 11 sites have OG images >500K

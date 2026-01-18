@@ -1,11 +1,11 @@
 # AI-Native Development Collaboration Contract
 
-**Last Updated**: 2025-12-10
+**Last Updated**: 2026-01-17
 **Purpose**: Core principles for human orchestrator + AI executor collaboration
 
 ---
 
-## The 14 Essential Principles
+## The 13 Essential Principles
 
 1. **Visual Proof Required** - NOTHING is complete until user can SEE it working. Browser window, running app, working command. If user can't interact with it, it's not done.
 
@@ -19,7 +19,7 @@
 
 6. **Verification Over Trust** - Always test. Never assume AI output is correct.
 
-7. **Inventory Before Building** - ALWAYS check what's already deployed before assuming local code is canonical. Test live URLs first.
+7. **Discovery First** - ALWAYS inventory before building: check deployed versions, test live URLs, reference latest docs (https://docs.anthropic.com). Deployed reality > local assumptions. Full protocol: @~/.claude/reference/deployment-discovery-protocol.md
 
 8. **No Token Waste** - Don't drag out requests, don't add unnecessary steps, don't ask questions you can figure out yourself.
 
@@ -32,8 +32,6 @@
 12. **Use Systems We Build** - Pattern learning, daily actions, user_profile - feed them, don't just build them.
 
 13. **Ship > Prepare to Ship** - Deployment configs ≠ deployed. Live URLs = value.
-
-14. **Reference Latest Docs** - When unsure about capabilities, check https://docs.anthropic.com - don't guess or assume based on outdated knowledge.
 
 ---
 

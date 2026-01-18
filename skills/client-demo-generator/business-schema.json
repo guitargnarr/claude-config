@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Business Information Schema",
+  "description": "Required fields for generating a client demo site",
+  "type": "object",
+  "required": ["name", "phone", "services"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Business name as it should appear on the site",
+      "examples": ["Highland Cleaners", "JW Cafe & Bakery"]
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-safe identifier (auto-generated from name if not provided)",
+      "pattern": "^[a-z0-9-]+$",
+      "examples": ["highland-cleaners", "jw-cafe-bakery"]
+    },
+    "tagline": {
+      "type": "string",
+      "description": "Short compelling description",
+      "maxLength": 100,
+      "examples": ["Louisville's Premier Dry Cleaning Since 1968"]
+    },
+    "phone": {
+      "type": "string",
+      "description": "Primary contact phone",
+      "examples": ["(502) 454-4641"]
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Primary contact email"
+    },
+    "address": {
+      "type": "string",
+      "description": "Primary business address",
+      "examples": ["2457 Bardstown Road, Louisville, KY 40205"]
+    },
+    "hours": {
+      "type": "string",
+      "description": "Operating hours summary",
+      "examples": ["Mon-Fri: 7AM-6PM | Sat: 8AM-3PM"]
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Existing website URL (for reference)"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Business category for styling hints",
+      "enum": [
+        "restaurant",
+        "retail",
+        "professional-services",
+        "healthcare",
+        "beauty-wellness",
+        "home-services",
+        "automotive",
+        "fitness",
+        "education",
+        "other"
+      ]
+    },
+    "services": {
+      "type": "array",
+      "description": "List of services/products offered",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Service name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief service description"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price or price range",
+            "examples": ["$15.99", "Starting at $50"]
+          },
+          "icon": {
+            "type": "string",
+            "description": "Lucide icon name",
+            "examples": ["Shirt", "Scissors", "Truck"]
+          }
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "description": "Business locations (for multi-location businesses)",
+      "items": {
+        "type": "object",
+        "required": ["name", "address"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Location name",
+            "examples": ["Office & Plant", "Indian Hills"]
+          },
+          "address": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "hours": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "description": "Social media links",
+      "properties": {
+        "facebook": { "type": "string", "format": "uri" },
+        "instagram": { "type": "string", "format": "uri" },
+        "twitter": { "type": "string", "format": "uri" },
+        "linkedin": { "type": "string", "format": "uri" },
+        "youtube": { "type": "string", "format": "uri" },
+        "tiktok": { "type": "string", "format": "uri" }
+      }
+    },
+    "colors": {
+      "type": "object",
+      "description": "Brand colors (defaults to teal/orange if not provided)",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#14b8a6",
+          "description": "Primary brand color (hex)"
+        },
+        "secondary": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#f97316",
+          "description": "Secondary/accent color (hex)"
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "description": "Feature flags for tier selection",
+      "properties": {
+        "booking": {
+          "type": "boolean",
+          "default": false,
+          "description": "Needs appointment booking (requires Tier 2+)"
+        },
+        "ecommerce": {
+          "type": "boolean",
+          "default": false,
+          "description": "Needs shopping cart (requires Tier 3+)"
+        },
+        "auth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Needs user authentication (requires Tier 4)"
+        },
+        "multiPage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Needs multiple pages (requires Tier 2+)"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "description": "Extended content sections",
+      "properties": {
+        "about": {
+          "type": "string",
+          "description": "About section text"
+        },
+        "history": {
+          "type": "string",
+          "description": "Company history/story"
+        },
+        "mission": {
+          "type": "string",
+          "description": "Mission statement"
+        },
+        "testimonials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "quote": { "type": "string" },
+              "author": { "type": "string" },
+              "role": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+O
+ourjourney
+client-cms-api
+
+
+Search
+COMMAND+K
+
+New
+
+Upgrade
+
+
+Dashboard
+client-cms-api
+Events
+Settings
+MONITOR
+Logs
+Updated
+Metrics
+MANAGE
+Environment
+Shell
+Scaling
+Previews
+Disk
+Jobs
+
+Changelog
+Invite a friend
+
+Contact support
+Render Status
+WEB SERVICE
+client-cms-api
+Python 3
+Free
+Upgrade your instance
+Blueprint managed
+
+Connect
+
+Manual Deploy
+Service ID:
+srv-d5i7qi56ubrc738e9bj0
+
+guitargnarr / client-cms
+main
+https://client-cms-api.onrender.com
+
+Environment
+
+Create environment group
+Environment Variables
+Set environment-specific config and secrets (such as API keys), then read those values from your code. Learn more.
+
+Export
+
+Edit
+KEY    VALUE
+Key
+
+Value
+
+
+Key
+
+Value
+
+
+Key
+
+Value
+
+
+Key
+
+Value
+
+
+Key
+
+Value
+
+
+Key
+
+Value
+
+
+Secret Files
+Store plaintext files containing secret data (such as a .env file or a private key).
+Access during builds and at runtime from your app's root, or from /etc/secrets/<filename>.
+
+Add
+Linked Environment Groups
+Environment groups are collections of environment variables and secret files that you can share across multiple services.
+No environment groups available to link.
+New Environment Group
+0 services selected:
+
+Move
+
+Generate Blueprint
+
+Resume
+
+Suspend

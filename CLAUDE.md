@@ -26,13 +26,16 @@
 - Execute efficiently toward visual, working result
 - If missing critical knowledge that user needs, state it directly - don't assume they know
 
-### Ultrathink Protocol
-When user says "use ultrathink", you MUST:
-1. Create `ULTRATHINK_[TOPIC].md` file in project directory
-2. Write structured analysis with phases (50-200+ lines)
-3. Include: risk matrices, edge cases, decision trees, alternatives
-4. Save file BEFORE executing
-5. NOT just "think carefully" - that's normal execution
+### Ultrathink Protocol (v2 - Automatic)
+Triggers automatically when complexity thresholds met:
+- 5+ files affected
+- Architectural decisions with multiple valid approaches
+- Security-sensitive changes (auth, credentials, permissions)
+- Breaking changes to existing APIs/interfaces
+- Cross-project impact or data migrations
+
+**When triggered:** Create `ULTRATHINK_[TOPIC].md`, write structured analysis (50-200 lines), show key findings, then execute.
+**Manual trigger still works:** "use ultrathink"
 Reference: @~/.claude/reference/ultrathink-definition.md
 
 ### Standard Rules
@@ -41,6 +44,13 @@ Reference: @~/.claude/reference/ultrathink-definition.md
 - **Delete planning docs** after extracting action items (prevent bloat)
 - **Work mode:** Consulting and platform building (sustainable income model)
 - Never use emojis unless explicitly requested
+
+### Pre-Commit Quality (Jan 2026 - MANDATORY)
+**Do NOT commit code with unresolved linting/build errors.** Before any commit:
+- **TypeScript/JS:** `npm run build` must pass (no type errors)
+- **Python:** `flake8 [file]` must pass (no lint errors)
+- **Fix ALL issues before committing** - don't rush commits with known problems
+- Pattern recognition: anticipate fixes based on error patterns, don't wait for user feedback
 
 ## System Info
 - Python: 3.14 at `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3`
@@ -51,6 +61,8 @@ Reference: @~/.claude/reference/ultrathink-definition.md
   - Vite bakes env vars at BUILD time - `vercel env add` alone does NOTHING for Vite apps
 
 ## Critical Pitfalls
+- **Use pg8000 for Render Python APIs** - Use `pg8000` (pure Python) instead of `psycopg2-binary` to avoid Render build failures. Update SQLAlchemy URL to `postgresql+pg8000://` and configure SSL context manually.
+- **Render Blueprint doesn't remove env vars** - If you remove an env var from render.yaml, you must manually delete it from Render dashboard. Blueprint sync only adds/updates, never removes.
 - **Vite env vars must be in build** - Don't just add to Vercel dashboard and deploy. Use `VITE_X=value vercel build --prod` then `vercel deploy --prebuilt --prod --yes`
 - **Minimal vercel.json OK for Vite SPA routing** - Simple rewrites to `/index.html` are REQUIRED for React Router. Complex configs break auto-detect. Keep it minimal.
 - **NO Tailwind v4** (use v3) - Exception: Next.js projects can use v4
@@ -63,9 +75,90 @@ Reference: @~/.claude/reference/ultrathink-definition.md
   ```
   Then read the screenshot. Never conclude a React app is "blank" based on WebFetch alone.
 
+## Render + Neon + pg8000 Stack (Jan 2026)
+**Proven pattern for production Python APIs with free-tier database:**
+
+| Layer | Service | Notes |
+|-------|---------|-------|
+| Database | Neon PostgreSQL | Free tier, no 1-DB limit like Render. CLI: `neonctl projects create --name [name]` |
+| API | Render (Python) | Use pg8000 driver, NOT psycopg2-binary |
+| Frontend | Vercel | Standard Vite deploy |
+
+**requirements.txt:**
+```
+fastapi
+uvicorn
+sqlalchemy
+pg8000
+```
+
+**Database connection (main.py):**
+```python
+import ssl
+DATABASE_URL = os.getenv("DATABASE_URL", "")
+# Convert to pg8000 dialect
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+pg8000://", 1)
+# Strip sslmode (pg8000 handles SSL differently)
+DATABASE_URL = re.sub(r'[\?&]sslmode=[^&]*', '', DATABASE_URL)
+# Configure SSL for Neon
+ssl_context = ssl.create_default_context()
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
+engine = create_engine(DATABASE_URL, connect_args={"ssl_context": ssl_context})
+```
+
+**Reference implementation:** `~/Projects/client-sites/client-cms/api/main.py`
+
+## Client Site Development Protocol (Jan 2026)
+
+### Pre-Development (MANDATORY)
+1. **Research the business** - Client sites represent real businesses. Research:
+   - Business name, location, industry
+   - Services/products offered
+   - Target audience
+   - Competitors in area
+   - Unique value proposition
+2. **Verify Unsplash images before use** - Test with curl:
+   ```bash
+   curl -sI "https://images.unsplash.com/[PHOTO_ID]?w=100" | head -1
+   # Must return HTTP 200, NOT 404
+   ```
+3. **No asset reuse across client sites** - Each site gets unique images
+
+### Content Rules (PERMANENT)
+- **NO FABRICATED TESTIMONIALS** - Never create fake reviews/quotes. This is fabrication.
+- **NO FAKE RATINGS** - Don't invent star ratings or review counts
+- **REAL DATA ONLY** - If business data unavailable, omit section rather than fabricate
+
+### Post-Deployment Checklist
+1. **Generate OG Image** - Create social preview image for the site
+2. **Frontend Oracle Review** - Consult frontend-design skill for design quality check
+3. **Mobile Verification** - Run `mobile-verify.sh [URL]` to test responsiveness
+4. **Content Review** - Screenshot and visually verify all images are appropriate
+5. **Add to Portfolio** - Create card on projectlavos.com homepage
+6. **Update Projects Page** - Add entry to projectlavos.com/projects
+7. **Update CMS** - Add site to client-cms if using managed content
+
+### Image Verification Workflow
+```bash
+# Validate single image
+curl -sI "https://images.unsplash.com/photo-XXXXXXXXX?w=100" | head -1
+
+# Batch validate (check multiple)
+for id in photo-1234 photo-5678 photo-9012; do
+  status=$(curl -sI "https://images.unsplash.com/$id?w=100" | head -1)
+  echo "$id: $status"
+done
+```
+
+**Diversify year searches when sourcing images** - Don't always search current year. Vary 2020-2026 for best results.
+
+**TODO:** Automate steps 5-7 via client-cms extension - when site added to CMS, auto-generate portfolio card data and push to projectlavos.com. Reference: `~/Projects/client-sites/client-cms/`
+
 ## Private Data Protection
 **CRITICAL - Never read/edit without permission:**
-- `**/JOB_TRACKER*.csv`, `**/GMAIL_*.csv`, `**/APPLICATIONS*.csv`
+- `**/GMAIL_*.csv`, `**/APPLICATIONS*.csv`
 - `~/Desktop/1_PRIORITY_JOB_SEARCH/**` (historical data, archived)
 
 ## Communication Style
@@ -97,15 +190,31 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - `claude-status` - Check what needs attention
 - `claude-export [type]` - Generate documentation exports
 
+**Deployment & Verification:**
+- `claude-discover [URL]` - Deployment discovery automation
+- `claude-verify-urls` - Batch URL verification
+- `mobile-verify.sh [URL]` - Mobile screenshot verification
+- `mobile-verify-batch.sh [dir]` - Batch mobile verification
+
+**Parallel Development:**
+- `tmux-parallel.sh` - Launch 4-pane tmux session
+- `tmux-worktrees.sh` - Launch tmux with git worktrees
+- `launch_parallel.sh` - Legacy terminal launcher
+- `cleanup-worktrees.sh` - Remove merged worktrees
+- `worktree_manager.py` - Full worktree management
+- `parallel_metrics.py` - Track parallel run efficiency
+- `merge-parallel-prs.sh` - Batch merge PRs from parallel run
+
 **Core Documentation:**
 - **Collaboration:** @~/.claude/COLLABORATION_CONTRACT.md (how human + AI work together)
-- **Parallel Dev:** @~/.claude/reference/parallel-development-playbook.md (v4, 100% success rate)
+- **Parallel Dev:** @~/.claude/reference/parallel-development-playbook.md (v5.0, tmux integration, 88% PR success)
 - **Deployment Discovery:** @~/.claude/reference/deployment-discovery-protocol.md (prevent wrong codebase)
 
 ## Reference Documentation (Load on-demand via @)
 - **Task Prompts:** @~/.claude/reference/unified-task-prompt.md (single template + project inventory)
 - **Full Inventory:** @~/.claude/reference/deployment-inventory.md (all deployments, backends, domains)
 - **Workflows:** @~/.claude/reference/workflows.md (git, brand, deployment)
+- **Tier Templates:** @~/.claude/reference/tier-templates-reference.md (UI/UX patterns, client site development)
 - **Permissions:** @~/.claude/archive/PERMISSIONS_GUIDE.md
 - When opening websites for me verify what is displayed on screen
 
@@ -130,105 +239,28 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 | `/coach` | Career coaching |
 | `/tactic` | Hiring tactics |
 
-## Guitar Model Lab (Dec 10, 2025)
-**Project:** `~/Projects/guitar-model-lab/`
-**Goal:** Generate accurate tabs → auto-play in web dashboard
+## Project-Specific Context (Load on-demand)
+- **Guitar Model Lab:** `~/Projects/guitar-model-lab/CLAUDE_CONTEXT.md`
+- **Full Inventory:** @~/.claude/reference/deployment-inventory.md
 
-**LIVE STATUS (Dec 11, 2025):**
-- **API:** https://guitar-model-lab.onrender.com (FastAPI, free tier - spins down after 15min)
-- **Frontend:** https://guitar.projectlavos.com/riff-generator (GP5 button calls API)
-- **Flow:** Generate riff → Click GP5 → Downloads .gp5 file → Open in Guitar Pro
-
-**Key Files:**
-- `main.py` - FastAPI with `/generate-gp5`, `/generate-tab`, `/scales`, `/patterns`, `/tunings`
-- `guitar_theory.py` - Deterministic tab generation (12 scales, 4 tunings, 8 patterns)
-- `export_gp.py` - PyGuitarPro GP5 file generation
-
-**Lesson Learned:** Ollama/LLMs generate musically INCORRECT tabs (F# in E Phrygian). Use Python for deterministic note generation, AI only for style interpretation (`ai_style_interpreter.py`).
-
-**Quick Reference:**
-- Protocol: `~/Projects/guitar-model-lab/protocol.md`
-- Directive: `~/Projects/guitar-model-lab/SESSION_DIRECTIVE.md`
-- Cross-session: `~/.claude/reference/cross-session-context-protocol.md`
-
-**Cross-Session Communication:**
-1. Check other session: `tail -15 ~/.claude/projects/-Users-matthewscott/b1079d33*.jsonl | jq -r '.toolUseResult.command // .message.content[0:300]'`
-2. Issue directives via `SESSION_DIRECTIVE.md`
-3. Update `protocol.md` LIVE STATUS on each check
-4. **20 min limit** - if no 5 passes, propose solution
-5. Don't ask questions unless loop risk detected
-
-**End Goal:** `"give me a random riff"` → generates tab → opens dashboard → plays audio
-
-**Full ecosystem plan:** @~/.claude/plans/splendid-jumping-kahan.md
-
----
-## Complete Asset Inventory (Dec 18, 2025 - Full Audit Complete)
-**GRAND TOTAL: 222+ Assets - All Verified**
-**Audit Status: ALL 13 FRONTEND SITES + 3 BACKEND APIs PASS**
-
-| Category | Count | Coverage |
-|----------|-------|----------|
-| Code Projects | 56 | - |
-| - With GitHub Repo | 29 | 52% |
-| - With Visual Assets | 28 | 50% (654 files) |
-| Deployed URLs | 14 | 25% |
-| Vercel Projects | 20 | (was 26, deleted 6 orphans) |
-| Slash Commands | 25 | - |
-| Agents | 7 | - |
-| Scripts | 22 | - |
-| Reference Docs | 35 | - |
-| Ollama Models | 51 (38 custom) | - |
-| Active Plans | 12 | - |
-
+**Quick Stats:** 222+ assets | 86 code projects | 94 deployed URLs | 51 Ollama models
 **Brand:** Teal (#14b8a6) / Orange (#f97316)
-**Platforms:** Vercel (20 projects) | Render (3 APIs) | Railway (1 Postgres)
 
-### Deployed Projects (14 URLs - All HTTP 200)
-| Project | URL | Platform |
-|---------|-----|----------|
-| projectlavos-monorepo | projectlavos.com + subdomains | Vercel |
-| ai-talent-optimizer | jobs.projectlavos.com | Vercel + Render |
-| guitar-model-lab | guitar-model-lab.onrender.com | Render |
-| projectlavos-backend | projectlavos-backend.onrender.com | Render |
-| phishguard-ui | phishguard-ui.vercel.app | Vercel |
-| interactive-resume | interactive-resume-ten-pi.vercel.app | Vercel |
-| jobtrack | jobtrack-two.vercel.app | Vercel |
-| OurJourney | ourjourney-app.vercel.app | Vercel |
-| jaspermatters | jaspermatters-job-intelligence.vercel.app | Vercel |
-| mirador | vercel-demo-flame.vercel.app | Vercel |
-| ba-pathfinder | ba-pathfinder.vercel.app | Vercel |
-| 2025-skills | 2025-skills-to-know.vercel.app | Vercel |
-| apartment-demo | frontend-mu-dusky-38.vercel.app | Vercel |
-| phishguard-ml | (API deployable) | - |
+## Client Demo Sites (Jan 2026 Audit)
+**Total:** 60 sites | **Deployed:** 51 | **Location:** ~/Projects/client-sites/ + ~/Projects/jobtrack/client-sites/
+**Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
-### Key Slash Commands
-| Command | Ollama Model | Use |
-|---------|--------------|-----|
-| `/coach` | matthew-career-coach | Career Q&A |
-| `/louisville` | louisville-job-market | Local market intel |
-| `/tactic` | barrier-breaker | Hiring strategies |
-| `/code` | code-executor | Python generation |
-| `/analyze` | data-analyzer-qwen | Data analysis |
+| Metric | Value |
+|--------|-------|
+| Tech Stack | 78% Tailwind, 17% Styled-Components, 93% TypeScript |
+| Largest | hideaway-saloon (5569 lines - Auth, Booking, Gallery, Dashboard) |
+| Architecture | Single-file (48 sites) vs Component-based (6 JobTrack sites) |
+| Features | 24 Booking, 12 Gallery, 11 Auth, 10 Toast, 6 Cart |
 
-### Custom Ollama Models (38 of 51)
-**Guitar:** guitar_expert_precise, guitar_tone_architect, master_guitar_instructor
-**Career:** louisville-job-market, local_market_expert, barrier-breaker
-**Financial:** financial_planning_expert_v6, financial_calculator
-**Code:** code-executor, elite-frontend, data-analyzer-qwen, quick-advisor-phi
-**Mirador:** mirador_self_reflection_guardian, cross_model_synthesizer
+**Remaining issues:**
+- 2 missing OG images (most added Jan 12)
 
-### Problems Solved by Theme
-1. **Portfolio/Career**: Job search (ai-talent-optimizer), resume gen (texume), market intel (jaspermatters)
-2. **Guitar/Music**: Learning (fretforge), GP5 export (guitar-model-lab), fretboard viz (fret-vision)
-3. **AI/Automation**: Model orchestration (mirador), meta-cognition (cross_model_synthesizer)
-4. **Security**: Phishing detection (phishguard-ml/ui), credential scanning (security-auditor)
-5. **Dev Productivity**: Parallel dev (playbook), deployment discovery, git automation
-6. **Personal**: Coparenting (OurJourney), financial planning
-
-**Monetization:** guitar.projectlavos.com/pricing (Stripe ready)
-
-**Next Deployments (25%→40%):** fret-vision, prompt-fact, texume, phishguard-ml
+**JobTrack sites use better architecture** - nachbar has 13 files, 3390 lines. Use as reference for new sites.
 
 ---
 ## LATEST GOVERNANCE UPDATE (Nov 23, 2025)

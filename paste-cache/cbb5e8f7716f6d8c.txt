@@ -1,0 +1,132 @@
+Supabase
+guitargnar's Org
+FREE
+
+portfolio-crm
+
+main
+PRODUCTION
+
+
+Connect
+Feedback
+
+Search...
+K
+
+
+
+
+
+
+SQL Editor
+Search queries
+
+
+SHARED
+
+FAVORITES
+
+PRIVATE (37)
+
+COMMUNITY
+
+View running queries
+
+
+Portfolio CRM Schema
+
+Bulk Import Demo Client Leads
+
+Portfolio CRM Outreach & Activity Tracking Update
+
+Clients & Activities Indexing with Tier Backfill
+
+Staggered Lead Follow-Ups
+
+Client Tier Assignment by Category
+
+Bulk Update Client Phone Numbers
+
+Update client contact names and hours
+
+Bulk client contact and hours update
+
+Add hours column to clients
+
+Bulk update client contact names and operating hours
+
+Client Pricing Tier Updates
+
+Client revenue summary
+
+Top Paying Lead Clients
+
+Top Lead Clients by Revenue
+
+Website Tiering & Pricing Migration
+
+Add website tier to clients
+
+Client Website Tier Assignments
+
+Website Tier Pricing and Revenue Breakdown
+
+Total Pipeline Value and Site Count
+
+Clients with Monthly Rate 149
+
+Upgrade clients from $149 to Tier 1
+
+Client Notes Outreach Templates
+
+Replace placeholder user_id in clients
+
+Client contact and billing list
+
+Deduplicate clients by highest monthly rate
+
+Deduplicate clients by business (keep highest rate)
+
+Merge Outreach phone numbers into CRM
+
+Bulk client phone updates
+
+Clients by Tier and Name
+
+Update client contact names by business
+
+Clients with Incomplete Contact Information
+
+Clients Ordered by Tier and Name
+
+Update client site URLs
+
+Untitled query
+
+2122232425262728293031323334
+  UPDATE clients SET site_url = 'https://headliners-louisville.vercel.app' WHERE business_name LIKE '%Headliners%';  UPDATE clients SET site_url = 'https://hideaway-saloon.vercel.app' WHERE business_name LIKE '%Hideaway%';  UPDATE clients SET site_url = 'https://jr-spa-salon.vercel.app' WHERE business_name LIKE '%JR Spa%';  UPDATE clients SET site_url = 'https://louisville-family-chiro.vercel.app' WHERE business_name LIKE '%Louisville Family Chiro%';  UPDATE clients SET site_url = 'https://primary-express-care.vercel.app' WHERE business_name LIKE '%Primary Express%';  UPDATE clients SET site_url = 'https://sophias-rugs.vercel.app' WHERE business_name LIKE '%Sophia%Rug%';  UPDATE clients SET site_url = 'https://springhurst-endo.vercel.app' WHERE business_name LIKE '%Springhurst%';  UPDATE clients SET site_url = 'https://vance-stovall-optometry.vercel.app' WHERE business_name LIKE '%Vance%Stovall%';  UPDATE clients SET site_url = 'https://cottage-cafe-eight.vercel.app' WHERE business_name LIKE '%Cottage%';  UPDATE clients SET site_url = 'https://nachbar.vercel.app' WHERE business_name = 'Nachbar';  UPDATE clients SET site_url = 'https://passtime-fish-house.vercel.app' WHERE business_name LIKE '%PassTime%';  UPDATE clients SET site_url = 'https://jw-cafe-bakery.vercel.app' WHERE business_name LIKE '%JW Cafe%';  UPDATE clients SET site_url = 'https://rejuvenation-med-spa.vercel.app' WHERE business_name LIKE '%Rejuvenation%';
+
+Results
+
+Explain
+
+Chart
+
+Export
+
+
+
+
+Source
+
+Primary Database
+
+Role
+postgres
+
+Run
+Success. No rows returned
+
+0 row
+portfolio-crm | guitargnar's Org | Supabase
