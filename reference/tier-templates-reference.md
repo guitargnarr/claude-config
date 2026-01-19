@@ -12,8 +12,10 @@
 | Section | Line | Description |
 |---------|------|-------------|
 | [Lighthouse Scores](#lighthouse-scores) | 30 | Performance metrics for all tiers |
-| [Template URLs](#template-urls) | 50 | Live URLs and local paths |
-| [Tech Stack](#tech-stack-all-templates) | 62 | Vite, React, Tailwind, Framer Motion |
+| [Content Rules](#content-rules-critical---jan-2026) | 53 | No fabricated testimonials |
+| [Portfolio Presentation](#portfolio-presentation-jan-2026) | 75 | Device mockups for projectlavos.com |
+| [Template URLs](#template-urls) | 100 | Live URLs and local paths |
+| [Tech Stack](#tech-stack-all-templates) | 112 | Vite, React, Tailwind, Framer Motion |
 | **Tier Templates** | | |
 | [Tier 1: Essential](#tier-1-essential-landing-page) | 73 | Single-page, scroll nav, contact form |
 | [Tier 2: Professional](#tier-2-professional-multi-page--booking) | 122 | Multi-page, booking wizard, gallery |
@@ -71,6 +73,100 @@
 - Verify every Unsplash image returns HTTP 200 before use
 - No reusing images across different client sites
 - Diversify year searches (2020-2026) for variety
+
+---
+
+## Portfolio Presentation (Jan 2026)
+
+**Standard operating procedure for representing client sites on projectlavos.com portfolio.**
+
+### Screenshot Requirements
+
+| Viewport | Dimensions | Device | Use Case |
+|----------|------------|--------|----------|
+| Desktop | 1920x1080 | - | Full layout verification |
+| Mobile | 390x844 | iPhone 14 | Mobile responsiveness |
+| Tablet | 820x1180 | iPad | Tablet layouts |
+
+**Capture ALL pages** - Not just homepage. Include: Home, About, Services, Contact, Shop, etc.
+
+### Device Mockup Workflow
+
+1. **Capture raw screenshots** (Playwright)
+   ```bash
+   npx playwright screenshot --viewport-size="390,844" --wait-for-timeout=5000 "URL" mobile.png
+   ```
+
+2. **Generate device frames** using local scripts (RECOMMENDED):
+   ```bash
+   cd ~/.claude/scripts && npm install canvas qrcode  # One-time
+   node create-client-assets.js <site-name> ./mobile.png --colors "#hex1,#hex2"
+   ```
+   Generates: iPhone mockup (430x880), OG image (1200x630), QR code, favicons
+
+   **Or use online tools:**
+   - [MockUPhone](https://mockuphone.com) - 80+ devices, free
+   - [DeviceMockup.app](https://devicemockup.app) - 219+ devices, local processing
+
+3. **Recommended device frames:**
+   - Mobile: iPhone 14 Pro (matches local script output)
+   - Tablet: iPad Pro 12.9" or iPad Air
+   - Desktop: MacBook Pro 16" (optional)
+
+4. **Store mockups** in project assets or portfolio directory
+
+**Full workflow documentation:** @~/.claude/reference/device-mockup-workflow.md
+**Proven with:** copper-barrel-brewing (Jan 2026)
+
+### CSS Device Frame Component
+
+```tsx
+// Minimal iPhone frame - Tailwind only
+function iPhoneFrame({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative w-64 h-[520px] bg-slate-900 rounded-[2.5rem] p-2.5 shadow-2xl">
+      {/* Notch/Dynamic Island */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-10" />
+      {/* Screen */}
+      <div className="rounded-[2rem] overflow-hidden h-full">
+        <img src={src} alt={alt} className="w-full h-full object-cover object-top" loading="lazy" />
+      </div>
+    </div>
+  );
+}
+```
+
+### Hover Effects for Portfolio Cards
+
+```tsx
+// 3D tilt on hover with Framer Motion
+<motion.div
+  whileHover={{ y: -8, rotateX: 5, rotateY: -5 }}
+  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+  style={{ perspective: 1000 }}
+>
+  {/* Card content with device mockup */}
+</motion.div>
+```
+
+### Portfolio Card Requirements
+
+| Element | Source |
+|---------|--------|
+| Primary image | iPhone mockup of homepage |
+| Hover image | Desktop screenshot (optional) |
+| Site name | Business name |
+| Description | Industry + key features |
+| CTA | "View Site" link |
+
+### Quality Checklist Before Portfolio Addition
+
+- [ ] All pages captured at 3 viewports
+- [ ] Screenshots reviewed for content issues
+- [ ] iPhone mockup generated from mobile screenshot
+- [ ] No broken images or placeholder text
+- [ ] Site loads within 3 seconds
+- [ ] Mobile navigation functional
 
 ---
 
