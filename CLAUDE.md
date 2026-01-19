@@ -132,13 +132,63 @@ engine = create_engine(DATABASE_URL, connect_args={"ssl_context": ssl_context})
 - **REAL DATA ONLY** - If business data unavailable, omit section rather than fabricate
 
 ### Post-Deployment Checklist
-1. **Generate OG Image** - Create social preview image for the site
-2. **Frontend Oracle Review** - Consult frontend-design skill for design quality check
-3. **Mobile Verification** - Run `mobile-verify.sh [URL]` to test responsiveness
-4. **Content Review** - Screenshot and visually verify all images are appropriate
-5. **Add to Portfolio** - Create card on projectlavos.com homepage
-6. **Update Projects Page** - Add entry to projectlavos.com/projects
-7. **Update CMS** - Add site to client-cms if using managed content
+1. **Capture Mobile Screenshot** - Get iPhone 14 viewport (390x844):
+   ```bash
+   npx playwright screenshot --viewport-size="390,844" --wait-for-timeout=5000 "URL" mobile.png
+   ```
+2. **Generate All Assets** - Use the all-in-one asset generator:
+   ```bash
+   cd ~/.claude/scripts && npm install canvas qrcode  # One-time setup
+   node create-client-assets.js <site-name> <mobile-screenshot> [options]
+
+   # Example with custom colors:
+   node create-client-assets.js copper-barrel-brewing ./mobile.png \
+     --colors "#b45309,#78350f" \
+     --title "Copper Barrel" \
+     --subtitle "Brewing Co."
+   ```
+   **Generates:** iPhone mockup (430x880), OG image (1200x630), QR code (370x370), favicons (16, 32, 180)
+
+3. **Copy Assets to Destinations:**
+   ```bash
+   # Client site (favicons, og-image)
+   cp output/favicon-*.png output/apple-touch-icon.png ~/Projects/client-sites/<site>/public/
+   cp output/<site>-og.png ~/Projects/client-sites/<site>/public/og-image.png
+
+   # Portfolio (preview, og-image, qr)
+   cp output/<site>-preview.png ~/Projects/projectlavos-monorepo/main-site/public/previews/
+   cp output/<site>-og.png ~/Projects/projectlavos-monorepo/main-site/public/og-images/
+   cp output/<site>-qr.png ~/Projects/projectlavos-monorepo/main-site/public/qr-codes/
+   ```
+4. **Update Client Site HTML** - Add meta tags to index.html:
+   - `<link rel="icon" type="image/png" href="/favicon.png" />`
+   - `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`
+   - `<meta property="og:image" content="https://<site>.vercel.app/og-image.png" />`
+5. **Add to Portfolio** - Add entry to localClients array in App.jsx:
+   ```javascript
+   {
+     id: "siteid",
+     title: "Business Name",
+     url: "https://<site>.vercel.app",
+     preview: "/previews/<site>.png",
+     ogImage: "/og-images/<site>-og.png",
+     qrCode: "/qr-codes/<site>-qr.png",
+     description: "Short description",
+     category: "Category",
+     specWork: true,
+     details: "Detailed description..."
+   }
+   ```
+6. **Deploy Both Sites:**
+   ```bash
+   cd ~/Projects/client-sites/<site> && vercel --prod --yes
+   cd ~/Projects/projectlavos-monorepo/main-site && vercel --prod --yes
+   ```
+7. **Visual Verification** - Verify both deployments with Playwright
+8. **Frontend Oracle Review** - Consult frontend-design skill for design quality check (optional)
+
+**Full workflow reference:** @~/.claude/reference/device-mockup-workflow.md
+**Proven with:** copper-barrel-brewing (Jan 2026)
 
 ### Image Verification Workflow
 ```bash
@@ -189,6 +239,11 @@ For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
 - `claude-verify` - Verify toolkit works
 - `claude-status` - Check what needs attention
 - `claude-export [type]` - Generate documentation exports
+
+**Client Site Asset Generation (Jan 2026):**
+- `~/.claude/scripts/create-client-assets.js` - All-in-one generator (iPhone mockup, OG image, QR code, favicons)
+- `~/.claude/scripts/create-iphone-mockup.js` - Standalone iPhone frame generator
+- **Requirements:** `npm install canvas qrcode` in scripts directory
 
 **Deployment & Verification:**
 - `claude-discover [URL]` - Deployment discovery automation
