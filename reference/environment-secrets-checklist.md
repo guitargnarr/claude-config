@@ -57,7 +57,7 @@ engine = create_engine(url, connect_args={"ssl_context": ssl_ctx})
 | Shell env vars override .env (pydantic-settings) | `unset DATABASE_URL` before starting server |
 | Multiple uvicorn instances cause memory issues | `pkill -f uvicorn`, run only one |
 | .env syntax errors break all loading | One `VAR=value` per line, no spaces around `=` |
-| Gmail vars conflict with .env | `unset GMAIL_CREDENTIALS_FILE GMAIL_TOKEN_FILE GMAIL_SCOPES` |
+| Gmail app password | macOS Keychain only: `security find-generic-password -s "gmail-app-password" -a "matthewdscott7@gmail.com" -w` |
 
 ---
 
@@ -66,7 +66,8 @@ engine = create_engine(url, connect_args={"ssl_context": ssl_ctx})
 - `.env`, `**/.env` - credentials
 - `**/credentials.json`, `client_secret_*.json` - OAuth
 - `**/.ssh/id_*`, `**/.aws/credentials` - system keys
-- `**/GMAIL_*.csv`, `**/APPLICATIONS*.csv`, `**/JOB_TRACKER*.csv` - personal data
+- `**/APPLICATIONS*.csv`, `**/JOB_TRACKER*.csv` - personal data
+- Gmail app password lives in macOS Keychain only -- never in `.env`, never in code, never committed
 
 ---
 

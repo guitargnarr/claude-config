@@ -150,7 +150,14 @@ When adding client sites to the portfolio at `projectlavos-monorepo/main-site/sr
 
 ## Private Data Protection
 **CRITICAL - Never read/edit without permission:** `**/APPLICATIONS*.csv`, `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
-- **Gmail access:** IMAP with app password (inline scripts, not a separate project). Never commit app passwords.
+
+### Gmail IMAP (Portable -- Any Project)
+When deliverable traceability requires verifying what was sent to a client, use Gmail IMAP to search the Sent folder. This is not a project -- it's a portable capability available from any working directory.
+- **Credential:** macOS Keychain (`security find-generic-password -s "gmail-app-password" -a "matthewdscott7@gmail.com" -w`)
+- **Never** hardcode, commit, log, or write the app password to any file. Retrieve it at runtime from Keychain only.
+- **Use case:** Cross-referencing delivered assets against email attachments when file discovery via CLI is insufficient
+- **Protocol:** `imaplib.IMAP4_SSL('imap.gmail.com')` with `[Gmail]/Sent Mail` folder search
+- **Email:** matthewdscott7@gmail.com
 
 ## Communication Style
 - Direct, technical, honest. Code examples > long explanations. Facts > speculation.
