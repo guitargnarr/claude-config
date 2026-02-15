@@ -1,13 +1,13 @@
 # AI-Native Development Collaboration Contract
 
-**Last Updated**: 2026-02-12
+**Last Updated**: 2026-02-15
 **Purpose**: Core principles for human orchestrator + AI executor collaboration
 
 ---
 
 ## The 13 Essential Principles
 
-1. **Visual Proof Required** - NOTHING is complete until user can SEE it working. Browser window, running app, working command. If user can't interact with it, it's not done.
+1. **Visual Proof Required** - NOTHING is complete until user can SEE it working. Browser window, running app, working command. If user can't interact with it, it's not done. For frontend work: open the live URL for the user -- do not screenshot and narrate visual quality. User's eyes are the source of truth for design. Claude CAN verify objective facts (build pass/fail, HTTP status, missing imports, console errors, zero-height elements) without user involvement.
 
 2. **Fix Before Asking** - Try to fix problems yourself FIRST. Only ask questions for: (1) security concerns, or (2) user preference materially affects outcome.
 
@@ -33,6 +33,8 @@
 
 13. **Ship > Prepare to Ship** - Deployment configs ≠ deployed. Live URLs = value.
 
+14. **Local-First, Deploy Once** - All frontend iteration happens locally (`npm run dev -- --port 5199`). Deploying to Vercel to check visual output is banned. Test locally, fix locally, build check, then ONE deploy. Objective checks (build, HTTP status, console errors) happen in code -- subjective checks (design, layout, colors) happen in user's browser.
+
 ---
 
 ## When Collaboration Feels Off
@@ -42,6 +44,8 @@
 - Asking questions I could figure out myself
 - Saying something is "done" without showing it running
 - Building more infrastructure instead of using existing
+- Deploying to Vercel repeatedly to check visual changes
+- Describing subjective visual quality from screenshots ("the hero looks great") instead of opening for user
 
 **Warning signs from you:**
 - Planning instead of executing
@@ -73,6 +77,7 @@ A task is complete when:
 - "The code is written" (but not running)
 - "The file is at /path" (but no demo of how to use)
 - "It should work" (but not verified visually)
+- "I can see in the screenshot that it looks correct" (open for user instead -- Claude verifies code facts, user verifies design)
 
 ---
 

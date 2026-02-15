@@ -1,8 +1,8 @@
 # Deployment Inventory
 
-**Last Updated:** 2026-02-09
-**Total:** 88 code projects | 67 client demo sites (63 deployed) | 51 Ollama models
-**Platforms:** 55 Vercel apps | 8 Render APIs | 3 custom domains | 13 projectlavos.com subdomains
+**Last Updated:** 2026-02-15
+**Total:** 43 GitHub repos | 69 client demo sites (69 deployed) | 51 Ollama models
+**Platforms:** 110 Vercel projects | 12 Render APIs | 3 custom domains | 14 projectlavos.com subdomains
 **Canonical site count:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
 ---
@@ -17,7 +17,7 @@
 
 ---
 
-## projectlavos.com Subdomains (13) - ALL VERIFIED
+## projectlavos.com Subdomains (14) - ALL VERIFIED
 
 | Subdomain | Local Path | Description | Status |
 |-----------|------------|-------------|--------|
@@ -35,6 +35,7 @@
 | resume. | ~/Projects/interactive-resume | Interactive resume | 200 |
 | prompts. | ~/Desktop/Manus/prompt-fact | Prompt factory | 200 |
 | orchestrator. | ~/Projects/projectlavos-monorepo/services/orchestrator | AI workflow builder | 200 |
+| crm. | ~/Projects/projectlavos-monorepo/main-site (CRM dashboard) | CRM Dashboard | 200 |
 
 ---
 
@@ -83,7 +84,7 @@
 
 ---
 
-## Client Demo Sites (63+ deployed)
+## Client Demo Sites (69 deployed)
 
 All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 **Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
@@ -102,7 +103,7 @@ All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 
 **Real Estate (3):** halsey-flats, mallard-crossing, springs-stony-brook
 
-**Professional Services (6):** dgv-services, ky-family-lawyer, morgan-pottinger-mcgarvey, pillar-financial-advisors, schwartz-bankruptcy, ln-credit-union
+**Professional Services (5):** dgv-services, ky-family-lawyer, morgan-pottinger-mcgarvey, pillar-financial-advisors, schwartz-bankruptcy
 
 **Conceptual/Demo (6):** auriga, forma, psyche-hub, threshold, umbra, uofl-demo
 
@@ -116,18 +117,22 @@ All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 
 ---
 
-## Render APIs (8)
+## Render APIs (12)
 
-| URL | Local Path | Key Endpoints |
-|-----|------------|---------------|
-| guitar-model-lab.onrender.com | ~/Projects/guitar-model-lab | /generate-gp5, /scales, /patterns |
-| projectlavos-backend.onrender.com | ~/Projects/projectlavos-backend | /api/sentiment, /api/leads |
-| ai-talent-optimizer.onrender.com | ~/Projects/ai-talent-optimizer | /stats, /jobs |
-| mirador-xva2.onrender.com | ~/Projects/Security-Tools/mirador-test | /api/personas, /api/chains |
-| ourjourney-api.onrender.com | ~/Projects/Personal/personal-journey | /api/health, /api/ideas |
-| client-cms-api.onrender.com | ~/Projects/client-sites/client-cms/api | /health, /api/sites, /api/auth/login |
-| job-search-automation-18u9.onrender.com | ~/Projects/job-search-automation/backend | /api/v1/jobs, /api/v1/applications, /api/v1/ats |
-| outreach-api-miha.onrender.com | ~/Projects/outreach-api | /health, /businesses, /metrics, /auth/login |
+| URL | Local Path | Key Endpoints | Status |
+|-----|------------|---------------|--------|
+| guitar-model-lab.onrender.com | ~/Projects/guitar-model-lab | /generate-gp5, /scales, /patterns | Active |
+| projectlavos-backend.onrender.com | ~/Projects/projectlavos-backend | /api/sentiment, /api/leads | Active |
+| ai-talent-optimizer.onrender.com | ~/Projects/ai-talent-optimizer | /stats, /jobs | Active |
+| mirador-xva2.onrender.com | ~/Projects/Security-Tools/mirador-test | /api/personas, /api/chains | Active |
+| ourjourney-api.onrender.com | ~/Projects/Personal/personal-journey | /api/health, /api/ideas | Active |
+| client-cms-api.onrender.com | ~/Projects/client-sites/client-cms/api | /health, /api/sites, /api/auth/login | Active |
+| job-search-automation-18u9.onrender.com | ~/Projects/job-search-automation/backend | /api/v1/jobs, /api/v1/applications, /api/v1/ats | Active |
+| outreach-api-miha.onrender.com | ~/Projects/outreach-api | /health, /businesses, /metrics, /auth/login | Active |
+| texume-api.onrender.com | ~/Projects/texume | API | Active |
+| systems-architect-console.onrender.com | - | Console | Active |
+| jaspermatters-api.onrender.com | ~/Projects/Career-Business/jaspermatters-job-intelligence | API | Suspended |
+| jobtracker-backend.onrender.com | ~/Projects/job-search-automation/backend | API | Suspended |
 
 **Note:** Free tier spins down after 15min (~30sec cold start)
 
@@ -194,6 +199,7 @@ phishguard.projectlavos.com   → ~/Projects/phishguard-ui (redirect)
 ba-pathfinder.projectlavos.com → ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder
 prompts.projectlavos.com      → ~/Desktop/Manus/prompt-fact
 orchestrator.projectlavos.com → ~/Projects/projectlavos-monorepo/services/orchestrator
+crm.projectlavos.com          → ~/Projects/projectlavos-monorepo/main-site (CRM dashboard)
 ```
 
 **By Render API → local path:**
@@ -206,6 +212,10 @@ ourjourney-api.onrender.com   → ~/Projects/Personal/personal-journey
 client-cms-api.onrender.com   → ~/Projects/client-sites/client-cms/api
 job-search-automation-18u9.onrender.com → ~/Projects/job-search-automation/backend
 outreach-api-miha.onrender.com → ~/Projects/outreach-api
+texume-api.onrender.com       → ~/Projects/texume
+systems-architect-console.onrender.com → (no local path)
+jaspermatters-api.onrender.com → ~/Projects/Career-Business/jaspermatters-job-intelligence (suspended)
+jobtracker-backend.onrender.com → ~/Projects/job-search-automation/backend (suspended)
 ```
 
 **Deploy commands:** See @~/.claude/reference/workflows.md
@@ -233,6 +243,15 @@ outreach-api-miha.onrender.com → ~/Projects/outreach-api
 
 ---
 
+## Vercel Pro Optimization (Feb 2026)
+
+- **Analytics:** @vercel/analytics enabled on all 67 client sites + 5 monorepo subdomains + main-site. @vercel/speed-insights on 10 priority client sites + main-site.
+- **Edge Proxy:** projectlavos.com proxies Render APIs via Vercel rewrites (`/api/outreach/`, `/api/backend/`, `/api/cms/`). Eliminates cold start latency for users. Cache: `s-maxage=60, stale-while-revalidate=300`.
+- **Image Optimization:** OptImage component + vercel.json `images.domains` in all 4 tier templates. Incremental rollout to existing sites (convert when site is touched for any reason).
+- **main-site deploy command simplified:** No longer needs `VITE_OUTREACH_API_URL` env var -- CRM uses edge proxy (`/api/outreach/`) in production, localhost in dev.
+
+---
+
 ## Maintenance Notes
 
 - **Auto-Deploy (GitHub):** phishguard-ui, interactive-resume, jobtrack, ba-pathfinder, jaspermatters-job-intelligence
@@ -246,4 +265,4 @@ outreach-api-miha.onrender.com → ~/Projects/outreach-api
 
 ---
 
-**Last Updated:** February 1, 2026 (jobtrack subdomain now points to Jobway/job-search-automation)
+**Last Updated:** February 15, 2026 (reconciled with Vercel CLI, Render CLI audit; ln-credit-union removed [404])

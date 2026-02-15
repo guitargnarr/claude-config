@@ -1,0 +1,9 @@
+{
+  "id": "18",
+  "subject": "Bridge Part I to Part II tone transition",
+  "description": "Add a transitional element at the end of Part I (after Red Thread section) or the start of Part II (the Diagnostic Overview intro) that explicitly signals the register shift from catalog to forensic audit. The current jump is abrupt. Add a brief bridge callout or modify the existing \"From Inventory to Decision Engine\" box to acknowledge the intentional shift.",
+  "activeForm": "Bridging Part I/II tone gap",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

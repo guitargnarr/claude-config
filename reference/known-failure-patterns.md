@@ -1,7 +1,7 @@
 # Known Failure Patterns
 
 **Updated:** February 5, 2026
-**Source:** Documented from real session failures across 88 projects
+**Source:** Documented from real session failures across 43 GitHub repos
 
 ---
 

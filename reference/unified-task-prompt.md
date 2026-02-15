@@ -5,10 +5,10 @@
 
 ---
 
-## PROJECT INVENTORY (Feb 9, 2026 - Synced with deployment-inventory.md)
+## PROJECT INVENTORY (Feb 15, 2026 - Synced with deployment-inventory.md)
 
-**Total:** 88 Code Projects | 67 Client Demo Sites (63 deployed) | 51 Ollama Models
-**Platforms:** 55 Vercel apps | 8 Render APIs | 3 custom domains | 13 projectlavos.com subdomains
+**Total:** 43 GitHub Repos | 69 Client Demo Sites (69 deployed) | 51 Ollama Models
+**Platforms:** 110 Vercel projects | 12 Render APIs | 3 custom domains | 14 projectlavos.com subdomains
 **Canonical site count:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
 ### Tier 1 - Core Portfolio (Deployed, Branded)
@@ -39,7 +39,7 @@
 | prompt-fact | ~/Desktop/Manus/prompt-fact | Streamlit prompt gen |
 | mirador-variant | ~/Desktop/Manus/mirador-one-of-many | 65+ model variant |
 
-### Subdomains (13 on projectlavos.com) - ALL VERIFIED HTTP 200
+### Subdomains (14 on projectlavos.com) - ALL VERIFIED HTTP 200
 | Subdomain | Local Path | Description |
 |-----------|------------|-------------|
 | projectlavos.com | ~/Projects/projectlavos-monorepo/main-site | Portfolio hub |
@@ -55,8 +55,9 @@
 | resume. | ~/Projects/interactive-resume | Interactive resume |
 | prompts. | ~/Desktop/Manus/prompt-fact | Prompt factory |
 | orchestrator. | ~/Projects/projectlavos-monorepo/services/orchestrator | AI workflow builder |
+| crm. | ~/Projects/projectlavos-monorepo/main-site (CRM dashboard) | CRM Dashboard |
 
-### Backend Services (8 Active on Render)
+### Backend Services (12 on Render, 8 Active)
 | Service | URL | Key Endpoints |
 |---------|-----|---------------|
 | guitar-model-lab | guitar-model-lab.onrender.com | /generate-gp5, /scales, /patterns |
@@ -67,10 +68,14 @@
 | client-cms-api | client-cms-api.onrender.com | /health, /api/sites, /api/auth/login |
 | job-search-automation | job-search-automation-18u9.onrender.com | /api/v1/jobs, /api/v1/applications, /api/v1/ats |
 | outreach-api | outreach-api-miha.onrender.com | /health, /businesses, /metrics, /auth/login |
+| texume-api | texume-api.onrender.com | API |
+| systems-architect-console | systems-architect-console.onrender.com | Console |
+| jaspermatters-api | jaspermatters-api.onrender.com | API (Suspended) |
+| jobtracker-backend | jobtracker-backend.onrender.com | API (Suspended) |
 
 **Note:** Free tier spins down after 15min (~30sec cold start)
 
-### Client Demo Sites (51 deployed)
+### Client Demo Sites (69 deployed)
 **Location:** ~/Projects/client-sites/ + ~/Projects/jobtrack/client-sites/
 **Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
@@ -82,7 +87,7 @@
 | Retail | 8 | genesis-diamonds, playthings-toy-shoppe, tasteful-travels |
 | Entertainment | 4 | headliners-louisville, hideaway-saloon (LARGEST - 5569 lines) |
 | Real Estate | 3 | halsey-flats, mallard-crossing, springs-stony-brook |
-| Professional Services | 4 | ky-family-lawyer, schwartz-bankruptcy, ln-credit-union |
+| Professional Services | 5 | ky-family-lawyer, schwartz-bankruptcy, dgv-services, morgan-pottinger-mcgarvey, pillar-financial-advisors |
 | Conceptual/Demo | 6 | auriga, forma, psyche-hub, threshold |
 
 ### Tier Templates (5 UI/UX References)
@@ -251,7 +256,7 @@ End with this summary:
 
 ### By Local Path → URL
 ```
-~/Projects/projectlavos-monorepo     → projectlavos.com + 12 subdomains
+~/Projects/projectlavos-monorepo     → projectlavos.com + 13 subdomains
 ~/Projects/ai-talent-optimizer       → jobs.projectlavos.com + ai-talent-optimizer.onrender.com
 ~/Projects/guitar-model-lab          → guitar-model-lab.onrender.com
 ~/Projects/phishguard-ui             → phishguard.projectlavos.com + phishguard-ui.vercel.app
@@ -343,6 +348,7 @@ jaspermatters.com                    → ~/Projects/Career-Business/jaspermatter
 
 ## Changelog
 
+- v3.5 (Feb 15, 2026): **Audit reconciliation** - Synced with Vercel CLI (110 projects), Render CLI (12 services), removed ln-credit-union (404), updated client sites 69 deployed, added crm subdomain, added 4 missing Render services
 - v3.4 (Feb 2, 2026): **Outreach CRM** - Added outreach-api (Render), updated totals (96 URLs, 87 projects, 8 Render APIs)
 - v3.3 (Feb 1, 2026): **Jobway update** - jobtrack subdomain now points to job-search-automation (Jobway), added Render backend, updated all lookup tables
 - v3.2 (Jan 17, 2026): **Inventory sync** - Updated totals (96 URLs, 86 projects), added 8 missing subdomains, 3 missing Render APIs, 51 client demo sites, tier templates section, expanded Quick Lookup tables

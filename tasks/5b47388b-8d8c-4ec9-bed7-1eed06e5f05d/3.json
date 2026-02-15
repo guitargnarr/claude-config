@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Build, verify locally with Playwright, deploy to Vercel",
+  "description": "npm run build, run local dev, Playwright screenshots at 5 scroll positions, deploy, verify live",
+  "activeForm": "Building and verifying deployment",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

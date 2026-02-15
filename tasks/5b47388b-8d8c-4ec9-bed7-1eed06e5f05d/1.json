@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Crop artwork and save to public/ashley-stoic.png",
+  "description": "Use Python PIL to crop tablet bezels/UI chrome from the screenshot, save clean artwork to medittoica public dir",
+  "activeForm": "Cropping artwork image",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

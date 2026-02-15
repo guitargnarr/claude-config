@@ -1,0 +1,9 @@
+{
+  "id": "19",
+  "subject": "Add resolution status field to INVESTIGATE sessions",
+  "description": "Add a \"RESOLUTION\" field to each INVESTIGATE callout box showing current status (PENDING, CONFIRMED, RESOLVED) and a placeholder for what was found when the session is actually opened. This makes the document a living decision tracker rather than a one-time report. Add to both the template and the data module.",
+  "activeForm": "Adding resolution tracking to INVESTIGATE sessions",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

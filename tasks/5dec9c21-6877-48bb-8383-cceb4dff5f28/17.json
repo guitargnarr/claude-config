@@ -1,0 +1,9 @@
+{
+  "id": "17",
+  "subject": "Two-tier scorecard: full detail A/B, condensed C/D/F",
+  "description": "Split the composition scorecard table into two tiers: A/B grades get full row with assessment text, C/D/F grades get a condensed compact table (no assessment column, just grade/name/score/tracks/audio/status). This cuts ~1 page while keeping all 50 entries visible.",
+  "activeForm": "Restructuring scorecard into two tiers",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

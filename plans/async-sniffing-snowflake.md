@@ -1,213 +1,130 @@
-# Metal Riff Demo -- Full Song Expansion Plan
+# Algorithmic Variation System for technique_song.py
 
 ## Context
-The 24-bar demo (44s at 130 BPM) has two complete riff sections with layered instrument entry, JR-style sparse rhythm guitar, and a proven motif/theory engine. The analysis showed dual-peak intensity, balanced riff proportions, and correct harmony intervals. Time to expand to a full 3:04 metal song (100 bars) with verse/pre-chorus/bridge/solo/breakdown/outro sections -- using every TabGenerator method we haven't touched yet.
+The key-agnostic harmony engine is COMPLETE (verified across 12 roots x 10 scale types = 120 combinations, all valid). Now: when exercise bars repeat within a section, they're note-for-note identical. Verse 1 bar 3 = verse 1 bar 0. The song needs to evolve -- repeated sections should sound composed, not looped.
 
-## Target: 100 bars = 3:04 at 130 BPM
+## File: `/Users/matthewscott/Scripts/python/technique_song.py`
+## Read-only: `/Users/matthewscott/Projects/guitar-model-lab/guitar_theory.py`
 
-```
-Section              Bars  Range    Time   Cumulative
-------------------------------------------------------
-Intro (Riff 1)       10    0-9      0:18   0:18
-Break 1               2    10-11    0:04   0:22
-Verse 1               8    12-19    0:15   0:37
-Pre-Chorus             4    20-23    0:07   0:44
-Chorus 1 (Riff 2)    10    24-33    0:18   1:02
-Transition             2    34-35    0:04   1:06
-Verse 2                8    36-43    0:15   1:21
-Pre-Chorus 2           4    44-47    0:07   1:28
-Chorus 2 (Riff 1)    10    48-57    0:18   1:47
-Bridge                 8    58-65    0:15   2:02
-Solo                   8    66-73    0:15   2:16
-Final Chorus (Riff 2) 10   74-83    0:18   2:35
-Breakdown              8    84-91    0:15   2:50
-Outro                  6    92-97    0:11   3:01
-End                    2    98-99    0:04   3:04
-```
+---
 
-Triple-peak dynamic arc: Peak 1 (bar 9 intro climax) < Peak 2 (bar 73 solo climax) < Peak 3 (bar 87 breakdown unison)
+## Approach: Pure transform functions on bar_data
 
-## File: `/Users/matthewscott/Scripts/python/metal_riff_demo.py`
+Transform functions take `bar_data` (list of 16 `(gp_string, fret)` tuples) and return a new list of the same shape. Composable via pipeline. Original exercise arrays are never mutated. All transforms are deterministic.
 
-## What Stays Unchanged
-- `build_riff1()` -- reused at bars 0-9 (intro) and 48-57 (chorus 2)
-- `build_riff2()` -- reused at bars 24-33 (chorus 1) and 74-83 (final chorus)
-- All GP5 plumbing (`mksong`, `mkhdrs`, `mkguitar`, `mkbass`, `mkdrums`)
-- All note helpers (`note`, `anote`, `anotes`, `bnote`, `notes2`, `rest`, `drum`, `emit_col`)
-- Motif system (`_note_pool`, `motif_from_indices`, `sequence_motif`, `harmonize_3rd`)
-
-## What Gets Extracted to Module Level
-Currently nested inside `build_riff1()` -- need to be accessible by multiple sections:
-- `_power_chord(fret)` -> module-level function
-- `_E5` -> module-level constant (after `_power_chord` is extracted)
-- `_burst_cell(voice, vel)` -> module-level, takes `e5_chord` param
-- `_motif_root_fret(motif)` -> module-level
-
-These stay nested (section-specific): `_chug_bar`, `_legato_bar`, `_drums_standard`, `_drums_ride`, `_bass_pedal`, `_rhythm_bar`, `_rest_bar` (each section defines its own version)
-
-## 7 New Section Builders
-
-### 1. `build_verse(gt_track, bt_track, dt_track, bars_offset, rt_track, ht_track)`
-**8 bars. Pulled-back, atmospheric, bass-forward.**
-
-Layer entry:
-- Bars 1-2: Bass + drums only (half-time: kick=[1,11], snare=[9], hho=[1,5,9,13])
-- Bars 3-4: +Lead with `generate_pedal_tone('E','minor', position=2)` -- quarter notes, let_ring
-- Bars 5-6: +Rhythm with `sad_progression` power chords (C5-A5-E5-B5) as half notes
-- Bars 7-8: +Harmony with natural harmonics fret 12
-
-Bass motif: `motif_from_indices(pool, [0, 6, 3, 7], art=['pick','hammer','pick','hammer'], pm=[True,F,F,F])` -- quarter notes
-
-Tools used: `generate_pedal_tone()`, `generate_chord_progression('E','minor','sad_progression',chord_type='5')`
-
-### 2. `build_prechorus(gt_track, ..., variation=False)`
-**4 bars. Tension build toward chorus.**
-
-Layer entry:
-- Bars 1-2: Lead `generate_ascending_run()` (or `descending_run` if variation=True), drums switch to standard
-- Bars 3-4: +Rhythm with `_rhythm_bar()` stab events, +bass 8th pedal, drums add double kicks
-
-Tools used: `generate_ascending_run()`, `generate_descending_run()`, `generate_3nps_run()` (bars 3-4 fast fragments)
-
-### 3. `build_verse2(gt_track, ...)`
-**8 bars. Verse variation -- legato lead, developed bass, ghost snare drums.**
-
-Differences from verse 1:
-- Lead: `generate_legato_run('E','minor', position=2)` instead of pedal_tone
-- Bass: shifted motif via `sequence_motif()` with `[0, 3, 5, 3]`
-- Drums: half-time + ghost snares at pos 6, 14
-- Harmony enters bar 3 (earlier than verse 1 bar 5)
-
-Tools used: `generate_legato_run()`
-
-### 4. `build_bridge(gt_track, ...)`
-**8 bars. Pivot section -- tapping intro, subtractive-then-additive layers.**
-
-Layer entry (unusual -- subtract then rebuild):
-- Bars 1-2: Lead ONLY with `generate_tapping_pattern()` pos 1. Shock of emptiness.
-- Bars 3-4: +Bass melodic figure + drums (tribal pattern: toms, no hats/snare)
-- Bars 5-6: +Rhythm with i-bVII-bVI-V (E5-D5-C5-B5 manually: `_power_chord(0,10,8,7)`). Lead switches to pedal_tone with pinch harmonics.
-- Bars 7-8: Full band climax. Lead `generate_3nps_run()` 32nds. Drums double-bass. Rhythm `_rhythm_bar` dense bursts.
-
-**bVII bug workaround**: `get_progression_chords('E','minor','metal_riff')` returns D# (wrong). Build manually: `_power_chord(0)` E5, `_power_chord(10)` D5, `_power_chord(8)` C5, `_power_chord(7)` B5.
-
-Tools used: `generate_tapping_pattern()`, `generate_pedal_tone()`, `generate_3nps_run()`
-
-### 5. `build_solo(gt_track, ...)`
-**8 bars. Lead showcase with structured arc over stable rhythm bed.**
-
-All instruments play throughout (lead varies):
-- Bars 1-2: Melodic motif statement, pool pos 2, 8th notes. Custom motif with vibrato.
-- Bars 3-4: `generate_legato_run()` pos 2, 16th notes
-- Bars 5-6: `generate_sweep_arpeggio()` pos 2, 32nd notes
-- Bars 7-8: `generate_3nps_run()` descending then ascending. Final note: bend + vibrato.
-
-Backing: rhythm plays sad_progression half-note chords, bass pedals roots, drums ride -> double-bass. Harmony RESTS (solo = single voice).
-
-Tools used: `generate_legato_run()`, `generate_sweep_arpeggio()`, `generate_3nps_run()`
-
-### 6. `build_breakdown(gt_track, ...)`
-**8 bars. Heaviest moment. Unison stabs then instruments strip away.**
-
-Anti-layering (everything in, then exits):
-- Bars 1-4: ALL instruments play identical syncopated E5 stab pattern. Half-time drums with china. No melody.
-- Bars 5-6: Lead breaks away with slow expressive figure (bends, pinch harmonics). Others continue stabs.
-- Bars 7-8: Instruments drop out one by one. Bar 8 = lead alone playing motif_a from Riff 1 (callback).
-
-### 7. `build_outro(gt_track, ...)`
-**6 bars. Riff 1 callback, rebuilds from nothing to final statement.**
-
-Layer entry (mirrors intro):
-- Bars 1-2: Lead alone with Riff 1 motif_a, quarter notes, vel 75-80
-- Bars 3-4: +Drums (kick/hat) + bass (root E whole notes)
-- Bars 5-6: Full band, one complete Riff 1 motif pass at 16ths, crash, final E5
-
-## Updated `build()` Function
-
+### New constant
 ```python
-def build():
-    TEMPO = 130
-    song = mksong('Metal Riff Demo', TEMPO)
-
-    mkhdrs(song, 10, marker='Intro - Riff 1')        # 0-9
-    mkhdrs(song, 2,  marker='Break')                  # 10-11
-    mkhdrs(song, 8,  marker='Verse 1')                # 12-19
-    mkhdrs(song, 4,  marker='Pre-Chorus')             # 20-23
-    mkhdrs(song, 10, marker='Chorus 1 - Melodic')     # 24-33
-    mkhdrs(song, 2,  marker='Transition')             # 34-35
-    mkhdrs(song, 8,  marker='Verse 2')                # 36-43
-    mkhdrs(song, 4,  marker='Pre-Chorus 2')           # 44-47
-    mkhdrs(song, 10, marker='Chorus 2 - Chug')        # 48-57
-    mkhdrs(song, 8,  marker='Bridge')                 # 58-65
-    mkhdrs(song, 8,  marker='Solo')                   # 66-73
-    mkhdrs(song, 10, marker='Final Chorus')           # 74-83
-    mkhdrs(song, 8,  marker='Breakdown')              # 84-91
-    mkhdrs(song, 6,  marker='Outro')                  # 92-97
-    mkhdrs(song, 2,  marker='End')                    # 98-99
-
-    gt = mkguitar(song, 'Guitar', 29)
-    rt = mkguitar(song, 'Rhythm Gtr', 30)
-    ht = mkguitar(song, 'Harmony Gtr', 27)
-    bt = mkbass(song, 'Bass', 33)
-    dt = mkdrums(song)
-
-    build_riff1(gt, bt, dt, 0, rt, ht)           # Intro
-    # Break 1 inline (bars 10-11)
-    build_verse(gt, bt, dt, 12, rt, ht)
-    build_prechorus(gt, bt, dt, 20, rt, ht)
-    build_riff2(gt, bt, dt, 24, rt, ht)          # Chorus 1
-    # Transition inline (bars 34-35)
-    build_verse2(gt, bt, dt, 36, rt, ht)
-    build_prechorus(gt, bt, dt, 44, rt, ht, variation=True)
-    build_riff1(gt, bt, dt, 48, rt, ht)          # Chorus 2
-    build_bridge(gt, bt, dt, 58, rt, ht)
-    build_solo(gt, bt, dt, 66, rt, ht)
-    build_riff2(gt, bt, dt, 74, rt, ht)          # Final Chorus
-    build_breakdown(gt, bt, dt, 84, rt, ht)
-    build_outro(gt, bt, dt, 92, rt, ht)
-    # End inline (bars 98-99)
+REST_NOTE = (-1, -1)  # sentinel for "rest this note"
 ```
 
-## TabGenerator Method Usage (all 8 unused methods now deployed)
+### New transform functions (7 total, ~120 lines)
+Insert after `_rest_bar()`, before section builders.
 
-| Method | Section | Purpose |
-|--------|---------|---------|
-| `generate_pedal_tone()` | Verse 1, Bridge | Atmospheric lead, root+melody alternation |
-| `generate_ascending_run()` | Pre-Chorus | Tension build, climbing energy |
-| `generate_descending_run()` | Pre-Chorus 2 | Variation: dip before climb |
-| `generate_3nps_run()` | Pre-Chorus, Bridge, Solo | Maximum speed shred passages |
-| `generate_legato_run()` | Verse 2, Solo | Smooth connected melodic lines |
-| `generate_tapping_pattern()` | Bridge | Texture shock, two-hand technique |
-| `generate_chord_progression()` | Verse 1/2, Solo | sad_progression rhythm bed |
-| `generate_random_pattern()` | (reserve for fills if needed) | Playable variation |
+1. **`var_rotate(bar_data, shift, art_list=None)`** -- Rotate 16-note pattern by N positions. shift=1 pushes everything one sixteenth late (syncopated feel). Returns (data, art).
 
-## Drum Pattern Reference (from drum_theory.py)
+2. **`var_sparsify(bar_data, keep_mask, art_list=None)`** -- Replace positions where mask is False with REST_NOTE. Returns (data, art).
 
-| Pattern | Kick | Snare | Cymbals | Use In |
-|---------|------|-------|---------|--------|
-| half_time | 1,11 | 9 | hho quarters | Verse 1/2 |
-| tribal | 1,5,9,13 | 9 | tlo: 3,7,11,15 | Bridge bars 3-4 |
-| groove_metal | 1,4,9,12 | 5,13 | hhc 8ths | Breakdown |
-| (existing standard) | 1,9 + 5,13 kicks | 5,13 | hhc 16ths | Chorus, Pre-Chorus |
-| (existing ride) | 1,9 + 5,13 kicks | 5,13 | ride 16ths | Solo, Melodic |
+3. **`var_octave_displace(bar_data, positions, direction=1)`** -- Shift notes at given indices +/-12 frets. Clamp to 0-24, leave unchanged if out of range. Returns data only.
 
-## Implementation Order
+4. **`var_retrograde(bar_data, art_list=None)`** -- Reverse the 16-note sequence. Returns (data, art).
 
-1. Extract `_power_chord`, `_E5`, `_burst_cell`, `_motif_root_fret` to module level
-2. Update `build()` with 100-bar layout, inline breaks, all build_* calls
-3. `build_verse()` -- simplest new section, validates bass-forward design
-4. `build_prechorus()` -- ascending run build, tests variation flag
-5. `build_verse2()` -- verse variant with legato
-6. `build_bridge()` -- most complex (tapping, manual chords, layer subtraction)
-7. `build_solo()` -- lead showcase, multiple generator methods
-8. `build_breakdown()` -- unison stabs, strip-away
-9. `build_outro()` -- Riff 1 callback
-10. Run `build()`, open in Guitar Pro, verify all 100 bars
-11. Run `analyze_metal_riff.py` (update section map for 100 bars) to validate
+5. **`var_velocity_contour(n_notes, contour, base_vel)`** -- Return list of 16 velocity ints. Contours: 'crescendo', 'decrescendo', 'accent_1_3', 'accent_2_4', 'swell'. Returns vel list (not a data transform).
+
+6. **`var_diatonic_shift(bar_data, degree_shift)`** -- Shift all notes by N scale degrees using `_KEY.scale_notes`. Chromatic fallback: `round(degree_shift * 12/7)` semitones. Octave-wraps if out of 0-24 range. Returns data only.
+
+7. **`var_note_swap(bar_data, swap_pairs)`** -- Swap selected pairs of note positions. Returns data only.
+
+### Predefined masks (~8 lines)
+```python
+MASK_DOWNBEATS  = [i % 4 == 0 for i in range(16)]   # 4 notes
+MASK_ODDS       = [i % 2 == 0 for i in range(16)]   # 8 notes
+MASK_DROP_4TH   = [i % 4 != 3 for i in range(16)]   # 12 notes
+MASK_FIRST_HALF = [i < 8 for i in range(16)]         # first 8
+MASK_LAST_HALF  = [i >= 8 for i in range(16)]        # last 8
+MASK_BOOKENDS   = [i < 4 or i >= 12 for i in range(16)]  # beats 1+4
+```
+
+### New emission function (~25 lines)
+**`_emit_exercise_bar_varied(voice, bar_data, dur=16, vel=VEL_F, art_list=None, vel_contour=None)`**
+- Handles REST_NOTE entries (emits 16th rest)
+- Handles per-note velocity via vel_contour list
+- Replicates cross-string legato fix from existing `_emit_exercise_bar`
+- Always emits exactly 16 events at dur=16 -> 960 ticks guaranteed
+
+### Pipeline helper (~20 lines)
+**`apply_variations(bar_data, transforms, art_list=None)`**
+- Takes list of `(transform_fn, kwargs)` tuples
+- Chains them, routing art_list through transforms that support it
+- Returns `(transformed_data, transformed_art)`
+
+### Updated harmony helper
+**`_diatonic_3rd_bar`** needs to handle REST_NOTE -- when it encounters (-1, -1), emit a rest instead of computing a harmony note. ~3 lines added.
+
+---
+
+## Section-by-Section Variation Plan
+
+### Principle: First hearing = original, repeats = varied, escalating through song
+
+| Section | Bars | Variation Level | Strategy |
+|---------|------|----------------|----------|
+| Intro | 0-3 | 0 (none) | First hearing, half speed already |
+| Verse 1 | 4-11 | 1 (subtle) | Bars 0-2 original, bars 3-7 get velocity contour + note swaps + rotation |
+| Pre-Chorus | 12-15 | 0 | First hearing |
+| Chorus 1 | 16-23 | 1 (subtle) | Bars 0-2 original, bars 3-7 get accents + octave displacement + diatonic shift on final bar |
+| Break | 24-25 | 0 | Static chord ring |
+| Verse 2 | 26-33 | 2 (moderate) | Bars 0-3 original, bars 4-7 get rotation + sparsify + retrograde + octave displacement |
+| Pre-Chorus 2 | 34-37 | 2 | Already reversed order; add octave displacement + velocity swell + sparsify |
+| Chorus 2 | 38-45 | 2 (moderate) | ALT bars get diatonic shifts; ECON bars get retrograde + octave displacement |
+| Bridge | 46-49 | 1 | Bars 0-1 atmospheric (no change), bars 2-3 get rotation + crescendo |
+| Solo | 50-57 | 3 (dramatic) | Octave displacement on pent bars, velocity swells + retrograde + diatonic shift on sweep bars |
+| Final Chorus | 58-65 | 3 (dramatic) | All 5 exercises varied: retrograde, diatonic shift, rotation + octave, crescendo/decrescendo |
+| Outro | 66-71 | 2 | Progressive sparsification: DROP_4TH -> ODDS -> DOWNBEATS (mirrors instrument dropout) |
+
+### Detailed per-bar transforms (example: build_verse)
+```
+bar 0: LEGATO_EX2[0] -- original
+bar 1: LEGATO_EX2[1] -- original
+bar 2: LEGATO_EX2[2] -- original
+bar 3: LEGATO_EX2[0] + velocity_contour('crescendo')
+bar 4: LEGATO_EX2[1] + note_swap([(1,2), (5,6)])
+bar 5: LEGATO_EX2[2] + velocity_contour('accent_2_4')
+bar 6: LEGATO_EX2[0] + rotate(2) + velocity_contour('swell')
+bar 7: LEGATO_EX2[1] + sparsify(MASK_DROP_4TH)
+```
+Similar tables for all 10 builders, defined as dict lookups inside each function.
+
+---
+
+## Implementation Sequence
+
+1. Add REST_NOTE, masks, 7 transform functions, pipeline helper (~170 lines, after `_rest_bar`)
+2. Add `_emit_exercise_bar_varied` (~25 lines, after `_emit_exercise_bar_half_speed`)
+3. Update `_diatonic_3rd_bar` to handle REST_NOTE (~3 lines)
+4. Modify section builders one at a time (verse -> chorus -> verse2 -> prechorus -> chorus2 -> bridge -> solo -> final_chorus -> outro)
+5. Each builder: add variation dict, swap `_emit_exercise_bar` calls to `_emit_exercise_bar_varied` for bars that have transforms, pass transformed data to `_diatonic_3rd_bar`
+6. Run and validate after each builder
+
+## What does NOT change
+- Exercise data arrays (never mutated)
+- Drum patterns (already vary per section)
+- Bass patterns (already chord-aware via CHORD_MAP)
+- Rhythm guitar patterns (already chord-aware)
+- Intro (first hearing, no variation needed)
+- Break (static chord ring)
+- GP5 plumbing, build() signature, key engine
+
+## Bar Duration Safety
+Every transform preserves exactly 16 entries. `_emit_exercise_bar_varied` emits exactly 16 sixteenth-note events (notes or rests). 16 * 60 ticks = 960 ticks = valid 4/4 bar. `validate_bar_durations()` catches violations.
+
+## Estimated scope
+- ~255 new lines (transforms + emission + masks + pipeline)
+- ~60 modified lines (variation dicts + call swaps in 10 builders)
+- ~315 total lines of change
 
 ## Verification
-1. `python3 metal_riff_demo.py` -- must output GP5 with 5 tracks, 100 bars, ~4000-6000 notes
-2. Open in Guitar Pro -- all bars populated, markers visible, playback smooth
-3. Update `analyze_metal_riff.py` SECTIONS constant for new structure, re-run analysis
-4. Dynamic arc should show triple-peak pattern with valleys at verses
-5. Commit to `/Users/matthewscott/Scripts` repo
+1. `build()` with Am default -- zero duration errors, 3522+ notes
+2. `build(root='E', scale_type='minor')` -- zero errors, valid GP5
+3. Open in Guitar Pro -- repeated bars should sound different from first occurrence
+4. Compare note count: should be slightly lower than 3522 (sparsification drops some notes)
+5. Spot-check: verse bar 6 should sound like a rotated/swelled version of bar 0

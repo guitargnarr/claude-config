@@ -2,7 +2,7 @@
 
 **Purpose:** Everything a new operator needs to run Matthew's Claude Code Dev OS
 **Audience:** Someone taking over this system with no prior context
-**System scale:** 88 projects, 67 client demo sites (63 deployed), 51 Ollama models, 42 tools (27 commands + 8 skills + 7 agents)
+**System scale:** 43 GitHub repos, 69 client demo sites (69 deployed), 51 Ollama models, 42 tools (27 commands + 8 skills + 7 agents)
 
 ---
 
@@ -516,4 +516,4 @@ git revert HEAD
 
 ---
 
-**This system was built over 4 months of daily use (Oct 2025 - Feb 2026). It operates 88 projects with 67 client demo sites, documented workflows, automated pipelines, and proven patterns. The rules exist because mistakes were made and lessons were learned. Follow them.**
+**This system was built over 4 months of daily use (Oct 2025 - Feb 2026). It operates 43 GitHub repos with 69 client demo sites, documented workflows, automated pipelines, and proven patterns. The rules exist because mistakes were made and lessons were learned. Follow them.**

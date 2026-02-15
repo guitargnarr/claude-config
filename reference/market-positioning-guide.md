@@ -27,7 +27,7 @@
 | 1 Essential | $1,500 | Service businesses needing basic web presence | cleaning-by-regina, kuhn-allergy, clater-jewelers, vance-stovall-optometry | 1-2 days |
 | 2 Professional | $3,000 | Appointment-based businesses (most common) | fritz-salon, primary-express-care, blown-away-bar, springhurst-endo, tom-drexler | 2-4 days |
 | 3 Advanced | $5,000 | Product sellers, restaurants with menus/ordering | genesis-diamonds, shawarma-shack, sophias-rugs, nachbar, jw-cafe-bakery | 3-5 days |
-| 4 Enterprise | $8,000+ | Businesses needing login, dashboards, admin tools | hideaway-saloon, headliners-louisville, cardinal-uniforms, ln-credit-union | 5-10 days |
+| 4 Enterprise | $8,000+ | Businesses needing login, dashboards, admin tools | hideaway-saloon, headliners-louisville, cardinal-uniforms, crestborne-private-office | 5-10 days |
 
 **Portfolio breakdown by likely tier:**
 - Tier 1 candidates: 12 sites (basic single-page, no booking/cart)

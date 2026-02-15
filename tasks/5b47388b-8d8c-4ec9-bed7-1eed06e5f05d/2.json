@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Implement image sampling, morph logic, camera, shaders, and attribution in App.tsx",
+  "description": "Add smoothstepFn, image sampling on mount, morph blend in animate loop, camera morph behavior, uMorph shader uniform, attribution section DOM",
+  "activeForm": "Implementing particle portrait morph system",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

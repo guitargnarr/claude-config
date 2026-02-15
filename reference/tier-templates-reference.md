@@ -150,6 +150,8 @@
 - **Scroll Detection:** react-intersection-observer
 - **Icons:** Lucide React
 - **Routing:** React Router (Tier 2+)
+- **Analytics:** @vercel/analytics (all sites) + @vercel/speed-insights (priority sites) -- included by default since Feb 2026
+- **Image Optimization:** OptImage component (`src/components/OptImage.tsx`) + vercel.json `images.domains` config -- converts Unsplash URLs to `/_vercel/image` endpoint (Vercel Pro)
 
 ---
 
@@ -964,4 +966,4 @@ No two client sites should look the same below the hero. Differentiate across 4 
 
 ---
 
-**Last Updated:** February 9, 2026
+**Last Updated:** February 15, 2026

@@ -63,10 +63,10 @@ Live systems, env vars, and deployment verification.
 
 | File | Lines | Updated | Purpose |
 |------|-------|---------|---------|
-| `deployment-inventory.md` | 242 | Feb 9, 2026 | 88 projects, 67 client sites (63 deployed), 8 Render APIs, 51 Ollama models |
+| `deployment-inventory.md` | 242 | Feb 15, 2026 | 43 GitHub repos, 69 client sites (69 deployed), 12 Render APIs, 51 Ollama models |
 | `deployment-discovery-protocol.md` | 409 | Jan 17, 2026 | OurJourney lesson: always inventory deployments before building |
 | `environment-secrets-checklist.md` | 92 | Feb 5, 2026 | Vercel/Render/Railway env var gotchas, Vite build-time baking |
-| `known-failure-patterns.md` | 69 | Feb 5, 2026 | Top 5 session-killing failures across 88 projects |
+| `known-failure-patterns.md` | 69 | Feb 5, 2026 | Top 5 session-killing failures across 43 GitHub repos |
 
 ---
 

@@ -90,24 +90,34 @@ git push origin main
 
 ## Deployment
 
-### Vercel (Frontend) - 8-13 seconds
+### Vercel (Frontend) - Deploy ONCE, Not Per Iteration
 
 ```bash
-# Test Before Deploy (ALWAYS)
-npm run build && npm run preview
+# 1. Iterate locally (repeat until correct)
+npm run dev -- --port 5199 &
+sleep 3
+playwright screenshot --wait-for-timeout=5000 "http://localhost:5199" local-verify.png
+# Fix issues, re-screenshot, repeat
 
-# NO env vars needed
+# 2. Build check (must pass before deploy)
+npm run build
+
+# 3. Deploy ONCE
 vercel --prod --yes
 
 # WITH env vars (Vite bakes at build time)
-# CRITICAL: Don't waste time with vercel env add then regular deploy
-# Env vars MUST be in the build, not just in Vercel dashboard
 VITE_MY_VAR=https://api.example.com vercel build --prod
 vercel deploy --prebuilt --prod --yes
+
+# 4. Open for user to verify (don't screenshot and narrate)
+open "https://site.vercel.app"
 
 # Git workflow (ALWAYS add assets)
 git add public/
 ```
+
+**Port:** Always `--port 5199` (avoids conflicts with default 5173).
+**Rule:** Deploying to Vercel to take a screenshot is BANNED. Test locally first.
 
 ### Render (Python APIs) - 2-5 minutes
 
@@ -144,8 +154,9 @@ services:
 ### Post-Deploy Verification (MANDATORY)
 
 ```bash
-# Frontend (SPA) - use Playwright, NOT curl/WebFetch
-npx playwright screenshot --wait-for-timeout=5000 "https://site.vercel.app" verify.png
+# Frontend (SPA) - open for user to verify visually
+open "https://site.vercel.app"
+# Do NOT screenshot and narrate -- user's eyes are the source of truth
 
 # Backend API - curl is fine
 curl -s https://api.onrender.com/health | jq .
@@ -214,8 +225,8 @@ time curl -s https://api.onrender.com/health > /dev/null
 # Batch verify top 10 client sites
 ~/.claude/scripts/mobile-verify-batch.sh ./audit-output
 
-# Quick mobile-only check
-npx playwright screenshot --viewport-size="375,667" --wait-for-timeout=5000 "https://site.vercel.app" mobile.png
+# Quick mobile-only check (local first, then live)
+playwright screenshot --viewport-size="375,667" --wait-for-timeout=5000 "http://localhost:5199" mobile.png
 ```
 
 **Mobile Viewport:** 375x667 (iPhone SE)
