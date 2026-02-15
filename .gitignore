@@ -33,6 +33,9 @@ statsig/
 # Downloaded content
 downloads/
 
+# Paste cache (clipboard pastes may contain secrets)
+paste-cache/
+
 # Local settings (may contain personal overrides)
 settings.local.json
 
