@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Build client outreach tracking spreadsheet",
+  "description": "Create XLSX spreadsheet with all 51 client demo sites, columns for business name, category, demo URL, existing website URL, website quality score, owner name, email, LinkedIn, phone, pitch priority, notes. Pre-populate with known data from inventory.",
+  "activeForm": "Building outreach spreadsheet",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -143,6 +143,7 @@
       "~/Desktop/Github"
     ]
   },
+  "model": "opus",
   "sandbox": {
     "enabled": false,
     "autoAllowBashIfSandboxed": false,

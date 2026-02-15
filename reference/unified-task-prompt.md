@@ -1,15 +1,15 @@
 # Unified Task Prompt Template
 
-**Version:** 3.2 (Jan 17, 2026)
+**Version:** 3.5 (Feb 4, 2026)
 **Purpose:** Single template for parallel terminal prompts with full project context
 
 ---
 
-## PROJECT INVENTORY (Jan 17, 2026 - Synced with deployment-inventory.md)
+## PROJECT INVENTORY (Feb 9, 2026 - Synced with deployment-inventory.md)
 
-**Total:** 222+ Assets | 86 Code Projects | 94 Deployed URLs | 51 Ollama Models
-**Status:** ALL 13 projectlavos.com URLs + 51 client demo sites VERIFIED HTTP 200
-**Vercel:** 51 projects | **Render:** 6 APIs
+**Total:** 88 Code Projects | 67 Client Demo Sites (63 deployed) | 51 Ollama Models
+**Platforms:** 55 Vercel apps | 8 Render APIs | 3 custom domains | 13 projectlavos.com subdomains
+**Canonical site count:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
 ### Tier 1 - Core Portfolio (Deployed, Branded)
 | Project | Local Path | URL | GitHub |
@@ -19,7 +19,7 @@
 | guitar-model-lab | ~/Projects/guitar-model-lab | guitar-model-lab.onrender.com | guitargnarr/guitar-model-lab |
 | phishguard-ui | ~/Projects/phishguard-ui | phishguard-ui.vercel.app | guitargnarr/phishguard-ui |
 | interactive-resume | ~/Projects/interactive-resume | interactive-resume-ten-pi.vercel.app | guitargnarr/interactive-resume |
-| jobtrack | ~/Projects/jobtrack | jobtrack-two.vercel.app | guitargnarr/jobtrack |
+| job-search-automation | ~/Projects/job-search-automation/frontend | jobtrack.projectlavos.com + jobway-eosin.vercel.app | guitargnarr/job-search-automation |
 | OurJourney | ~/Projects/Personal/personal-journey | ourjourney-app.vercel.app | guitargnarr/OurJourney |
 | ba-pathfinder | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | ba-pathfinder.vercel.app | guitargnarr/ba-pathfinder |
 
@@ -49,14 +49,14 @@
 | about. | ~/Projects/projectlavos-monorepo/about | About page |
 | mirador. | ~/Projects/projectlavos-monorepo/services/mirador | Mirador AI |
 | ourjourney. | ~/Projects/Personal/personal-journey | Coparenting app |
-| jobtrack. | ~/Projects/jobtrack | Job tracker |
+| jobtrack. | ~/Projects/job-search-automation/frontend | Jobway - Job search automation |
 | phishguard. | ~/Projects/phishguard-ui | PhishGuard |
 | ba-pathfinder. | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | BA career guide |
 | resume. | ~/Projects/interactive-resume | Interactive resume |
 | prompts. | ~/Desktop/Manus/prompt-fact | Prompt factory |
 | orchestrator. | ~/Projects/projectlavos-monorepo/services/orchestrator | AI workflow builder |
 
-### Backend Services (6 Active on Render)
+### Backend Services (8 Active on Render)
 | Service | URL | Key Endpoints |
 |---------|-----|---------------|
 | guitar-model-lab | guitar-model-lab.onrender.com | /generate-gp5, /scales, /patterns |
@@ -65,6 +65,8 @@
 | mirador-xva2 | mirador-xva2.onrender.com | /api/personas, /api/chains |
 | ourjourney-api | ourjourney-api.onrender.com | /api/health, /api/ideas |
 | client-cms-api | client-cms-api.onrender.com | /health, /api/sites, /api/auth/login |
+| job-search-automation | job-search-automation-18u9.onrender.com | /api/v1/jobs, /api/v1/applications, /api/v1/ats |
+| outreach-api | outreach-api-miha.onrender.com | /health, /businesses, /metrics, /auth/login |
 
 **Note:** Free tier spins down after 15min (~30sec cold start)
 
@@ -91,6 +93,7 @@
 | 3 | tier3-advanced.vercel.app | E-commerce + cart |
 | 4 | tier4-enterprise.vercel.app | Auth + dashboard |
 | - | tier-comparison.vercel.app | Side-by-side comparison |
+| - | entropy-viz.vercel.app | WebGPU/WebGL2 Entropy Particle Viz (reusable) |
 
 **Reference:** @~/.claude/reference/tier-templates-reference.md
 
@@ -253,10 +256,11 @@ End with this summary:
 ~/Projects/guitar-model-lab          → guitar-model-lab.onrender.com
 ~/Projects/phishguard-ui             → phishguard.projectlavos.com + phishguard-ui.vercel.app
 ~/Projects/interactive-resume        → resume.projectlavos.com + interactive-resume-ten-pi.vercel.app
-~/Projects/jobtrack                  → jobtrack.projectlavos.com + jobtrack-two.vercel.app
+~/Projects/job-search-automation/frontend → jobtrack.projectlavos.com + jobway-eosin.vercel.app
 ~/Projects/Personal/personal-journey → ourjourney.projectlavos.com + ourjourney-api.onrender.com
 ~/Projects/Security-Tools/mirador-test → mirador.projectlavos.com + mirador-xva2.onrender.com
 ~/Projects/client-sites/client-cms/api → client-cms-api.onrender.com
+~/Projects/outreach-api              → outreach-api-miha.onrender.com
 ~/Projects/texume                    → GitHub only (guitargnarr/texume)
 ~/Projects/reflexia-model-manager    → GitHub only (guitargnarr/reflexia)
 ~/Projects/fretforge-v1              → LOCAL-ONLY (116 assets)
@@ -274,7 +278,7 @@ demos.projectlavos.com               → ~/Projects/projectlavos-monorepo/demos
 about.projectlavos.com               → ~/Projects/projectlavos-monorepo/about
 mirador.projectlavos.com             → ~/Projects/projectlavos-monorepo/services/mirador
 ourjourney.projectlavos.com          → ~/Projects/Personal/personal-journey
-jobtrack.projectlavos.com            → ~/Projects/jobtrack
+jobtrack.projectlavos.com            → ~/Projects/job-search-automation/frontend
 phishguard.projectlavos.com          → ~/Projects/phishguard-ui
 ba-pathfinder.projectlavos.com       → ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder
 resume.projectlavos.com              → ~/Projects/interactive-resume
@@ -284,6 +288,7 @@ guitar-model-lab.onrender.com        → ~/Projects/guitar-model-lab
 mirador-xva2.onrender.com            → ~/Projects/Security-Tools/mirador-test
 ourjourney-api.onrender.com          → ~/Projects/Personal/personal-journey
 client-cms-api.onrender.com          → ~/Projects/client-sites/client-cms/api
+outreach-api-miha.onrender.com       → ~/Projects/outreach-api
 jaspermatters.com                    → ~/Projects/Career-Business/jaspermatters-job-intelligence
 ```
 
@@ -338,6 +343,8 @@ jaspermatters.com                    → ~/Projects/Career-Business/jaspermatter
 
 ## Changelog
 
+- v3.4 (Feb 2, 2026): **Outreach CRM** - Added outreach-api (Render), updated totals (96 URLs, 87 projects, 8 Render APIs)
+- v3.3 (Feb 1, 2026): **Jobway update** - jobtrack subdomain now points to job-search-automation (Jobway), added Render backend, updated all lookup tables
 - v3.2 (Jan 17, 2026): **Inventory sync** - Updated totals (96 URLs, 86 projects), added 8 missing subdomains, 3 missing Render APIs, 51 client demo sites, tier templates section, expanded Quick Lookup tables
 - v3.1 (Dec 18, 2025): Full audit complete - 13 frontend + 3 backend APIs pass, deleted 6 Vercel orphans, fixed jaspermatters broken links
 - v3.0 (Dec 16, 2025): Updated with 222+ asset inventory, added ai-talent-optimizer, jobs.projectlavos.com, 3 Render APIs

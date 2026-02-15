@@ -1,0 +1,11 @@
+{
+  "id": "3",
+  "subject": "Build Tier 4 site: Louisville Law Firm",
+  "description": "Build complete Tier 4 enterprise site for a Louisville law firm with auth, client portal, case tracker dashboard, toast notifications. Deploy to Vercel.",
+  "activeForm": "Building Louisville Law Firm site",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": [
+    "1"
+  ]
+}

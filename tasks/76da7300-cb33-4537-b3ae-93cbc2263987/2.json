@@ -1,0 +1,11 @@
+{
+  "id": "2",
+  "subject": "Build Tier 4 site: Louisville Med Spa",
+  "description": "Build complete Tier 4 enterprise site for a Louisville med spa with auth, dashboard, toast notifications, booking system. Deploy to Vercel.",
+  "activeForm": "Building Louisville Med Spa site",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": [
+    "1"
+  ]
+}

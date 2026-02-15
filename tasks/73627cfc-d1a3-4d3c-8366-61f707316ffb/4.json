@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Add all 3 sites to portfolio and deploy",
+  "description": "Add full-tilt-gym, morgan-pottinger-mcgarvey, and caviar-creative-co entries to localClients array in projectlavos.com App.jsx. Deploy portfolio.",
+  "activeForm": "Debugging portfolio 56 vs 66 count discrepancy",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

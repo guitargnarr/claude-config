@@ -1,0 +1,9 @@
+{
+  "id": "5",
+  "subject": "Build Tier 4 site: Louisville Fitness Studio",
+  "description": "Copy tier4-enterprise template, customize for a Louisville fitness studio. Research business, set brand colors, customize services/memberships, verify images, build, deploy to Vercel.",
+  "activeForm": "Building Louisville Fitness Studio site",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

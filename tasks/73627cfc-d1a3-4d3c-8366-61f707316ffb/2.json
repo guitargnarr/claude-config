@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Complete post-deploy for morgan-pottinger-mcgarvey",
+  "description": "OG image returns 404 on deployed site (exists locally but not in dist/deployed). Assets in portfolio directories. Need: redeploy site with OG image, add portfolio card.",
+  "activeForm": "Completing morgan-pottinger-mcgarvey post-deploy",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

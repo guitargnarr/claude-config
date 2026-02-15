@@ -1,0 +1,11 @@
+{
+  "id": "4",
+  "subject": "Build Tier 4 site: Louisville Fitness Studio",
+  "description": "Build complete Tier 4 enterprise site for a Louisville fitness studio with auth, class booking dashboard, membership management, toast notifications. Deploy to Vercel.",
+  "activeForm": "Building Louisville Fitness Studio site",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": [
+    "1"
+  ]
+}

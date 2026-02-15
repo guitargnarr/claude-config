@@ -1,0 +1,9 @@
+{
+  "id": "10",
+  "subject": "Lazy loading + Suspense in App.tsx (Risk 1a)",
+  "description": "Convert static hero imports to React.lazy() with Suspense fallback gradients in all 3 App.tsx files.",
+  "activeForm": "Adding lazy loading to App.tsx",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

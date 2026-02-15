@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Check existing websites for all 51 businesses",
+  "description": "For each of the 51 businesses, search for their real website and assess quality. Businesses with bad/no websites are higher priority targets. Record findings in spreadsheet.",
+  "activeForm": "Checking business websites",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

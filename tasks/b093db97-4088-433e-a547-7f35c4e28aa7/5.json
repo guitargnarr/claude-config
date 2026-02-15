@@ -1,0 +1,13 @@
+{
+  "id": "5",
+  "subject": "Generate cinematic OG image and 3D hero formation",
+  "description": "Create a unique 3D hero formation for Clementine and a cinematic OG image per the differentiation standard. Each client site needs a distinct formation and brand-colored OG.",
+  "activeForm": "Generating visual assets",
+  "status": "pending",
+  "blocks": [
+    "6"
+  ],
+  "blockedBy": [
+    "1"
+  ]
+}

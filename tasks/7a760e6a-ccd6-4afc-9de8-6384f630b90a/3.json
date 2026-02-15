@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Build Tier 4 site: Louisville Med Spa",
+  "description": "Copy tier4-enterprise template, customize for a Louisville med spa business. Research business, set brand colors, customize services/products, verify images, build, deploy to Vercel.",
+  "activeForm": "Building Louisville Med Spa site",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

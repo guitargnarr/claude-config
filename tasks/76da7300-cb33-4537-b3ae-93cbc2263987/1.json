@@ -1,0 +1,14 @@
+{
+  "id": "1",
+  "subject": "Read tier4-enterprise template source",
+  "description": "Read the tier4-enterprise App.tsx to understand the full template structure before spawning parallel builds",
+  "activeForm": "Reading tier4 template",
+  "status": "completed",
+  "blocks": [
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "blockedBy": []
+}

@@ -131,7 +131,10 @@ npm run build && npm run preview
 # 7. Deploy
 vercel --prod --yes
 
-# 8. Generate OG image (use Playwright screenshot of hero section)
+# 8. Generate OG image
+# For differentiated sites: add to ~/.claude/scripts/create-cinematic-og.js SITE_CONFIGS, then:
+# node ~/.claude/scripts/create-cinematic-og.js --site <key>
+# git add -f public/og-image.png  (global gitignore blocks *.png)
 ```
 
 ## Color Customization

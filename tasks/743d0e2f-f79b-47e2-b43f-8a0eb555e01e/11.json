@@ -1,0 +1,9 @@
+{
+  "id": "11",
+  "subject": "Vite bundle budget (Risk 1d)",
+  "description": "Add rollup-plugin-visualizer to vite.config.ts in all 3 sites.",
+  "activeForm": "Adding bundle visualizer",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

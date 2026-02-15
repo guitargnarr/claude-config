@@ -1,0 +1,9 @@
+{
+  "id": "10",
+  "subject": "Rewrite Split Crown with actual musical variety",
+  "description": "The current Split Crown has removed Crystalline but still sounds repetitive because:\n- Lead: all 4 riff variations on same string 5, same rhythm (straight 8ths)\n- Rhythm: cookie-cutter accompaniment patterns, no real counterpoint\n- Bass: same root for 56 bars\n- No register changes, no rhythmic contrast between parts\n\nNeed: different registers per section, different subdivisions (mix 8ths/16ths/quarters/ties), string changes, dynamic contour, bass follows the harmonic progression not just one root, real call-and-response between guitars.",
+  "activeForm": "Rewriting Split Crown with musical variety",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

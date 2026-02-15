@@ -1,0 +1,11 @@
+{
+  "id": "5",
+  "subject": "Build Tier 4 site: Louisville Financial Advisor",
+  "description": "Build complete Tier 4 enterprise site for a Louisville financial advisory firm with auth, portfolio dashboard, client management, toast notifications. Deploy to Vercel.",
+  "activeForm": "Building Louisville Financial Advisor site",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": [
+    "1"
+  ]
+}

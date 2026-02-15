@@ -1,0 +1,13 @@
+{
+  "id": "3",
+  "subject": "Implement technical SEO foundation",
+  "description": "JSON-LD structured data (LocalBusiness, FoodEstablishment, Event), OG images, social previews, robots.txt, LLMs.txt, sitemap, Google Search Console ready meta tags. No hidden div tricks.",
+  "activeForm": "Implementing SEO foundation",
+  "status": "pending",
+  "blocks": [
+    "6"
+  ],
+  "blockedBy": [
+    "1"
+  ]
+}

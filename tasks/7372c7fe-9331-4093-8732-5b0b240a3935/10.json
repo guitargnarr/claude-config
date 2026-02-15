@@ -1,0 +1,9 @@
+{
+  "id": "10",
+  "subject": "Create mockData.js with all sample data",
+  "description": "Create frontend/src/api/mockData.js with mock dashboard, jobs, applications, follow-ups, email data",
+  "activeForm": "Creating mock data file",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

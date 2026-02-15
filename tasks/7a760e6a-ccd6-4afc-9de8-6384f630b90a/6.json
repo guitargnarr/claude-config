@@ -1,0 +1,9 @@
+{
+  "id": "6",
+  "subject": "Build Tier 4 site: Louisville Financial Advisor",
+  "description": "Copy tier4-enterprise template, customize for a Louisville financial advisor. Research business, set brand colors, customize services, verify images, build, deploy to Vercel.",
+  "activeForm": "Building Louisville Financial Advisor site",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

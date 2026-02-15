@@ -1,0 +1,13 @@
+{
+  "id": "6",
+  "subject": "Deploy site and verify live",
+  "description": "Deploy to Vercel, verify all pages render correctly with Playwright, confirm OG images work, test lead form submission, verify mobile responsiveness.",
+  "activeForm": "Deploying and verifying",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": [
+    "2",
+    "3",
+    "5"
+  ]
+}

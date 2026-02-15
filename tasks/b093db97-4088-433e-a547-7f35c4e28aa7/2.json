@@ -1,0 +1,13 @@
+{
+  "id": "2",
+  "subject": "Build all website pages (8-10 pages)",
+  "description": "Build Home, About/Story, Menus & Services, Gallery, The Venue (PDH), Testimonials, Blog, Contact/Inquiry, Privacy Policy pages. Each with proper content, SEO, and lead capture.",
+  "activeForm": "Building website pages",
+  "status": "pending",
+  "blocks": [
+    "6"
+  ],
+  "blockedBy": [
+    "1"
+  ]
+}

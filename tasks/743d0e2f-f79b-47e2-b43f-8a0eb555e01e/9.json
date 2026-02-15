@@ -1,0 +1,9 @@
+{
+  "id": "9",
+  "subject": "Upgrade hero components (Risk 1b, 2a-2e, 4d)",
+  "description": "Named imports, low-end detection, frame throttling, adaptive geometry, visibility observer, context loss handling, inline docs for all 3 hero components.",
+  "activeForm": "Upgrading hero components",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

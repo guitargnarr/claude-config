@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Draft cold email templates per cluster",
+  "description": "Write cold email templates for each of the 7 business categories (Healthcare, Entertainment, F&B, Retail, Personal Services, Real Estate, Professional Services). Each template should reference the specific demo site built for that business.",
+  "activeForm": "Drafting email templates",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

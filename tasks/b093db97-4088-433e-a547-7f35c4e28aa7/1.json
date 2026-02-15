@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "subject": "Set up Clementine Catering project scaffold",
+  "description": "Create the Next.js + React + shadcn + Framer Motion + Tailwind v3 project for Clementine Catering & Events. Scaffold the project structure based on existing client site templates.",
+  "activeForm": "Setting up project scaffold",
+  "status": "pending",
+  "blocks": [
+    "2",
+    "3",
+    "5"
+  ],
+  "blockedBy": []
+}

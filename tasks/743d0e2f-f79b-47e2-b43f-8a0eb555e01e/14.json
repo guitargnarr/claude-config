@@ -1,0 +1,9 @@
+{
+  "id": "14",
+  "subject": "Build, deploy, verify all 3 sites",
+  "description": "npm run build (zero errors), vercel deploy, Playwright screenshots for verification.",
+  "activeForm": "Building and deploying",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

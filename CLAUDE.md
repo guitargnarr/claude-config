@@ -2,384 +2,225 @@
 
 ## Critical Rules
 
-### VISUAL PROOF OF COMPLETION (Dec 2025 - HIGHEST PRIORITY)
+### VISUAL PROOF OF COMPLETION (HIGHEST PRIORITY)
 **Nothing is "complete" until user can SEE and INTERACT with it:**
 - Web app? Must open in browser at a URL user can visit
 - CLI tool? Must show how to run it and demonstrate it working
-- MIDI generator? Must produce a file and show how to play it
 - API? Must demonstrate with actual request/response
 - **If you can't show it running, it's not done**
-
-**When finding something:**
 - Don't just say "it's at /path/to/file" - show HOW TO USE IT
-- Provide the exact command to run or URL to open
 - Results must be REPEATABLE - same command = same result every time
+
+### VERIFICATION HONESTY
+Reading source code is not visual verification. Reading a report is not numerical verification. Do not confuse either.
+
+When asked to check if something looks right or works:
+- Take an actual screenshot and analyze the actual image
+- If the screenshot fails or returns nothing useful, say that
+- Do NOT infer rendering correctness from source code alone
+- Do NOT summarize empty or failed results as if they confirmed anything
+- Do NOT deflect with diagnostic questions to cover for a check you didn't actually perform
+
+When verifying data or numerical claims in deliverables:
+- Run the actual computation against the source data. Do not eyeball it.
+- If a report says "11,190 pharmacies are flagged Immediate Outreach" -- count them in the CSV
+- If a report says "3.5x ROI" -- compute the ROI from the raw fields and confirm the formula
+- Cross-check every metric across all documents that reference it. One inconsistency = all assets are suspect until re-validated.
+- Do not take shortcuts on large files. 41,775 rows means 41,775 rows, not a sample.
+
+If your verification attempt fails, say "I tried to check and couldn't get a usable result" — not "everything renders perfectly."
+
+The standard: only assert what you directly observed or computed, not what you expect the code or data to produce.
 
 ### FIX BEFORE ASKING
 - If something is broken, TRY TO FIX IT before asking questions
 - Only ask if: (1) security concern, or (2) multiple valid paths and user preference affects outcome
-- When you must ask, present options based on how user likely wants result to look/work
 - Reference Anthropic docs at https://docs.anthropic.com when unsure about model capabilities
 
 ### NO TOKEN WASTE
-- Do not drag out requests or add unnecessary steps
 - Execute efficiently toward visual, working result
-- If missing critical knowledge that user needs, state it directly - don't assume they know
+- Do not drag out requests or add unnecessary steps
+
+### DOC UPDATES: ONE PASS, FULL SCOPE
+When updating docs/references after a task:
+1. Grep `~/.claude/` for every related term before proposing any edits
+2. Read every referenced doc (SOPs, skills, indexes) before acting
+3. Present the complete list of findings for approval -- all at once, not incrementally
+4. Do not say "that's everything" until the sweep is provably exhaustive
+5. Never claim done, get challenged, find more, repeat. One pass.
 
 ### Ultrathink Protocol (v2 - Automatic)
-Triggers automatically when complexity thresholds met:
-- 5+ files affected
-- Architectural decisions with multiple valid approaches
-- Security-sensitive changes (auth, credentials, permissions)
-- Breaking changes to existing APIs/interfaces
-- Cross-project impact or data migrations
-
+Triggers automatically when: 5+ files affected, architectural decisions, security-sensitive changes, breaking changes, cross-project impact, data migrations, multi-doc update sweeps (3+ reference docs).
 **When triggered:** Create `ULTRATHINK_[TOPIC].md`, write structured analysis (50-200 lines), show key findings, then execute.
-**Manual trigger still works:** "use ultrathink"
-Reference: @~/.claude/reference/ultrathink-definition.md
+**Full spec:** ~/.claude/reference/ultrathink-definition.md
 
 ### Standard Rules
-- **Documentation:** Max 5 files per project, 500 lines each (READMEs prefer <200, ULTRATHINK_*.md exempt)
-- **Discovery first, then code:** For deployment work, inventory what exists before building. For new features, implement before documenting.
-- **Delete planning docs** after extracting action items (prevent bloat)
-- **Work mode:** Consulting and platform building (sustainable income model)
+- **Documentation:** Max 5 files per project, 500 lines each (READMEs prefer <200)
+- **Discovery first, then code:** For deployment work, inventory what exists before building
+- **Planning docs:** Extract action items into permanent docs (CLAUDE.md, SOPs, reference). Retain plans in `~/.claude/plans/` as historical decision records.
+- **Work mode:** Active client delivery (RetailMyMeds) supersedes SELL phase. When no client work is pending, resume consulting and platform building.
 - Never use emojis unless explicitly requested
 
-### Pre-Commit Quality (Jan 2026 - MANDATORY)
-**Do NOT commit code with unresolved linting/build errors.** Before any commit:
-- **TypeScript/JS:** `npm run build` must pass (no type errors)
-- **Python:** `flake8 [file]` must pass (no lint errors)
-- **Fix ALL issues before committing** - don't rush commits with known problems
-- Pattern recognition: anticipate fixes based on error patterns, don't wait for user feedback
+### Pre-Commit Quality (MANDATORY)
+Before any commit: `npm run build` (JS/TS) or `flake8` (Python) must pass. Fix ALL issues before committing.
 
 ## System Info
 - Python: 3.14 at `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3`
 - GitHub: guitargnarr (matthewdscott7@gmail.com)
-- Deployment: Vercel, test build locally: `npm run build && npm run preview`
-  - **No env vars:** `vercel --prod --yes`
-  - **With VITE_ env vars:** `VITE_X=value vercel build --prod && vercel deploy --prebuilt --prod --yes`
-  - Vite bakes env vars at BUILD time - `vercel env add` alone does NOTHING for Vite apps
+- **Deploy frontend:** `vercel --prod --yes` (no env vars) or `VITE_X=value vercel build --prod && vercel deploy --prebuilt --prod --yes` (with env vars -- Vite bakes at BUILD time)
+- **Deploy backend:** `git push origin main` (Render auto-deploys, ~30s cold start on free tier)
+- **Verify React apps:** Use Playwright (`npx playwright screenshot --wait-for-timeout=5000 "URL" verify.png`), NEVER curl/WebFetch
+- **Verify LOCALLY before deploying** - Run `npm run dev &` then Playwright against `http://localhost:5173` to catch rendering bugs in one cycle. Do NOT deploy to Vercel just to take a screenshot. Only deploy once the local screenshot confirms all sections render. This avoids wasting 3+ deploy round-trips on visual bugs (learned: clementine-cater invisible sections, Feb 2026).
 
 ## Critical Pitfalls
-- **Use pg8000 for Render Python APIs** - Use `pg8000` (pure Python) instead of `psycopg2-binary` to avoid Render build failures. Update SQLAlchemy URL to `postgresql+pg8000://` and configure SSL context manually.
-- **Render Blueprint doesn't remove env vars** - If you remove an env var from render.yaml, you must manually delete it from Render dashboard. Blueprint sync only adds/updates, never removes.
-- **Vite env vars must be in build** - Don't just add to Vercel dashboard and deploy. Use `VITE_X=value vercel build --prod` then `vercel deploy --prebuilt --prod --yes`
-- **Minimal vercel.json OK for Vite SPA routing** - Simple rewrites to `/index.html` are REQUIRED for React Router. Complex configs break auto-detect. Keep it minimal.
+- **pg8000 for Render** - NOT psycopg2-binary. Reference: `~/Projects/client-sites/client-cms/api/main.py`
+- **Vite env vars must be in build command** - Dashboard alone does nothing
 - **NO Tailwind v4** (use v3) - Exception: Next.js projects can use v4
 - **Absolute URLs for OG meta tags**
-- **ALWAYS inventory ALL deployments FIRST** - Check Vercel/Railway/Netlify dashboards before assuming local code is canonical
-- **Test live URLs before building** - Deployed version might be superior to local code
-- **WebFetch CANNOT verify React apps** - WebFetch/curl only get initial HTML before JavaScript renders. React/Vue/Svelte apps will appear "blank" or "title only" to these tools even when fully functional. **ALWAYS use Playwright with wait timeout** to verify SPA content:
-  ```bash
-  npx playwright screenshot --wait-for-timeout=5000 "https://url" screenshot.png
-  ```
-  Then read the screenshot. Never conclude a React app is "blank" based on WebFetch alone.
+- **Global gitignore blocks *.png** - `~/.gitignore_global` line 189. Every PNG (OG images, previews, QR codes, favicons, apple-touch-icons) requires `git add -f`. After staging, ALWAYS verify with `git ls-files --cached | grep '\.png'` to confirm the files are tracked. If the count doesn't match expectations, PNGs were silently dropped. This applies to every repo on this machine.
+- **Inventory deployments FIRST** - Check Vercel/Railway/Netlify before assuming local code is canonical
+- **WebFetch CANNOT verify React apps** - Always use Playwright with --wait-for-timeout=5000
+- **Formations: useEffect + vanilla Three.js, NOT iframe** - Embedding formation HTML via `<iframe>` causes rendering failures (blank/gray hero). Use React component with `useEffect` + `useRef` + vanilla Three.js instead. Proven: VoronoiHero.tsx, LSystemHero.tsx, DNAHelixBg.tsx, NeuralMeshBg.tsx, OrbitalSystemBg.tsx. Reference: formations-component.md Pattern C.
+- **Three.js Object.assign + position CRASHES at runtime** - `Object.assign(new THREE.PointLight(...), { position: new THREE.Vector3(...) })` fails silently at build but crashes at runtime ("Cannot assign to read only property 'position'"). Always use `light.position.set(x, y, z)` instead.
+- **OrbitControls hijacks mobile scroll** - Even with `enableRotate/Zoom/Pan = false`, OrbitControls attaches touch/wheel listeners that block scrolling. For decorative formations, remove OrbitControls entirely and use manual camera orbit: `cameraAngle += dt * 0.1; camera.position.x = Math.sin(cameraAngle) * radius; camera.position.z = Math.cos(cameraAngle) * radius; camera.lookAt(0,0,0);`. Also set `pointer-events: none` on canvas. Proven fix: VoronoiHero.tsx.
+- **framer-motion opacity:0 silently fails** - `motion.*` elements with `initial={{ opacity: 0 }}` / `animate={{ opacity: 1 }}` can stay invisible on mobile. Replace with plain HTML elements for critical visible content (headers, CTAs).
+- **isLowEnd device detection unreliable** - `navigator.hardwareConcurrency <= 4` doesn't catch modern iPhones. Only use `canUseWebGL()` as the WebGL guard -- no mobile width bypass or CPU-core checks.
 
-## Render + Neon + pg8000 Stack (Jan 2026)
-**Proven pattern for production Python APIs with free-tier database:**
+## Client Site Rules
+- Research the business first. NO fabricated testimonials/ratings/reviews. Verify Unsplash images return HTTP 200. No image reuse across sites.
+- **Workflow:** ~/.claude/reference/client-site-assets-sop.md | ~/Projects/client-sites/templates/SITE_GENERATION_GUIDE.md
+- **Templates:** ~/Projects/client-sites/templates/ (4 tiers)
+- **Elite Frontend:** ~/.claude/skills/frontend-design/ELITE_FRONTEND_PLAYBOOK.md
+- **Reusable 3D Components:** ~/.claude/reference/entropy-viz-component.md, torus-knot-component.md, formations-component.md
 
-| Layer | Service | Notes |
-|-------|---------|-------|
-| Database | Neon PostgreSQL | Free tier, no 1-DB limit like Render. CLI: `neonctl projects create --name [name]` |
-| API | Render (Python) | Use pg8000 driver, NOT psycopg2-binary |
-| Frontend | Vercel | Standard Vite deploy |
+### Differentiation Standard (Feb 2026 -- MANDATORY)
+Every client site must be visually distinct. No two sites should share the same layout patterns below the hero. Requirements:
+1. **Unique 3D hero formation** -- Each site gets a different formation (Voronoi, L-System, Torus Knot, etc.)
+2. **Unique section background formation** -- A second formation used as a dark cinematic section background (e.g., DNA Helix behind stats, Neural Mesh behind features)
+3. **Differentiated CSS** -- Card radius, button shape, hover behavior, shadows, section dividers, and accent patterns must vary per site personality
+4. **Differentiated section layouts** -- Features, stats, and contact sections must use different structural layouts per site (zigzag vs anchor+grid vs icon-strip, timeline vs 2x2 vs large-centered, glass-card vs 3-office vs split-screen)
+5. **Distinct cinematic OG image** -- Each site gets a brand-colored OG image with unique accent geometry. Generated via `~/.claude/scripts/create-cinematic-og.js --batch`. Accents must be visible at thumbnail scale (15%+ opacity, not 3%). Force-add with `git add -f` (global gitignore blocks *.png).
+- **Reference:** formations-component.md "Proven Deployments" table for available formations and site-specific palettes
+- **Proven at:** scout-aesthetics, morgan-pottinger-mcgarvey, pillar-financial-advisors (Feb 2026)
 
-**requirements.txt:**
-```
-fastapi
-uvicorn
-sqlalchemy
-pg8000
-```
+### Adding Sites to projectlavos.com Portfolio (Checklist)
+When adding client sites to the portfolio at `projectlavos-monorepo/main-site/src/App.jsx`:
+1. **Copy ALL PNGs** -- preview, OG image, and QR code for each site. Not just OG.
+2. **`git add -f` every PNG** -- then verify: `git ls-files --cached | grep '\.png' | wc -l` must match expected count
+3. **Use cinematic OG as preview** -- for sites with cinematic OG images, set `preview` field to the OG path (not the old phone mockup)
+4. **Match `category` to `categoryGroups`** -- check the filter map in App.jsx so the site appears under the correct tab
+5. **Build before commit** -- `npm run build` from `main-site/`
+6. **Deploy with CRM env var** -- `VITE_OUTREACH_API_URL=https://outreach-api-miha.onrender.com vercel build --prod && vercel deploy --prebuilt --prod --yes`
+7. **Verify live** -- curl each PNG URL for HTTP 200, then Playwright screenshot the expanded grid
 
-**Database connection (main.py):**
-```python
-import ssl
-DATABASE_URL = os.getenv("DATABASE_URL", "")
-# Convert to pg8000 dialect
-if DATABASE_URL.startswith("postgresql://"):
-    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+pg8000://", 1)
-# Strip sslmode (pg8000 handles SSL differently)
-DATABASE_URL = re.sub(r'[\?&]sslmode=[^&]*', '', DATABASE_URL)
-# Configure SSL for Neon
-ssl_context = ssl.create_default_context()
-ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
-engine = create_engine(DATABASE_URL, connect_args={"ssl_context": ssl_context})
-```
+## Project Lavos Article & Report Template (Cinematic PDF)
+**Scope:** projectlavos.com articles and operational reports only. Uses the Texume Jinja2 + LaTeX pipeline.
 
-**Reference implementation:** `~/Projects/client-sites/client-cms/api/main.py`
+**Proven at:** The Quiet Trade (Feb 2026) -- `~/Projects/texume/templates/the_quiet_trade.tex`
 
-## Client Site Development Protocol (Jan 2026)
+### Cover Page (reusable across all articles/reports)
+- TikZ-generated CG cover with plum/slate-blue/gold palette (`plum #1A0A2E`, `slateblue #4A6FA5`, `gold #D4A853`)
+- Charioteer logo (white, `assets/charioteer-white.pdf`) centered above title
+- Radial glows, arc segments, bezier curves, corner brackets, edge vignettes
+- Layout: logo > cover label > title (38pt bold white) > gold rule > tagline > vfill > author/date/org
 
-### Pre-Development (MANDATORY)
-1. **Research the business** - Client sites represent real businesses. Research:
-   - Business name, location, industry
-   - Services/products offered
-   - Target audience
-   - Competitors in area
-   - Unique value proposition
-2. **Verify Unsplash images before use** - Test with curl:
-   ```bash
-   curl -sI "https://images.unsplash.com/[PHOTO_ID]?w=100" | head -1
-   # Must return HTTP 200, NOT 404
-   ```
-3. **No asset reuse across client sites** - Each site gets unique images
+### Section Pages
+- Full-page CG background images per section, generated via `~/.claude/scripts/create-article-fullpage-images.js` (Node.js Canvas, 1700x2200, seeded PRNG)
+- `\AddToShipoutPictureBG` (persistent, no asterisk) so overflow pages inherit the same background. `\ClearShipoutPictureBG` before each new section.
+- `\sectionpage{image.png}{Title}` command handles clearpage + background + headers + section title
+- Headers: `fancyhdr` cinematic style (title left, date right, page center, "Project Lavos" footer-right)
 
-### Content Rules (PERMANENT)
-- **NO FABRICATED TESTIMONIALS** - Never create fake reviews/quotes. This is fabrication.
-- **NO FAKE RATINGS** - Don't invent star ratings or review counts
-- **REAL DATA ONLY** - If business data unavailable, omit section rather than fabricate
+### Typography Rules
+- **Standard body:** 13pt/19 for sections that fill 1+ pages naturally
+- **Short sections:** 16pt/24 for sections with little content (fills space instead of floating)
+- **Dense sections:** 12pt/17.5 if content just barely overflows -- pull back to fit one page rather than orphaning 2-3 lines
+- **If overflow is substantial** (half page+), keep at 13pt and let it flow to 2 pages
+- Global parskip: 12pt. No parindent. Section titles: 20pt white bold with gold rule. Subsections: 13pt titlegold.
 
-### Post-Deployment Checklist
-1. **Capture Mobile Screenshot** - Get iPhone 14 viewport (390x844):
-   ```bash
-   npx playwright screenshot --viewport-size="390,844" --wait-for-timeout=5000 "URL" mobile.png
-   ```
-2. **Generate All Assets** - Use the all-in-one asset generator:
-   ```bash
-   cd ~/.claude/scripts && npm install canvas qrcode  # One-time setup
-   node create-client-assets.js <site-name> <mobile-screenshot> [options]
+### Callout Boxes
+- `calloutbox` (gold accent) and `insightbox` (slate accent) -- TikZ nodes with translucent fill over dark backgrounds
+- Gold left-edge gradient stripe on calloutbox, slate on insightbox
 
-   # Example with custom colors:
-   node create-client-assets.js copper-barrel-brewing ./mobile.png \
-     --colors "#b45309,#78350f" \
-     --title "Copper Barrel" \
-     --subtitle "Brewing Co."
-   ```
-   **Generates:** iPhone mockup (430x880), OG image (1200x630), QR code (370x370), favicons (16, 32, 180)
-
-3. **Copy Assets to Destinations:**
-   ```bash
-   # Client site (favicons, og-image)
-   cp output/favicon-*.png output/apple-touch-icon.png ~/Projects/client-sites/<site>/public/
-   cp output/<site>-og.png ~/Projects/client-sites/<site>/public/og-image.png
-
-   # Portfolio (preview, og-image, qr)
-   cp output/<site>-preview.png ~/Projects/projectlavos-monorepo/main-site/public/previews/
-   cp output/<site>-og.png ~/Projects/projectlavos-monorepo/main-site/public/og-images/
-   cp output/<site>-qr.png ~/Projects/projectlavos-monorepo/main-site/public/qr-codes/
-   ```
-4. **Update Client Site HTML** - Add meta tags to index.html:
-   - `<link rel="icon" type="image/png" href="/favicon.png" />`
-   - `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`
-   - `<meta property="og:image" content="https://<site>.vercel.app/og-image.png" />`
-5. **Add to Portfolio** - Add entry to localClients array in App.jsx:
-   ```javascript
-   {
-     id: "siteid",
-     title: "Business Name",
-     url: "https://<site>.vercel.app",
-     preview: "/previews/<site>.png",
-     ogImage: "/og-images/<site>-og.png",
-     qrCode: "/qr-codes/<site>-qr.png",
-     description: "Short description",
-     category: "Category",
-     specWork: true,
-     details: "Detailed description..."
-   }
-   ```
-6. **Deploy Both Sites:**
-   ```bash
-   cd ~/Projects/client-sites/<site> && vercel --prod --yes
-   cd ~/Projects/projectlavos-monorepo/main-site && vercel --prod --yes
-   ```
-7. **Visual Verification** - Verify both deployments with Playwright
-8. **Frontend Oracle Review** - Consult frontend-design skill for design quality check (optional)
-
-**Full workflow reference:** @~/.claude/reference/device-mockup-workflow.md
-**Proven with:** copper-barrel-brewing (Jan 2026)
-
-### Image Verification Workflow
-```bash
-# Validate single image
-curl -sI "https://images.unsplash.com/photo-XXXXXXXXX?w=100" | head -1
-
-# Batch validate (check multiple)
-for id in photo-1234 photo-5678 photo-9012; do
-  status=$(curl -sI "https://images.unsplash.com/$id?w=100" | head -1)
-  echo "$id: $status"
-done
-```
-
-**Diversify year searches when sourcing images** - Don't always search current year. Vary 2020-2026 for best results.
-
-**TODO:** Automate steps 5-7 via client-cms extension - when site added to CMS, auto-generate portfolio card data and push to projectlavos.com. Reference: `~/Projects/client-sites/client-cms/`
+### Workflow
+1. Data: `data/<article_name>.py` returning dict of section content
+2. Template: `templates/<article_name>.tex` with `\VAR{}` Jinja2 placeholders
+3. Images: `~/.claude/scripts/create-article-fullpage-images.js` generates section backgrounds to `output/<slug>-fullpage/`
+4. Generate: `python3 scripts/generate_<article_name>.py`
+5. PNGs require `git add -f` (global gitignore blocks *.png). Verify count with `git ls-files --cached | grep '\.png'`
 
 ## Private Data Protection
-**CRITICAL - Never read/edit without permission:**
-- `**/GMAIL_*.csv`, `**/APPLICATIONS*.csv`
-- `~/Desktop/1_PRIORITY_JOB_SEARCH/**` (historical data, archived)
+**CRITICAL - Never read/edit without permission:** `**/APPLICATIONS*.csv`, `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
+- **Gmail access:** IMAP with app password (inline scripts, not a separate project). Never commit app passwords.
 
 ## Communication Style
-- Direct, technical, honest
-- Code examples > Long explanations
-- Facts > Speculation
+- Direct, technical, honest. Code examples > long explanations. Facts > speculation.
 
 ## Quality Standards
-Task complete ONLY when:
-- **User can see visual proof** (browser window, running app, working command)
-- Tests pass (run actual tests)
-- Build succeeds
-- Committed to git
-- **User knows exact location/URL/command** to access result repeatedly
+Task complete ONLY when: user can see visual proof, tests pass, build succeeds, committed to git, user knows exact location/URL/command.
 
 ## Context Management
 - `/clear` after major tasks
 - `/model [haiku|sonnet|opus]` - right model for task
 
-## Parallel Development (2-4x faster)
-For 2-4 independent tasks: Use git worktrees + multiple Claude terminals
-- **Full playbook:** @~/.claude/reference/parallel-development-playbook.md
-- Proven: 60-70% time savings, 50-100% PR success rate acceptable
+## Reference Documentation (load on-demand, DO NOT auto-load)
+**Full index:** ~/.claude/reference/INDEX.md
 
-## AI-Native Development Toolkit (2025-11-19)
-**Quick Commands:**
-- `claude-inventory` - Show available tools
-- `claude-verify` - Verify toolkit works
-- `claude-status` - Check what needs attention
-- `claude-export [type]` - Generate documentation exports
+| Category | Key Docs |
+|----------|----------|
+| Deployment | ~/.claude/reference/deployment-inventory.md, deployment-discovery-protocol.md |
+| Workflows | ~/.claude/reference/workflows.md |
+| Client Sites | ~/.claude/reference/tier-templates-reference.md, client-site-assets-sop.md |
+| Parallel Dev | ~/.claude/reference/parallel-development-playbook.md, unified-task-prompt.md |
+| System | ~/.claude/TRANSFER_GUIDE.md, COLLABORATION_CONTRACT.md, COMMAND_MANIFEST.md |
 
-**Client Site Asset Generation (Jan 2026):**
-- `~/.claude/scripts/create-client-assets.js` - All-in-one generator (iPhone mockup, OG image, QR code, favicons)
-- `~/.claude/scripts/create-iphone-mockup.js` - Standalone iPhone frame generator
-- **Requirements:** `npm install canvas qrcode` in scripts directory
-
-**Deployment & Verification:**
-- `claude-discover [URL]` - Deployment discovery automation
-- `claude-verify-urls` - Batch URL verification
-- `mobile-verify.sh [URL]` - Mobile screenshot verification
-- `mobile-verify-batch.sh [dir]` - Batch mobile verification
-
-**Parallel Development:**
-- `tmux-parallel.sh` - Launch 4-pane tmux session
-- `tmux-worktrees.sh` - Launch tmux with git worktrees
-- `launch_parallel.sh` - Legacy terminal launcher
-- `cleanup-worktrees.sh` - Remove merged worktrees
-- `worktree_manager.py` - Full worktree management
-- `parallel_metrics.py` - Track parallel run efficiency
-- `merge-parallel-prs.sh` - Batch merge PRs from parallel run
-
-**Core Documentation:**
-- **Collaboration:** @~/.claude/COLLABORATION_CONTRACT.md (how human + AI work together)
-- **Parallel Dev:** @~/.claude/reference/parallel-development-playbook.md (v5.0, tmux integration, 88% PR success)
-- **Deployment Discovery:** @~/.claude/reference/deployment-discovery-protocol.md (prevent wrong codebase)
-
-## Reference Documentation (Load on-demand via @)
-- **Task Prompts:** @~/.claude/reference/unified-task-prompt.md (single template + project inventory)
-- **Full Inventory:** @~/.claude/reference/deployment-inventory.md (all deployments, backends, domains)
-- **Workflows:** @~/.claude/reference/workflows.md (git, brand, deployment)
-- **Tier Templates:** @~/.claude/reference/tier-templates-reference.md (UI/UX patterns, client site development)
-- **Permissions:** @~/.claude/archive/PERMISSIONS_GUIDE.md
-- When opening websites for me verify what is displayed on screen
-
-## Agent Quick Reference (Dec 2025)
-**Agents** (in `~/.claude/agents/`):
-| Agent | Purpose | Trigger |
-|-------|---------|---------|
-| audit-orchestrator | Full audit (coordinates all agents) | "Full audit of [repo]" |
-| repo-scanner | Metrics, file counts, git stats | "How big is this repo?" |
-| documentation-reader | Verify README claims | "Does README match reality?" |
-| code-analyzer | Understand code, assess quality | "What does this code do?" |
-| security-auditor | Find credentials, automation risks | "Check for security issues" |
-| Code Automation | Generate Python scripts | "Automate this process" |
-| Interview Prep | Career prep (uses Ollama models) | "Prepare for interview" |
-
-**Slash Commands**:
-| Command | Use |
-|---------|-----|
-| `/audit-repo [name]` | Start audit |
-| `/commit` | AI-generated commit message |
-| `/push-pr main` | Create PR |
-| `/coach` | Career coaching |
-| `/tactic` | Hiring tactics |
-
-## Project-Specific Context (Load on-demand)
-- **Guitar Model Lab:** `~/Projects/guitar-model-lab/CLAUDE_CONTEXT.md`
-- **Full Inventory:** @~/.claude/reference/deployment-inventory.md
-
-**Quick Stats:** 222+ assets | 86 code projects | 94 deployed URLs | 51 Ollama models
 **Brand:** Teal (#14b8a6) / Orange (#f97316)
+**Quick Stats:** 88 code projects | 67 client demo sites (63 deployed) | 51 Ollama models
 
-## Client Demo Sites (Jan 2026 Audit)
-**Total:** 60 sites | **Deployed:** 51 | **Location:** ~/Projects/client-sites/ + ~/Projects/jobtrack/client-sites/
-**Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
+## Governance (Nov 2025+)
+1. **Tabula Rasa** - Never bake personal context into prompts/models
+2. **SELL phase** - Monetize deployed assets, package tools for sale. **Exception: active income work (RetailMyMeds) takes absolute priority over sell-phase tasks.**
+3. **AI + Python hybrid** - AI for qualitative, Python for quantitative. LLMs can't do reliable arithmetic or music theory.
+4. **Deployment gotchas** - Vercel defaults to auth-protected. Railway needs PORT env var. Render free tier spins down.
+5. **Session management** - Never suggest closing sessions. User controls session boundaries.
+6. **Fix-first communication** - Fix it, show result. Only ask when security risk or user preference affects outcome.
+7. **Discovery before building** - Test all live deployments before writing code (OurJourney lesson)
+8. **Execution bias** - Never frame sales/outreach as "scary". Direct next actions only.
 
-| Metric | Value |
-|--------|-------|
-| Tech Stack | 78% Tailwind, 17% Styled-Components, 93% TypeScript |
-| Largest | hideaway-saloon (5569 lines - Auth, Booking, Gallery, Dashboard) |
-| Architecture | Single-file (48 sites) vs Component-based (6 JobTrack sites) |
-| Features | 24 Booking, 12 Gallery, 11 Auth, 10 Toast, 6 Cart |
+## Active Engagements (INCOME)
+| Client | Contact | Status | Agreed Rate | Scope | Key Paths |
+|--------|---------|--------|-------------|-------|-----------|
+| RetailMyMeds | Kevin McCarron (dev) + Arica Collins (strategy) | **ACTIVE -- SOLE INCOME** | $2,500 (Option B @ 1/3) | Pharmacy qualification system: scoring engine, Wix Studio/Velo integration, strategic reports, GLP-1 targeting database (41,775 pharmacies), portfolio analysis | `~/Desktop/RetailMyMeds/` (deliverables), `~/Projects/texume/` (source/templates), Render API (not yet live) |
 
-**Remaining issues:**
-- 2 missing OG images (most added Jan 12)
+### RetailMyMeds Engagement Rules (MANDATORY -- overrides all defaults)
 
-**JobTrack sites use better architecture** - nachbar has 13 files, 3390 lines. Use as reference for new sites.
+**1. Numerical Accuracy is Non-Negotiable**
+- Every number in every deliverable must be reproducible from the source data
+- When a number is an estimate, it MUST be labeled as an estimate with the methodology visible
+- One formula per metric, used consistently across ALL assets (CSV, PDF reports, email). No mixing gross/net ROI, no rounding inconsistencies between documents
+- Before any deliverable is sent: run programmatic validation against the CSV/data source. Reading source code is not validation. Running the numbers is.
+- If a discrepancy is found, ALL assets containing that metric must be corrected and recompiled before anything ships. No partial fixes.
 
----
-## LATEST GOVERNANCE UPDATE (Nov 23, 2025)
-**Applies to ALL projects. Overrides previous conflicting instructions.**
+**2. Kevin is a Developer, Not a Client Receiving Instructions**
+- Kevin owns the Wix Studio implementation. He is building the site. He wants involvement and ownership.
+- Deliverables should position Kevin as the implementor with full control, not as someone following a deployment checklist
+- Velo code, API specs, and technical docs are resources he can use, modify, or replace -- not instructions to follow
+- Frame Matthew's work as "here's what I built and how it works" not "here's what you need to do"
+- With proper access, Matthew's proposed system can alleviate manual work -- communicate this as capability, not as tasks for Kevin
 
-### 1. Tabula Rasa Law (Context Integrity)
-- **CRITICAL**: NEVER bake personal context (mortgages, health, specific location) into prompts or models.
-- If an AI tool generates personal life advice, **DISCARD IMMEDIATELY**. It is a hallucination/context leak.
-- **Strict Scope**: Actions must map to Operational Assets (Repos, Deployments, Revenue).
+**3. Trust Through Truth**
+- This engagement exists to build a personal relationship. Trust is earned through accurate, honest work -- not volume of deliverables
+- Never fabricate, overstate, or allow ambiguity in anything sent to Kevin or Arica
+- Assume the recipient is a numbers person. Every claim must survive scrutiny from someone who will check the math
+- Assets must be presentable beyond Kevin -- he may share them with partners, investors, or Arica's contacts
+- We are not selling. We are earning trust through quality delivery.
 
-### 2. Work Mode: CAPITALIZATION PHASE
-- **Current Phase**: `DEPLOY` -> **`SELL`**
-- We are no longer just building tools. We are capitalizing on them.
-- **Required Focus**:
-  1. Monetize deployed assets (add user-facing interfaces)
-  2. Package tools for sale (courses, templates, consulting)
-  3. Assess repos for value (not just deployability)
+**4. Large File Integrity**
+- The GLP-1 targeting CSV (41,775 rows, 36 columns) is the backbone of the engagement
+- No shortcuts on validation. Every column, every formula, every distribution claim must be programmatically verified before delivery
+- When reports reference CSV data, the specific numbers must match exactly -- not "approximately"
 
-### 3. AI + Python Hybrid Pattern
-- Use AI for: qualitative tasks (code generation, recommendations, style interpretation)
-- Use Python for: quantitative tasks (scoring, math, deterministic logic, music theory)
-- Don't use AI for: static inventory (CLI tools + JSON simpler)
-- Small models can't do arithmetic reliably (proven Nov 22)
-- **LLMs generate musically incorrect tabs** (proven Dec 10) - Use deterministic Python for note generation, AI only for "aggressive metal" → {root: E, scale: phrygian, pattern: pedal} style interpretation
-
-### 4. Deployment Gotchas (Learned Nov 23, updated Dec 11)
-- **Vercel**: Defaults to auth-protected. Disable "Vercel Authentication" in Project Settings → Deployment Protection
-- **Railway**: Requires PORT from environment variable (not hardcoded 8000). Free plan has project limit - use Render for new Python APIs.
-- **Render**: Use "Public Git Repository" URL option if GitHub app doesn't show repo. Start command for FastAPI: `uvicorn main:app --host 0.0.0.0 --port $PORT`. Free tier spins down after 15min (~30sec cold start).
-- **Vercel + GitHub**: Auto-connects when repo is pushed, enables CI/CD automatically
-
-### 5. Session Management
-- **NEVER suggest closing sessions** - User keeps terminals open and returns after breaks
-- **NEVER assume fatigue** - You don't know if user just woke up or took a break
-- **NEVER say "you've been working X hours"** - Sessions span multiple days
-- **DO provide natural stopping points** when work is complete (all committed, clean state)
-- **DO ask** "continue or pause?" instead of "let's close"
-- **User controls session boundaries**, not you
-
-### 6. Decision Communication (Direct, Fix-First)
-- **Try to fix it yourself FIRST** - Don't ask unless blocked
-- **State what you know clearly** - Don't hide knowledge behind options
-- **Recommend explicitly** - "Option C is right because X, Y, Z"
-- **Only ask when**: security risk OR user preference materially affects outcome
-
-**Pattern**:
-❌ Bad: "Here are 3 options..." (secretly knowing C is right)
-❌ Bad: "Do you want me to fix this?" (just fix it)
-✅ Good: Fix it, then show: "Fixed. Here's the result: [URL/command]"
-✅ Good: "Two valid approaches: A gives [outcome], B gives [outcome]. Which result do you want?"
-
-**Why**: User wants working software, not decisions. Execute toward results.
-
-### 7. Deployment Discovery (Nov 26, 2025)
-**MANDATORY for any deployment work:**
-- Run `claude-discover [URL]` before building
-- Test ALL found deployments with Playwright
-- Compare quality, choose best foundation
-- **Prevents building on wrong codebase** (OurJourney lesson)
-- Full protocol: @~/.claude/reference/deployment-discovery-protocol.md
-
-### 8. Execution Bias (Not Fear Avoidance)
-- **Never frame sales/outreach as "scary"** - It's just work, like coding
-- **Don't suggest** "building feels safer" - Building and selling are both execution
-- **Don't assume** user is avoiding hard conversations - They're strategic about timing
-- **Do recommend** direct next actions without psychological commentary
-- **Pattern**: "Next: Reach out to 10 healthcare CIOs" NOT "scary but necessary"
+**5. Operational**
+- Prioritize over ALL other work (demo sites, portfolio, personal projects) when Kevin/Arica are waiting
+- Track hours honestly -- current estimate: ~61 hrs across Phases 0-1.5
+- All deliverables organized at `~/Desktop/RetailMyMeds/` (committed to texume repo)
+- Nothing is deployed/live until Kevin explicitly integrates -- do not represent otherwise

@@ -28,6 +28,7 @@ Ultrathink activates automatically when ANY of these thresholds are met:
 | Cross-project impact | Changes affecting 2+ deployments | Shared component update |
 | Data migration | Schema changes, data transformations | Database restructure |
 | Third-party integration | New external service dependency | Adding Stripe, Twilio |
+| Multi-doc update sweep | Lessons learned affecting 3+ reference docs | New pitfalls, workflow changes, standard updates |
 
 **Manual trigger still works:** User says "ultrathink" or "use ultrathink"
 
@@ -86,7 +87,7 @@ When triggered (automatic or manual):
 Skip ultrathink for:
 - Single file changes
 - Bug fixes with obvious solutions
-- Documentation updates
+- Single-file documentation updates (for cross-cutting doc sweeps, ultrathink DOES apply)
 - Style/formatting changes
 - Adding tests to existing code
 - Simple feature additions (<3 files)

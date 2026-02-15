@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Build Tier 4 site: Louisville Law Firm",
+  "description": "Copy tier4-enterprise template, customize for a Louisville law firm. Research business, set brand colors, customize services, verify images, build, deploy to Vercel.",
+  "activeForm": "Building Louisville Law Firm site",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

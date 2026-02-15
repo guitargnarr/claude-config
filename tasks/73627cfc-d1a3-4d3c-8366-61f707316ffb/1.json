@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Complete post-deploy for full-tilt-gym",
+  "description": "OG image deployed. Assets in portfolio directories. Need: portfolio card in App.jsx, redeploy. Also clean up duplicate in phishguard-ui/.",
+  "activeForm": "Completing full-tilt-gym post-deploy",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

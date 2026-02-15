@@ -1,0 +1,9 @@
+{
+  "id": "8",
+  "subject": "Rewrite Red Thread GP5 generator with musically cohesive content",
+  "description": "Complete rewrite of red_thread_gp5.py addressing: (1) actual riffs not just chord blocks, (2) ghost notes on drums, (3) rhythmic variation within sections, (4) Track 1 constant E pulse throughout, (5) drum fills at transitions, (6) bass track on all songs, (7) Runloop velocity wave, (8) proper melodic motifs",
+  "activeForm": "Rewriting Red Thread GP5 generator",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

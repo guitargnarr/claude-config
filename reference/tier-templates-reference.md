@@ -1,7 +1,7 @@
 # Tier Templates Reference
 
 **Created:** January 4, 2026
-**Updated:** January 17, 2026
+**Updated:** February 5, 2026
 **Purpose:** Reference templates for client website development with proven UI/UX patterns
 **Status:** DEPLOYED - All templates live and tested
 
@@ -9,28 +9,29 @@
 
 ## Quick Reference (TOC)
 
-| Section | Line | Description |
-|---------|------|-------------|
-| [Lighthouse Scores](#lighthouse-scores) | 30 | Performance metrics for all tiers |
-| [Content Rules](#content-rules-critical---jan-2026) | 53 | No fabricated testimonials |
-| [Portfolio Presentation](#portfolio-presentation-jan-2026) | 75 | Device mockups for projectlavos.com |
-| [Template URLs](#template-urls) | 100 | Live URLs and local paths |
-| [Tech Stack](#tech-stack-all-templates) | 112 | Vite, React, Tailwind, Framer Motion |
-| **Tier Templates** | | |
-| [Tier 1: Essential](#tier-1-essential-landing-page) | 73 | Single-page, scroll nav, contact form |
-| [Tier 2: Professional](#tier-2-professional-multi-page--booking) | 122 | Multi-page, booking wizard, gallery |
-| [Tier 3: Advanced](#tier-3-advanced-e-commerce--analytics) | 189 | E-commerce, cart, search/filter |
-| [Tier 4: Enterprise](#tier-4-enterprise-auth--api--toasts) | 254 | Auth, dashboard, toasts, charts |
-| **Shared Patterns** | | |
-| [CSS Variables](#css-variables-all-templates) | 398 | Brand colors, component classes |
-| [Accessibility (WCAG AA)](#accessibility-wcag-aa-compliance) | 455 | Contrast ratios, ARIA requirements |
-| [Error Boundaries](#error-boundaries) | 545 | Graceful error handling |
-| [Lazy Loading](#lazy-loading-images) | 636 | Image optimization patterns |
-| [Code Splitting](#code-splitting-architecture-note) | 677 | Route-based lazy loading |
-| **Interactive Effects** | | |
-| [3D Card Hover](#3d-card-hover-effects-tier-1) | 745 | Framer Motion transforms |
-| [Parallax Scroll](#parallax-scroll-effects-tier-1) | 835 | Background depth effects |
-| [Real-time Availability](#real-time-availability-tier-2-booking) | 906 | Booking slot simulation |
+| Section | Description |
+|---------|-------------|
+| [Lighthouse Scores](#lighthouse-scores) | Performance metrics for all tiers |
+| [Content Rules](#content-rules-critical---jan-2026) | No fabricated testimonials |
+| [Portfolio Presentation](#portfolio-presentation-jan-2026) | Device mockups for projectlavos.com |
+| [Template URLs](#template-urls) | Live URLs and local paths |
+| [Tech Stack](#tech-stack-all-templates) | Vite, React, Tailwind, Framer Motion |
+| [Tier 1: Essential](#tier-1-essential-landing-page) | Single-page, scroll nav, contact form |
+| [Tier 2: Professional](#tier-2-professional-multi-page--booking) | Multi-page, booking wizard, gallery |
+| [Tier 3: Advanced](#tier-3-advanced-e-commerce--analytics) | E-commerce, cart, search/filter |
+| [Tier 4: Enterprise](#tier-4-enterprise-auth--api--toasts) | Auth, dashboard, toasts, charts |
+| [CSS Variables](#css-variables-all-templates) | Brand colors, component classes |
+| [Accessibility (WCAG AA)](#accessibility-wcag-aa-compliance) | Contrast ratios, ARIA requirements |
+| [Error Boundaries](#error-boundaries) | Graceful error handling |
+| [Lazy Loading](#lazy-loading-images) | Image optimization patterns |
+| [Code Splitting](#code-splitting-architecture-note) | Route-based lazy loading |
+| [3D Card Hover](#3d-card-hover-effects-tier-1) | Framer Motion transforms |
+| [Parallax Scroll](#parallax-scroll-effects-tier-1) | Background depth effects |
+| [Real-time Availability](#real-time-availability-tier-2-booking) | Booking slot simulation |
+| [Entropy Particle Viz](#entropy-particle-visualization) | WebGPU/WebGL2 interactive particles |
+| [Crystalline Torus Knot](#crystalline-torus-knot) | React Three Fiber glass refraction hero |
+| [Animation-Driven Template](#animation-driven-template-quest) | 3D scenes responding to user input |
+| [Three.js Formations (9)](#threejs-formations-9-standalone-animations) | Glass animations: torus, lorenz, DNA, voronoi, neural, etc. |
 
 ---
 
@@ -78,8 +79,6 @@
 
 ## Portfolio Presentation (Jan 2026)
 
-**Standard operating procedure for representing client sites on projectlavos.com portfolio.**
-
 ### Screenshot Requirements
 
 | Viewport | Dimensions | Device | Use Case |
@@ -108,47 +107,6 @@
    - [MockUPhone](https://mockuphone.com) - 80+ devices, free
    - [DeviceMockup.app](https://devicemockup.app) - 219+ devices, local processing
 
-3. **Recommended device frames:**
-   - Mobile: iPhone 14 Pro (matches local script output)
-   - Tablet: iPad Pro 12.9" or iPad Air
-   - Desktop: MacBook Pro 16" (optional)
-
-4. **Store mockups** in project assets or portfolio directory
-
-**Full workflow documentation:** @~/.claude/reference/device-mockup-workflow.md
-**Proven with:** copper-barrel-brewing (Jan 2026)
-
-### CSS Device Frame Component
-
-```tsx
-// Minimal iPhone frame - Tailwind only
-function iPhoneFrame({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="relative w-64 h-[520px] bg-slate-900 rounded-[2.5rem] p-2.5 shadow-2xl">
-      {/* Notch/Dynamic Island */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-10" />
-      {/* Screen */}
-      <div className="rounded-[2rem] overflow-hidden h-full">
-        <img src={src} alt={alt} className="w-full h-full object-cover object-top" loading="lazy" />
-      </div>
-    </div>
-  );
-}
-```
-
-### Hover Effects for Portfolio Cards
-
-```tsx
-// 3D tilt on hover with Framer Motion
-<motion.div
-  whileHover={{ y: -8, rotateX: 5, rotateY: -5 }}
-  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-  style={{ perspective: 1000 }}
->
-  {/* Card content with device mockup */}
-</motion.div>
-```
-
 ### Portfolio Card Requirements
 
 | Element | Source |
@@ -168,17 +126,7 @@ function iPhoneFrame({ src, alt }: { src: string; alt: string }) {
 - [ ] Site loads within 3 seconds
 - [ ] Mobile navigation functional
 
----
-
-## Overview
-
-These 4 tiered templates represent the canonical reference for client website development. Each tier builds on the previous, demonstrating progressively more complex features while maintaining consistent UX patterns.
-
-**Use these templates when:**
-- Building new client sites
-- Implementing UI/UX improvements
-- Adding interactive features
-- Setting up new React + Tailwind projects
+**Full workflow documentation:** @~/.claude/reference/device-mockup-workflow.md
 
 ---
 
@@ -377,10 +325,6 @@ const filteredProducts = products.filter(p => {
       </button>
     </div>
   </div>
-  <div className="p-6">
-    <h3 className="text-xl font-bold text-slate-800 group-hover:text-primary-600 mb-2 transition-colors">{product.name}</h3>
-    {/* ... */}
-  </div>
 </div>
 ```
 
@@ -419,6 +363,10 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
     }, 4000);
   }, []);
 
+  const removeToast = useCallback((id: string) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  }, []);
+
   return (
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}
@@ -434,7 +382,7 @@ addToast('success', 'Settings saved successfully!');
 
 **Animated Progress Ring:**
 ```tsx
-function ProgressRing({ progress, size = 60, strokeWidth = 6, color = 'primary' }) {
+function ProgressRing({ progress, size = 60, strokeWidth = 6 }: { progress: number; size?: number; strokeWidth?: number }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (progress / 100) * circumference;
@@ -463,7 +411,7 @@ function ProgressRing({ progress, size = 60, strokeWidth = 6, color = 'primary' 
 
 **Mini Sparkline Chart:**
 ```tsx
-function MiniSparkline({ data, color = 'primary' }) {
+function MiniSparkline({ data }: { data: number[] }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
@@ -484,48 +432,6 @@ function MiniSparkline({ data, color = 'primary' }) {
     </svg>
   );
 }
-```
-
----
-
-## Comparison Page Patterns
-
-**Enhanced CTA Buttons:**
-```tsx
-<a
-  href={`mailto:matthewdscott7@gmail.com?subject=${tier.name}%20Package%20Inquiry`}
-  className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 group ${
-    tier.popular
-      ? 'bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.02]'
-      : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 hover:shadow-md'
-  }`}
->
-  {tier.cta}
-  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-</a>
-```
-
-**Card Hover with Framer Motion:**
-```tsx
-<motion.div
-  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-  className="tier-card hover:shadow-2xl transition-shadow duration-300"
->
-  {/* Card content */}
-</motion.div>
-```
-
-**Feature Card with Icon Animation:**
-```tsx
-<motion.div
-  whileHover={{ y: -5, transition: { duration: 0.2 } }}
-  className="text-center p-6 rounded-xl bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-300 cursor-pointer group"
->
-  <div className="w-14 h-14 bg-teal-100 group-hover:bg-teal-500 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
-    <Icon className="w-7 h-7 text-teal-600 group-hover:text-white transition-colors duration-300" />
-  </div>
-  <h3 className="font-semibold text-slate-800 group-hover:text-teal-600 mb-2 transition-colors">{title}</h3>
-</motion.div>
 ```
 
 ---
@@ -625,15 +531,6 @@ All tier templates achieve **100% Lighthouse Accessibility score**. Key requirem
 <span className="text-primary-600">Highlighted text</span>
 ```
 
-**Hero CTAs with white background:**
-```tsx
-/* CORRECT */
-<Link className="bg-white text-primary-700 hover:bg-primary-50...">
-
-/* WRONG */
-<Link className="bg-white text-primary-600...">
-```
-
 ### ARIA Requirements
 
 **Role semantics matter:**
@@ -679,13 +576,9 @@ All templates include:
 
 ## Error Boundaries
 
-All tier templates include Error Boundaries for graceful error handling. This prevents entire app crashes when individual components fail.
-
-### Error Boundary Component Pattern
-
 ```tsx
 import { Component } from 'react';
-import type { ErrorInfo, ReactNode } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';  // MUST be separate import for verbatimModuleSyntax
 import { AlertTriangle } from 'lucide-react';
 
 interface ErrorBoundaryProps {
@@ -737,28 +630,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 }
 ```
 
-### Usage in App
-
-Wrap your entire app or specific sections:
-
+**Usage:**
 ```tsx
-function App() {
-  return (
-    <ErrorBoundary>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </ErrorBoundary>
-  );
-}
+<ErrorBoundary><BrowserRouter><AppContent /></BrowserRouter></ErrorBoundary>
 ```
 
-### TypeScript Import Note
-
-**IMPORTANT:** When using `verbatimModuleSyntax` in TypeScript, use separate type imports:
-
+**TypeScript Import Note:** When using `verbatimModuleSyntax`, use separate type imports:
 ```tsx
-// CORRECT - type-only import
+// CORRECT
 import { useState, Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
 
@@ -770,34 +649,7 @@ import { useState, Component, ErrorInfo, ReactNode } from 'react';
 
 ## Lazy Loading Images
 
-All templates use native lazy loading for images to improve initial page load performance.
-
-### Pattern
-
 Add `loading="lazy"` to any image that isn't immediately visible (below the fold):
-
-```tsx
-{/* Hero image - DON'T lazy load (above fold) */}
-<img src="/hero.jpg" alt="Hero" className="w-full h-96 object-cover" />
-
-{/* Gallery/product images - DO lazy load */}
-<img
-  src={product.image}
-  alt={product.name}
-  className="w-full h-48 object-cover"
-  loading="lazy"
-/>
-
-{/* User avatars in lists - DO lazy load */}
-<img
-  src={user.avatar}
-  alt=""
-  className="w-8 h-8 rounded-full"
-  loading="lazy"
-/>
-```
-
-### When to Use
 
 | Location | Lazy Load? | Reason |
 |----------|------------|--------|
@@ -807,21 +659,22 @@ Add `loading="lazy"` to any image that isn't immediately visible (below the fold
 | Gallery images | Yes | User scrolls to view |
 | Cart item images | Yes | Often in drawer/modal |
 
+```tsx
+{/* Hero image - DON'T lazy load (above fold) */}
+<img src="/hero.jpg" alt="Hero" className="w-full h-96 object-cover" />
+
+{/* Gallery/product images - DO lazy load */}
+<img src={product.image} alt={product.name} className="w-full h-48 object-cover" loading="lazy" />
+```
+
 ---
 
 ## Code Splitting (Architecture Note)
 
-### Current Template Design
+Templates are **single-file designs** (`App.tsx` contains all pages) for simplicity. They include `Suspense` and `PageLoading` components ready for code splitting.
 
-The tier templates are **single-file designs** (`App.tsx` contains all pages) for simplicity and portability. They include `Suspense` and `PageLoading` components ready for code splitting if you extract pages to separate files.
-
-### Ready-to-Use Infrastructure
-
-Templates already have:
+**PageLoading component:**
 ```tsx
-import { Suspense } from 'react';
-
-// PageLoading component for Suspense fallback
 function PageLoading() {
   return (
     <div className="flex items-center justify-center min-h-[400px]" role="status" aria-label="Loading page content">
@@ -831,55 +684,28 @@ function PageLoading() {
 }
 ```
 
-### To Enable Route-Based Code Splitting
-
-If you extract pages to separate files:
-
+**To enable route-based code splitting** (when extracting pages to separate files):
 ```tsx
-// 1. Create separate page files
-// src/pages/HomePage.tsx
-// src/pages/AboutPage.tsx
-// src/pages/ServicesPage.tsx
-
-// 2. Use React.lazy in App.tsx
 import { lazy, Suspense } from 'react';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
-// 3. Wrap routes in Suspense
 <Routes>
   <Route path="/" element={
-    <Suspense fallback={<PageLoading />}>
-      <HomePage />
-    </Suspense>
+    <Suspense fallback={<PageLoading />}><HomePage /></Suspense>
   } />
   <Route path="/about" element={
-    <Suspense fallback={<PageLoading />}>
-      <AboutPage />
-    </Suspense>
+    <Suspense fallback={<PageLoading />}><AboutPage /></Suspense>
   } />
 </Routes>
 ```
 
-### When to Extract Pages
-
-**Keep single-file design when:**
-- Template is reference/demo only
-- Site has < 5 pages
-- Each page shares most components
-
-**Extract to separate files when:**
-- Site has 5+ distinct pages
-- Individual pages have heavy dependencies
-- Need to optimize bundle size for production
+**When to extract pages:** Site has 5+ distinct pages, individual pages have heavy deps, need to optimize bundle size.
 
 ---
 
 ## 3D Card Hover Effects (Tier 1+)
-
-All tier templates include 3D card hover effects using Framer Motion's `useMotionValue` and `useTransform` hooks, creating smooth interactive depth effects with spring-based animations.
 
 ### Hook Implementation (Framer Motion)
 
@@ -890,11 +716,9 @@ function use3DCard() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Transform mouse position to rotation values
   const rotateX = useTransform(y, [-0.5, 0.5], [10, -10]);
   const rotateY = useTransform(x, [-0.5, 0.5], [-10, 10]);
 
-  // Spring animation for smooth transitions
   const springRotateX = useSpring(rotateX, { stiffness: 150, damping: 20 });
   const springRotateY = useSpring(rotateY, { stiffness: 150, damping: 20 });
 
@@ -902,36 +726,19 @@ function use3DCard() {
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    // Normalize to -0.5 to 0.5 range
-    x.set((mouseX - centerX) / rect.width);
-    y.set((mouseY - centerY) / rect.height);
+    x.set((e.clientX - rect.left - centerX) / rect.width);
+    y.set((e.clientY - rect.top - centerY) / rect.height);
   };
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const handleMouseLeave = () => { x.set(0); y.set(0); };
 
-  return { x, y, rotateX: springRotateX, rotateY: springRotateY, handleMouseMove, handleMouseLeave };
+  return { rotateX: springRotateX, rotateY: springRotateY, handleMouseMove, handleMouseLeave };
 }
 ```
 
-### CSS Classes (index.css)
+**CSS:** `.card-3d { perspective: 1000px; }`
 
-```css
-@layer components {
-  /* 3D Card Hover Effect */
-  .card-3d {
-    perspective: 1000px;
-  }
-}
-```
-
-### Usage Example
-
+**Usage:**
 ```tsx
 function ServiceCard3D({ service }: { service: { title: string; description: string } }) {
   const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DCard();
@@ -941,11 +748,7 @@ function ServiceCard3D({ service }: { service: { title: string; description: str
       <motion.article
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d',
-        }}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         className="card p-6 cursor-pointer"
@@ -958,31 +761,18 @@ function ServiceCard3D({ service }: { service: { title: string; description: str
 }
 ```
 
-### Benefits of Framer Motion Implementation
-
-- **Smoother animations:** Spring-based transforms vs manual CSS
-- **No direct DOM manipulation:** Uses motion values instead of `style.transform`
-- **Automatic spring reset:** Mouse leave smoothly animates back to origin
-- **Better performance:** Framer Motion optimizes animation frames
-
 ---
 
 ## Parallax Scroll Effects (Tier 1+)
 
-All tier templates include parallax scrolling effects for hero sections, creating depth as users scroll.
-
 ### Hook Implementation
 
 ```tsx
-import { useState, useEffect } from 'react';
-
 function useParallax() {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setOffset(window.pageYOffset);
-    };
+    const handleScroll = () => setOffset(window.pageYOffset);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -991,19 +781,9 @@ function useParallax() {
 }
 ```
 
-### CSS Classes (index.css)
+**CSS:** `.parallax-hero { background-attachment: fixed; background-position: center; background-size: cover; }`
 
-```css
-/* Parallax Hero Background */
-.parallax-hero {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-```
-
-### Usage Example
+### Usage
 
 ```tsx
 function Hero() {
@@ -1011,7 +791,6 @@ function Hero() {
 
   return (
     <section className="relative text-white py-20 md:py-32 overflow-hidden">
-      {/* Parallax Background */}
       <div
         className="absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700"
         style={{
@@ -1024,8 +803,6 @@ function Hero() {
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-primary-900/70" aria-hidden="true" />
-
-      {/* Content with reverse parallax */}
       <div className="relative max-w-6xl mx-auto px-4 text-center">
         <h1 style={{ transform: `translateY(${parallaxOffset * -0.1}px)` }}>
           Your Business Name
@@ -1039,8 +816,6 @@ function Hero() {
 ---
 
 ## Real-time Availability (Tier 2 Booking)
-
-The Tier 2 Professional template includes real-time availability simulation for booking time slots.
 
 ### Hook Implementation
 
@@ -1057,14 +832,12 @@ function useSlotAvailability() {
     ];
     const statuses: SlotAvailability[] = ['available', 'limited', 'unavailable'];
 
-    // Initialize with random availability
     const initialAvailability: Record<string, SlotAvailability> = {};
     slots.forEach(slot => {
       initialAvailability[slot] = statuses[Math.floor(Math.random() * 3)];
     });
     setAvailability(initialAvailability);
 
-    // Simulate real-time updates every 30 seconds
     const interval = setInterval(() => {
       const updatedSlot = slots[Math.floor(Math.random() * slots.length)];
       setAvailability(prev => ({
@@ -1080,104 +853,101 @@ function useSlotAvailability() {
 }
 ```
 
-### CSS Classes (index.css)
+### CSS Classes
 
 ```css
-/* Time slot availability indicators */
-.slot-available {
-  @apply bg-green-100 text-green-700 hover:bg-green-200;
-}
-.slot-limited {
-  @apply bg-yellow-100 text-yellow-700 hover:bg-yellow-200;
-}
-.slot-unavailable {
-  @apply bg-slate-100 text-slate-400 cursor-not-allowed;
-}
+.slot-available { @apply bg-green-100 text-green-700 hover:bg-green-200; }
+.slot-limited { @apply bg-yellow-100 text-yellow-700 hover:bg-yellow-200; }
+.slot-unavailable { @apply bg-slate-100 text-slate-400 cursor-not-allowed; }
 ```
 
-### Usage Example
+### Usage
 
 ```tsx
-function TimeSlots() {
-  const slotAvailability = useSlotAvailability();
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const timeSlots = ['9:00 AM', '10:00 AM', '11:00 AM', /* ... */];
+{/* Legend */}
+<div className="flex gap-2 text-xs mb-4">
+  <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-green-500" /> Available</span>
+  <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-yellow-500" /> Limited</span>
+  <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-slate-300" /> Full</span>
+</div>
 
-  return (
-    <div className="card p-6">
-      {/* Legend */}
-      <div className="flex gap-2 text-xs mb-4">
-        <span className="flex items-center gap-1">
-          <span className="w-3 h-3 rounded-full bg-green-500" /> Available
-        </span>
-        <span className="flex items-center gap-1">
-          <span className="w-3 h-3 rounded-full bg-yellow-500" /> Limited
-        </span>
-        <span className="flex items-center gap-1">
-          <span className="w-3 h-3 rounded-full bg-slate-300" /> Full
-        </span>
-      </div>
-
-      {/* Time Slots */}
-      <div className="grid grid-cols-3 gap-2">
-        {timeSlots.map((time) => {
-          const availability = slotAvailability[time] || 'available';
-          const isUnavailable = availability === 'unavailable';
-
-          return (
-            <button
-              key={time}
-              onClick={() => !isUnavailable && setSelectedTime(time)}
-              disabled={isUnavailable}
-              className={`py-2 px-3 rounded text-sm font-medium ${
-                selectedTime === time
-                  ? 'bg-primary-500 text-white'
-                  : isUnavailable
-                    ? 'slot-unavailable'
-                    : availability === 'limited'
-                      ? 'slot-limited'
-                      : 'slot-available'
-              }`}
-            >
-              {time}
-            </button>
-          );
-        })}
-      </div>
-      <p className="text-xs text-slate-500 mt-3" aria-live="polite">
-        Availability updates in real-time
-      </p>
-    </div>
-  );
-}
+{/* Slots */}
+<div className="grid grid-cols-3 gap-2">
+  {timeSlots.map((time) => {
+    const avail = slotAvailability[time] || 'available';
+    return (
+      <button key={time} onClick={() => avail !== 'unavailable' && setSelectedTime(time)}
+        disabled={avail === 'unavailable'}
+        className={`py-2 px-3 rounded text-sm font-medium ${
+          selectedTime === time ? 'bg-primary-500 text-white'
+            : avail === 'unavailable' ? 'slot-unavailable'
+            : avail === 'limited' ? 'slot-limited' : 'slot-available'
+        }`}>
+        {time}
+      </button>
+    );
+  })}
+</div>
+<p className="text-xs text-slate-500 mt-3" aria-live="polite">Availability updates in real-time</p>
 ```
+
+---
+
+## Animation-Driven Template (Quest)
+
+**Live URL:** https://portfolio-website-one-mu-68.vercel.app/quest
+**Local Path:** ~/Projects/portfolio-website
+
+Interactive/educational sites where user interaction drives 3D visual feedback. Core pattern: state lifting + smooth `useRef` interpolation. 4 demo components (Entropy, Gini, Bayes, RSA) feed state to 4 matching 3D scenes. Uses `@react-three/fiber` + `@react-three/drei`.
+
+**Adapts to:** Music visualizers, data dashboards, portfolio hover effects, games.
 
 ---
 
 ## Usage Guidelines
 
-### When Building New Client Sites
+**New sites:** Choose tier, copy template, reference patterns here, apply brand colors, test interactive features.
+**Adding features:** Check higher tier first, copy exact implementation, adapt styling, test in isolation.
+**Priority:** Tier 4 > 3 > 2 > 1 (highest tier = most refined pattern).
 
-1. **Choose the appropriate tier** based on client needs
-2. **Copy the template** as starting point
-3. **Reference patterns** from this document for consistent UI/UX
-4. **Apply brand colors** using Tailwind config
-5. **Test all interactive features** before deployment
+---
 
-### When Adding Features to Existing Sites
+## Specialty Components (Full docs in dedicated reference files)
 
-1. **Check if pattern exists** in a higher tier template
-2. **Copy the implementation** exactly as documented
-3. **Adapt styling** to match existing site brand
-4. **Test the feature** in isolation before integrating
+| Component | Demo URL | Full Reference |
+|-----------|----------|----------------|
+| Entropy Particle Viz | entropy-viz.vercel.app | @~/.claude/reference/entropy-viz-component.md |
+| Crystalline Torus Knot | guitar-model-lab-ui.vercel.app | @~/.claude/reference/torus-knot-component.md |
+| Three.js Formations (9) | localhost:8877 | @~/.claude/reference/formations-component.md |
 
-### Pattern Priority
+### Client Site Matching (Quick Lookup)
 
-When multiple approaches exist, prefer patterns from:
-1. Tier 4 (most refined, includes feedback systems)
-2. Tier 3 (e-commerce patterns)
-3. Tier 2 (form validation, multi-step)
-4. Tier 1 (basic interactions)
+Each site needs TWO formations: one hero + one section background. Pick different formations for each.
+
+| Business Type | Hero Formation | Section BG Formation | Layout Style | Proven At |
+|---------------|---------------|---------------------|--------------|-----------|
+| Med spa / aesthetics | Torus Knot (rose #c9a0a0) | DNA Helix (pink) | Zigzag features, centered stats, glass contact | scout-aesthetics.vercel.app |
+| Law / Consulting | Voronoi (gold #a0865c) | Neural Mesh (blue) | Anchor+grid features, timeline stats, multi-office contact | morgan-pottinger-mcgarvey.vercel.app |
+| Finance / Advisory | L-System Tree (emerald #6cc89a) | Orbital System (green) | Icon-strip features, 2x2 stats, split-screen contact | pillar-financial-advisors.vercel.app |
+| Tech/SaaS | Neural Mesh or Entropy Viz | Orbital System | Grid features, dashboard-style stats | |
+| Healthcare | DNA Helix | L-System Tree | Card features, large-number stats | |
+| Data/Analytics | Lorenz Attractor | Voronoi | Metric-heavy layout | |
+| Luxury retail / jewelry | Torus Knot (amber #c8956c) | Mobius Strip | Minimal features, editorial stats | |
+| Creative Agency | Mobius Strip | Torus Knot | Asymmetric features, gallery contact | |
+| Cybersecurity | Governance Cascade | Neural Mesh | Pipeline features, uptime stats | |
+
+### Site Differentiation Standard (Feb 2026 -- MANDATORY)
+
+No two client sites should look the same below the hero. Differentiate across 4 axes:
+
+| Axis | Examples (proven) |
+|------|-------------------|
+| **CSS personality** | Pillowy 24px radius + pill buttons (med spa) vs Sharp 8px + uppercase buttons (law) vs Green-bordered 16px + stable hover (finance) |
+| **Features layout** | Zigzag alternating rows vs Anchor card + small grid vs Icon header strip cards |
+| **Stats layout** | Large centered numbers on dark band vs Horizontal timeline with dividers vs 2x2 glass cards on dark bg |
+| **Contact layout** | Centered glass-morphism card vs Multi-office grid + map vs Split-screen dark panel + map |
+
+**Integration pattern:** useEffect + vanilla Three.js (NOT iframe). See formations-component.md Pattern C.
 
 ---
 
@@ -1185,8 +955,13 @@ When multiple approaches exist, prefer patterns from:
 
 - **Deployment Inventory:** @~/.claude/reference/deployment-inventory.md
 - **Workflows:** @~/.claude/reference/workflows.md
-- **Brand System:** See `splendid-jumping-kahan.md` plan
+- **Elite Frontend Playbook:** @~/.claude/skills/frontend-design/ELITE_FRONTEND_PLAYBOOK.md
+- **Device Mockup Workflow:** @~/.claude/reference/device-mockup-workflow.md
+- **Client Site Assets SOP:** @~/.claude/reference/client-site-assets-sop.md
+- **Formations (Full):** @~/.claude/reference/formations-component.md
+- **Entropy Viz:** @~/.claude/reference/entropy-viz-component.md
+- **Torus Knot (React):** @~/.claude/reference/torus-knot-component.md
 
 ---
 
-**Last Updated:** January 17, 2026 (TOC added, Lighthouse scores synced with CATALOG.md)
+**Last Updated:** February 9, 2026

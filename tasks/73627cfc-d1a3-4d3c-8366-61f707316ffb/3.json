@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Complete post-deploy for caviar-creative-co",
+  "description": "OG image returns 404. Missing og:image URL in meta. No portfolio assets generated. Need: generate assets, add OG meta, redeploy, add portfolio card.",
+  "activeForm": "Completing caviar-creative-co post-deploy",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

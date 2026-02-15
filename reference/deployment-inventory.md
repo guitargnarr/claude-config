@@ -1,9 +1,9 @@
 # Deployment Inventory
 
-**Last Updated:** 2026-01-17
-**Total:** 94 live URLs | 86 code projects | 51 Vercel | 6 Render | 51 Ollama models
-**Status:** ALL 13 projectlavos.com URLs + 51 client demo sites VERIFIED HTTP 200
-**Note:** 51 Ollama models are local AI models, not web URLs
+**Last Updated:** 2026-02-09
+**Total:** 88 code projects | 67 client demo sites (63 deployed) | 51 Ollama models
+**Platforms:** 55 Vercel apps | 8 Render APIs | 3 custom domains | 13 projectlavos.com subdomains
+**Canonical site count:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
 ---
 
@@ -28,8 +28,9 @@
 | about. | ~/Projects/projectlavos-monorepo/about | About page | 200 |
 | mirador. | ~/Projects/projectlavos-monorepo/services/mirador | Mirador AI | 200 |
 | ourjourney. | ~/Projects/Personal/personal-journey | Coparenting app | 200 |
-| jobtrack. | ~/Projects/jobtrack | Job tracker | 200 |
-| phishguard. | ~/Projects/phishguard-ui | PhishGuard | 200 |
+| jobtrack. | ~/Projects/job-search-automation/frontend | Jobway - Job search automation | 200 |
+| meridian. | ~/Projects/phishguard-ui | Meridian - US Economic Data Explorer | DNS pending |
+| phishguard. | ~/Projects/phishguard-ui | (redirect to meridian) | 200 |
 | ba-pathfinder. | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | BA career guide | 200 |
 | resume. | ~/Projects/interactive-resume | Interactive resume | 200 |
 | prompts. | ~/Desktop/Manus/prompt-fact | Prompt factory | 200 |
@@ -37,15 +38,15 @@
 
 ---
 
-## Vercel Apps (13 with .vercel.app URLs)
+## Vercel Apps (14 with .vercel.app URLs)
 
 | URL | Local Path | GitHub |
 |-----|------------|--------|
 | interactive-resume-ten-pi.vercel.app | ~/Projects/interactive-resume | guitargnarr/interactive-resume |
 | ourjourney-app.vercel.app | ~/Projects/Personal/personal-journey | guitargnarr/OurJourney |
-| jobtrack-two.vercel.app | ~/Projects/jobtrack | guitargnarr/jobtrack |
+| jobway-eosin.vercel.app | ~/Projects/job-search-automation/frontend | guitargnarr/job-search-automation |
 | ba-pathfinder.vercel.app | ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder | guitargnarr/ba-pathfinder |
-| phishguard-ui.vercel.app | ~/Projects/phishguard-ui | guitargnarr/phishguard-ui |
+| phishguard-ui.vercel.app | ~/Projects/phishguard-ui | guitargnarr/meridian |
 | jaspermatters-job-intelligence.vercel.app | ~/Projects/Career-Business/jaspermatters-job-intelligence | guitargnarr/jaspermatters-job-intelligence |
 | fret-vision.vercel.app | ~/Desktop/Manus/fret-vision | NO-GIT |
 | 2025-skills-to-know.vercel.app | ~/Desktop/Manus/2025-skills-to-know | NO-GIT |
@@ -53,7 +54,9 @@
 | mirador-enterprise.vercel.app | ~/Projects/projectlavos-monorepo/services/mirador-enterprise | guitargnarr/projectlavos-monorepo |
 | guitar-ebon.vercel.app | ~/Projects/projectlavos-monorepo/services/guitar | guitargnarr/projectlavos-monorepo |
 | services-teal.vercel.app | ~/Projects/projectlavos-monorepo/services | guitargnarr/projectlavos-monorepo |
+| portfolio-website-one-mu-68.vercel.app | ~/Projects/portfolio-website | guitargnarr/portfolio-website |
 | jcps-transfer.vercel.app | ~/Projects/Personal/jcps-boots | guitargnarr/jcps-boots |
+| entropy-viz.vercel.app | ~/Projects/entropy-viz | guitargnarr/entropy-viz |
 
 ---
 
@@ -67,18 +70,27 @@
 | tier4-enterprise.vercel.app | Auth + dashboard |
 | tier-comparison.vercel.app | Side-by-side comparison |
 
+### Specialty Templates
+
+| URL | Description | Local Path |
+|-----|-------------|------------|
+| portfolio-website-one-mu-68.vercel.app/quest | Animation-Driven (3D scenes + interactive demos) | ~/Projects/portfolio-website |
+| entropy-viz.vercel.app | WebGPU/WebGL2 Entropy Particle Viz (reusable component) | ~/Projects/entropy-viz |
+| guitar-model-lab-ui.vercel.app | Crystalline Torus Knot hero + Guitar Model Lab (reusable component) | ~/Projects/guitar-model-lab-ui |
+| LOCAL ONLY (localhost:8877) | 9 Three.js Formations (glass animations, Architectural Noir) | ~/Projects/texume/output/formations |
+
 **Reference:** @~/.claude/reference/tier-templates-reference.md
 
 ---
 
-## Client Demo Sites (51 deployed)
+## Client Demo Sites (63+ deployed)
 
 All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 **Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
 ### By Business Category
 
-**Healthcare/Medical (14):** affinity-dental, dermatology-associates-psc, dermcare-practitioners, dupont-pediatric-dentistry, gray-family-dentistry, jbh-dental, kentuckiana-gastro, kuhn-allergy, louisville-family-chiro, primary-express-care, rejuvenation-med-spa, springhurst-endo, vance-stovall-optometry
+**Healthcare/Medical (15):** affinity-dental, dermatology-associates-psc, dermcare-practitioners, dupont-pediatric-dentistry, gray-family-dentistry, jbh-dental, kentuckiana-gastro, kuhn-allergy, louisville-family-chiro, primary-express-care, rejuvenation-med-spa, scout-aesthetics, springhurst-endo, vance-stovall-optometry
 
 **Personal Services (10):** blown-away-bar, cleaning-by-regina, fritz-salon, highland-cleaners (x5 versions), jr-spa-salon, louisville-aesthetics, louisville-nails-spa, pilates-plus-louisville, lawnco-louisville
 
@@ -90,16 +102,21 @@ All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 
 **Real Estate (3):** halsey-flats, mallard-crossing, springs-stony-brook
 
-**Professional Services (4):** dgv-services, ky-family-lawyer, schwartz-bankruptcy, ln-credit-union
+**Professional Services (6):** dgv-services, ky-family-lawyer, morgan-pottinger-mcgarvey, pillar-financial-advisors, schwartz-bankruptcy, ln-credit-union
 
 **Conceptual/Demo (6):** auriga, forma, psyche-hub, threshold, umbra, uofl-demo
 
-### All 51 Sites Deployed (Jan 12, 2026)
-No remaining stub files or undeployed sites.
+### 3D Formation Heroes (Feb 2026)
+
+| Site | Formation | Color |
+|------|-----------|-------|
+| scout-aesthetics | Torus Knot (R3F) | Rose gold #c9a0a0 |
+| morgan-pottinger-mcgarvey | Voronoi Tessellation | Muted gold #a0865c |
+| pillar-financial-advisors | L-System Tree | Emerald #6cc89a |
 
 ---
 
-## Render APIs (6)
+## Render APIs (8)
 
 | URL | Local Path | Key Endpoints |
 |-----|------------|---------------|
@@ -109,6 +126,8 @@ No remaining stub files or undeployed sites.
 | mirador-xva2.onrender.com | ~/Projects/Security-Tools/mirador-test | /api/personas, /api/chains |
 | ourjourney-api.onrender.com | ~/Projects/Personal/personal-journey | /api/health, /api/ideas |
 | client-cms-api.onrender.com | ~/Projects/client-sites/client-cms/api | /health, /api/sites, /api/auth/login |
+| job-search-automation-18u9.onrender.com | ~/Projects/job-search-automation/backend | /api/v1/jobs, /api/v1/applications, /api/v1/ats |
+| outreach-api-miha.onrender.com | ~/Projects/outreach-api | /health, /businesses, /metrics, /auth/login |
 
 **Note:** Free tier spins down after 15min (~30sec cold start)
 
@@ -140,22 +159,23 @@ No remaining stub files or undeployed sites.
 
 ---
 
-## GitHub Repos with Deployments (12)
+## GitHub Repos with Deployments (13)
 
 | Repo | Deployment |
 |------|------------|
 | projectlavos-monorepo | projectlavos.com + subdomains |
 | ai-talent-optimizer | jobs.projectlavos.com + Render |
 | guitar-model-lab | guitar-model-lab.onrender.com |
-| phishguard-ui | phishguard.projectlavos.com |
+| meridian (was phishguard-ui) | meridian.projectlavos.com + phishguard.projectlavos.com |
 | interactive-resume | resume.projectlavos.com |
-| jobtrack | jobtrack.projectlavos.com |
+| job-search-automation | jobtrack.projectlavos.com + jobway-eosin.vercel.app |
 | OurJourney | ourjourney.projectlavos.com |
 | jaspermatters-job-intelligence | jaspermatters.com |
 | mirador | mirador-xva2.onrender.com |
 | ba-pathfinder | ba-pathfinder.projectlavos.com |
 | apartment-leasing-demo | frontend-mu-dusky-38.vercel.app |
 | jcps-boots | jcps-transfer.vercel.app |
+| outreach-api | outreach-api-miha.onrender.com |
 
 ---
 
@@ -166,10 +186,11 @@ No remaining stub files or undeployed sites.
 guitar.projectlavos.com       → ~/Projects/projectlavos-monorepo/services/guitar
 jobs.projectlavos.com         → ~/Projects/ai-talent-optimizer
 ourjourney.projectlavos.com   → ~/Projects/Personal/personal-journey
-jobtrack.projectlavos.com     → ~/Projects/jobtrack
+jobtrack.projectlavos.com     → ~/Projects/job-search-automation/frontend
 resume.projectlavos.com       → ~/Projects/interactive-resume
 mirador.projectlavos.com      → ~/Projects/projectlavos-monorepo/services/mirador
-phishguard.projectlavos.com   → ~/Projects/phishguard-ui
+meridian.projectlavos.com     → ~/Projects/phishguard-ui
+phishguard.projectlavos.com   → ~/Projects/phishguard-ui (redirect)
 ba-pathfinder.projectlavos.com → ~/Desktop/2_AI_PROJECTS_PORTFOLIO/ba-pathfinder
 prompts.projectlavos.com      → ~/Desktop/Manus/prompt-fact
 orchestrator.projectlavos.com → ~/Projects/projectlavos-monorepo/services/orchestrator
@@ -183,6 +204,8 @@ ai-talent-optimizer.onrender.com → ~/Projects/ai-talent-optimizer
 mirador-xva2.onrender.com     → ~/Projects/Security-Tools/mirador-test
 ourjourney-api.onrender.com   → ~/Projects/Personal/personal-journey
 client-cms-api.onrender.com   → ~/Projects/client-sites/client-cms/api
+job-search-automation-18u9.onrender.com → ~/Projects/job-search-automation/backend
+outreach-api-miha.onrender.com → ~/Projects/outreach-api
 ```
 
 **Deploy commands:** See @~/.claude/reference/workflows.md
@@ -191,8 +214,16 @@ client-cms-api.onrender.com   → ~/Projects/client-sites/client-cms/api
 
 ## Pending Actions
 
-- [ ] LOGIN: `render login`
-- [ ] LOGIN: `railway login`
+### CLI Login Status (Jan 17, 2026)
+
+| CLI | Status | Command |
+|-----|--------|---------|
+| Vercel | Logged in (guitargnar) | `vercel whoami` |
+| GitHub | Logged in (guitargnarr) | `gh auth status` |
+| Netlify | Logged in | `netlify status` |
+| Render | Logged in | `render login` |
+| Railway | Needs login (interactive) | `railway login` |
+| Supabase | Needs token | `supabase login` or set `SUPABASE_ACCESS_TOKEN` |
 
 ### Stale Vercel Apps (Not in URL count - need review)
 - chordgen-pro.vercel.app - status unknown
@@ -215,4 +246,4 @@ client-cms-api.onrender.com   → ~/Projects/client-sites/client-cms/api
 
 ---
 
-**Last Updated:** January 17, 2026 (URL count corrected to 94, Ollama clarification, Render Quick Lookup added)
+**Last Updated:** February 1, 2026 (jobtrack subdomain now points to Jobway/job-search-automation)

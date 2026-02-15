@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Rebuild Quiet Trade as 9-page cinematic document",
+  "description": "Cover + 8 full-page section spreads. Each page has a full-bleed CG background with white/cream text overlaid. Regenerate images at letter-page ratio, trim all section content to fit single pages, rebuild LaTeX template.",
+  "activeForm": "Rebuilding as cinematic full-page document",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}
