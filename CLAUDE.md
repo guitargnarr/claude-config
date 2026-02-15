@@ -4,12 +4,13 @@
 
 ### VISUAL PROOF OF COMPLETION (HIGHEST PRIORITY)
 **Nothing is "complete" until user can SEE and INTERACT with it:**
-- Web app? Must open in browser at a URL user can visit
+- Web app? Open the URL in user's browser (`open "https://..."`) -- user verifies, not Claude
 - CLI tool? Must show how to run it and demonstrate it working
 - API? Must demonstrate with actual request/response
 - **If you can't show it running, it's not done**
 - Don't just say "it's at /path/to/file" - show HOW TO USE IT
 - Results must be REPEATABLE - same command = same result every time
+- **Do NOT screenshot deployed sites and narrate what you see.** Open the URL for the user. Their eyes are the source of truth, not Claude's image interpretation.
 
 ### VERIFICATION HONESTY
 Reading source code is not visual verification. Reading a report is not numerical verification. Do not confuse either.
@@ -69,24 +70,53 @@ Before any commit: `npm run build` (JS/TS) or `flake8` (Python) must pass. Fix A
 - GitHub: guitargnarr (matthewdscott7@gmail.com)
 - **Deploy frontend:** `vercel --prod --yes` (no env vars) or `VITE_X=value vercel build --prod && vercel deploy --prebuilt --prod --yes` (with env vars -- Vite bakes at BUILD time)
 - **Deploy backend:** `git push origin main` (Render auto-deploys, ~30s cold start on free tier)
-- **Verify React apps:** Use Playwright (`npx playwright screenshot --wait-for-timeout=5000 "URL" verify.png`), NEVER curl/WebFetch
-- **Verify LOCALLY before deploying** - Run `npm run dev &` then Playwright against `http://localhost:5173` to catch rendering bugs in one cycle. Do NOT deploy to Vercel just to take a screenshot. Only deploy once the local screenshot confirms all sections render. This avoids wasting 3+ deploy round-trips on visual bugs (learned: clementine-cater invisible sections, Feb 2026).
+- **Playwright:** Installed globally (`@playwright/test` + `playwright`). Use `playwright screenshot` directly -- never `npx playwright` or per-project installs.
+- **Verify React apps:** `playwright screenshot --wait-for-timeout=5000 "URL" verify.png` -- NEVER curl/WebFetch
+
+### LOCAL-FIRST DEVELOPMENT (MANDATORY -- NO EXCEPTIONS)
+**Every frontend iteration MUST be tested locally before deploying. Deploying to Vercel just to take a screenshot is BANNED.**
+
+985 deploys in 30 days costs real build minutes. Each `vercel --prod` consumes ~30s of build time. The fix: **deploy ONCE per site, not once per iteration.**
+
+**Workflow:**
+1. Start dev server: `npm run dev -- --port 5199 &`
+2. Wait for ready: `sleep 3`
+3. Screenshot locally: `playwright screenshot --wait-for-timeout=5000 "http://localhost:5199" local-verify.png`
+4. Review screenshot, fix issues, repeat steps 3-4
+5. Build check: `npm run build` (must pass)
+6. **ONE** deploy: `vercel --prod --yes`
+7. Show user the live URL immediately -- let THEM verify visually
+
+**Port convention:** Always use `--port 5199` to avoid conflicts with other dev servers. If 5199 is occupied, use `--port 5198`. Never rely on Vite's default 5173 (may be taken).
+
+**Show, don't describe:** After deploying, open the live URL for the user (`open "https://site.vercel.app"`). Do NOT take multiple Vercel screenshots and describe what you see. The user's eyes are the final verification, not Claude's image analysis. Say "Deployed to [URL] -- please verify" rather than "I can see the hero section renders correctly."
+
+**Learned from:** clementine-cater invisible sections (Feb 2026), 160 main-site deploys in 30 days (Feb 2026).
 
 ## Critical Pitfalls
 - **pg8000 for Render** - NOT psycopg2-binary. Reference: `~/Projects/client-sites/client-cms/api/main.py`
 - **Vite env vars must be in build command** - Dashboard alone does nothing
-- **NO Tailwind v4** (use v3) - Exception: Next.js projects can use v4
+- **NO Tailwind v4** (use v3) - Exception: Next.js projects can use v4, **and quiet-trade-experience uses v4 (approved Feb 2026)**
 - **Absolute URLs for OG meta tags**
 - **Global gitignore blocks *.png** - `~/.gitignore_global` line 189. Every PNG (OG images, previews, QR codes, favicons, apple-touch-icons) requires `git add -f`. After staging, ALWAYS verify with `git ls-files --cached | grep '\.png'` to confirm the files are tracked. If the count doesn't match expectations, PNGs were silently dropped. This applies to every repo on this machine.
 - **Inventory deployments FIRST** - Check Vercel/Railway/Netlify before assuming local code is canonical
-- **WebFetch CANNOT verify React apps** - Always use Playwright with --wait-for-timeout=5000
+- **Guitar Pro must be quit before opening new .gp5 files** - Installed: Guitar Pro 7 (v7.6.0) at `/Applications/Guitar Pro 7.app`. If already running, `open file.gp5` silently fails. Always quit first: `osascript -e 'quit app "Guitar Pro 7"'; sleep 1; open file.gp5`. To verify it's running: `pgrep -f GuitarPro7`. To confirm what file is open, the process name alone doesn't reveal it -- only the user can verify visually. Do NOT claim a specific file is displayed in Guitar Pro unless the user confirms it.
+- **WebFetch CANNOT verify React apps** - Use `playwright screenshot --wait-for-timeout=5000` (global install, no npx)
 - **Formations: useEffect + vanilla Three.js, NOT iframe** - Embedding formation HTML via `<iframe>` causes rendering failures (blank/gray hero). Use React component with `useEffect` + `useRef` + vanilla Three.js instead. Proven: VoronoiHero.tsx, LSystemHero.tsx, DNAHelixBg.tsx, NeuralMeshBg.tsx, OrbitalSystemBg.tsx. Reference: formations-component.md Pattern C.
 - **Three.js Object.assign + position CRASHES at runtime** - `Object.assign(new THREE.PointLight(...), { position: new THREE.Vector3(...) })` fails silently at build but crashes at runtime ("Cannot assign to read only property 'position'"). Always use `light.position.set(x, y, z)` instead.
 - **OrbitControls hijacks mobile scroll** - Even with `enableRotate/Zoom/Pan = false`, OrbitControls attaches touch/wheel listeners that block scrolling. For decorative formations, remove OrbitControls entirely and use manual camera orbit: `cameraAngle += dt * 0.1; camera.position.x = Math.sin(cameraAngle) * radius; camera.position.z = Math.cos(cameraAngle) * radius; camera.lookAt(0,0,0);`. Also set `pointer-events: none` on canvas. Proven fix: VoronoiHero.tsx.
 - **framer-motion opacity:0 silently fails** - `motion.*` elements with `initial={{ opacity: 0 }}` / `animate={{ opacity: 1 }}` can stay invisible on mobile. Replace with plain HTML elements for critical visible content (headers, CTAs).
 - **isLowEnd device detection unreliable** - `navigator.hardwareConcurrency <= 4` doesn't catch modern iPhones. Only use `canUseWebGL()` as the WebGL guard -- no mobile width bypass or CPU-core checks.
 
-## Client Site Rules
+## Building Any Website (General Principle)
+When asked to build "the best site possible" or given source files to assemble:
+1. **Read the source material first.** Understand what it is -- a business, a personal project, an article, a portfolio, an app, a cause, an event. The content dictates the design, not a template.
+2. **Ask what the goal is** if not obvious from context. A memorial site, a SaaS launch, a research paper, and a music project demand completely different approaches.
+3. **Decide whether a tier template applies.** It might not. Storytelling experiences, data visualizations, interactive tools, documentation sites, and magazine layouts may need custom structure.
+4. **Design to the content.** 3D formations, cinematic sections, and Louisville business research are tools in the toolbox -- not the default answer for every project. If the content is poetry, serve poetry. If it's technical, clarity beats cinematic.
+5. **Then** apply universal standards: local-first development (port 5199), build check, one deploy, user verifies visually, accessible, performant, no fabricated content.
+
+## Client Site Rules (Louisville Business Demos)
 - Research the business first. NO fabricated testimonials/ratings/reviews. Verify Unsplash images return HTTP 200. No image reuse across sites.
 - **Workflow:** ~/.claude/reference/client-site-assets-sop.md | ~/Projects/client-sites/templates/SITE_GENERATION_GUIDE.md
 - **Templates:** ~/Projects/client-sites/templates/ (4 tiers)
@@ -110,7 +140,7 @@ When adding client sites to the portfolio at `projectlavos-monorepo/main-site/sr
 3. **Use cinematic OG as preview** -- for sites with cinematic OG images, set `preview` field to the OG path (not the old phone mockup)
 4. **Match `category` to `categoryGroups`** -- check the filter map in App.jsx so the site appears under the correct tab
 5. **Build before commit** -- `npm run build` from `main-site/`
-6. **Deploy with CRM env var** -- `VITE_OUTREACH_API_URL=https://outreach-api-miha.onrender.com vercel build --prod && vercel deploy --prebuilt --prod --yes`
+6. **Deploy** -- `vercel --prod --yes` (CRM now uses edge proxy `/api/outreach/` -- no env var needed)
 7. **Verify live** -- curl each PNG URL for HTTP 200, then Playwright screenshot the expanded grid
 
 ## Project Lavos Article & Report Template (Cinematic PDF)
@@ -181,7 +211,7 @@ Task complete ONLY when: user can see visual proof, tests pass, build succeeds, 
 | System | ~/.claude/TRANSFER_GUIDE.md, COLLABORATION_CONTRACT.md, COMMAND_MANIFEST.md |
 
 **Brand:** Teal (#14b8a6) / Orange (#f97316)
-**Quick Stats:** 88 code projects | 67 client demo sites (63 deployed) | 51 Ollama models
+**Quick Stats:** 43 GitHub repos | 69 client demo sites (69 deployed) | 51 Ollama models
 
 ## Governance (Nov 2025+)
 1. **Tabula Rasa** - Never bake personal context into prompts/models
