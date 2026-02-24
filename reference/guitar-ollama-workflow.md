@@ -233,5 +233,21 @@ The `guitarpro` Python library doesn't support GP8 format. Export to GP5 first.
 
 ---
 
-**Last Updated:** December 10, 2025
+## Songsterr Tab Extraction (Feb 2026)
+
+Separate from AI generation -- this extracts existing tabs directly from Songsterr's CDN as GP5 files.
+
+```bash
+python3 /Users/matthewscott/Music/covers/erra-further-eden/songsterr_to_gp5.py "<songsterr-url>"
+```
+
+**Repo:** `guitargnarr/songsterr-ripper` (private)
+**Full reference:** `~/.claude/reference/music-cover-workflow.md`
+**Capabilities:** Tempo changes, bend curves, all articulations, 40+ track songs, MIDI channel management
+
+Also includes **audio stem separation** pipeline (yt-dlp + audio-separator + ffmpeg) for isolating instruments from recordings. See music-cover-workflow.md for complete details.
+
+---
+
+**Last Updated:** February 23, 2026
 **Status:** Model active and verified

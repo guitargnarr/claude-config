@@ -1,7 +1,7 @@
 # Deployment Inventory
 
-**Last Updated:** 2026-02-15
-**Total:** 43 GitHub repos | 69 client demo sites (69 deployed) | 51 Ollama models
+**Last Updated:** 2026-02-23
+**Total:** 46 GitHub repos | 69 client sites (67 spec demos + 2 active retainer clients, 69 deployed) | 85 Ollama models
 **Platforms:** 110 Vercel projects | 12 Render APIs | 3 custom domains | 14 projectlavos.com subdomains
 **Canonical site count:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
 
@@ -58,6 +58,7 @@
 | portfolio-website-one-mu-68.vercel.app | ~/Projects/portfolio-website | guitargnarr/portfolio-website |
 | jcps-transfer.vercel.app | ~/Projects/Personal/jcps-boots | guitargnarr/jcps-boots |
 | entropy-viz.vercel.app | ~/Projects/entropy-viz | guitargnarr/entropy-viz |
+| quiet-trade-experience.vercel.app | ~/Projects/quiet-trade-experience | guitargnarr/quiet-trade-experience |
 
 ---
 
@@ -84,10 +85,15 @@
 
 ---
 
-## Client Demo Sites (69 deployed)
+## Client Sites (69 deployed)
 
 All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 **Full inventory:** ~/Projects/client-sites/CLIENT_SITES_INVENTORY.md
+
+### Active Client Sites (paying)
+| Site | Client | URL | Status |
+|------|--------|-----|--------|
+| clementine-cater | Clementine Catering (Steve Clements) | clementine-cater.vercel.app | PENDING FIRST PAYMENT -- retainer client, pushed to GitHub |
 
 ### By Business Category
 
@@ -161,6 +167,8 @@ All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 | ~/Projects/fretforge-v1 | Node.js | LOCAL-ONLY |
 | ~/Projects/tool-gmail-integration | Python | LOCAL-ONLY |
 | ~/Projects/mcp-vercel | Node.js | nganiet/mcp-vercel |
+| ~/Projects/quiet-trade-experience | React/Three.js | guitargnarr/quiet-trade-experience |
+| ~/Music/covers/erra-further-eden | Python | guitargnarr/songsterr-ripper (PRIVATE) |
 
 ---
 
@@ -181,6 +189,7 @@ All at ~/Projects/client-sites/ or ~/Projects/jobtrack/client-sites/ - NO-GIT
 | apartment-leasing-demo | frontend-mu-dusky-38.vercel.app |
 | jcps-boots | jcps-transfer.vercel.app |
 | outreach-api | outreach-api-miha.onrender.com |
+| quiet-trade-experience | quiet-trade-experience.vercel.app |
 
 ---
 

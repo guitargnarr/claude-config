@@ -1,7 +1,7 @@
 # Python Utilities Index
 
-**Updated:** 2026-02-08
-**Total:** 26 standalone Python utilities across 4 projects
+**Updated:** 2026-02-23
+**Total:** 27 standalone Python utilities across 5 projects
 **Note:** Claude scripts (.py) are also indexed in `automation-scripts-index.md`
 
 ---
@@ -16,6 +16,7 @@
 | Track parallel dev metrics | `~/.claude/scripts/parallel_metrics.py` |
 | Manage git worktrees | `~/.claude/scripts/worktree_manager.py` |
 | Generate guitar riffs | `guitar-model-lab/generate_riff.py` |
+| Extract Songsterr tabs to GP5 | `songsterr_to_gp5.py` |
 | Clean sensitive data from repo | `~/.claude/scripts/sanitize_repo.py` |
 | Verify dev environment | `~/.claude/scripts/validate_environment.py` |
 
@@ -116,8 +117,30 @@ python3 generate_riff.py --scale pentatonic --random --bars 4
 
 ---
 
+## Songsterr Tab Extraction (1)
+
+**Location:** `/Users/matthewscott/Music/covers/erra-further-eden/`
+**Repo:** `guitargnarr/songsterr-ripper` (private)
+**Deps:** `guitarpro`, `requests`, `playwright` (fallback only)
+
+| Script | Purpose |
+|--------|---------|
+| `songsterr_to_gp5.py` | Extract Songsterr tabs via CDN and convert to Guitar Pro 5 format |
+
+**Features:** Tempo changes (MixTableChange), bend curves (BendEffect), tuplet variants, MIDI channel overflow handling, track/filename sanitization, auto drum/vocal skip
+
+**Usage:**
+```bash
+python3 /Users/matthewscott/Music/covers/erra-further-eden/songsterr_to_gp5.py "https://www.songsterr.com/a/wsa/SONG-tab-sNNNNNN"
+```
+
+**Full reference:** `~/.claude/reference/music-cover-workflow.md`
+
+---
+
 ## Related
 
 - **Automation Scripts Index:** `~/.claude/reference/automation-scripts-index.md` (Shell + JS scripts)
 - **Ollama Model Manifest:** `~/.claude/reference/ollama-model-manifest.md`
 - **Command Manifest:** `~/.claude/COMMAND_MANIFEST.md` (which commands use which scripts)
+- **Music Cover Workflow:** `~/.claude/reference/music-cover-workflow.md` (stem separation + tab extraction)

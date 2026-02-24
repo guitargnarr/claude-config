@@ -1,6 +1,6 @@
 # Reference Documents Index
 
-**Total:** 51 documents (15,100+ lines)
+**Total:** 58 documents (~16,300 lines)
 **Location:** `~/.claude/reference/`
 **Updated:** 2026-02-08
 **Audit method:** Every file read, categorized, dated, line-counted
@@ -11,7 +11,7 @@
 
 | # | Category | Files | Lines | Status |
 |---|----------|-------|-------|--------|
-| 1 | [Reusable Components](#reusable-components-4) | 4 | 1,289 | Current |
+| 1 | [Reusable Components](#reusable-components-5) | 5 | 1,639 | Current |
 | 2 | [Client Site Development](#client-site-development-4) | 4 | 1,950 | Current |
 | 3 | [Deployment & Infrastructure](#deployment--infrastructure-4) | 4 | 988 | Current |
 | 4 | [Workflows & SOPs](#workflows--sops-4) | 4 | 666 | Current |
@@ -34,6 +34,7 @@ Drop-in 3D/visual components for client sites and portfolio.
 | `torus-knot-component.md` | 406 | Feb 7, 2026 | React Three Fiber crystalline glass knot (hero sections) |
 | `formations-component.md` | 465 | Feb 7, 2026 | 9 standalone Three.js glass animations (Architectural Noir) |
 | `oracle-query-pattern.md` | 92 | Feb 7, 2026 | Multi-model design query pipeline (design-oracle + atlas + elite-frontend) |
+| `scroll-driven-3d-experience.md` | 350 | Feb 15, 2026 | Replicable scroll-driven 3D storytelling (Tailwind v4, R3F, Web Audio, mobile scroll) — proven at The Quiet Trade |
 
 **Load with:** `@~/.claude/reference/[filename]`
 
@@ -63,10 +64,10 @@ Live systems, env vars, and deployment verification.
 
 | File | Lines | Updated | Purpose |
 |------|-------|---------|---------|
-| `deployment-inventory.md` | 242 | Feb 15, 2026 | 43 GitHub repos, 69 client sites (69 deployed), 12 Render APIs, 51 Ollama models |
+| `deployment-inventory.md` | 242 | Feb 20, 2026 | 45 GitHub repos, 69 client sites (69 deployed), 12 Render APIs, 85 Ollama models |
 | `deployment-discovery-protocol.md` | 409 | Jan 17, 2026 | OurJourney lesson: always inventory deployments before building |
 | `environment-secrets-checklist.md` | 92 | Feb 5, 2026 | Vercel/Render/Railway env var gotchas, Vite build-time baking |
-| `known-failure-patterns.md` | 69 | Feb 5, 2026 | Top 5 session-killing failures across 43 GitHub repos |
+| `known-failure-patterns.md` | 69 | Feb 5, 2026 | Top 5 session-killing failures across 45 GitHub repos |
 
 ---
 
@@ -171,10 +172,20 @@ Documentation tied to specific projects or workflows.
 | File | Lines | Updated | Purpose |
 |------|-------|---------|---------|
 | `MIRADOR_PATTERN_LEARNING_INTEGRATION.md` | 601 | Nov 20, 2025 | Mirador June 2025 pattern learning integration |
-| `guitar-ollama-workflow.md` | 237 | Dec 10, 2025 | guitar_expert_precise Ollama model workflow |
+| `guitar-ollama-workflow.md` | 253 | Feb 23, 2026 | guitar_expert_precise Ollama model workflow + Songsterr extraction cross-ref |
+| `gp7-xml-editing.md` | 140 | Feb 16, 2026 | GP7 (.gp) file format: ZIP/XML structure, required note properties, editing utility |
+| `music-cover-workflow.md` | 204 | Feb 23, 2026 | Two-pipeline cover workflow: audio stem separation (yt-dlp + audio-separator) + Songsterr tab extraction (CDN -> GP5) |
 | `merry-go-round-pattern.md` | 853 | Nov 17, 2025 | Rapid deploy pattern (4 commits/60 min), merry-go-round debugging |
 
 **Note:** `merry-go-round-pattern.md` at 853 lines is the 3rd largest file. Consider archiving if pattern is no longer used.
+
+---
+
+## Business Operations (1)
+
+| File | Lines | Updated | Purpose |
+|------|-------|---------|---------|
+| `business-formation.md` | 69 | Feb 20, 2026 | Project Lavos LLC formation tracker: timeline, deadlines, docs, financial setup |
 
 ---
 
@@ -200,8 +211,8 @@ Documentation tied to specific projects or workflows.
 
 | Metric | Value |
 |--------|-------|
-| Total files | 51 (+ 1 .backup) |
-| Total lines | ~15,100 |
+| Total files | 58 |
+| Total lines | ~16,300 |
 | Current (Jan-Feb 2026) | 20 files |
 | Recent (Nov-Dec 2025) | 15 files |
 | Foundational (Oct 2025) | 9 files |

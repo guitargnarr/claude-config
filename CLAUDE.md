@@ -33,6 +33,8 @@ If your verification attempt fails, say "I tried to check and couldn't get a usa
 
 The standard: only assert what you directly observed or computed, not what you expect the code or data to produce.
 
+Always ask: does the doc match reality, or did I just make reality match the doc?
+
 ### FIX BEFORE ASKING
 - If something is broken, TRY TO FIX IT before asking questions
 - Only ask if: (1) security concern, or (2) multiple valid paths and user preference affects outcome
@@ -59,7 +61,7 @@ Triggers automatically when: 5+ files affected, architectural decisions, securit
 - **Documentation:** Max 5 files per project, 500 lines each (READMEs prefer <200)
 - **Discovery first, then code:** For deployment work, inventory what exists before building
 - **Planning docs:** Extract action items into permanent docs (CLAUDE.md, SOPs, reference). Retain plans in `~/.claude/plans/` as historical decision records.
-- **Work mode:** Active client delivery (RetailMyMeds) supersedes SELL phase. When no client work is pending, resume consulting and platform building.
+- **Work mode:** Active client delivery supersedes SELL phase. All paying clients take equal priority. When no client work is pending, resume consulting and platform building.
 - Never use emojis unless explicitly requested
 
 ### Pre-Commit Quality (MANDATORY)
@@ -72,6 +74,10 @@ Before any commit: `npm run build` (JS/TS) or `flake8` (Python) must pass. Fix A
 - **Deploy backend:** `git push origin main` (Render auto-deploys, ~30s cold start on free tier)
 - **Playwright:** Installed globally (`@playwright/test` + `playwright`). Use `playwright screenshot` directly -- never `npx playwright` or per-project installs.
 - **Verify React apps:** `playwright screenshot --wait-for-timeout=5000 "URL" verify.png` -- NEVER curl/WebFetch
+- **Business entity:** Project Lavos LLC (KY SOS filed 2/20/2026, filing #1545983.06, member-managed). EIN: 41-4409224. Annual report due Jan 1 - Jun 30, 2027.
+- **Banking:** Chase Business Complete Banking -- applied 2/20/2026, pending approval (1-2 days). Will replace personal account for all business transactions.
+- **Invoicing:** Wave (wave.app) -- account created, branded, customers added, payments application submitted
+- **Key docs:** `~/Documents/Project Lavos LLC/` (Articles of Organization, Operating Agreement, EIN Confirmation). Full tracker: `~/.claude/reference/business-formation.md`
 
 ### LOCAL-FIRST DEVELOPMENT (MANDATORY -- NO EXCEPTIONS)
 **Every frontend iteration MUST be tested locally before deploying. Deploying to Vercel just to take a screenshot is BANNED.**
@@ -100,7 +106,57 @@ Before any commit: `npm run build` (JS/TS) or `flake8` (Python) must pass. Fix A
 - **Absolute URLs for OG meta tags**
 - **Global gitignore blocks *.png** - `~/.gitignore_global` line 189. Every PNG (OG images, previews, QR codes, favicons, apple-touch-icons) requires `git add -f`. After staging, ALWAYS verify with `git ls-files --cached | grep '\.png'` to confirm the files are tracked. If the count doesn't match expectations, PNGs were silently dropped. This applies to every repo on this machine.
 - **Inventory deployments FIRST** - Check Vercel/Railway/Netlify before assuming local code is canonical
-- **Guitar Pro must be quit before opening new .gp5 files** - Installed: Guitar Pro 7 (v7.6.0) at `/Applications/Guitar Pro 7.app`. If already running, `open file.gp5` silently fails. Always quit first: `osascript -e 'quit app "Guitar Pro 7"'; sleep 1; open file.gp5`. To verify it's running: `pgrep -f GuitarPro7`. To confirm what file is open, the process name alone doesn't reveal it -- only the user can verify visually. Do NOT claim a specific file is displayed in Guitar Pro unless the user confirms it.
+- **Guitar Pro 7 (v7.6.0)** - Installed at `/Applications/Guitar Pro 7.app`. Verify running: `pgrep -f GuitarPro7`. Only the user can confirm what file is displayed.
+  - **GP5 files:** Must quit GP7 before opening (`osascript -e 'quit app "Guitar Pro 7"'; sleep 1; open file.gp5`). Uses pyguitarpro for programmatic editing.
+  - **GP7 files (.gp):** ZIP archive containing `Content/score.gpif` (XML). pyguitarpro CANNOT read GP7. Use `gp7_editor.py` utility (`~/Scripts/python/gp7_editor.py`). GP7 supports multiple tabs -- `open file.gp` adds to existing instance.
+  - **GP7 Note elements REQUIRE `ConcertPitch` + `TransposedPitch`** -- without them, notes render as rests even with Fret/String/Midi present. TransposedPitch octave = ConcertPitch octave + 1 (guitar transposing instrument).
+  - **NEVER Cmd+S in GP7 after corrupted in-memory state** -- if undo/navigation broke bars, GP7 will overwrite the file with garbage. Quit WITHOUT saving, fix on disk, reopen.
+  - **Always create locked backups** before GP7 XML edits: `cp file.gp file_LOCKED.gp && chmod 444 file_LOCKED.gp`
+  - **GP7 navigation:** Edit > Go to... (type bar number, Enter) is the only reliable method. Ctrl+Right triggers macOS desktop switching. Cmd+Right can create phantom bars.
+  - **Full reference:** `~/.claude/reference/gp7-xml-editing.md`
+
+## Music Production & Cover Workflow (Proven Feb 2026)
+
+Two complementary pipelines for learning/covering songs. Always offer these when the user mentions covering a song, learning a part, or working on guitar material.
+
+### Pipeline 1: Audio Stem Separation
+Isolate individual instruments from a recording so the user can play along with real audio (minus their instrument).
+
+1. **Download audio:** `yt-dlp --js-runtimes node -x --audio-format wav -o "output.wav" "<youtube-url>"` (requires yt-dlp 2026.02.21+)
+2. **Separate stems:** `audio-separator --model_filename htdemucs_6s.yaml "input.wav"` -- produces 6 stems: vocals, drums, bass, guitar, other, piano
+3. **Upsample if needed:** `ffmpeg -i stem.wav -ar 48000 stem_48k.wav` (match project sample rate)
+4. **Import into Logic Pro** -- user drags stems in, selects "Create new tracks", matches sample rate
+
+**Dependencies:** `pip3 install audio-separator onnxruntime` + `pip3 install yt-dlp` + `ffmpeg`
+**Output:** Individual instrument stems as WAV files at target sample rate
+
+### Pipeline 2: Songsterr Tab Extraction
+Extract guitar tablature from Songsterr and convert to Guitar Pro 5 format.
+
+1. **Run:** `python3 songsterr_to_gp5.py "<songsterr-url>"` -- auto-downloads metadata, track JSON from CDN, builds GP5
+2. **Open:** `osascript -e 'quit app "Guitar Pro 7"'; sleep 1; open "output.gp5"`
+
+**Script location:** `/Users/matthewscott/Music/covers/erra-further-eden/songsterr_to_gp5.py`
+**Repo:** `guitargnarr/songsterr-ripper` (private)
+**CDN pattern:** `https://dqsljvtekg760.cloudfront.net/{songId}/{revisionId}/{imageHash}/{trackIndex}.json`
+**Metadata API:** `https://songsterr.com/api/meta/{songId}` (unauthenticated)
+**Features:** Tempo changes (MixTableChange), bend curves (BendEffect with auto type detection), tuplet variants (array + int), MIDI channel overflow handling (15+ tracks), track name sanitization, filename sanitization
+**Battle-tested:** 60 songs in one session including 40-track orchestral arrangements, 17-track full productions, 697-measure compilations
+**Dependencies:** `pip3 install guitarpro requests playwright`
+
+### GP5 File Locations (3 copies kept in sync)
+1. **Source:** `/Users/matthewscott/Music/covers/erra-further-eden/` (originals)
+2. **Guitar platform:** `~/Projects/projectlavos-monorepo/services/guitar/public/tabs/` (154 tabs total)
+3. **FretForge archive:** `~/Projects/Archive-Recovered-2025-11-18/FretForge/backend/tabs/`
+
+### How These Work Together
+- Stems give the real audio feel and tone -- mute the guitar stem, play along with real drums/bass/vocals
+- GP5 gives the exact notes, fret positions, effects, and the ability to slow down or isolate parts in GP7
+- Combined: the user has both the sound and the score for any song on Songsterr/YouTube
+
+**Full reference:** `~/.claude/reference/music-cover-workflow.md`
+**Origin:** ERRA - Further Eden cover session (Feb 23, 2026). This workflow should evolve through experimentation but the core capability must remain replicable.
+
 - **WebFetch CANNOT verify React apps** - Use `playwright screenshot --wait-for-timeout=5000` (global install, no npx)
 - **Formations: useEffect + vanilla Three.js, NOT iframe** - Embedding formation HTML via `<iframe>` causes rendering failures (blank/gray hero). Use React component with `useEffect` + `useRef` + vanilla Three.js instead. Proven: VoronoiHero.tsx, LSystemHero.tsx, DNAHelixBg.tsx, NeuralMeshBg.tsx, OrbitalSystemBg.tsx. Reference: formations-component.md Pattern C.
 - **Three.js Object.assign + position CRASHES at runtime** - `Object.assign(new THREE.PointLight(...), { position: new THREE.Vector3(...) })` fails silently at build but crashes at runtime ("Cannot assign to read only property 'position'"). Always use `light.position.set(x, y, z)` instead.
@@ -122,6 +178,7 @@ When asked to build "the best site possible" or given source files to assemble:
 - **Templates:** ~/Projects/client-sites/templates/ (4 tiers)
 - **Elite Frontend:** ~/.claude/skills/frontend-design/ELITE_FRONTEND_PLAYBOOK.md
 - **Reusable 3D Components:** ~/.claude/reference/entropy-viz-component.md, torus-knot-component.md, formations-component.md
+- **Scroll-Driven 3D Experience:** ~/.claude/reference/scroll-driven-3d-experience.md (Tailwind v4, R3F, Web Audio, mobile scroll — proven at The Quiet Trade)
 
 ### Differentiation Standard (Feb 2026 -- MANDATORY)
 Every client site must be visually distinct. No two sites should share the same layout patterns below the hero. Requirements:
@@ -179,7 +236,7 @@ When adding client sites to the portfolio at `projectlavos-monorepo/main-site/sr
 5. PNGs require `git add -f` (global gitignore blocks *.png). Verify count with `git ls-files --cached | grep '\.png'`
 
 ## Private Data Protection
-**CRITICAL - Never read/edit without permission:** `**/APPLICATIONS*.csv`, `~/Desktop/1_PRIORITY_JOB_SEARCH/**`
+**CRITICAL - Never read/edit without permission:** `**/APPLICATIONS*.csv`, `~/Desktop/1_PRIORITY_JOB_SEARCH/**`, `~/Desktop/Clementine/**` (client credentials, financial terms, LLC filing)
 
 ### Gmail IMAP (Portable -- Any Project)
 When deliverable traceability requires verifying what was sent to a client, use Gmail IMAP to search the Sent folder. This is not a project -- it's a portable capability available from any working directory.
@@ -211,11 +268,11 @@ Task complete ONLY when: user can see visual proof, tests pass, build succeeds, 
 | System | ~/.claude/TRANSFER_GUIDE.md, COLLABORATION_CONTRACT.md, COMMAND_MANIFEST.md |
 
 **Brand:** Teal (#14b8a6) / Orange (#f97316)
-**Quick Stats:** 43 GitHub repos | 69 client demo sites (69 deployed) | 51 Ollama models
+**Quick Stats:** 46 GitHub repos | 69 client sites (69 deployed) | 2 active clients | 85 Ollama models
 
 ## Governance (Nov 2025+)
 1. **Tabula Rasa** - Never bake personal context into prompts/models
-2. **SELL phase** - Monetize deployed assets, package tools for sale. **Exception: active income work (RetailMyMeds) takes absolute priority over sell-phase tasks.**
+2. **SELL phase** - Monetize deployed assets, package tools for sale. **Exception: active client work takes absolute priority over sell-phase tasks.**
 3. **AI + Python hybrid** - AI for qualitative, Python for quantitative. LLMs can't do reliable arithmetic or music theory.
 4. **Deployment gotchas** - Vercel defaults to auth-protected. Railway needs PORT env var. Render free tier spins down.
 5. **Session management** - Never suggest closing sessions. User controls session boundaries.
@@ -223,10 +280,60 @@ Task complete ONLY when: user can see visual proof, tests pass, build succeeds, 
 7. **Discovery before building** - Test all live deployments before writing code (OurJourney lesson)
 8. **Execution bias** - Never frame sales/outreach as "scary". Direct next actions only.
 
+### Referral Pipeline
+Pip -- Louisville web design and brand expert, Matthew's mentor. Actively refers clients. Clementine Catering was Pip's first referral (Steve reached out to Pip, Pip referred to Matthew). Maintain relationship by sharing work, keeping quality high.
+
 ## Active Engagements (INCOME)
 | Client | Contact | Status | Agreed Rate | Scope | Key Paths |
 |--------|---------|--------|-------------|-------|-----------|
-| RetailMyMeds | Kevin McCarron (dev) + Arica Collins (strategy) | **ACTIVE -- SOLE INCOME** | $2,500 (Option B @ 1/3) | Pharmacy qualification system: scoring engine, Wix Studio/Velo integration, strategic reports, GLP-1 targeting database (41,775 pharmacies), portfolio analysis | `~/Desktop/RetailMyMeds/` (deliverables), `~/Projects/texume/` (source/templates), Render API (not yet live) |
+| RetailMyMeds | Kevin McCarron (dev, primary contact) + Arica Collins (strategy, Kevin's contact -- not direct) + Amy & Delaney (Arica's team) | **ACTIVE** | $2,500 (Option B @ 1/3) | Pharmacy qualification system: scoring engine, Wix Studio/Velo integration, strategic reports, GLP-1 targeting database (33,185 pharmacies), Intel Hub dashboard, landing pages, scorecard lead capture | `~/Desktop/RetailMyMeds/` (deliverables), `~/Projects/texume/` (source/templates), Render: `rmm-intel-hub.onrender.com` (live, auth-protected) |
+| Clementine Catering | Steve Clements (owner) + Grace Lindsey (digital, Steve's daughter) | **INVOICED -- awaiting first payment** | $1,250/mo retainer + $400/mo ad spend | Website (Squarespace->Vercel migration), social media (8-12 posts/mo), targeted advertising (Google/FB/IG), 2 SEO blog posts/mo, GBP, directories, review campaign, monthly report | `~/Desktop/Clementine/` (deliverables), `~/Projects/client-sites/clementine-cater/`, `~/Projects/texume/` (proposals) |
+
+### RetailMyMeds Current State (Feb 22, 2026)
+
+**Last action:** Mutual NDA signed and returned to Kevin (Feb 22). W-9 generated and emailed to Kevin at projects@kevinmccarron.com for ADP 1099 setup (Feb 22).
+
+**Business/legal status:**
+- Mutual NDA executed (3-way: Projection Creative LLC / Project Lavos LLC / Retailmymeds.com LLC). Signed PDF at `~/Desktop/RetailMyMeds/Mutual_NDA_PC_PL_RMM_SIGNED.pdf`. 3-year term from last disclosure.
+- W-9 sent to Kevin for ADP 1099 setup. PDF at `~/Desktop/RetailMyMeds/W9_Project_Lavos_LLC.pdf`. Direct deposit details pending Chase business checking approval.
+- Chase business checking: applied 2/20/2026, still pending approval.
+
+**Contact structure clarification:**
+- Matthew communicates directly with Kevin. Kevin is the primary contact.
+- Arica Collins is Kevin's contact (RMM President & CEO). Matthew does not track touchbase with Arica -- she is reached via Kevin.
+- Amy & Delaney are Arica's team members, introduced at Feb 20 meeting.
+
+**Meeting outcome (Feb 20 -- Kevin, Arica, Amy, Delaney, Matthew):**
+- Kevin presented (62%), Arica talked (28%), Matthew support (9%). 37 min.
+- Arica brought team members Amy and Delaney to see the assets
+- Showed: landing pages (GLP-1, MFP, DIR Fee), scorecard/lead capture, Intel Hub demo, state outreach lists
+- Arica liked the pointed messaging ("No, I like it" on aggressive GLP-1 tone)
+- Arica validated the scorecard concept for lead capture
+- **Key ask from Arica:** two-tier model -- free scorecard to capture leads, then **paid** deep-dive using actual dispensing data (acquisition costs, net profit, brand-level GLP-1 analysis)
+- No data accuracy concerns raised on Intel Hub -- treated as directionally sound
+- Arica confirmed: ~19,000 independent pharmacies nationally, RMM has touched ~1,000-1,500, high churn rate is a major concern
+- Growth today: social media + word of mouth only
+- Cash flow is #1 issue even before GLP-1/MFP
+
+**Industry intel from Arica (new):**
+- GLP-1 acquisition: $800-$1,200/mo, margins 1-5% gross at best. Delaware pharmacy lost $6k on one drug.
+- MFP program (6 weeks old): pharmacies front full cost, PBM reimburses half, wait 60 days for manufacturer rebate -- but manufacturers are NOT rebating correct amounts. Expanding 10 drugs/year to 50-60 total.
+- Direct-to-consumer GLP-1 programs bypassing PBMs are promising but consumers resist paying cash
+- "Pharmacies operating in pure dispense model have a very grim future"
+
+**Deployed assets:**
+- Intel Hub: `rmm-intel-hub.onrender.com` (auth-protected, credentials via Render env vars)
+- Forecasting tool: `rmm-pharmacy-tool.vercel.app`
+- API: `texume-api.onrender.com`
+
+**Next steps (Matthew):**
+1. Refine scorecard indicators with Arica's language (cash-flow burden, PBM-proof, acquisition vs. reimbursement)
+2. Design paid deep-dive tier spec (intake: actual dispensing data, output: pharmacy-specific plan)
+3. Update MFP intelligence in landing pages and Intel Hub (60-day lag, rebate shortfalls, expansion timeline)
+4. Cross-reference conference attendee data against database when Arica provides it
+5. Share Intel Hub credentials with Amy and Delaney
+
+**Post-meeting notes:** `~/Desktop/RetailMyMeds/post_meeting_notes_feb20.md`
 
 ### RetailMyMeds Engagement Rules (MANDATORY -- overrides all defaults)
 
